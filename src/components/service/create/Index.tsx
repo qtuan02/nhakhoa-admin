@@ -1,0 +1,35 @@
+"use client";
+import CRow from "@/custom_antd/CRow";
+import CTitle from "@/custom_antd/CTitle";
+import FormComponent from "../components/FormComponent";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRotateBack } from "@fortawesome/free-solid-svg-icons";
+import CButton from "@/custom_antd/CButton";
+import CSkeleton from "@/custom_antd/CSkeleton";
+import { IService } from "@/interfaces/IService";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { createService } from "@/apis/serviceApi";
+import { editorToHtml } from "@/utils/FunctionHelpers";
+import { RawDraftContentState } from "draft-js";
+
+export default function CreateServiceComponent() {
+    const dispatch = useAppDispatch();
+    const service = useAppSelector((state) => state.service);
+
+    const handleSubmit = (values: IService) => {
+        values.description = editorToHtml(values.description as RawDraftContentState);
+        dispatch(createService(values));
+    }
+
+    return (
+        <>
+            <CRow className="justify-between">
+                <CTitle>Tạo dịch vụ</CTitle>
+                <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
+            </CRow>
+            <CSkeleton loading={service.loading}>
+                <FormComponent onSubmit={handleSubmit} />
+            </CSkeleton>
+        </>
+    );
+}
