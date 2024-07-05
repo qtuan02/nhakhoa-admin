@@ -12,8 +12,6 @@ import { IService } from "@/interfaces/IService";
 import { useAppSelector } from "@/redux/hooks";
 import { htmlToEditor } from "@/utils/FunctionHelpers";
 import { Form } from "antd";
-import { EditorState, convertToRaw } from "draft-js";
-import draftToHtml from "draftjs-to-html";
 import { useEffect } from "react";
 
 
@@ -39,13 +37,12 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
   const category = useAppSelector((state) => state.category);
 
   useEffect(() => {
-    console.log(data);
-    
-    form.setFieldsValue({
-      ...data,
-      category_id: data?.category?.id || 1,
-    });
-    // console.log(form.getFieldsValue());
+    if(data) {
+      form.setFieldsValue({
+        ...data,
+        category_id: data?.category?.id || 1,
+      });
+    }
   }, [form, data]);
 
   return (

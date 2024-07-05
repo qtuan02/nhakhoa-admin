@@ -1,7 +1,7 @@
 import { IService } from "@/interfaces/IService";
 import { createSlice } from "@reduxjs/toolkit";
-import { TOAST_ERROR, TOAST_SUCCESS } from "@/commons/Option";
-import { createService, deleteService, editService, getService, getServices } from "../../apis";
+import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
+import { createService, deleteService, editService, getService, getServices } from "@/apis";
 
 
 interface IServiceState {

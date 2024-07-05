@@ -1,6 +1,6 @@
 import { appConfig } from "@/commons/AppConfig";
 import axiosClient from "@/commons/AxiosConfig";
-import { TOAST_ERROR } from "@/commons/Option";
+import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { IResponse } from "@/interfaces/IResponse";
 import { IService } from "@/interfaces/IService";
 import { createAsyncThunk } from "@reduxjs/toolkit";

@@ -1,7 +1,7 @@
 import { ICategory } from "@/interfaces/ICategory";
 import { createSlice } from "@reduxjs/toolkit";
-import { createCategory, deleteCategory, editCategory, getCategories } from "../../apis";
-import { TOAST_ERROR, TOAST_SUCCESS } from "@/commons/Option";
+import { createCategory, deleteCategory, editCategory, getCategories } from "@/apis";
+import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 
 interface ICategoryState {
     loading?: boolean;

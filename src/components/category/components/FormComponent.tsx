@@ -25,7 +25,9 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps){
     const [form] = Form.useForm();
 
     useEffect(() => {
-        form.setFieldsValue(data);
+        if(data) {
+            form.setFieldsValue(data);
+        }
     }, [form, data]);
 
     return (

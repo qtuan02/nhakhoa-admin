@@ -30,7 +30,7 @@ export default function ServiceComponent() {
                 <CButton link="/dich-vu/them" type="primary" icon={<FontAwesomeIcon icon={faCirclePlus} />}>Thêm mới</CButton>
             </CRow>
             <CSkeleton loading={service.loading}>
-                <div className="w-full h-[calc(100%-65x)] overflow-auto">
+                <div className="w-full h-[calc(100%-65px)] overflow-auto">
                     <TableComponent />
                 </div>
             </CSkeleton>

@@ -71,9 +71,9 @@ export default function TableComponent() {
             width: 200,
             render: (item) => (
                 <CSpace>
-                    <CButton link={`/dich-vu/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
+                    <CButton tooltip="Chỉnh sửa dịch vụ" link={`/dich-vu/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
                     <CPopConfirm title={"Thông báo!!!"} description={`Bạn muốn xóa dịch vụ "${item.name}"`} onConfirm={() => dispatch(deleteService(item.id))}>
-                        <CButton type="primary" danger icon={<FontAwesomeIcon icon={faTrashCan} />} className='ts-16'></CButton>
+                        <CButton tooltip="Xóa dịch vụ" type="primary" danger icon={<FontAwesomeIcon icon={faTrashCan} />} className='ts-16'></CButton>
                     </CPopConfirm>
                 </CSpace>
             )

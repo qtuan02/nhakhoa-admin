@@ -7,7 +7,10 @@ import CInput from "@/custom_antd/CInput";
 import CSpace from "@/custom_antd/CSpace";
 import CButton from "@/custom_antd/CButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faRotateRight } from "@fortawesome/free-solid-svg-icons";
+import { faInfo, faMagnifyingGlass, faRotateRight } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
+import { ICustomer } from "@/interfaces/ICustomer";
+import CTable from "@/custom_antd/CTable";
 
 
 type MenuItem = GetProp<MenuProps, 'items'>[number];
@@ -76,3 +79,10 @@ export const getColumnSearchProps = (dataIndex: string) => ({
     render: (text: string) => text,
 });
 
+export const TOAST_SUCCESS: any = (value: string) => {
+    return toast.success(value);
+}
+
+export const TOAST_ERROR: any = (error: string) => {
+    return toast.error(error || "Đã có lỗi xảy ra");
+}

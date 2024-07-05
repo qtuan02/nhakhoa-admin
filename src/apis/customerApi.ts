@@ -1,13 +1,13 @@
 import { appConfig } from "@/commons/AppConfig";
 import axiosClient from "@/commons/AxiosConfig";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
-import { ICategory } from "@/interfaces/ICategory";
+import { ICustomer } from "@/interfaces/ICustomer";
 import { IResponse } from "@/interfaces/IResponse";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const URL = appConfig.API_LOCAL+'/v1/category';
+const URL = appConfig.API_LOCAL+'/v1/customer';
 
-export const getCategory = async (id: string) => {
+export const getCustomer = async (id: string) => {
     try {
         const res = await axiosClient.get(URL+ '/' +id);
         return res.data.data;
@@ -17,8 +17,8 @@ export const getCategory = async (id: string) => {
     }
 };
 
-export const getCategories = createAsyncThunk<IResponse>(
-    'category/get',
+export const getCustomers = createAsyncThunk<IResponse>(
+    'customer/get',
     async () => {
         try{
             const res = await axiosClient.get(URL);
@@ -29,8 +29,8 @@ export const getCategories = createAsyncThunk<IResponse>(
     }
 );
 
-export const createCategory = createAsyncThunk<IResponse, ICategory>(
-    'category/create',
+export const createCustomer = createAsyncThunk<IResponse, ICustomer>(
+    'customer/create',
     async (data) => {
         try{
             const res = await axiosClient.post(URL, data);
@@ -41,20 +41,8 @@ export const createCategory = createAsyncThunk<IResponse, ICategory>(
     }
 );
 
-export const deleteCategory = createAsyncThunk<IResponse, number>(
-    'category/delete',
-    async (id) => {
-        try{
-            const res = await axiosClient.delete(URL+ '/' +id);
-            return {...res.data, data: id};
-        }catch(error: any) {
-            throw error?.response?.data;
-        }
-    }
-);
-
-export const editCategory = createAsyncThunk<IResponse, { id: string, data: ICategory }>(
-    'category/edit',
+export const editCustomer = createAsyncThunk<IResponse, { id: string, data: ICustomer }>(
+    'customer/edit',
     async({ id, data }) => {
         try{
             const res = await axiosClient.put(URL+ '/' +id, data);
