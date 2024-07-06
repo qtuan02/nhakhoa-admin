@@ -1,48 +1,51 @@
 "use client";
 import CButton from "@/custom_antd/CButton";
 import CRow from "@/custom_antd/CRow";
+import CSkeleton from "@/custom_antd/CSkeleton";
 import CTitle from "@/custom_antd/CTitle";
 import { faRotateBack } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import FormComponent from "../components/FormComponent";
-import { ICustomer } from "@/interfaces/ICustomer";
-import dayjs from 'dayjs';
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import CSkeleton from "@/custom_antd/CSkeleton";
 import { useParams } from "next/navigation";
-import { editCustomer, getCustomer } from "@/apis";
+import FormComponent from "../components/FormComponent";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect, useState } from "react";
+import { IUser } from "@/interfaces/IUser";
+import { editorToHtml } from "@/utils/FunctionHelpers";
+import { RawDraftContentState } from "draft-js";
+import dayjs from 'dayjs';
+import { editUser, getUser } from "@/apis";
 
-export default function EditCustomerComponent() {
+export default function EditUserComponent() {
     const { id } = useParams();
     const dispatch = useAppDispatch();
-    const customer = useAppSelector((state) => state.customer);
+    const user = useAppSelector((state) => state.user);
 
-    const [data, setData] = useState<ICustomer | undefined>(undefined);
+    const [data, setData] = useState<IUser | undefined>(undefined);
 
-    const handleSubmit = (values: ICustomer) => {
+    const handleSubmit = (values: IUser) => {
+        values.description = editorToHtml(values.description as RawDraftContentState);
         values.birthday = dayjs(values.birthday).format('YYYY-MM-DD');
-        dispatch(editCustomer({ id: id as string, data: values}));
+        dispatch(editUser({ id: id as string, data: values}));
     }
 
-    const getDataCustomer = async (id: string) => {
-        const value = await getCustomer(id);
+    const getDataUser = async (id: string) => {
+        const value = await getUser(id);
         return value !== null ? setData(value) : setData(undefined);
     }
-
+    
     useEffect(() => {
-        if(customer.edit === 'success' || customer.edit === 'fail'){
-            getDataCustomer(id as string);
+        if(user.edit === "success" || user.edit === "fail"){
+            getDataUser(id as string);
         }
-    }, [id, customer.edit]);
+    }, [id, user.edit]);
 
     return (
         <>
             <CRow className="justify-between">
-                <CTitle>Chỉnh sửa khách hàng</CTitle>
+                <CTitle>Cập nhật người dùng</CTitle>
                 <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
             </CRow>
-            <CSkeleton loading={customer.edit === 'wait'}>
+            <CSkeleton loading={user.edit === 'wait'}>
                 <FormComponent onSubmit={handleSubmit} data={data} />
             </CSkeleton>
         </>

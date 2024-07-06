@@ -13,7 +13,7 @@ const SIDER_MENU: any = [
     ], "group"),
     customItemMenu("Quản lí thông tin", "grp3", null, [
         customItemMenu(<Link href="/khach-hang">Khách hàng</Link>, "/khach-hang", <FontAwesomeIcon icon={faUsers} />),
-        customItemMenu(<Link href="/nhan-vien-y-te">Nhân viên y tế</Link>, "/nhan-vien-y-te", <FontAwesomeIcon icon={faUserDoctor} />)
+        customItemMenu(<Link href="/nguoi-dung">Người dùng</Link>, "/nguoi-dung", <FontAwesomeIcon icon={faUserDoctor} />)
     ], "group"),
     customItemMenu("Quản lí lịch", "grp4", null, [
         customItemMenu(<Link href="/lich-hen">Lịch hẹn</Link>, "/lich-hen", <FontAwesomeIcon icon={faCalendar} />),
@@ -47,6 +47,21 @@ const GENDER: any = [
     },
 ];
 
+const ROLE: any = [
+    {
+        label: "Nha sĩ",
+        value: 1,
+    },
+    {
+        label: "Nhân viên y tế",
+        value: 2,
+    },
+    {
+        label: "Quản trị viên",
+        value: 3,
+    }
+];
+
 const COLUMN_CUSTOMER: any = [
     { title: 'Mã khách hàng', dataIndex: 'address', key: 'id' },
     { title: 'Tên khách hàng', dataIndex: 'address', key: 'name' },
@@ -57,4 +72,4 @@ const COLUMN_CUSTOMER: any = [
     { title: 'Địa chỉ', dataIndex: 'address', key: 'address' },
 ];
 
-export { SIDER_MENU, STATUS, GENDER, COLUMN_CUSTOMER };
+export { SIDER_MENU, STATUS, GENDER, ROLE, COLUMN_CUSTOMER };

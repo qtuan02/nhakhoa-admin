@@ -1,7 +1,7 @@
-
+import NotFoundComponent from "@/components/layout/NotFound";
 
 export default function NotFoundPage() {
     return (
-        <h1>Trang không tồn tại</h1>
+        <NotFoundComponent />
     );
 }

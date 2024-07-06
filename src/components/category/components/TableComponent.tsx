@@ -57,9 +57,9 @@ export default function TableComponent() {
             width: 300,
             render: (item) => (
                 <CSpace>
-                    <CButton tooltip="Xóa danh mục" link={`/danh-muc/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
+                    <CButton tooltip="Chỉnh sửa danh mục" link={`/danh-muc/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
                     <CPopConfirm title={"Thông báo!!!"} description={`Bạn muốn xóa danh mục "${item.name}"`} onConfirm={() => dispatch(deleteCategory(item.id))}>
-                        <CButton tooltip="Chỉnh sửa danh mục" type="primary" danger icon={<FontAwesomeIcon icon={faTrashCan} />} className='ts-16'></CButton>
+                        <CButton tooltip="Xóa danh mục" type="primary" danger icon={<FontAwesomeIcon icon={faTrashCan} />} className='ts-16'></CButton>
                     </CPopConfirm>
                 </CSpace>
             )

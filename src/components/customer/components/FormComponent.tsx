@@ -30,7 +30,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps){
         if(data) {
             form.setFieldsValue({
                 ...data,
-                birthday: dayjs(data?.birthday) || ''
+                birthday: dayjs(data?.birthday) || '',
             });
         }
     }, [form, data]);

@@ -1,74 +1,74 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
-import { ICustomer } from "@/interfaces/ICustomer";
-import { createCustomer, editCustomer, getCustomers } from "@/apis";
+import { IUser } from "@/interfaces/IUser";
+import { createUser, editUser, getUsers } from "@/apis";
 
-interface ICustomerState {
+interface IUserState {
     loading?: boolean;
     status?: 'pending' | 'completed' | 'rejected';
     edit?: 'wait' | 'success' | 'fail';
-    data: ICustomer[];
-    drawer?: boolean;
-    history_id?: string;
+    data: IUser[];
+    modal?: boolean;
+    user_id?: string;
 };
 
-const initialState: ICustomerState = {
+const initialState: IUserState = {
     loading: false,
     status: 'completed',
     edit: 'success',
     data: [],
-    drawer: false,
-    history_id: '',
+    modal: false,
+    user_id: '',
 };
 
-const customerSlice = createSlice({
-    name: 'customer',
+const userSlice = createSlice({
+    name: 'user',
     initialState,
     reducers: {
-        toggleDrawer: (state) => {
-            state.drawer = !state.drawer;
+        toggleModal: (state) => {
+            state.modal = !state.modal;
         },
-        setHistoryId: (state, action: PayloadAction<string>) => {
-            state.history_id = action.payload;
+        setUserId: (state, action: PayloadAction<string>) => {
+            state.user_id = action.payload;
         }
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getCustomers.pending, (state) => {
+            .addCase(getUsers.pending, (state) => {
                 state.status = 'pending';
                 state.loading = true;
             })
-            .addCase(getCustomers.fulfilled, (state, action) => {
+            .addCase(getUsers.fulfilled, (state, action) => {
                 state.loading = false;
                 state.data = action.payload.data;
             })
-            .addCase(getCustomers.rejected, (state, action: any) => {
+            .addCase(getUsers.rejected, (state, action: any) => {
                 state.data = [];
                 state.loading = false;
                 TOAST_ERROR(action.error?.message)
             })
-            .addCase(createCustomer.pending, (state) => {
+            .addCase(createUser.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(createCustomer.fulfilled, (state, action) => {
+            .addCase(createUser.fulfilled, (state, action) => {
                 state.status = 'completed';
                 state.loading = false;
                 TOAST_SUCCESS(action.payload.message);
             })
-            .addCase(createCustomer.rejected, (state, action: any) => {
+            .addCase(createUser.rejected, (state, action: any) => {
                 state.status = 'rejected';
                 state.loading = false;
                 TOAST_ERROR(action.error?.message)
             })
-            .addCase(editCustomer.pending, (state) => {
+            .addCase(editUser.pending, (state) => {
                 state.edit = 'wait';
             })
-            .addCase(editCustomer.fulfilled, (state, action) => {
+            .addCase(editUser.fulfilled, (state, action) => {
                 state.status = 'completed';
                 state.edit = 'success';
                 TOAST_SUCCESS(action.payload.message);
             })
-            .addCase(editCustomer.rejected, (state, action: any) => {
+            .addCase(editUser.rejected, (state, action: any) => {
                 state.status = 'rejected';
                 state.edit = 'fail';
                 TOAST_ERROR(action.error?.message)
@@ -76,5 +76,5 @@ const customerSlice = createSlice({
     }
 });
 
-export const { toggleDrawer, setHistoryId } = customerSlice.actions;
-export default customerSlice.reducer;
+export const { toggleModal, setUserId } = userSlice.actions;
+export default userSlice.reducer;
