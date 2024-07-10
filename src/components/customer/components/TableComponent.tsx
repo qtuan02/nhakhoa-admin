@@ -1,7 +1,7 @@
 import CButton from "@/custom_antd/CButton";
 import CSpace from "@/custom_antd/CSpace";
 import CTable from "@/custom_antd/CTable";
-import { faInfo, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { faCirclePlus, faInfo, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Checkbox, CheckboxOptionType, TableColumnsType } from "antd";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -79,6 +79,7 @@ export default function TableComponent() {
             render: (item) => (
                 <CSpace>
                     <CButton link={`/khach-hang/sua/${item.id}`} tooltip="Chỉnh sửa thông tin khách hàng" type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
+                    <CButton link={`/lich-kham/them/${item.id}`} tooltip="Tạo lịch khám" type="primary" danger icon={<FontAwesomeIcon icon={faCirclePlus} />} className='ts-16'></CButton>
                 </CSpace>
             )
         }

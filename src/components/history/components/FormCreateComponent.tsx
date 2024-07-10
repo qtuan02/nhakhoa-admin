@@ -8,6 +8,7 @@ import { IHistory } from "@/interfaces/IHistory";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setDoctors } from "@/redux/reducers/userReducer";
 import { Form, Input } from "antd";
+import { useParams } from "next/navigation";
 import { useEffect } from "react";
 
 interface FormComponentProps {
@@ -22,6 +23,7 @@ const initialHistory: IHistory = {
 }
 
 export default function FormCreateComponent({ onSubmit, data }: FormComponentProps) {
+    const { id } = useParams();
     const [form] = Form.useForm();
 
     const dispatch = useAppDispatch();
@@ -40,8 +42,12 @@ export default function FormCreateComponent({ onSubmit, data }: FormComponentPro
         if(user.doctors.length === 0) {
             dispatch(setDoctors());
         }
+
+        if(id){
+            form.setFieldValue("customer_id", id);
+        }
         
-    }, [customer.status, dispatch, user.doctors.length, user.status]);
+    }, [customer.status, dispatch, form, id, user.doctors.length, user.status]);
     return (
         <Form layout="vertical" className="px-2 py-4" onFinish={onSubmit} initialValues={initialHistory} form={form}>
             <CRow gutter={[16, 16]}>
