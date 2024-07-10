@@ -9,7 +9,7 @@ export interface IHistory {
     total_price?: number,
     customer_id?: string,
     customer_name?: string,
-    noted?: string,
+    note?: string,
     doctor_id?: string,
     doctor_name?: string,
     customer?: ICustomer,

@@ -77,6 +77,25 @@ const STATUS_APPOINTMENT: any = [
     },
 ];
 
+const STATUS_HISTORY: any = [
+    {
+        label: "Đang chờ",
+        value: 0,
+    },
+    {
+        label: "Hoàn thành",
+        value: 1,
+    },
+    {
+        label: "Xác nhận",
+        value: 2,
+    },
+    {
+        label: "Hủy",
+        value: 3,
+    }
+];
+
 const COLUMN_CUSTOMER: any = [
     { title: 'Mã khách hàng', dataIndex: 'address', key: 'id' },
     { title: 'Tên khách hàng', dataIndex: 'address', key: 'name' },
@@ -87,4 +106,4 @@ const COLUMN_CUSTOMER: any = [
     { title: 'Địa chỉ', dataIndex: 'address', key: 'address' },
 ];
 
-export { SIDER_MENU, STATUS, GENDER, ROLE, COLUMN_CUSTOMER, STATUS_APPOINTMENT };
+export { SIDER_MENU, STATUS, GENDER, ROLE, COLUMN_CUSTOMER, STATUS_APPOINTMENT, STATUS_HISTORY };

@@ -1,13 +1,13 @@
 import { getCustomers, getUsers } from "@/apis";
+import { STATUS_HISTORY } from "@/commons/Option";
 import CButton from "@/custom_antd/CButton";
 import CCol from "@/custom_antd/CCol";
-import CInput from "@/custom_antd/CInput";
 import CRow from "@/custom_antd/CRow";
 import { CSelect } from "@/custom_antd/CSelect";
 import { IHistory } from "@/interfaces/IHistory";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setDoctors } from "@/redux/reducers/userReducer";
-import { Form } from "antd";
+import { Form, Input } from "antd";
 import { useEffect } from "react";
 
 interface FormComponentProps {
@@ -16,10 +16,12 @@ interface FormComponentProps {
 }
 
 const initialHistory: IHistory = {
-
+    customer_id: undefined,
+    doctor_id: undefined,
+    note: ''
 }
 
-export default function FormComponent({ onSubmit, data }: FormComponentProps) {
+export default function FormCreateComponent({ onSubmit, data }: FormComponentProps) {
     const [form] = Form.useForm();
 
     const dispatch = useAppDispatch();
@@ -38,8 +40,8 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
         if(user.doctors.length === 0) {
             dispatch(setDoctors());
         }
+        
     }, [customer.status, dispatch, user.doctors.length, user.status]);
-
     return (
         <Form layout="vertical" className="px-2 py-4" onFinish={onSubmit} initialValues={initialHistory} form={form}>
             <CRow gutter={[16, 16]}>
@@ -49,15 +51,10 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                             className="!h-[40px]"
                             showSearch
                             placeholder="Chọn khách hàng..."
+                            options={customer.data.map(c => ({ value: c.id, label: c.id+' - '+c.name+' - '+c.phone_number }))}
                             filterOption={(input, option) =>
                                 (option?.label as string ?? '').toLowerCase().includes(input.toLowerCase())
                             }
-                            options={[
-                                { value: '1', label: 'Jack' },
-                                { value: '2', label: 'Jack' },
-                                { value: '3', label: 'Lucy' },
-                                { value: '4', label: 'Tom' },
-                            ]}
                         />
                     </Form.Item>
                 </CCol>
@@ -67,19 +64,25 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                             className="!h-[40px]"
                             showSearch
                             placeholder="Chọn nha sĩ..."
+                            options={user.data.map(c => ({ value: c.id, label: c.id+' - '+c.name+' - '+c.phone_number }))}
                             filterOption={(input, option) =>
                                 (option?.label as string ?? '').toLowerCase().includes(input.toLowerCase())
                             }
-                            options={[
-                                { value: '1', label: 'Jack' },
-                                { value: '2', label: 'Jack' },
-                                { value: '3', label: 'Lucy' },
-                                { value: '4', label: 'Tom' },
-                            ]}
                         />
                     </Form.Item>
                 </CCol>
             </CRow>
+            
+            <Form.Item label="Ghi chú:" name="note">
+                <Input.TextArea
+                    showCount
+                    maxLength={1000}
+                    placeholder="Nhập nội dung..."
+                    className="ts-16"
+                    style={{ height: 200, resize: 'none' }}
+                />
+            </Form.Item>
+            <br />
             <CRow className="gap-4 justify-end">
                 <CButton type="primary" htmlType="submit">{data ? "Cập nhật" : "Lưu"}</CButton>
             </CRow>

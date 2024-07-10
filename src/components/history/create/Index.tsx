@@ -5,12 +5,15 @@ import CSkeleton from "@/custom_antd/CSkeleton";
 import CTitle from "@/custom_antd/CTitle";
 import { faRotateBack } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import FormComponent from "../components/FormComponent";
 import { IHistory } from "@/interfaces/IHistory";
+import FormCreateComponent from "../components/FormCreateComponent";
+import { useAppDispatch } from "@/redux/hooks";
+import { createHistory } from "@/apis";
 
 export default function CreateHistoryComponent() {
+    const dispatch = useAppDispatch();
     const handleSubmit = (values: IHistory) => {
-        console.log(values);
+        dispatch(createHistory(values));
     }
 
     return (
@@ -20,7 +23,7 @@ export default function CreateHistoryComponent() {
                 <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
             </CRow>
             <CSkeleton loading={false}>
-                <FormComponent onSubmit={handleSubmit} />
+                <FormCreateComponent onSubmit={handleSubmit} />
             </CSkeleton>
         </>
     );
