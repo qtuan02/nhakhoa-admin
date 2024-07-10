@@ -9,7 +9,7 @@ import { CSelect } from "@/custom_antd/CSelect";
 import CUploadImage from "@/custom_antd/CUploadImage";
 import { ICategory } from "@/interfaces/ICategory";
 import { IService } from "@/interfaces/IService";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { htmlToEditor } from "@/utils/FunctionHelpers";
 import { Form } from "antd";
 import { useEffect } from "react";
@@ -34,16 +34,22 @@ const initialService: IService = {
 
 export default function FormComponent({ onSubmit, data }: FormComponentProps) {
   const [form] = Form.useForm();
+  
+  const dispatch = useAppDispatch();
   const category = useAppSelector((state) => state.category);
 
   useEffect(() => {
-    if(data) {
+    if (category.status === "completed" || category.status === "rejected") {
+      dispatch(getCategories());
+    }
+    
+    if (data) {
       form.setFieldsValue({
         ...data,
         category_id: data?.category?.id || 1,
       });
     }
-  }, [form, data]);
+  }, [form, data, category.status, dispatch]);
 
   return (
     <Form layout="vertical" className="px-2 py-4" initialValues={initialService} onFinish={onSubmit} form={form}>

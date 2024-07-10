@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { createAppointment, deleteAppointment, editAppointment, getAppointments, getDate, getDoctors, getTimes } from "@/apis";
+import { createAppointment, deleteAppointment, editAppointment, getAppointments, getDate, getTimes } from "@/apis";
 import { TOAST_ERROR, TOAST_SUCCESS, TOAST_WARNING } from "@/utils/FunctionUiHelpers";
 import { IAppointment, IDate, ITime } from "@/interfaces/IAppointment";
-import { IUser } from "@/interfaces/IUser";
 import { getTime } from "@/apis/scheduleApi";
 import { IService } from "@/interfaces/IService";
 
@@ -11,8 +10,6 @@ interface IAppointmentState {
     status?: 'pending' | 'completed' | 'rejected';
     edit?: 'wait' | 'success' | 'fail';
     data: IAppointment[];
-    doctors: IUser[];
-    loadingDoctors?: boolean;
     times: ITime[];
     loadingTimes?: boolean;
     date: IDate[];
@@ -28,8 +25,6 @@ const initialState: IAppointmentState = {
     status: 'completed',
     edit: 'success',
     data: [],
-    doctors: [],
-    loadingDoctors: false,
     times: [],
     loadingTimes: false,
     date: [],
@@ -70,6 +65,9 @@ const appointmentSlice = createSlice({
         },
         clearService: (state) => {
             state.services = [];
+        },
+        setServices: (state, action: PayloadAction<IService[]>) => {
+            state.services = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -123,18 +121,6 @@ const appointmentSlice = createSlice({
                 state.edit = 'fail';
                 TOAST_ERROR(action.error?.message)
             })
-            .addCase(getDoctors.pending, (state) => {
-                state.loadingDoctors = true;
-            })
-            .addCase(getDoctors.fulfilled, (state, action) => {
-                state.loadingDoctors = false;
-                state.doctors = action.payload.data;
-            })
-            .addCase(getDoctors.rejected, (state, action: any) => {
-                state.doctors = [];
-                state.loadingDoctors = false;
-                TOAST_ERROR(action.error?.message)
-            })
             .addCase(getTimes.pending, (state) => {
                 state.loadingTimes = true;
             })
@@ -174,5 +160,5 @@ const appointmentSlice = createSlice({
     }
 });
 
-export const { setDate, setTime, toggleModal, addService, removeService, clearService } = appointmentSlice.actions;
+export const { setDate, setTime, toggleModal, addService, removeService, clearService, setServices } = appointmentSlice.actions;
 export default appointmentSlice.reducer;

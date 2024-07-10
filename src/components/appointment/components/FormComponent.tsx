@@ -1,4 +1,4 @@
-import { getDate, getDoctors, getTimes } from "@/apis";
+import { getDate, getTimes, getUsers } from "@/apis";
 import { getTime } from "@/apis/scheduleApi";
 import CButton from "@/custom_antd/CButton";
 import CCol from "@/custom_antd/CCol";
@@ -9,12 +9,13 @@ import { CSelect } from "@/custom_antd/CSelect";
 import { IAppointment, IDate, ITime } from "@/interfaces/IAppointment";
 import { IUser } from "@/interfaces/IUser";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { addService, clearService, removeService, setDate, setTime, toggleModal } from "@/redux/reducers/appointmentReducer";
+import { removeService, setDate, setServices, setTime, toggleModal } from "@/redux/reducers/appointmentReducer";
 import { Avatar, Form, Input, List, Select } from "antd";
 import { useEffect } from "react";
 import ModalComponent from "./ModalComponent";
 import dayjs from 'dayjs';
 import { STATUS_APPOINTMENT } from "@/commons/Option";
+import { setDoctors } from "@/redux/reducers/userReducer";
 
 interface FormComponentProps {
     onSubmit: (values: IAppointment) => void;
@@ -36,12 +37,13 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
     const [form] = Form.useForm();
 
     const dispatch = useAppDispatch();
+    const user = useAppSelector((state) => state.user);
     const appointment = useAppSelector((state) => state.appointment);
 
-    useEffect(() => {
 
-        if (appointment.doctors && appointment.doctors.length === 0) {
-            dispatch(getDoctors());
+    useEffect(() => {
+        if(user.status === 'completed' || user.status === 'rejected') {
+            dispatch(getUsers());
         }
 
         if (appointment.times && appointment.times.length === 0) {
@@ -49,8 +51,8 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
         }
 
         if (data) {
-            if (data.services && data.services.length > 0) {
-                data.services.forEach((service) => dispatch(addService(service)));
+            if(data.services){
+                dispatch(setServices(data.services));
             }
             if(data.doctor && data.time) {
                 dispatch(getDate(data.doctor.id as string));
@@ -62,7 +64,11 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                 date: data.doctor ? dayjs(data?.date).format('YYYY/MM/DD') || '' : dayjs(data?.date) || '',
             });
         }
-    }, [appointment.doctors, appointment.times, data, dispatch, form]);
+
+        if(user.doctors.length === 0) {
+            dispatch(setDoctors());
+        }
+    }, [appointment.times, data, dispatch, form, user.doctors.length, user.status]);
 
     const handleDisabledDate = (current: any) => {
         return current && (current.valueOf() < Date.now() || current.day() === 0);
@@ -113,9 +119,9 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
             <CRow gutter={[16, 16]}>
                 <CCol span={12}>
                     <Form.Item label="Chọn nha sĩ:" className="!mb-4" name="doctor_id">
-                        <CSelect loading={appointment.loadingDoctors} className="!h-10 ts-16" onChange={handleDoctorChange}>
+                        <CSelect loading={user.loading} className="!h-10 ts-16" onChange={handleDoctorChange}>
                             <Select.Option value="">--Không chọn nha sĩ</Select.Option>
-                            {appointment.doctors?.map((d: IUser) => (
+                            {user.doctors.map((d: IUser) => (
                                 <Select.Option key={d.id} value={d.id}>{d.name}</Select.Option>
                             ))}
                         </CSelect>

@@ -1,6 +1,7 @@
+import HistoryComponent from "@/components/history/Index";
 
-export default function SchedulePage(){
+export default function HistoryPage(){
     return (
-        <div>lich-kham</div>
+        <HistoryComponent />
     );
 }

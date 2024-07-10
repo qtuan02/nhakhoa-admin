@@ -33,8 +33,6 @@ export default function EditAppointmentComponent() {
     }
 
     useEffect(() => {
-        dispatch(clearService());
-
         if(appointment.edit === 'success' || appointment.edit === 'fail'){
             getDataAppointment(id as string);
         }

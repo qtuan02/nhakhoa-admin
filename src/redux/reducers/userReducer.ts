@@ -10,6 +10,7 @@ interface IUserState {
     data: IUser[];
     modal?: boolean;
     user_id?: string;
+    doctors: IUser[];
 };
 
 const initialState: IUserState = {
@@ -19,6 +20,7 @@ const initialState: IUserState = {
     data: [],
     modal: false,
     user_id: '',
+    doctors: [],
 };
 
 const userSlice = createSlice({
@@ -30,7 +32,10 @@ const userSlice = createSlice({
         },
         setUserId: (state, action: PayloadAction<string>) => {
             state.user_id = action.payload;
-        }
+        },
+        setDoctors: (state) => {
+            state.doctors = state.data.filter(user => user.role?.id === 1);
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -76,5 +81,5 @@ const userSlice = createSlice({
     }
 });
 
-export const { toggleModal, setUserId } = userSlice.actions;
+export const { toggleModal, setUserId, setDoctors } = userSlice.actions;
 export default userSlice.reducer;

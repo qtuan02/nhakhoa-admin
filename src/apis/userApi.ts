@@ -7,6 +7,16 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const URL = appConfig.API_LOCAL+'/v1/user';
 
+export const getDoctors = async () => {
+    try {
+        const res = await axiosClient.get(URL+ '?role_id=1');
+        return res.data.data;
+    }catch(error: any) {
+        TOAST_ERROR(error?.response?.data?.message);
+        return [];
+    }
+};
+
 export const getUser = async (id: string) => {
     try {
         const res = await axiosClient.get(URL+ '/' +id);

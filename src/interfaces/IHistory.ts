@@ -14,7 +14,8 @@ export interface IHistory {
     doctor_name?: string,
     customer?: ICustomer,
     doctor?: IUser,
-    services?: IHistoryDetail[]
+    services?: IHistoryDetail[],
+    status?: number
 }
 
 export interface IHistoryDetail {
