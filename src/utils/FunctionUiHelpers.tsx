@@ -86,3 +86,7 @@ export const TOAST_SUCCESS: any = (value: string) => {
 export const TOAST_ERROR: any = (error: string) => {
     return toast.error(error || "Đã có lỗi xảy ra");
 }
+
+export const TOAST_WARNING: any = (warning: string) => {
+    return toast.warning(warning);
+}

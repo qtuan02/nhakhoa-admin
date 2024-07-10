@@ -1,4 +1,3 @@
-"use client";
 import CButton from "@/custom_antd/CButton";
 import CSpace from "@/custom_antd/CSpace";
 import CTable from "@/custom_antd/CTable";

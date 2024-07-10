@@ -28,7 +28,7 @@ export default function EditServiceComponent() {
 
     const getDataService = async (id: string) => {
         const value = await getService(id);
-        return value !== null ? setData(value) : setData(undefined);
+        setData(value);
     }
     
     useEffect(() => {

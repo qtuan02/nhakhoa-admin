@@ -13,15 +13,18 @@ import { getCategories } from "@/apis";
 
 export default function ServiceComponent() {
     const service = useAppSelector((state) => state.service);
+    const category = useAppSelector((state) => state.category);
     const dispatch = useAppDispatch();
     
     useEffect(() => {
-        dispatch(getCategories());
+        if(category.status === "completed" || category.status === "rejected") {
+            dispatch(getCategories());
+        }
 
         if(service.status === "completed" || service.status === "rejected") {
             dispatch(getServices());
         }
-    }, [dispatch, service.status]);
+    }, [category.status, dispatch, service.status]);
 
     return (
         <>

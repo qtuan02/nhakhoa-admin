@@ -23,3 +23,7 @@
     font-weight: 400;
     color: black;
 }
+
+.table-modal .ant-table-cell {
+    padding: 8px 8px !important;
+}

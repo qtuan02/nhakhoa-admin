@@ -30,7 +30,7 @@ export default function EditUserComponent() {
 
     const getDataUser = async (id: string) => {
         const value = await getUser(id);
-        return value !== null ? setData(value) : setData(undefined);
+        setData(value);
     }
     
     useEffect(() => {

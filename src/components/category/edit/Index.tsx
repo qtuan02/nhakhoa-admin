@@ -25,7 +25,7 @@ export default function EditCategoryComponent() {
 
     const getDataCategory = async (id: string) => {
         const value = await getCategory(id);
-        return value !== null ? setData(value) : setData(undefined);
+        setData(value);
     }
 
     useEffect(() => {

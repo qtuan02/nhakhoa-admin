@@ -15,7 +15,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <StyledComponentsRegistry>
           <ReduxProvider>
             <div>{children}</div>
-            <ToastContainer limit={3} />
+            <ToastContainer limit={3} autoClose={1200} />
           </ReduxProvider>
         </StyledComponentsRegistry>
       </body>
