@@ -25,10 +25,8 @@ export default function EditHistoryComponent() {
 
     const handleSubmit = (values: IHistory) => {
         values.services = history.services;
-        console.log(values);
-        
-        // dispatch(editHistory({ id: id as string, data: values }));
-        // dispatch(clearService());
+        dispatch(editHistory({ id: id as string, data: values }));
+        dispatch(clearService());
     }
 
     const getDataHistory = async (id: string) => {
