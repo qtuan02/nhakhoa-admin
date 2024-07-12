@@ -20,6 +20,7 @@ export default function EditAppointmentComponent() {
     const appointment = useAppSelector((state) => state.appointment);
 
     const [data, setData] = useState<IAppointment | undefined>(undefined);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const handleSubmit = (values: IAppointment) => {
         values.date = dayjs(values.date).format('YYYY-MM-DD');
@@ -28,7 +29,9 @@ export default function EditAppointmentComponent() {
     }
 
     const getDataAppointment = async (id: string) => {
+        setLoading(true);
         const value = await getAppointment(id);
+        setLoading(false);
         setData(value);
     }
 
@@ -44,7 +47,7 @@ export default function EditAppointmentComponent() {
                 <CTitle>Cập nhật lịch hẹn</CTitle>
                 <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
             </CRow>
-            <CSkeleton loading={appointment.edit === 'wait'}>
+            <CSkeleton loading={appointment.edit === 'wait' || loading}>
                 <FormComponent onSubmit={handleSubmit} data={data} />
             </CSkeleton>
         </>

@@ -19,6 +19,7 @@ export default function EditCustomerComponent() {
     const customer = useAppSelector((state) => state.customer);
 
     const [data, setData] = useState<ICustomer | undefined>(undefined);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const handleSubmit = (values: ICustomer) => {
         values.birthday = dayjs(values.birthday).format('YYYY-MM-DD');
@@ -26,7 +27,9 @@ export default function EditCustomerComponent() {
     }
 
     const getDataCustomer = async (id: string) => {
+        setLoading(true);
         const value = await getCustomer(id);
+        setLoading(false);
         setData(value);
     }
 
@@ -42,7 +45,7 @@ export default function EditCustomerComponent() {
                 <CTitle>Chỉnh sửa khách hàng</CTitle>
                 <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
             </CRow>
-            <CSkeleton loading={customer.edit === 'wait'}>
+            <CSkeleton loading={customer.edit === 'wait' || loading}>
                 <FormComponent onSubmit={handleSubmit} data={data} />
             </CSkeleton>
         </>

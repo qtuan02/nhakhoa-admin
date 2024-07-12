@@ -1,26 +1,76 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { TOAST_ERROR, TOAST_SUCCESS, TOAST_WARNING } from "@/utils/FunctionUiHelpers";
 import { IHistory } from "@/interfaces/IHistory";
 import { createHistory, editHistory, getHistories } from "@/apis";
+import { IService } from "@/interfaces/IService";
 
 interface IHistoryState {
     loading?: boolean;
     status?: 'pending' | 'completed' | 'rejected';
     edit?: 'wait' | 'success' | 'fail';
     data: IHistory[];
+    drawer?: boolean;
+    history_id?: string;
+    modal?: boolean;
+    services: IService[];
 };
 
 const initialState: IHistoryState = {
     loading: false,
     status: 'completed',
     edit: 'success',
-    data: []
+    data: [],
+    drawer: false,
+    history_id: '',
+    modal: false,
+    services: [],
 };
 
 const historySlice = createSlice({
     name: 'history',
     initialState,
-    reducers: {},
+    reducers: {
+        toggleDrawer: (state) => {
+            state.drawer = !state.drawer;
+        },
+        setHistoryId: (state, action: PayloadAction<string>) => {
+            state.history_id = action.payload;
+        },
+        toggleModal: (state) => {
+            state.modal = !state.modal;
+        },
+        addService: (state, action: PayloadAction<IService>) => {
+            const service = action.payload;
+            if(state.services.find(s => s.id === service.id)) {
+                TOAST_WARNING("Dịch vụ đã được thêm!");
+            }else{
+                state.services.push(service);
+            }
+        },
+        removeService: (state, action: PayloadAction<number>) => {
+            const service_id = action.payload;
+            const index = state.services.findIndex(s => s.id === service_id);
+            if (index !== -1) {
+                state.services.splice(index, 1);
+            }
+        },
+        editService: (state, action: PayloadAction<IService>) => {
+            const service = action.payload;
+            const index = state.services.findIndex(s => s.id === service.id);
+            if (index !== -1) {
+                state.services[index].price = service.price;
+                state.services[index].quantity = service.quantity;
+            } else {
+                TOAST_WARNING("Dịch vụ không tồn tại!");
+            }
+        },
+        clearService: (state) => {
+            state.services = [];
+        },
+        setServices: (state, action: PayloadAction<IService[]>) => {
+            state.services = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getHistories.pending, (state) => {
@@ -65,4 +115,5 @@ const historySlice = createSlice({
     }
 });
 
+export const { toggleDrawer, setHistoryId, toggleModal, addService, removeService, editService, clearService, setServices } = historySlice.actions;
 export default historySlice.reducer;

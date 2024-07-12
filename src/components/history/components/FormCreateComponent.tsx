@@ -1,5 +1,4 @@
 import { getCustomers, getUsers } from "@/apis";
-import { STATUS_HISTORY } from "@/commons/Option";
 import CButton from "@/custom_antd/CButton";
 import CCol from "@/custom_antd/CCol";
 import CRow from "@/custom_antd/CRow";
@@ -13,7 +12,6 @@ import { useEffect } from "react";
 
 interface FormComponentProps {
     onSubmit: (values: IHistory) => void;
-    data?: IHistory;
 }
 
 const initialHistory: IHistory = {
@@ -22,7 +20,7 @@ const initialHistory: IHistory = {
     note: ''
 }
 
-export default function FormCreateComponent({ onSubmit, data }: FormComponentProps) {
+export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
     const { id } = useParams();
     const [form] = Form.useForm();
 
@@ -90,7 +88,7 @@ export default function FormCreateComponent({ onSubmit, data }: FormComponentPro
             </Form.Item>
             <br />
             <CRow className="gap-4 justify-end">
-                <CButton type="primary" htmlType="submit">{data ? "Cập nhật" : "Lưu"}</CButton>
+                <CButton type="primary" htmlType="submit">Lưu</CButton>
             </CRow>
         </Form>
     );

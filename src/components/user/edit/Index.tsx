@@ -21,6 +21,7 @@ export default function EditUserComponent() {
     const user = useAppSelector((state) => state.user);
 
     const [data, setData] = useState<IUser | undefined>(undefined);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const handleSubmit = (values: IUser) => {
         values.description = editorToHtml(values.description as RawDraftContentState);
@@ -29,7 +30,9 @@ export default function EditUserComponent() {
     }
 
     const getDataUser = async (id: string) => {
+        setLoading(true);
         const value = await getUser(id);
+        setLoading(false);
         setData(value);
     }
     
@@ -45,7 +48,7 @@ export default function EditUserComponent() {
                 <CTitle>Cập nhật người dùng</CTitle>
                 <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
             </CRow>
-            <CSkeleton loading={user.edit === 'wait'}>
+            <CSkeleton loading={user.edit === 'wait' || loading}>
                 <FormComponent onSubmit={handleSubmit} data={data} />
             </CSkeleton>
         </>

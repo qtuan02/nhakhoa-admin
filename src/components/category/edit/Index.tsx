@@ -18,13 +18,16 @@ export default function EditCategoryComponent() {
     const category = useAppSelector((state) => state.category);
 
     const [data, setData] = useState<ICategory | undefined>(undefined);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const handleSubmit = (values: ICategory) => {
         dispatch(editCategory({ id: id as string, data: values}));
     }
 
     const getDataCategory = async (id: string) => {
+        setLoading(true);
         const value = await getCategory(id);
+        setLoading(false);
         setData(value);
     }
 
@@ -40,7 +43,7 @@ export default function EditCategoryComponent() {
                 <CTitle>Cập nhật danh mục</CTitle>
                 <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
             </CRow>
-            <CSkeleton loading={category.edit === 'wait'}>
+            <CSkeleton loading={category.edit === 'wait' || loading}>
                 <FormComponent onSubmit={handleSubmit} data={data} />
             </CSkeleton>
         </>

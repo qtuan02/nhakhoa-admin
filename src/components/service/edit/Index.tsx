@@ -20,6 +20,7 @@ export default function EditServiceComponent() {
     const service = useAppSelector((state) => state.service);
 
     const [data, setData] = useState<IService | undefined>(undefined);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const handleSubmit = (values: IService) => {
         values.description = editorToHtml(values.description as RawDraftContentState);
@@ -27,7 +28,9 @@ export default function EditServiceComponent() {
     }
 
     const getDataService = async (id: string) => {
+        setLoading(true);
         const value = await getService(id);
+        setLoading(false);
         setData(value);
     }
     
@@ -44,7 +47,7 @@ export default function EditServiceComponent() {
                 <CTitle>Cập nhật dịch vụ</CTitle>
                 <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
             </CRow>
-            <CSkeleton loading={service.edit === 'wait'}>
+            <CSkeleton loading={service.edit === 'wait' || loading}>
                 <FormComponent onSubmit={handleSubmit} data={data} />
             </CSkeleton>
         </>

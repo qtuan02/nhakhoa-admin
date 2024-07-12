@@ -87,12 +87,8 @@ const STATUS_HISTORY: any = [
         value: 1,
     },
     {
-        label: "Xác nhận",
-        value: 2,
-    },
-    {
         label: "Hủy",
-        value: 3,
+        value: 2,
     }
 ];
 

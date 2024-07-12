@@ -1,5 +1,5 @@
-import { GetProp, MenuProps } from "antd";
-import { Dispatch, Key, ReactNode, SetStateAction } from "react";
+import { Form, GetProp, MenuProps } from "antd";
+import { Dispatch, HTMLAttributes, Key, PropsWithChildren, ReactNode, SetStateAction } from "react";
 import { TinyColor } from '@ctrl/tinycolor';
 import React from 'react';
 import { FilterConfirmProps } from 'antd/es/table/interface';
@@ -7,15 +7,14 @@ import CInput from "@/custom_antd/CInput";
 import CSpace from "@/custom_antd/CSpace";
 import CButton from "@/custom_antd/CButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfo, faMagnifyingGlass, faRotateRight } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass, faRotateRight } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
-import { ICustomer } from "@/interfaces/ICustomer";
-import CTable from "@/custom_antd/CTable";
+import { IService } from "@/interfaces/IService";
 
 
 type MenuItem = GetProp<MenuProps, 'items'>[number];
 
-export const customItemMenu = (label?: ReactNode, key?: Key, icon?: ReactNode, children?: MenuItem[] , type?: string): MenuItem => {
+export const customItemMenu = (label?: ReactNode, key?: Key, icon?: ReactNode, children?: MenuItem[], type?: string): MenuItem => {
     return { label, key, icon, children, type } as MenuItem;
 };
 
@@ -74,7 +73,7 @@ export const getColumnSearchProps = (dataIndex: string) => ({
         </div>
     ),
     filterIcon: () => <FontAwesomeIcon icon={faMagnifyingGlass} />,
-    onFilter: (value: string, record: Record<string, any>) => 
+    onFilter: (value: string, record: Record<string, any>) =>
         (record[dataIndex] || '').toString().toLowerCase().includes(value.toLowerCase()),
     render: (text: string) => text,
 });

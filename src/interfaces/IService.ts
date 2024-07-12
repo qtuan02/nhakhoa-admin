@@ -10,6 +10,8 @@ export interface IService {
     min_price?: number,
     max_price?: number,
     unit?: string,
+    price?: number,
+    quantity?: number,
     category?: ICategory,
     category_id?: number,
     description?: RawDraftContentState | EditorState | string,

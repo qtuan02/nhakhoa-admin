@@ -2,7 +2,7 @@ import { IHistory } from "@/interfaces/IHistory";
 import { useAppSelector } from "@/redux/hooks";
 import { TableColumnsType } from "antd";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
-import { CheckCircleOutlined, ClockCircleOutlined, SafetyCertificateOutlined } from "@ant-design/icons";
+import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined, SafetyCertificateOutlined } from "@ant-design/icons";
 import CTag from "@/custom_antd/CTag";
 import CSpace from "@/custom_antd/CSpace";
 import CButton from "@/custom_antd/CButton";
@@ -68,14 +68,14 @@ export default function TableComponent() {
                         text = "Đang chờ"
                         break;
                     case 1:
-                        icon = <CheckCircleOutlined />
-                        color = "warning"
+                        icon = <CheckCircleOutlined  />
+                        color = "success"
                         text = "Hoàn thành"
                         break;
                     case 2:
-                        icon = <SafetyCertificateOutlined />
-                        color="success"
-                        text = "Xác nhận"
+                        icon = <CloseCircleOutlined />
+                        color="error"
+                        text = "Hủy"
                         break;
                 }
                 return <CTag icon={icon} color={color}><span className="ml-2">{text}</span></CTag>;
@@ -87,7 +87,7 @@ export default function TableComponent() {
             width: 120,
             render: (item) => (
                 <CSpace>
-                    <CButton tooltip="Chỉnh sửa lịch khám" link={`/lich-kham/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
+                    <CButton tooltip="Chi tiết" link={`/lich-kham/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
                 </CSpace>
             )
         }

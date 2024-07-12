@@ -6,15 +6,15 @@ import CSkeleton from "@/custom_antd/CSkeleton";
 import CTable from "@/custom_antd/CTable";
 import { IHistory, IHistoryDetail } from "@/interfaces/IHistory";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { toggleDrawer } from "@/redux/reducers/customerReducer";
+import { toggleDrawer } from "@/redux/reducers/historyReducer";
 import { Divider, Drawer, TableColumnsType } from "antd";
 import { useEffect, useState } from "react";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
 
 export default function DrawerComponent() {
     const dispatch = useAppDispatch();
-    const history_id = useAppSelector((state) => state.customer.history_id);
-    const isDrawerOpen = useAppSelector((state) => state.customer.drawer);
+    const history_id = useAppSelector((state) => state.history.history_id);
+    const isDrawerOpen = useAppSelector((state) => state.history.drawer);
 
     const [loading, setLoading] = useState<boolean>(false);
     const [data, setData] = useState<IHistory | null>();
