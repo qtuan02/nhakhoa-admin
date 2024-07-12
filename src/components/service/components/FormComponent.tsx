@@ -4,6 +4,7 @@ import CButton from "@/custom_antd/CButton";
 import CCol from "@/custom_antd/CCol";
 import CEditor from "@/custom_antd/CEditor";
 import CInput from "@/custom_antd/CInput";
+import CInputNumber from "@/custom_antd/CInputNumber";
 import CRow from "@/custom_antd/CRow";
 import { CSelect } from "@/custom_antd/CSelect";
 import CUploadImage from "@/custom_antd/CUploadImage";
@@ -81,17 +82,17 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
         </CCol>
         <CCol span={6}>
           <Form.Item label="Giá tối thiểu" className="!mb-4" name="min_price" rules={[{ required: true, message: "Hãy nhập giá tối thiểu..." }]}>
-            <CInput type="number" className="!h-[40px]" placeholder="Giá tối thiểu" />
+            <CInputNumber className="!h-[40px]" placeholder="Giá tối thiểu" />
           </Form.Item>
         </CCol>
         <CCol span={6}>
           <Form.Item label="Giá tối đa" className="!mb-4" name="max_price" rules={[{ required: true, message: "Hãy nhập giá tối đa..." }]}>
-            <CInput type="number" className="!h-[40px]" placeholder="Giá tối đa" />
+            <CInputNumber className="!h-[40px]" placeholder="Giá tối đa" />
           </Form.Item>
         </CCol>
         <CCol span={6}>
           <Form.Item label="Số lượng bán" className="!mb-4" name="quantity_sold">
-            <CInput type="number" className="!h-[40px]" placeholder="Số lượng bán" />
+            <CInputNumber className="!h-[40px]" placeholder="Số lượng bán" />
           </Form.Item>
         </CCol>
       </CRow>

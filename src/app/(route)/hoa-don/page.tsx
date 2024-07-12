@@ -1,6 +1,7 @@
+import InvoiceComponent from "@/components/invoice/Index";
 
 export default function InvoicePage(){
     return (
-        <div>hoa-don</div>
+        <InvoiceComponent />
     );
 }

@@ -15,6 +15,8 @@ import CInput from "@/custom_antd/CInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import CTitle from "@/custom_antd/CTitle";
+import CInputNumber from "@/custom_antd/CInputNumber";
+import { customNumberPrice } from "@/utils/FunctionHelpers";
 
 interface FormComponentProps {
     onSubmit: (values: IHistory) => void;
@@ -40,7 +42,7 @@ const EditableCell: React.FC<React.PropsWithChildren<EditableCellProps>> = ({
     children,
     ...restProps
 }) => {
-    const inputNode = inputType === 'number' ? <CInput type="number" /> : <CInput />;
+    const inputNode = inputType === 'number' ? <CInputNumber /> : <CInput />;
 
     return (
         <td {...restProps}>
@@ -122,6 +124,7 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
             key: "price",
             editable: true,
             width: 200,
+            render: (price: number) =>(customNumberPrice(price))
         },
         {
             title: "Số lượng",
@@ -172,7 +175,7 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
     });
 
     return (
-        data && data.status !== 2 ?
+        data && data.status === 0 ?
             <Form layout="vertical" onFinish={onSubmit} initialValues={initialHistory} form={form}>
                 <Form.Item label="Trạng thái:" name="status" rules={[{ required: true, message: "Hãy chọn trạng thái..." }]}>
                     <CSelect className="!h-[40px]" options={STATUS_HISTORY} />
@@ -215,6 +218,6 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
                     <CButton type="primary" htmlType="submit">Hoàn thành</CButton>
                 </CRow>
             </Form> :
-            <CTitle level={3}>Cuộc hẹn đã hoàn thành!</CTitle>
+            <CTitle level={3} className="!text-green-400">Cuộc hẹn đã hoàn thành!</CTitle>
     );
 }

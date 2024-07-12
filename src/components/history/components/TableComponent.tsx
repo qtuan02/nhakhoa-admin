@@ -87,7 +87,7 @@ export default function TableComponent() {
             width: 120,
             render: (item) => (
                 <CSpace>
-                    <CButton tooltip="Chi tiết" link={`/lich-kham/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
+                    <CButton tooltip="Chi tiết" link={`/lich-kham/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
                 </CSpace>
             )
         }

@@ -47,11 +47,11 @@ export default function ModalComponent() {
         },
         {
             title: "Giá/Đơn vị",
-            dataIndex: "min_price",
-            key: "min_price",
+            dataIndex: "price",
+            key: "price",
             width: 150,
-            sorter: (a: any, b: any) => a.min_price - b.min_price,
-            render: (min_price, item) => <span>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(min_price))+"/"+item.unit}</span>
+            sorter: (a: any, b: any) => a.price - b.price,
+            render: (price, item) => <span>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(price))+"/"+item.unit}</span>
         },
         {
             title: "Thao tác",
@@ -68,7 +68,7 @@ export default function ModalComponent() {
                 <CTable
                     className="table-modal"
                     columns={columns}
-                    dataSource={service.data?.map((item, index) => ({ ...item, index: index + 1, key: item.id }))}
+                    dataSource={service.data?.map((item, index) => ({ ...item, index: index + 1, key: item.id, price: item.min_price, quantity: 1 }))}
                     pagination={{ defaultPageSize: 5, showSizeChanger: false }}
                 />
             </CSkeleton>

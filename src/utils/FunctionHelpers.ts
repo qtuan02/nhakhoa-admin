@@ -24,3 +24,21 @@ export const htmlToEditor = (html: string) => {
 	const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
 	return EditorState.createWithContent(contentState);
 };
+
+export const formatterInputNumber = (value: number | undefined) => {
+	if (value) {
+		return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+	}
+	return '0';
+};
+
+export const parserInputNumber = (value: string | undefined) => {
+	if (value) {
+		return Number(value.replace(/\./g, ''));
+	}
+	return 0;
+};
+
+export const customNumberPrice = (value: number | undefined) => {
+	return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(value));
+}

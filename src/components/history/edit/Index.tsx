@@ -25,8 +25,10 @@ export default function EditHistoryComponent() {
 
     const handleSubmit = (values: IHistory) => {
         values.services = history.services;
-        dispatch(editHistory({ id: id as string, data: values }));
-        dispatch(clearService());
+        console.log(values);
+        
+        // dispatch(editHistory({ id: id as string, data: values }));
+        // dispatch(clearService());
     }
 
     const getDataHistory = async (id: string) => {
@@ -54,7 +56,7 @@ export default function EditHistoryComponent() {
         },
         {
             key: 'form',
-            label: 'Chỉnh sửa lịch khám',
+            label: 'Tiến độ lịch khám',
             children: <CSkeleton loading={history.edit === 'wait'}>
                 <FormEditComponent onSubmit={handleSubmit} data={data} />
             </CSkeleton >,

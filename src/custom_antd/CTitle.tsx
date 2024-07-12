@@ -1,7 +1,7 @@
 import { TitleProps } from "antd/es/typography/Title";
 import { ReactNode } from "react";
 import { Typography } from 'antd';
-const { Title } = Typography;
+const { Text, Title } = Typography;
 
 interface CTitleProps extends TitleProps {
     children?: ReactNode;

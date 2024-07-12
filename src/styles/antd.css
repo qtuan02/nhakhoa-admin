@@ -27,3 +27,9 @@
 .table-modal .ant-table-cell {
     padding: 8px 8px !important;
 }
+
+.ant-input-number{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
