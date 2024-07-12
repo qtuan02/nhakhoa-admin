@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { IUser } from "@/interfaces/IUser";
-import { createUser, editUser, getUsers } from "@/apis";
+import { createUser, editUser, getDoctors, getUsers } from "@/apis";
 
 interface IUserState {
     loading?: boolean;
@@ -10,6 +10,8 @@ interface IUserState {
     data: IUser[];
     modal?: boolean;
     user_id?: string;
+    loadingDoctors?: boolean;
+    statusDoctors?: 'pending' | 'completed' | 'rejected';
     doctors: IUser[];
 };
 
@@ -20,6 +22,8 @@ const initialState: IUserState = {
     data: [],
     modal: false,
     user_id: '',
+    loadingDoctors: false,
+    statusDoctors: 'completed',
     doctors: [],
 };
 
@@ -32,9 +36,6 @@ const userSlice = createSlice({
         },
         setUserId: (state, action: PayloadAction<string>) => {
             state.user_id = action.payload;
-        },
-        setDoctors: (state) => {
-            state.doctors = state.data.filter(user => user.role?.id === 1);
         },
     },
     extraReducers: (builder) => {
@@ -57,6 +58,7 @@ const userSlice = createSlice({
             })
             .addCase(createUser.fulfilled, (state, action) => {
                 state.status = 'completed';
+                state.statusDoctors = 'completed';
                 state.loading = false;
                 TOAST_SUCCESS(action.payload.message);
             })
@@ -70,6 +72,7 @@ const userSlice = createSlice({
             })
             .addCase(editUser.fulfilled, (state, action) => {
                 state.status = 'completed';
+                state.statusDoctors = 'completed';
                 state.edit = 'success';
                 TOAST_SUCCESS(action.payload.message);
             })
@@ -78,8 +81,21 @@ const userSlice = createSlice({
                 state.edit = 'fail';
                 TOAST_ERROR(action.error?.message)
             })
+            .addCase(getDoctors.pending, (state) => {
+                state.statusDoctors = 'pending';
+                state.loadingDoctors = true;
+            })
+            .addCase(getDoctors.fulfilled, (state, action) => {
+                state.loadingDoctors = false;
+                state.doctors = action.payload.data;
+            })
+            .addCase(getDoctors.rejected, (state, action: any) => {
+                state.doctors = [];
+                state.loadingDoctors = false;
+                TOAST_ERROR(action.error?.message)
+            })
     }
 });
 
-export const { toggleModal, setUserId, setDoctors } = userSlice.actions;
+export const { toggleModal, setUserId } = userSlice.actions;
 export default userSlice.reducer;

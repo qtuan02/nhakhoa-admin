@@ -1,4 +1,4 @@
-import { getDate, getTimes, getUsers } from "@/apis";
+import { getDate, getDoctors, getTimes, getUsers } from "@/apis";
 import { getTime } from "@/apis/scheduleApi";
 import CButton from "@/custom_antd/CButton";
 import CCol from "@/custom_antd/CCol";
@@ -15,7 +15,6 @@ import { useEffect } from "react";
 import ModalComponent from "./ModalComponent";
 import dayjs from 'dayjs';
 import { STATUS_APPOINTMENT } from "@/commons/Option";
-import { setDoctors } from "@/redux/reducers/userReducer";
 
 interface FormComponentProps {
     onSubmit: (values: IAppointment) => void;
@@ -65,10 +64,11 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
             });
         }
 
-        if(user.doctors.length === 0) {
-            dispatch(setDoctors());
+        if(user.statusDoctors === 'completed' || user.statusDoctors === 'rejected') {
+            dispatch(getDoctors());
         }
-    }, [appointment.times, data, dispatch, form, user.doctors.length, user.status]);
+
+    }, [appointment.times, data, dispatch, form, user.status, user.statusDoctors]);
 
     const handleDisabledDate = (current: any) => {
         return current && (current.valueOf() < Date.now() || current.day() === 0);
