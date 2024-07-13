@@ -2,7 +2,7 @@ import { IHistory } from "@/interfaces/IHistory";
 import { useAppSelector } from "@/redux/hooks";
 import { TableColumnsType } from "antd";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
-import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined, SafetyCertificateOutlined } from "@ant-design/icons";
+import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import CTag from "@/custom_antd/CTag";
 import CSpace from "@/custom_antd/CSpace";
 import CButton from "@/custom_antd/CButton";

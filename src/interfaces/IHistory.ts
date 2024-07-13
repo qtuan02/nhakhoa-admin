@@ -1,5 +1,4 @@
 import { ICustomer } from "./ICustomer";
-import { IService } from "./IService";
 import { IUser } from "./IUser";
 
 export interface IHistory {

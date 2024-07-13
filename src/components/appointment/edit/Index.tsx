@@ -12,7 +12,6 @@ import FormComponent from "../components/FormComponent";
 import { useEffect, useState } from "react";
 import { editAppointment, getAppointment } from "@/apis";
 import CSkeleton from "@/custom_antd/CSkeleton";
-import { clearService } from "@/redux/reducers/appointmentReducer";
 
 export default function EditAppointmentComponent() {
     const { id } = useParams();

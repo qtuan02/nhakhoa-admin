@@ -102,4 +102,26 @@ const COLUMN_CUSTOMER: any = [
     { title: 'Địa chỉ', dataIndex: 'address', key: 'address' },
 ];
 
-export { SIDER_MENU, STATUS, GENDER, ROLE, COLUMN_CUSTOMER, STATUS_APPOINTMENT, STATUS_HISTORY };
+const STATUS_INVOICE: any = [
+    {
+        label: "Chưa thanh toán",
+        value: 0,
+    },
+    {
+        label: "Đã thanh toán",
+        value: 1,
+    }
+];
+
+const METHOD_PAYMENT_INVOICE: any = [
+    {
+        label: "Tiền mặt",
+        value: 0,
+    },
+    {
+        label: "Chuyển khoản",
+        value: 1,
+    }
+];
+
+export { SIDER_MENU, STATUS, GENDER, ROLE, COLUMN_CUSTOMER, STATUS_APPOINTMENT, STATUS_HISTORY, STATUS_INVOICE, METHOD_PAYMENT_INVOICE };

@@ -1,4 +1,4 @@
-import { getCustomers, getDoctors, getUsers } from "@/apis";
+import { getCustomers, getDoctors } from "@/apis";
 import CButton from "@/custom_antd/CButton";
 import CCol from "@/custom_antd/CCol";
 import CRow from "@/custom_antd/CRow";

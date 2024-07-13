@@ -9,7 +9,6 @@ import TableComponent from "./components/TableComponent";
 import { getServices } from "@/apis/serviceApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
-import { getCategories } from "@/apis";
 
 export default function ServiceComponent() {
     const service = useAppSelector((state) => state.service);

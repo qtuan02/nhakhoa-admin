@@ -1,4 +1,5 @@
 import { ICustomer } from "./ICustomer";
+import { IHistory } from "./IHistory";
 import { IUser } from "./IUser";
 
 export interface IInvoice {
@@ -9,4 +10,5 @@ export interface IInvoice {
     status?: number,
     customer? :ICustomer,
     user?: IUser,
+    history?: IHistory
 }

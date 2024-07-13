@@ -11,7 +11,7 @@ export const getDoctors = createAsyncThunk<IResponse>(
     'user/getDoctors',
     async () => {
         try{
-            const res = await axiosClient.get(URL + '?role_id=1');
+            const res = await axiosClient.get(URL + '?role_id=1&status=1');
             return res.data;
         }catch(error: any) {
             throw error?.response?.data;

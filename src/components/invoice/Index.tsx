@@ -19,7 +19,7 @@ export default function InvoiceComponent() {
     return (
         <>
             <CRow className="justify-between">
-                <CTitle>Hóa đơn</CTitle>
+                <CTitle>Danh sách hóa đơn</CTitle>
             </CRow>
             <CSkeleton loading={invoice.loading}>
                 <div className="w-full h-[calc(100%-65px)] overflow-auto">
