@@ -5,3 +5,4 @@ export * from './historyApi';
 export * from './userApi';
 export * from './appointmentApi';
 export * from './invoiceApi';
+export * from './scheduleApi';

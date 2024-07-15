@@ -1,5 +1,5 @@
-import { Form, GetProp, MenuProps } from "antd";
-import { Dispatch, HTMLAttributes, Key, PropsWithChildren, ReactNode, SetStateAction } from "react";
+import { GetProp, MenuProps } from "antd";
+import { Dispatch, Key, ReactNode, SetStateAction } from "react";
 import { TinyColor } from '@ctrl/tinycolor';
 import React from 'react';
 import { FilterConfirmProps } from 'antd/es/table/interface';
@@ -9,7 +9,6 @@ import CButton from "@/custom_antd/CButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faRotateRight } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
-import { IService } from "@/interfaces/IService";
 
 
 type MenuItem = GetProp<MenuProps, 'items'>[number];

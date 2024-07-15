@@ -10,6 +10,7 @@ import { toggleDrawer } from "@/redux/reducers/historyReducer";
 import { Divider, Drawer, TableColumnsType } from "antd";
 import { useEffect, useState } from "react";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
+import { formatDate } from "@/utils/FunctionHelpers";
 
 export default function DrawerComponent() {
     const dispatch = useAppDispatch();
@@ -72,7 +73,7 @@ export default function DrawerComponent() {
                     <CDescriptionItem title="Họ tên" content={data?.customer?.name} />
                 </CCol>
                 <CCol span={12}>
-                    <CDescriptionItem title="Ngày khám" content={String(data?.date)} />
+                    <CDescriptionItem title="Ngày khám" content={formatDate(data?.date)} />
                 </CCol>
             </CRow>
             <CRow>

@@ -9,6 +9,7 @@ import CButton from "@/custom_antd/CButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import CTable from "@/custom_antd/CTable";
+import { formatDate } from "@/utils/FunctionHelpers";
 
 export default function TableComponent() {
     const history = useAppSelector((state) => state.history);
@@ -40,6 +41,7 @@ export default function TableComponent() {
             width: 150,
             ...getColumnSearchProps('date'),
             sorter: (a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+            render: (date) => <p>{formatDate(date)}</p>
         },
         {
             title: "Thời gian",

@@ -10,9 +10,8 @@ import FormComponent from "../components/FormComponent";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect, useState } from "react";
 import { IUser } from "@/interfaces/IUser";
-import { editorToHtml } from "@/utils/FunctionHelpers";
+import { editorToHtml, parseDayjsToString } from "@/utils/FunctionHelpers";
 import { RawDraftContentState } from "draft-js";
-import dayjs from 'dayjs';
 import { editUser, getUser } from "@/apis";
 
 export default function EditUserComponent() {
@@ -25,7 +24,7 @@ export default function EditUserComponent() {
 
     const handleSubmit = (values: IUser) => {
         values.description = editorToHtml(values.description as RawDraftContentState);
-        values.birthday = dayjs(values.birthday).format('YYYY-MM-DD');
+        values.birthday = parseDayjsToString(values.birthday);
         dispatch(editUser({ id: id as string, data: values}));
     }
 

@@ -6,20 +6,7 @@ import { IResponse } from "@/interfaces/IResponse";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const URL_TIME = appConfig.API_LOCAL+"/v1/time";
-const URL_SCHEDULE = appConfig.API_LOCAL+"/v1/schedule";
 const URL_APPOINTMENT = appConfig.API_LOCAL+'/v1/appointment';
-
-export const getDate = createAsyncThunk<IResponse, string>(
-    'appointment/getDate',
-    async (doctor_id) => {
-        try{
-            const res = await axiosClient.get(URL_SCHEDULE+"/"+doctor_id);
-            return res.data;
-        }catch(error: any) {
-            throw error?.response?.data;
-        }
-    }
-);
 
 export const getTimes = createAsyncThunk<IResponse>(
     'appointment/getTimes',

@@ -3,7 +3,7 @@ import { IUser } from "./IUser";
 
 export interface IHistory {
     id?: number,
-    date?: Date | string,
+    date?: string,
     time?: string,
     total_price?: number,
     customer_id?: string,

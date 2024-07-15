@@ -60,7 +60,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                 </CCol>
                 <CCol span={4}>
                     <Form.Item label="Ngày sinh" className="!mb-4" name="birthday" rules={[{ required: true, message: "Hãy chọn ngày sinh..." }]}>
-                        <DatePicker className="h-10 w-full" placeholder="YYYY-MM-DD" format='YYYY-MM-DD' allowClear={false} />
+                        <DatePicker className="h-10 w-full" placeholder="DD/MM/YYYY" format='DD/MM/YYYY' allowClear={false} />
                     </Form.Item>
                 </CCol>
                 <CCol span={4}>

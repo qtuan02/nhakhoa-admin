@@ -1,6 +1,7 @@
+import ScheduleComponent from "@/components/schedule/Index";
 
 export default function CalendarPage(){
     return (
-        <div>lich-lam-viec</div>
+        <ScheduleComponent />
     );
 }

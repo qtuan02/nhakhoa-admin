@@ -7,6 +7,7 @@ import userReducer from "./userReducer";
 import appointmentReducer from "./appointmentReducer";
 import historyReducer from "./historyReducer";
 import invoiceReducer from "./invoiceReducer";
+import scheduleReducer from "./scheduleReducer";
 
 const rootReducer = combineReducers({
     sider: siderReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     user: userReducer,
     appointment: appointmentReducer,
     history: historyReducer,
-    invoice: invoiceReducer
+    invoice: invoiceReducer,
+    schedule: scheduleReducer,
 });
 
 export default rootReducer;

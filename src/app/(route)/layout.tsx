@@ -6,7 +6,7 @@ const Layout = dynamic(() => import('@/components/layout/Index'), { ssr: false }
 export const metadata: Metadata = {
   title: "Quản trị - Nha khoa OK-Vip",
   icons: {
-    icon: "/okvip.png"
+    icon: "/logo.png"
   }
 };
 

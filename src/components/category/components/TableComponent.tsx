@@ -28,7 +28,7 @@ export default function TableComponent() {
             key: "image",
             width: 250,
             render: (image) => (
-                <Image width={40} height={40} src={image}  alt="img..." />
+                <Image width={65} height={40} src={image}  alt="img..." />
             )
         },
         {

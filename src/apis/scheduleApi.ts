@@ -27,4 +27,16 @@ export const getTime = createAsyncThunk<IResponse, { doctor_id: string, date: st
             throw error?.response?.data;
         }
     }
-); 
+);
+
+export const getSchedules = createAsyncThunk<IResponse, string>(
+    'schedule/get',
+    async (date) => {
+        try{
+            const res = await axiosClient.get(URL+"?date="+date);
+            return res.data;
+        }catch(error: any) {
+            throw error?.response?.data;
+        }
+    }
+);

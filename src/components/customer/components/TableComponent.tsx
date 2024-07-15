@@ -12,6 +12,7 @@ import CTitle from "@/custom_antd/CTitle";
 import { setHistoryId, toggleDrawer } from "@/redux/reducers/customerReducer";
 import { IHistory } from "@/interfaces/IHistory";
 import DrawerComponent from "./DrawerComponent";
+import { formatDate } from "@/utils/FunctionHelpers";
 
 export default function TableComponent() {
     const dispatch = useAppDispatch();
@@ -44,6 +45,7 @@ export default function TableComponent() {
             dataIndex: "birthday",
             key: "birthday",
             width: 110,
+            render: (birthday) => <p>{formatDate(birthday)}</p>
         },
         {
             title: "Email",
@@ -94,7 +96,7 @@ export default function TableComponent() {
 
     const expandedRowRender = (record: ICustomer) => {
         const columns = [
-            { title: 'Ngày', dataIndex: 'date', key: 'date' },
+            { title: 'Ngày', dataIndex: 'date', key: 'date', render: (date: string) => <p>{formatDate(date)}</p> },
             { title: 'Thời gian', dataIndex: 'time', key: 'time' },
             { title: 'Nha sĩ', dataIndex: 'doctor_name', key: 'doctor_name' },
             { title: 'Tổng giá', dataIndex: 'total_price', key: 'total_price', render: (total_price: number) => ( <span>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(total_price))}</span> ) },

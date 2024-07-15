@@ -5,7 +5,7 @@ export interface ICustomer {
     id?: string,
     name: string,
     phone_number?: string,
-    birthday?: Date | string,
+    birthday?: string,
     email?: string,
     gender?: number,
     address?: string,

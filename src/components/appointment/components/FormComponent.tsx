@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import ModalComponent from "./ModalComponent";
 import dayjs from 'dayjs';
 import { STATUS_APPOINTMENT } from "@/commons/Option";
+import { formatDate } from "@/utils/FunctionHelpers";
 
 interface FormComponentProps {
     onSubmit: (values: IAppointment) => void;
@@ -60,7 +61,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
             form.setFieldsValue({
                 ...data,
                 doctor_id: data?.doctor?.id || '',
-                date: data.doctor ? dayjs(data?.date).format('YYYY/MM/DD') || '' : dayjs(data?.date) || '',
+                date: data.doctor ? dayjs(data?.date).format('DD/MM/YYYY') || '' : dayjs(data?.date) || '',
             });
         }
 
@@ -135,7 +136,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                                     <CSelect loading={appointment.loadingDate} className="!h-10 ts-16" onChange={handleDateChange}>
                                         <Select.Option value="">--Chọn ngày</Select.Option>
                                         {appointment.date?.map((d: IDate) => (
-                                            <Select.Option key={d.date} value={d.date}>{d.date}</Select.Option>
+                                            <Select.Option key={d.date} value={d.date}>{formatDate(d.date)}</Select.Option>
                                         ))}
                                     </CSelect>
                                 </Form.Item>
@@ -155,7 +156,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                         <CRow gutter={[16, 16]}>
                             <CCol span={12}>
                                 <Form.Item label="Chọn ngày:" className="!mb-4" name="date" rules={[{ required: true, message: "Chưa chọn ngày..." }]}>
-                                    <CDatePicker disabledDate={handleDisabledDate} className="h-10 w-full ts-16" placeholder="--Chọn ngày" />
+                                    <CDatePicker disabledDate={handleDisabledDate} className="h-10 w-full ts-16" placeholder="--Chọn ngày" format="DD/MM/YYYY" />
                                 </Form.Item>
                             </CCol>
                             <CCol span={12}>

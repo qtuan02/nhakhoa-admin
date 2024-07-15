@@ -6,7 +6,7 @@ export interface IUser {
     avatar?: string,
     phone_number?: string,
     email?: string,
-    birthday?: Date | string,
+    birthday?: string,
     gender?: number,
     address?: string,
     role? : IRole,

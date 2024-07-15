@@ -2,7 +2,6 @@ import { SIDER_MENU } from "@/commons/Option";
 import CMenu from "@/custom_antd/CMenu";
 import CSider from "@/custom_antd/CSider";
 import { useAppSelector } from "@/redux/hooks";
-import { RootState } from "@/redux/store";
 import { usePathname } from "next/navigation";
 
 export default function SiderComponent() {

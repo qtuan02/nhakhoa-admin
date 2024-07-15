@@ -5,13 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateBack } from "@fortawesome/free-solid-svg-icons";
 import CButton from "@/custom_antd/CButton";
 import { IAppointment } from "@/interfaces/IAppointment";
-import dayjs from 'dayjs';
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useParams } from "next/navigation";
 import FormComponent from "../components/FormComponent";
 import { useEffect, useState } from "react";
 import { editAppointment, getAppointment } from "@/apis";
 import CSkeleton from "@/custom_antd/CSkeleton";
+import { parseDayjsToString } from "@/utils/FunctionHelpers";
 
 export default function EditAppointmentComponent() {
     const { id } = useParams();
@@ -22,7 +22,7 @@ export default function EditAppointmentComponent() {
     const [loading, setLoading] = useState<boolean>(false);
 
     const handleSubmit = (values: IAppointment) => {
-        values.date = dayjs(values.date).format('YYYY-MM-DD');
+        values.date = parseDayjsToString(values.date);
         values.services = appointment.services;     
         dispatch(editAppointment({ id: id as string, data: values }));
     }

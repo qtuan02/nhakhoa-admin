@@ -6,12 +6,12 @@ import { faRotateBack } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FormComponent from "../components/FormComponent";
 import { ICustomer } from "@/interfaces/ICustomer";
-import dayjs from 'dayjs';
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import { useParams } from "next/navigation";
 import { editCustomer, getCustomer } from "@/apis";
 import { useEffect, useState } from "react";
+import { parseDayjsToString } from "@/utils/FunctionHelpers";
 
 export default function EditCustomerComponent() {
     const { id } = useParams();
@@ -22,7 +22,7 @@ export default function EditCustomerComponent() {
     const [loading, setLoading] = useState<boolean>(false);
 
     const handleSubmit = (values: ICustomer) => {
-        values.birthday = dayjs(values.birthday).format('YYYY-MM-DD');
+        values.birthday = parseDayjsToString(values.birthday);
         dispatch(editCustomer({ id: id as string, data: values}));
     }
 

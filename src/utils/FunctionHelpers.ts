@@ -1,21 +1,14 @@
-import { ContentState, convertFromHTML, EditorState } from 'draft-js';
+import { ContentState, EditorState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 import { RawDraftContentState } from 'react-draft-wysiwyg';
+import dayjs from 'dayjs';
+import { Dayjs } from 'dayjs';
 
 export const editorToHtml = (rawContentState: RawDraftContentState | null) => {
 	if (!rawContentState) return '';
 	return draftToHtml(rawContentState);
 };
-
-// export const htmlToEditor = (html: string) => {
-// 	const blocksFromHTML = convertFromHTML(html);
-// 	const contentState = ContentState.createFromBlockArray(
-//         blocksFromHTML.contentBlocks,
-//         blocksFromHTML.entityMap
-//     );
-//     return EditorState.createWithContent(contentState);
-// };
 
 export const htmlToEditor = (html: string) => {
 	if (!html) return EditorState.createEmpty();
@@ -41,4 +34,15 @@ export const parserInputNumber = (value: string | undefined) => {
 
 export const customNumberPrice = (value: number | undefined) => {
 	return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(value));
+}
+
+export const parseDayjsToString = (value: string | Dayjs | undefined) => {
+	return dayjs(value).format('YYYY-MM-DD') as string;
+}
+
+export const formatDate = (date: string | undefined) => {
+    if (!date) return '';
+    const parsedDate = new Date(date);
+    const formatter = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    return formatter.format(parsedDate);
 }

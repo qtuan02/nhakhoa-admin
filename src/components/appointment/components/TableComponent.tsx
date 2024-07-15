@@ -11,6 +11,7 @@ import CTag from "@/custom_antd/CTag";
 import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
 import { IAppointment } from "@/interfaces/IAppointment";
+import { formatDate } from "@/utils/FunctionHelpers";
 
 export default function TableComponent() {
     const appoinment = useAppSelector((state) => state.appointment);
@@ -43,6 +44,7 @@ export default function TableComponent() {
             width: 150,
             ...getColumnSearchProps('date'),
             sorter: (a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+            render: (date) => <p>{formatDate(date)}</p>
         },
         {
             title: "Thời gian",
