@@ -19,7 +19,7 @@ const CardComponent: React.FC<CardComponentProps> = ({ data }) => {
             <CRow gutter={[16, 16]}>
                 {data.map((d, index) => (
                     <CCol key={index} span={6}>
-                        <Card title={d.name+" - "+d.id} style={{ border: "1px solid black", height: '200px' }} 
+                        <Card className="shadow-lg hover:shadow-2xl cursor-pointer" title={d.id+" - "+d.name} style={{ border: "1px solid #f3f3f3", height: '200px' }} 
                         extra={<CSpace>
                             <CButton tooltip="Chỉnh sửa" type="primary" size='small' icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
                             <CButton tooltip="Xóa" type="primary" size='small' danger icon={<FontAwesomeIcon icon={faTrashCan} />} className='ts-16'></CButton>

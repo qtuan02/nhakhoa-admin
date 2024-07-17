@@ -3,7 +3,8 @@ import { ITime } from "./IAppointment"
 export interface ISchedule {
     key?: string,
     date?: string,
-    doctor?: IScheduleDoctor[]
+    doctor?: IScheduleDoctor[],
+    doctor_id?: string
 }
 
 export interface IScheduleDoctor {

@@ -19,5 +19,6 @@ export interface IDate {
 }
 
 export interface ITime {
+    id?: number,
     time?: string,
 }

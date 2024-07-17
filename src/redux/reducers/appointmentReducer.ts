@@ -14,8 +14,9 @@ interface IAppointmentState {
     loadingTimes?: boolean;
     date: IDate[];
     loadingDate?: boolean;
-    time: ITime[];
     loadingTime?: boolean;
+    statusTime?: 'pending' | 'completed' | 'rejected';
+    time: ITime[];
     modal?: boolean;
     services: IService[];
 };
@@ -25,8 +26,9 @@ const initialState: IAppointmentState = {
     status: 'completed',
     edit: 'success',
     data: [],
-    times: [],
     loadingTimes: false,
+    statusTime: 'completed',
+    times: [],
     date: [],
     loadingDate: false,
     time: [],
@@ -122,6 +124,7 @@ const appointmentSlice = createSlice({
                 TOAST_ERROR(action.error?.message)
             })
             .addCase(getTimes.pending, (state) => {
+                state.statusTime = 'pending';
                 state.loadingTimes = true;
             })
             .addCase(getTimes.fulfilled, (state, action) => {

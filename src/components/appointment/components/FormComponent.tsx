@@ -46,7 +46,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
             dispatch(getUsers());
         }
 
-        if (appointment.times && appointment.times.length === 0) {
+        if (appointment.statusTime === 'completed' || appointment.statusTime === 'rejected') {
             dispatch(getTimes());
         }
 
@@ -69,7 +69,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
             dispatch(getDoctors());
         }
 
-    }, [appointment.times, data, dispatch, form, user.status, user.statusDoctors]);
+    }, [appointment.statusTime, data, dispatch, form, user.status, user.statusDoctors]);
 
     const handleDisabledDate = (current: any) => {
         return current && (current.valueOf() < Date.now() || current.day() === 0);

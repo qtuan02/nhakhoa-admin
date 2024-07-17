@@ -2,7 +2,7 @@
 import CButton from "@/custom_antd/CButton";
 import CSpace from "@/custom_antd/CSpace";
 import CTable from "@/custom_antd/CTable";
-import { faKey, faPenToSquare, faUserDoctor, faUserNurse, faUserShield } from "@fortawesome/free-solid-svg-icons";
+import { faCalendarPlus, faKey, faPenToSquare, faUserDoctor, faUserNurse, faUserShield } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Image, TableColumnsType } from "antd";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -36,7 +36,7 @@ export default function TableComponent() {
             title: "Tên nhân viên",
             dataIndex: "name",
             key: "name",
-            width: 250,
+            width: 225,
             ...getColumnSearchProps('name'),
             ellipsis: true
         },
@@ -51,7 +51,7 @@ export default function TableComponent() {
             title: "Email",
             dataIndex: "email",
             key: "email",
-            width: 250,
+            width: 225,
             ...getColumnSearchProps('email'),
         },
         {
@@ -102,7 +102,7 @@ export default function TableComponent() {
         {
             title: "Thao tác",
             key: "item",
-            width: 100,
+            width: 150,
             render: (item) => (
                 <CSpace>
                     <CButton tooltip="Chỉnh sửa thông tin nhân viên y tế" link={`/nguoi-dung/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
@@ -112,6 +112,7 @@ export default function TableComponent() {
                             dispatch(setUserId(String(item.id)));
                         }}
                     ></CButton>
+                    <CButton tooltip="Tạo lịch làm việc" link={`/lich-lam-viec/them/${item.id}`} type="default" icon={<FontAwesomeIcon icon={faCalendarPlus} />} className='ts-16'></CButton>
                 </CSpace>
             )
         }

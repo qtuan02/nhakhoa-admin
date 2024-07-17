@@ -59,7 +59,7 @@ export default function ScheduleComponent() {
             </CRow>
             <br />
             <CSkeleton loading={schedule.loading}>
-                {schedule.data && schedule.data.length === 0 ? <CTitle level={4} className="!text-red-800">Chưa có lịch làm việc!</CTitle>  : <Tabs items={items} />}
+                {schedule.data && schedule.data.length === 0 ? <CTitle level={4} className="!text-red-500">Không tìm thấy lịch làm việc!</CTitle>  : <Tabs items={items} />}
             </CSkeleton>
         </>
     );
