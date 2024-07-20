@@ -71,7 +71,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
 
     }, [appointment.statusTime, data, dispatch, form, user.status, user.statusDoctors]);
 
-    const handleDisabledDate = (current: any) => {
+    const handleDisabledPast = (current: any) => {
         return current && (current.valueOf() < Date.now() || current.day() === 0);
     };
 
@@ -156,7 +156,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                         <CRow gutter={[16, 16]}>
                             <CCol span={12}>
                                 <Form.Item label="Chọn ngày:" className="!mb-4" name="date" rules={[{ required: true, message: "Chưa chọn ngày..." }]}>
-                                    <CDatePicker disabledDate={handleDisabledDate} className="h-10 w-full ts-16" placeholder="--Chọn ngày" format="DD/MM/YYYY" />
+                                    <CDatePicker disabledDate={handleDisabledPast} className="h-10 w-full ts-16" placeholder="--Chọn ngày" format="DD/MM/YYYY" />
                                 </Form.Item>
                             </CCol>
                             <CCol span={12}>

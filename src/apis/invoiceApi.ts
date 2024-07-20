@@ -1,11 +1,10 @@
-import { appConfig } from "@/commons/AppConfig";
 import axiosClient from "@/commons/AxiosConfig";
 import { IInvoice } from "@/interfaces/IInvoice";
 import { IResponse } from "@/interfaces/IResponse";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const URL = appConfig.API_LOCAL+"/v1/invoice";
+const URL = "/v1/invoice";
 
 export const getInvoice = async (id: string) => {
     try {

@@ -25,6 +25,27 @@ const SIDER_MENU: any = [
     ], "group"),
 ];
 
+const SIDER_MENU_DOCTOR: any = [
+    customItemMenu("Quản lí lịch", "grp4", null, [
+        customItemMenu(<Link href="/lich-kham">Lịch khám</Link>, "/lich-kham", <FontAwesomeIcon icon={faCalendarCheck} />),
+        customItemMenu(<Link href="/lich-lam-viec">Lịch làm việc</Link>, "/lich-lam-viec", <FontAwesomeIcon icon={faCalendarAlt} />),
+    ], "group"),
+];
+
+const SIDER_MENU_EMPLOYEE: any = [
+    customItemMenu("Quản lí thông tin", "grp3", null, [
+        customItemMenu(<Link href="/khach-hang">Khách hàng</Link>, "/khach-hang", <FontAwesomeIcon icon={faUsers} />),
+    ], "group"),
+    customItemMenu("Quản lí lịch", "grp4", null, [
+        customItemMenu(<Link href="/lich-hen">Lịch hẹn</Link>, "/lich-hen", <FontAwesomeIcon icon={faCalendar} />),
+        customItemMenu(<Link href="/lich-kham">Lịch khám</Link>, "/lich-kham", <FontAwesomeIcon icon={faCalendarCheck} />),
+        customItemMenu(<Link href="/lich-lam-viec">Lịch làm việc</Link>, "/lich-lam-viec", <FontAwesomeIcon icon={faCalendarAlt} />),
+    ], "group"),
+    customItemMenu("Quản lí giao dịch", "grp5", null, [
+        customItemMenu(<Link href="/hoa-don">Hóa đơn</Link>, "/hoa-don", <FontAwesomeIcon icon={faHandHoldingDollar} />),
+    ], "group"),
+];
+
 const STATUS: any = [
     {
         label: "Hoạt động",
@@ -124,4 +145,6 @@ const METHOD_PAYMENT_INVOICE: any = [
     }
 ];
 
-export { SIDER_MENU, STATUS, GENDER, ROLE, COLUMN_CUSTOMER, STATUS_APPOINTMENT, STATUS_HISTORY, STATUS_INVOICE, METHOD_PAYMENT_INVOICE };
+export { SIDER_MENU, STATUS, GENDER, ROLE, COLUMN_CUSTOMER, STATUS_APPOINTMENT,STATUS_HISTORY, 
+    STATUS_INVOICE, METHOD_PAYMENT_INVOICE, SIDER_MENU_DOCTOR, SIDER_MENU_EMPLOYEE
+};

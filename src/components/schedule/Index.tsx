@@ -7,7 +7,7 @@ import CSkeleton from "@/custom_antd/CSkeleton";
 import CTitle from "@/custom_antd/CTitle";
 import { ISchedule } from "@/interfaces/ISchedule";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { parseDayjsToString } from "@/utils/FunctionHelpers";
+import { formatDate, parseDayjsToString } from "@/utils/FunctionHelpers";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DatePicker, Tabs, TabsProps } from "antd";
@@ -38,8 +38,8 @@ export default function ScheduleComponent() {
 
     const items: TabsProps['items'] = schedule.data.map((s: ISchedule) => ({
         key: s.key as string,
-        label: <p className="px-6">Thứ {s.key}</p>,
-        children: <CardComponent data={s.doctor} />
+        label: <p className="px-4">Thứ {s.key} - {formatDate(s.date)}</p>,
+        children: <CardComponent data={s.doctor} date={s.date} />
     }));
 
     const handleChange = (date: Dayjs) => {

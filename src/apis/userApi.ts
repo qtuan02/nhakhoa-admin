@@ -1,11 +1,10 @@
-import { appConfig } from "@/commons/AppConfig";
 import axiosClient from "@/commons/AxiosConfig";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { IUser } from "@/interfaces/IUser";
 import { IResponse } from "@/interfaces/IResponse";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const URL = appConfig.API_LOCAL+'/v1/user';
+const URL = '/v1/user';
 
 export const getDoctors = createAsyncThunk<IResponse>(
     'user/getDoctors',

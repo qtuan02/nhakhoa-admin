@@ -1,9 +1,9 @@
-import { appConfig } from "@/commons/AppConfig";
 import axiosClient from "@/commons/AxiosConfig";
 import { IResponse } from "@/interfaces/IResponse";
+import { IScheduleAction } from "@/interfaces/ISchedule";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const URL = appConfig.API_LOCAL+"/v1/schedule";
+const URL = "/v1/schedule";
 
 export const getDate = createAsyncThunk<IResponse, string>(
     'schedule/getDate',
@@ -35,6 +35,30 @@ export const getSchedules = createAsyncThunk<IResponse, string>(
         try{
             const res = await axiosClient.get(URL+"?date="+date);
             return res.data;
+        }catch(error: any) {
+            throw error?.response?.data;
+        }
+    }
+);
+
+export const createSchedule = createAsyncThunk<IResponse, IScheduleAction>(
+    'schedule/create',
+    async (data) => {
+        try{
+            const res = await axiosClient.post(URL, data);
+            return res.data;
+        }catch(error: any) {
+            throw error?.response?.data;
+        }
+    }
+);
+
+export const deleteSchedule = createAsyncThunk<IResponse, { doctor_id: string, date: string }>(
+    'schedule/delete',
+    async ({ doctor_id, date }) => {
+        try{
+            const res = await axiosClient.delete(URL+"/"+doctor_id+"/"+date);
+            return {...res.data, data: { date: date, doctor_id: doctor_id }};
         }catch(error: any) {
             throw error?.response?.data;
         }

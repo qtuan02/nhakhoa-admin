@@ -112,7 +112,7 @@ export default function TableComponent() {
                             dispatch(setUserId(String(item.id)));
                         }}
                     ></CButton>
-                    <CButton tooltip="Tạo lịch làm việc" link={`/lich-lam-viec/them/${item.id}`} type="default" icon={<FontAwesomeIcon icon={faCalendarPlus} />} className='ts-16'></CButton>
+                    {item.role === 1 && item.status === 1 ? <CButton tooltip="Tạo lịch làm việc" link={`/lich-lam-viec/them/${item.id}`} type="default" icon={<FontAwesomeIcon icon={faCalendarPlus} />} className='ts-16'></CButton> : null}
                 </CSpace>
             )
         }

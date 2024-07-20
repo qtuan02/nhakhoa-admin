@@ -46,3 +46,8 @@ export const formatDate = (date: string | undefined) => {
     const formatter = new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
     return formatter.format(parsedDate);
 }
+
+export const parseHTML = (html: string | undefined) => {
+    return { __html: html || '' };
+}
+

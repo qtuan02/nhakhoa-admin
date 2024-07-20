@@ -1,6 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import siderReducer from "./siderReducer";
-import categoryReducer from "./categoryReducer";
 import serviceReducer from "./serviceReducer";
 import customerReducer from "./customerReducer";
 import userReducer from "./userReducer";
@@ -8,6 +7,9 @@ import appointmentReducer from "./appointmentReducer";
 import historyReducer from "./historyReducer";
 import invoiceReducer from "./invoiceReducer";
 import scheduleReducer from "./scheduleReducer";
+import dashboardReducer from "./dashboardReducer";
+import authReducer from "./authReducer";
+import categoryReducer from "./categoryReducer";
 
 const rootReducer = combineReducers({
     sider: siderReducer,
@@ -19,6 +21,8 @@ const rootReducer = combineReducers({
     history: historyReducer,
     invoice: invoiceReducer,
     schedule: scheduleReducer,
+    dashboard: dashboardReducer,
+    auth: authReducer
 });
 
 export default rootReducer;

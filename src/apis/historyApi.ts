@@ -1,11 +1,10 @@
-import { appConfig } from "@/commons/AppConfig";
 import axiosClient from "@/commons/AxiosConfig";
 import { IHistory } from "@/interfaces/IHistory";
 import { IResponse } from "@/interfaces/IResponse";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const URL = appConfig.API_LOCAL+'/v1/history';
+const URL = '/v1/history';
 
 export const getHistory = async (id: string) => {
     try {

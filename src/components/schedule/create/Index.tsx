@@ -7,14 +7,15 @@ import { faRotateBack } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FormCreateComponent from "../components/FormCreateComponent";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { ISchedule } from "@/interfaces/ISchedule";
+import { IScheduleAction } from "@/interfaces/ISchedule";
+import { createSchedule } from "@/apis";
 
 export default function CreateScheduleComponent() {
     const dispatch = useAppDispatch();
     const schedule = useAppSelector((state) => state.schedule);
 
-    const handleSubmit = (values: ISchedule) => {
-        console.log(values);
+    const handleSubmit = (values: IScheduleAction) => {
+        dispatch(createSchedule(values));
     }
 
     return (

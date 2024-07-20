@@ -6,3 +6,5 @@ export * from './userApi';
 export * from './appointmentApi';
 export * from './invoiceApi';
 export * from './scheduleApi';
+export * from './dashboardApi';
+export * from './authApi';

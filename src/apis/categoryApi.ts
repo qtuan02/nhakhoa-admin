@@ -1,11 +1,10 @@
-import { appConfig } from "@/commons/AppConfig";
 import axiosClient from "@/commons/AxiosConfig";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { ICategory } from "@/interfaces/ICategory";
 import { IResponse } from "@/interfaces/IResponse";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const URL = appConfig.API_LOCAL+'/v1/category';
+const URL = '/v1/category';
 
 export const getCategory = async (id: string) => {
     try {

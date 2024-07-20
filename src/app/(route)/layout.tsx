@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import "../../styles/globals.css";
 import dynamic from "next/dynamic";
 const Layout = dynamic(() => import('@/components/layout/Index'), { ssr: false });
 

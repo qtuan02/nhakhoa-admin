@@ -1,27 +1,71 @@
 "use client";
+import { ILogin } from "@/interfaces/ILogin";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import CButton from "@/custom_antd/CButton";
-import CCheckBox from "@/custom_antd/CCheckBox";
 import CInput from "@/custom_antd/CInput";
-import CRow from "@/custom_antd/CRow";
-import { Form } from "antd";
+import CTitle from "@/custom_antd/CTitle";
+import { faHospital } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Checkbox, Form, Input } from "antd";
+import { useEffect, useState } from "react";
+import { login } from "@/apis";
+import { logining, setRemember } from "@/redux/reducers/authReducer";
+import { useRouter } from "next/navigation";
 
-export default function Login(){
+const initialLogin: ILogin = {
+    account: '',
+    password: '',
+    remember: false,
+}
+
+export default function LoginComponent() {
+    const [form] = Form.useForm();
+    const dispatch = useAppDispatch();
+    const [loading, setLoading] = useState<boolean>(false);
+    const router = useRouter();
+
+    const handleSubmit = async (values: ILogin) => {
+        setLoading(true);
+        const response = await login(values);
+        setLoading(false);
+        dispatch(setRemember(values));
+        if(response) {
+            dispatch(logining(response));
+            router.push('/');
+        }
+    }
+
+    useEffect(() => {
+        const token = localStorage.getItem('access_token') || '';
+        if(token){
+            router.push('/');
+        }
+
+        const user = JSON.parse(localStorage.getItem('r_u') || '{}');
+        if(user){
+            form.setFieldsValue(user);
+        }
+    }, [form, router]);
+
     return (
-        <CRow className="items-center h-screen">
-            <Form className="w-[500px] !mx-auto shadow-lg !p-14 border-t-4 border-green-400 rounded-lg">
+        <div className="bg-login flex items-center justify-center">
+            <Form layout="vertical" onFinish={handleSubmit} initialValues={initialLogin} form={form} className="form-login !pt-10 !px-20 w-[600px] h-[450px] rounded-2xl">
+                <CTitle>Đăng nhập</CTitle>
+                <Form.Item label="Tài khoản" className="!mb-4" name="account"
+                    rules={[{ required: true, message: 'Hãy nhập tài khoản!' }]}>
+                    <CInput size="large" placeholder="Email hoặc số điện thoại..." />
+                </Form.Item>
+                <Form.Item label="Mật khẩu" className="!mb-2" name="password"
+                    rules={[{ required: true, message: 'Hãy nhập mật khẩu!' }]}>
+                    <Input.Password size="large" placeholder="Mật khẩu..." />
+                </Form.Item>
+                <Form.Item name="remember" valuePropName="checked" className="!mb-4">
+                    <Checkbox>Nhớ mật khẩu</Checkbox>
+                </Form.Item>
                 <Form.Item>
-                    <CInput placeholder="Tài khoản..." className="h-10"/>
-                </Form.Item>
-                <Form.Item className="!mb-2">
-                    <CInput type="password" placeholder="Mật khẩu..." className="h-10"/>
-                </Form.Item>
-                <Form.Item className="text-end !mb-2">
-                    <CCheckBox>Nhớ mật khẩu</CCheckBox>
-                </Form.Item>
-                <Form.Item className="!mb-2">
-                    <CButton type="primary" htmlType="submit" className="w-full !py-5 rounded !text-lg !font-bold !bg-green-400">Đăng nhập</CButton>
+                    <CButton loading={loading} type="primary" htmlType="submit" icon={<FontAwesomeIcon icon={faHospital} />} size="large">Đăng nhập</CButton>
                 </Form.Item>
             </Form>
-        </CRow>
+        </div>
     );
 }

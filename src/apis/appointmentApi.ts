@@ -1,12 +1,11 @@
-import { appConfig } from "@/commons/AppConfig";
 import axiosClient from "@/commons/AxiosConfig";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { IAppointment } from "@/interfaces/IAppointment";
 import { IResponse } from "@/interfaces/IResponse";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const URL_TIME = appConfig.API_LOCAL+"/v1/time";
-const URL_APPOINTMENT = appConfig.API_LOCAL+'/v1/appointment';
+const URL_TIME = "/v1/time";
+const URL_APPOINTMENT = '/v1/appointment';
 
 export const getTimes = createAsyncThunk<IResponse>(
     'appointment/getTimes',
