@@ -215,7 +215,7 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
                 </Form.Item>
                 <br />
                 <CRow className="gap-4 justify-end">
-                    <CButton type="primary" htmlType="submit">Hoàn thành</CButton>
+                    <CButton type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} htmlType="submit">Hoàn thành</CButton>
                 </CRow>
             </Form> :
             <CTitle level={3} className="!text-green-400">Cuộc hẹn đã hoàn thành!</CTitle>

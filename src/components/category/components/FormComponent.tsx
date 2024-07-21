@@ -6,6 +6,8 @@ import CRow from "@/custom_antd/CRow";
 import { CSelect } from "@/custom_antd/CSelect";
 import CUploadImage from "@/custom_antd/CUploadImage";
 import { ICategory } from "@/interfaces/ICategory";
+import { faPenToSquare, faSave } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, Input } from "antd";
 import { useEffect } from "react";
 
@@ -50,13 +52,13 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps){
             <Form.Item label="Mô tả" className="!mb-10" name="description">
                 <Input.TextArea
                     showCount
-                    maxLength={255}
+                    maxLength={1000}
                     placeholder="Thông tin mô tả"
                     style={{ height: 120, resize: 'none' }}
                 />
             </Form.Item>
             <CRow className="gap-4 justify-end">
-                <CButton type="primary" htmlType="submit">{data ? "Cập nhật" : "Lưu"}</CButton>
+                <CButton type="primary" icon={<FontAwesomeIcon icon={data ? faPenToSquare : faSave} />} htmlType="submit">{data ? "Cập nhật" : "Lưu"}</CButton>
             </CRow>
         </Form>
     );

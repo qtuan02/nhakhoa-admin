@@ -1,6 +1,6 @@
 "use client";
 import { ILogin } from "@/interfaces/ILogin";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import CButton from "@/custom_antd/CButton";
 import CInput from "@/custom_antd/CInput";
 import CTitle from "@/custom_antd/CTitle";
@@ -10,7 +10,7 @@ import { Checkbox, Form, Input } from "antd";
 import { useEffect, useState } from "react";
 import { login } from "@/apis";
 import { logining, setRemember } from "@/redux/reducers/authReducer";
-import { useRouter } from "next/navigation";
+import { handleBeforeInput } from "@/utils/FunctionHelpers";
 
 const initialLogin: ILogin = {
     account: '',
@@ -22,30 +22,29 @@ export default function LoginComponent() {
     const [form] = Form.useForm();
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState<boolean>(false);
-    const router = useRouter();
 
     const handleSubmit = async (values: ILogin) => {
         setLoading(true);
         const response = await login(values);
         setLoading(false);
         dispatch(setRemember(values));
-        if(response) {
+        if (response) {
             dispatch(logining(response));
-            router.push('/');
+            window.location.assign('/');
         }
     }
 
     useEffect(() => {
         const token = localStorage.getItem('access_token') || '';
-        if(token){
-            router.push('/');
+        if (token) {
+            window.location.assign('/');
         }
 
         const user = JSON.parse(localStorage.getItem('r_u') || '{}');
-        if(user){
+        if (user) {
             form.setFieldsValue(user);
         }
-    }, [form, router]);
+    }, [form]);
 
     return (
         <div className="bg-login flex items-center justify-center">

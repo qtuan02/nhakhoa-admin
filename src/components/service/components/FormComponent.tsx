@@ -12,6 +12,8 @@ import { ICategory } from "@/interfaces/ICategory";
 import { IService } from "@/interfaces/IService";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { htmlToEditor } from "@/utils/FunctionHelpers";
+import { faPenToSquare, faSave } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form } from "antd";
 import { useEffect } from "react";
 
@@ -100,7 +102,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
         <CEditor initialDes={htmlToEditor(data?.description as string)} />
       </Form.Item>
       <CRow className="gap-4 justify-end">
-        <CButton type="primary" htmlType="submit">{data ? "Cập nhật" : "Lưu"}</CButton>
+        <CButton type="primary" icon={<FontAwesomeIcon icon={data ? faPenToSquare : faSave} />} htmlType="submit">{data ? "Cập nhật" : "Lưu"}</CButton>
       </CRow>
     </Form>
   );

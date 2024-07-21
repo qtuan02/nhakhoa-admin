@@ -16,6 +16,8 @@ import ModalComponent from "./ModalComponent";
 import dayjs from 'dayjs';
 import { STATUS_APPOINTMENT } from "@/commons/Option";
 import { formatDate } from "@/utils/FunctionHelpers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faSave } from "@fortawesome/free-solid-svg-icons";
 
 interface FormComponentProps {
     onSubmit: (values: IAppointment) => void;
@@ -207,7 +209,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                 />
             </Form.Item>
             <CRow className="gap-4 justify-end">
-                <CButton type="primary" htmlType="submit">{data ? "Cập nhật" : "Lưu"}</CButton>
+                <CButton type="primary" icon={<FontAwesomeIcon icon={data ? faPenToSquare : faSave} />} htmlType="submit">{data ? "Cập nhật" : "Lưu"}</CButton>
             </CRow>
         </Form>
     );

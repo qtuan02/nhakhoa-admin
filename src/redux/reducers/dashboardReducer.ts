@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getOverview, getOverviewAppointment, getOverviewInvoice } from "@/apis";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { IDashboard, IDashboardAppoinment, IDashboardInvoice } from "@/interfaces/IDashboard";
+import { getOverview, getOverviewAppointment, getOverviewInvoice } from "@/apis/dashboardApi";
 
 interface IDashboardState {
     loading?: boolean;

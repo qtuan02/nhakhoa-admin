@@ -50,4 +50,3 @@ export const formatDate = (date: string | undefined) => {
 export const parseHTML = (html: string | undefined) => {
     return { __html: html || '' };
 }
-

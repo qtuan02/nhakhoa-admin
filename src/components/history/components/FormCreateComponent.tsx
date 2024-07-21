@@ -5,6 +5,8 @@ import CRow from "@/custom_antd/CRow";
 import { CSelect } from "@/custom_antd/CSelect";
 import { IHistory } from "@/interfaces/IHistory";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, Input } from "antd";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
@@ -83,7 +85,7 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
             </Form.Item>
             <br />
             <CRow className="gap-4 justify-end">
-                <CButton type="primary" htmlType="submit">Lưu</CButton>
+                <CButton type="primary" icon={<FontAwesomeIcon icon={faSave} />} htmlType="submit">Lưu</CButton>
             </CRow>
         </Form>
     );

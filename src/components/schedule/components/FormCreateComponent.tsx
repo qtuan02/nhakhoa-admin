@@ -8,7 +8,7 @@ import CSelectTag from "@/custom_antd/CSelectTag";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { formatDate, parseDayjsToString } from "@/utils/FunctionHelpers";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
-import { faMinus } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, DatePicker, Form } from "antd";
 import { useParams } from "next/navigation";
@@ -141,7 +141,7 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
             </CRow>
             <br />
             <CRow className="gap-4 justify-end">
-                <CButton type="primary" htmlType="submit">Lưu</CButton>
+                <CButton type="primary" icon={<FontAwesomeIcon icon={faSave} />} htmlType="submit">Lưu</CButton>
             </CRow>
         </Form>
     );

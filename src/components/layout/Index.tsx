@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
 import LoadingComponent from "./Loading";
 import { profile } from "@/apis";
+import { appConfig } from "@/commons/AppConfig";
 
 export default function LayoutComponent({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();
@@ -14,7 +15,6 @@ export default function LayoutComponent({ children }: { children: React.ReactNod
     dispatch(profile());
   }, [dispatch])
 
-  console.log(auth.profile);
   return (
     <div className="flex h-screen w-screen bg-[#f5f5f5]">
       {auth.loading ? <LoadingComponent />

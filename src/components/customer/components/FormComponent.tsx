@@ -8,6 +8,8 @@ import { ICustomer } from "@/interfaces/ICustomer";
 import { DatePicker, Form, Input } from "antd";
 import { useEffect } from "react";
 import dayjs from 'dayjs';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faSave } from "@fortawesome/free-solid-svg-icons";
 
 interface FormComponentProps {
     onSubmit: (values: ICustomer) => void;
@@ -75,7 +77,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps){
                 />
             </Form.Item>
             <CRow className="gap-4 justify-end">
-                <CButton type="primary" htmlType="submit">{data ? "Cập nhật" : "Lưu"}</CButton>
+                <CButton type="primary" icon={<FontAwesomeIcon icon={data ? faPenToSquare : faSave} />} htmlType="submit">{data ? "Cập nhật" : "Lưu"}</CButton>
             </CRow>
         </Form>
     );

@@ -4,6 +4,8 @@ import CRow from "@/custom_antd/CRow";
 import { CSelect } from "@/custom_antd/CSelect";
 import CTitle from "@/custom_antd/CTitle";
 import { IInvoice } from "@/interfaces/IInvoice";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form } from "antd";
 
 interface FormComponentProps {
@@ -32,7 +34,7 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
                     </Form.Item>
                     <br />
                     <CRow className="gap-4 justify-end">
-                        <CButton type="primary" htmlType="submit">Xác nhận</CButton>
+                        <CButton type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} htmlType="submit">Xác nhận</CButton>
                     </CRow>
                 </Form>
                 : <CTitle level={5} className="!text-green-500">Hóa đơn đã thanh toán!</CTitle>

@@ -3,14 +3,15 @@ import CCol from '@/custom_antd/CCol';
 import CDropDown from '@/custom_antd/CDropdown';
 import CRow from '@/custom_antd/CRow';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { logout } from '@/redux/reducers/authReducer';
+import { logout, toggleModal } from '@/redux/reducers/authReducer';
 import { toggleSider } from '@/redux/reducers/siderReducer';
 import { RootState } from '@/redux/store';
-import { faAddressCard, faBars, faBell, faSignOut, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faAddressCard, faBars, faBell, faLock, faSignOut, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Avatar, Badge, Divider, Flex, Layout, MenuProps } from 'antd';
 import Link from 'next/link';
 import React from 'react';
+import ModalComponent from './ModalComponent';
 const { Header } = Layout;
 
 export default function HeaderComponent() {
@@ -32,8 +33,13 @@ export default function HeaderComponent() {
         },
         {
             key: 'profile',
-            label: <Link href='#'>Trang cá nhân</Link>,
+            label: <Link href='#' >Thông tin</Link>,
             icon: <FontAwesomeIcon icon={faAddressCard} />
+        },
+        {
+            key: 'change-password',
+            label: <Link href='#' onClick={() => dispatch(toggleModal())}>Đổi mật khẩu</Link>,
+            icon: <FontAwesomeIcon icon={faLock} />
         },
         {
             type: 'divider',
@@ -72,6 +78,7 @@ export default function HeaderComponent() {
                                 )}>
                                 <Avatar className='hover:bg-[#d9d9d9] hover:opacity-90 cursor-pointer shadow-sm' style={{ border: '1px solid #d9d9d9'}} size="large" src={auth.profile?.avatar} alt="Ảnh đại diện..." />
                             </CDropDown>
+                            <ModalComponent />
                         </CCol>
                     </Flex>
                 </CCol>

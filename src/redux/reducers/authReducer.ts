@@ -8,11 +8,13 @@ import { IProfile } from "@/interfaces/IProfile";
 interface IAuthState {
     profile: IProfile | null;
     loading?: boolean;
+    modal?: boolean;
 }
 
 const initialState: IAuthState = {
     profile: null,
-    loading: false
+    loading: false,
+    modal: false,
 };
 
 const authSlice = createSlice({
@@ -31,13 +33,14 @@ const authSlice = createSlice({
         },
         logining: (state, action: PayloadAction<IResponse>) => {
             localStorage.setItem('access_token', action.payload.data.access_token);
-            localStorage.setItem('r_e', action.payload.data.role);
             TOAST_SUCCESS(action.payload.message);
         },
         logout: (state) => {
-            localStorage.removeItem('r_e');
             localStorage.removeItem('access_token');
 			window.location.assign('/dang-nhap');
+        },
+        toggleModal: (state) => {
+            state.modal =!state.modal;
         }
     },
     extraReducers: (builder) => {
@@ -55,5 +58,5 @@ const authSlice = createSlice({
         }
 });
 
-export const { logout, setRemember, logining } = authSlice.actions;
+export const { logout, setRemember, logining, toggleModal } = authSlice.actions;
 export default authSlice.reducer;
