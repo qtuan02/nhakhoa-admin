@@ -40,12 +40,14 @@ const customerSlice = createSlice({
             })
             .addCase(getCustomers.fulfilled, (state, action) => {
                 state.loading = false;
+                state.status = 'completed';
                 state.data = action.payload.data;
             })
             .addCase(getCustomers.rejected, (state, action: any) => {
                 state.data = [];
                 state.loading = false;
-                TOAST_ERROR(action.error?.message)
+                state.status = 'rejected';
+                TOAST_ERROR(action.error?.message);
             })
             .addCase(createCustomer.pending, (state) => {
                 state.loading = true;
@@ -58,7 +60,7 @@ const customerSlice = createSlice({
             .addCase(createCustomer.rejected, (state, action: any) => {
                 state.status = 'rejected';
                 state.loading = false;
-                TOAST_ERROR(action.error?.message)
+                TOAST_ERROR(action.error?.message);
             })
             .addCase(editCustomer.pending, (state) => {
                 state.edit = 'wait';
@@ -71,8 +73,8 @@ const customerSlice = createSlice({
             .addCase(editCustomer.rejected, (state, action: any) => {
                 state.status = 'rejected';
                 state.edit = 'fail';
-                TOAST_ERROR(action.error?.message)
-            })
+                TOAST_ERROR(action.error?.message);
+            });
     }
 });
 
