@@ -1,3 +1,4 @@
+import { appConfig } from "@/commons/AppConfig";
 import axiosClient from "@/commons/AxiosConfig";
 import { IChangepassword } from "@/interfaces/IChangepassword";
 import { ILogin } from "@/interfaces/ILogin";
@@ -6,12 +7,14 @@ import { logout } from "@/redux/reducers/authReducer";
 import store from "@/redux/store";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const URL = '/v1/auth';
+const URL_AUTH = appConfig.API_LOCAL+'/v1/auth';
 
 export const login = async (data: ILogin) => {
     try {
-        const res = await axiosClient.post(URL+ '/login', data, {
+        const res = await axios.post(URL_AUTH+'/login', data, {
             withCredentials: true
         });
         return res.data;
@@ -21,15 +24,19 @@ export const login = async (data: ILogin) => {
     }
 };
 
-export const refresh = async () => {
+export const refreshToken = async () => {
+    console.log("in");
     try {
-        const res = await axiosClient.post(URL+ '/refresh');
+        console.log("in1");
+        const res = await axios.post(URL_AUTH+'/refresh', null, {
+            withCredentials: true
+        });
         return res.data.data;
     }catch(error: any) {
         TOAST_ERROR(error?.response?.data?.message);
-        if (error.response.status === 401) {
-			store.dispatch(logout());
-		}
+        if(error.response.status === 401){
+            store.dispatch(logout());
+        }
     }
 };
 
@@ -49,7 +56,7 @@ export const changePasswordWithToken = async (data: IChangepassword) => {
     try {
         const res = await axiosClient.post(URL+ '/change-password', data);
         return res.data;
-    }catch(error: any) {
+    } catch(error: any) {
         TOAST_ERROR(error?.response?.data?.message);
         return null;
     }

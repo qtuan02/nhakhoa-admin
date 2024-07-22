@@ -2,8 +2,8 @@ import axios from "axios";
 import { appConfig } from "./AppConfig";
 import { logout } from "@/redux/reducers/authReducer";
 import store from "@/redux/store";
-import { jwtDecode } from "jwt-decode";
-import { refresh } from "@/apis";
+import { jwtDecode, JwtPayload } from "jwt-decode";
+import { refreshToken } from "@/apis";
 
 const axiosClient = axios.create({
   baseURL: appConfig.API_LOCAL,
@@ -16,20 +16,19 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use(
 	async (config) => {
-		const token = localStorage.getItem("access_token");
-		if (token) {
-			config.headers.Authorization = `Bearer ${token}`;
-
-			const decodedToken: any = jwtDecode(token);
-			const currentTime = Date.now() / 1000;
-
+		let accessToken = localStorage.getItem("access_token");
+		if (accessToken ) {
+			const decodedToken: any = jwtDecode<JwtPayload>(accessToken);
+			const currentTime = new Date().getTime() / 1000;
 			if (decodedToken.exp < currentTime) {
-				const response = await refresh();
-				const newAccessToken = response.access_token;
-				
-				localStorage.setItem("access_token", newAccessToken);
-				config.headers.Authorization = `Bearer ${newAccessToken}`;
+				const response = await refreshToken();
+				localStorage.setItem("access_token", response.access_token);
+				config.headers.Authorization = `Bearer ${response.access_token}`;
+			} else {
+				config.headers.Authorization = `Bearer ${accessToken}`;
 			}
+		} else{
+			store.dispatch(logout());
 		}
 		return config;
 	},
@@ -44,7 +43,7 @@ axiosClient.interceptors.response.use(
 	},
 	(error) => {
 		if (error.response && error.response.status === 401) {
-		store.dispatch(logout());
+			store.dispatch(logout());
 		}
 		return Promise.reject(error);
 	}
