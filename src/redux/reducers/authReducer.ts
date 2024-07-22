@@ -1,11 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
+import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { ILogin } from "@/interfaces/ILogin";
 import { IResponse } from "@/interfaces/IResponse";
-import { profile } from "@/apis";
+import { login, profile } from "@/apis";
 import { IProfile } from "@/interfaces/IProfile";
 
 interface IAuthState {
+    
     profile: IProfile | null;
     loading: boolean;
     modal: boolean;
@@ -31,10 +32,6 @@ const authSlice = createSlice({
                 localStorage.setItem('r_u', JSON.stringify(user));
             }
         },
-        logining: (state, action: PayloadAction<IResponse>) => {
-            localStorage.setItem('access_token', action.payload.data.access_token);
-            TOAST_SUCCESS(action.payload.message);
-        },
         logout: (state) => {
             localStorage.removeItem('access_token');
 			window.location.assign('/dang-nhap');
@@ -45,6 +42,19 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            .addCase(login.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(login.fulfilled, (state, action) => {
+                localStorage.setItem('access_token', action.payload.data.access_token);
+                state.loading = false;
+                window.location.assign('/');
+                TOAST_SUCCESS(action.payload.message);
+            })
+            .addCase(login.rejected, (state, action: any) => {
+                state.loading = false;
+                TOAST_ERROR(action.error?.message);
+            })
             .addCase(profile.pending, (state) => {
                 state.loading = true;
             })
@@ -54,9 +64,10 @@ const authSlice = createSlice({
             })
             .addCase(profile.rejected, (state, action: any) => {
                 state.profile = null;
+                TOAST_ERROR(action.error?.message);
             })
         }
 });
 
-export const { logout, setRemember, logining, toggleModal } = authSlice.actions;
+export const { logout, setRemember, toggleModal } = authSlice.actions;
 export default authSlice.reducer;

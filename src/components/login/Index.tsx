@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Checkbox, Form, Input } from "antd";
 import { useEffect, useState } from "react";
 import { login } from "@/apis";
-import { logining, setRemember } from "@/redux/reducers/authReducer";
+import { setRemember } from "@/redux/reducers/authReducer";
 
 const initialLogin: ILogin = {
     account: '',
@@ -22,15 +22,9 @@ export default function LoginComponent() {
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState<boolean>(false);
 
-    const handleSubmit = async (values: ILogin) => {
-        setLoading(true);
-        const response = await login(values);
-        setLoading(false);
+    const handleSubmit = (values: ILogin) => {
         dispatch(setRemember(values));
-        if (response) {
-            dispatch(logining(response));
-            window.location.assign('/');
-        }
+        dispatch(login(values));
     }
 
     useEffect(() => {

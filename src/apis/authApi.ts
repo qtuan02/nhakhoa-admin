@@ -1,3 +1,4 @@
+
 import { appConfig } from "@/config/AppConfig";
 import axiosClient from "@/config/AxiosConfig";
 import { IChangepassword } from "@/interfaces/IChangepassword";
@@ -12,17 +13,20 @@ import axios from "axios";
 const URL = '/v1/auth';
 const URL_AUTH = appConfig.API_LOCAL+'/v1/auth';
 
-export const login = async (data: ILogin) => {
-    try {
-        const res = await axios.post(URL_AUTH+'/login', data, {
-            withCredentials: true
-        });
-        return res.data;
-    }catch(error: any) {
-        TOAST_ERROR(error?.response?.data?.message);
-        return null;
+export const login = createAsyncThunk<IResponse, ILogin>(
+    'auth/login',
+    async (data) => {
+        try {
+            const res = await axios.post(URL_AUTH+'/login', data, {
+                withCredentials: true
+            });
+            return res.data;
+        } catch(error: any) {
+            throw error?.response?.data;
+        }
     }
-};
+);
+
 
 export const refreshToken = async () => {
     try {
