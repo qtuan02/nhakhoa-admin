@@ -6,13 +6,14 @@ import { login, profile } from "@/apis";
 import { IProfile } from "@/interfaces/IProfile";
 
 interface IAuthState {
-    
+    loging: boolean;
     profile: IProfile | null;
     loading: boolean;
     modal: boolean;
 }
 
 const initialState: IAuthState = {
+    loging: false,
     profile: null,
     loading: false,
     modal: false,
@@ -43,16 +44,16 @@ const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(login.pending, (state) => {
-                state.loading = true;
+                state.loging = true;
             })
             .addCase(login.fulfilled, (state, action) => {
                 localStorage.setItem('access_token', action.payload.data.access_token);
-                state.loading = false;
+                state.loging = false;
                 window.location.assign('/');
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(login.rejected, (state, action: any) => {
-                state.loading = false;
+                state.loging = false;
                 TOAST_ERROR(action.error?.message);
             })
             .addCase(profile.pending, (state) => {

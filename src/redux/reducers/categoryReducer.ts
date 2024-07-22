@@ -24,7 +24,7 @@ const categorySlice = createSlice({
   extraReducers: (builder) => {
     builder
         .addCase(getCategorys.pending, (state) => {
-            state.status = "pending";
+            state.status = 'pending';
             state.loading = true;
         })
         .addCase(getCategorys.fulfilled, (state, action) => {
@@ -34,7 +34,7 @@ const categorySlice = createSlice({
         .addCase(getCategorys.rejected, (state, action: any) => {
             state.data = [];
             state.loading = false;
-            TOAST_ERROR(action.error?.message);
+            TOAST_ERROR(action.error?.message)
         })
         .addCase(createCategory.pending, (state) => {
             state.loading = true;

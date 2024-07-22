@@ -7,7 +7,7 @@ import CTitle from "@/custom_antd/CTitle";
 import { faHospital } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Checkbox, Form, Input } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { login } from "@/apis";
 import { setRemember } from "@/redux/reducers/authReducer";
 
@@ -41,22 +41,22 @@ export default function LoginComponent() {
 
     return (
         <div className="bg-login flex items-center justify-center">
-            <Form layout="vertical" onFinish={handleSubmit} initialValues={initialLogin} form={form} autoComplete="off"
+            <Form layout="vertical" onFinish={handleSubmit} initialValues={initialLogin} form={form} autoComplete="off" onFinishFailed={() => {}}
                 className="form-login !pt-10 !px-20 w-[600px] h-[450px] rounded-2xl">
                 <CTitle>Đăng nhập</CTitle>
                 <Form.Item label="Tài khoản" className="!mb-4" name="account"
                     rules={[{ required: true, message: 'Hãy nhập tài khoản!' }]}>
-                    <CInput size="large" placeholder="Email hoặc số điện thoại..." />
+                    <CInput size="large" placeholder="Email hoặc số điện thoại..." autoComplete="username" />
                 </Form.Item>
                 <Form.Item label="Mật khẩu" className="!mb-2" name="password"
                     rules={[{ required: true, message: 'Hãy nhập mật khẩu!' }]}>
-                    <Input.Password size="large" placeholder="Mật khẩu..." />
+                    <Input.Password size="large" placeholder="Mật khẩu..." autoComplete="current-password" />
                 </Form.Item>
                 <Form.Item name="remember" valuePropName="checked" className="!mb-4">
                     <Checkbox>Nhớ mật khẩu</Checkbox>
                 </Form.Item>
                 <Form.Item>
-                    <CButton loading={auth.loading} type="primary" htmlType="submit" icon={<FontAwesomeIcon icon={faHospital} />} size="large">Đăng nhập</CButton>
+                    <CButton loading={auth.loging} type="primary" htmlType="submit" icon={<FontAwesomeIcon icon={faHospital} />} size="large">Đăng nhập</CButton>
                 </Form.Item>
             </Form>
         </div>
