@@ -1,4 +1,4 @@
-import { STATUS_HISTORY } from "@/commons/Option";
+import { STATUS_HISTORY } from "@/utils/Option";
 import CButton from "@/custom_antd/CButton";
 import CRow from "@/custom_antd/CRow";
 import { CSelect } from "@/custom_antd/CSelect";

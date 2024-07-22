@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
 import LoadingComponent from "./Loading";
 import { profile } from "@/apis";
-import { appConfig } from "@/commons/AppConfig";
+import { appConfig } from "@/config/AppConfig";
 
 export default function LayoutComponent({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();

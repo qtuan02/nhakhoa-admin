@@ -1,11 +1,12 @@
 import { customItemMenu } from "@/utils/FunctionUiHelpers";
-import { faCalendar, faCalendarAlt, faCalendarCheck, faGaugeHigh, faHandHoldingDollar, faLayerGroup, faTooth, faUserDoctor, faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faCalendarAlt, faCalendarCheck, faChartBar, faGaugeHigh, faHandHoldingDollar, faLayerGroup, faTooth, faUserDoctor, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
 const SIDER_MENU: any = [
-    customItemMenu("Chung", "grp1", null, [
+    customItemMenu("Tổng quan", "grp1", null, [
         customItemMenu(<Link href="/">Tổng quan</Link>, "/", <FontAwesomeIcon icon={faGaugeHigh} />),
+        customItemMenu(<Link href="/thong-ke">Thống kê</Link>, "/thong-ke", <FontAwesomeIcon icon={faChartBar} />),
     ], "group"),
     customItemMenu("Quản lí dịch vụ", "grp2", null, [
         customItemMenu(<Link href="/danh-muc">Danh mục</Link>, "/danh-muc", <FontAwesomeIcon icon={faLayerGroup} />),

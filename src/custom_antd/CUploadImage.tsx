@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Image, Upload, UploadProps } from 'antd';
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import { appConfig } from "@/commons/AppConfig";
+import { appConfig } from "@/config/AppConfig";
 import { toast } from "react-toastify";
 import { UploadChangeParam, UploadFile } from "antd/es/upload";
 

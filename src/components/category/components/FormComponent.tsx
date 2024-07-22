@@ -1,4 +1,4 @@
-import { STATUS } from "@/commons/Option";
+import { STATUS } from "@/utils/Option";
 import CButton from "@/custom_antd/CButton";
 import CCol from "@/custom_antd/CCol";
 import CInput from "@/custom_antd/CInput";

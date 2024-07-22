@@ -1,4 +1,4 @@
-import axiosClient from "@/commons/AxiosConfig";
+import axiosClient from "@/config/AxiosConfig";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { IResponse } from "@/interfaces/IResponse";
 import { IService } from "@/interfaces/IService";

@@ -37,3 +37,7 @@
 .ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item {
     padding: 12px 12px !important;
 }
+
+.ant-btn {
+    line-height: 0 !important;
+}

@@ -1,4 +1,4 @@
-import { GENDER, ROLE, STATUS } from "@/commons/Option";
+import { GENDER, ROLE, STATUS } from "@/utils/Option";
 import CButton from "@/custom_antd/CButton";
 import CCol from "@/custom_antd/CCol";
 import CEditor from "@/custom_antd/CEditor";

@@ -8,7 +8,7 @@ import CRow from "@/custom_antd/CRow";
 import CCol from "@/custom_antd/CCol";
 import ChartComponent from "./components/ChartComponent";
 import PieComponent from "./components/PieComponent";
-import { appConfig } from "@/commons/AppConfig";
+import { appConfig } from "@/config/AppConfig";
 import { getOverview, getOverviewAppointment, getOverviewInvoice } from "@/apis/dashboardApi";
 import ProfileComponent from "../profile/Index";
 import CTitle from "@/custom_antd/CTitle";

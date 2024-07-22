@@ -14,7 +14,7 @@ import { Avatar, Form, Input, List, Select } from "antd";
 import { useEffect } from "react";
 import ModalComponent from "./ModalComponent";
 import dayjs from 'dayjs';
-import { STATUS_APPOINTMENT } from "@/commons/Option";
+import { STATUS_APPOINTMENT } from "@/utils/Option";
 import { formatDate } from "@/utils/FunctionHelpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faSave } from "@fortawesome/free-solid-svg-icons";

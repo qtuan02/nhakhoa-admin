@@ -1,5 +1,5 @@
 "use client";
-import { appConfig } from "@/commons/AppConfig";
+import { appConfig } from "@/config/AppConfig";
 import CCol from "@/custom_antd/CCol";
 import CDescriptionItem from "@/custom_antd/CDescriptionItem";
 import CTitle from "@/custom_antd/CTitle";

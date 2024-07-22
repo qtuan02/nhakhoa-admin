@@ -1,5 +1,5 @@
-import { appConfig } from "@/commons/AppConfig";
-import axiosClient from "@/commons/AxiosConfig";
+import { appConfig } from "@/config/AppConfig";
+import axiosClient from "@/config/AxiosConfig";
 import { IChangepassword } from "@/interfaces/IChangepassword";
 import { ILogin } from "@/interfaces/ILogin";
 import { IResponse } from "@/interfaces/IResponse";

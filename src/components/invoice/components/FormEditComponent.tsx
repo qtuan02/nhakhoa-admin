@@ -1,4 +1,4 @@
-import { METHOD_PAYMENT_INVOICE, STATUS_INVOICE } from "@/commons/Option";
+import { METHOD_PAYMENT_INVOICE, STATUS_INVOICE } from "@/utils/Option";
 import CButton from "@/custom_antd/CButton";
 import CRow from "@/custom_antd/CRow";
 import { CSelect } from "@/custom_antd/CSelect";
