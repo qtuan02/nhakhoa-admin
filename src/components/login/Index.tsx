@@ -1,6 +1,6 @@
 "use client";
 import { ILogin } from "@/interfaces/ILogin";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import CButton from "@/custom_antd/CButton";
 import CInput from "@/custom_antd/CInput";
 import CTitle from "@/custom_antd/CTitle";
@@ -20,7 +20,7 @@ const initialLogin: ILogin = {
 export default function LoginComponent() {
     const [form] = Form.useForm();
     const dispatch = useAppDispatch();
-    const [loading, setLoading] = useState<boolean>(false);
+    const auth = useAppSelector((state) => state.auth);
 
     const handleSubmit = (values: ILogin) => {
         dispatch(setRemember(values));
@@ -55,7 +55,7 @@ export default function LoginComponent() {
                     <Checkbox>Nhớ mật khẩu</Checkbox>
                 </Form.Item>
                 <Form.Item>
-                    <CButton loading={loading} type="primary" htmlType="submit" icon={<FontAwesomeIcon icon={faHospital} />} size="large">Đăng nhập</CButton>
+                    <CButton loading={auth.loading} type="primary" htmlType="submit" icon={<FontAwesomeIcon icon={faHospital} />} size="large">Đăng nhập</CButton>
                 </Form.Item>
             </Form>
         </div>
