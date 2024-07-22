@@ -41,7 +41,8 @@ export default function LoginComponent() {
 
     return (
         <div className="bg-login flex items-center justify-center">
-            <Form layout="vertical" onFinish={handleSubmit} initialValues={initialLogin} form={form} className="form-login !pt-10 !px-20 w-[600px] h-[450px] rounded-2xl">
+            <Form layout="vertical" onFinish={handleSubmit} initialValues={initialLogin} form={form} autoComplete="off"
+                className="form-login !pt-10 !px-20 w-[600px] h-[450px] rounded-2xl">
                 <CTitle>Đăng nhập</CTitle>
                 <Form.Item label="Tài khoản" className="!mb-4" name="account"
                     rules={[{ required: true, message: 'Hãy nhập tài khoản!' }]}>
