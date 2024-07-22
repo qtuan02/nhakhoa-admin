@@ -82,7 +82,7 @@ export default function TableComponent() {
     return (
         <CTable
             columns={columns}
-            dataSource={service.data?.map((item, index) => ({...item, index: index + 1, key: item.id }))}
+            dataSource={service?.data?.map((item: IService, index: number) => ({...item, index: index + 1, key: item.id })) || []}
             pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15'] }}
         />
     );

@@ -122,7 +122,7 @@ export default function TableComponent() {
         <>
             <CTable
                 columns={columns}
-                dataSource={user.data?.map((item, index) => ({ ...item, index: index + 1, key: item.id, role: item.role?.id }))}
+                dataSource={user?.data?.map((item: IUser, index: number) => ({ ...item, index: index + 1, key: item.id, role: item.role?.id })) || []}
                 pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15'] }}
             />
             <ModalComponent />

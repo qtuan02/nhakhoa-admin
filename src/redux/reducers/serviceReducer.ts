@@ -5,8 +5,8 @@ import { createService, deleteService, editService, getServices } from "@/apis";
 
 
 interface IServiceState {
-    loading?: boolean;
-    status?: 'pending' | 'completed' | 'rejected';
+    loading: boolean;
+    status: 'pending' | 'completed' | 'rejected';
     edit?: 'wait' | 'success' | 'fail';
     data: IService[];
 };

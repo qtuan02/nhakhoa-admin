@@ -45,10 +45,11 @@ export default function DashboardComponent() {
         checked ?
             <div className="m-5">
                 <Card
-                    className="shadow-lg"
+                    className="shadow-lg border-[2px]"
                     hoverable
                     style={{ width: 650 }}
                 >
+                    <CTitle level={3} className="text-center bg-blue-400 py-2">THẺ Y TẾ</CTitle>
                     <Flex gap={32}>
                         <CCol>
                             <Image src={auth.profile?.avatar} alt="Hình đại diện..." height={300} width={300} />

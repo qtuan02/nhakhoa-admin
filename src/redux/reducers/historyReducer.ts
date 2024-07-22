@@ -5,13 +5,13 @@ import { createHistory, editHistory, getHistories } from "@/apis";
 import { IService } from "@/interfaces/IService";
 
 interface IHistoryState {
-    loading?: boolean;
-    status?: 'pending' | 'completed' | 'rejected';
+    loading: boolean;
+    status: 'pending' | 'completed' | 'rejected';
     edit?: 'wait' | 'success' | 'fail';
     data: IHistory[];
-    drawer?: boolean;
+    drawer: boolean;
     history_id?: string;
-    modal?: boolean;
+    modal: boolean;
     services: IService[];
 };
 

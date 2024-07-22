@@ -6,16 +6,16 @@ import { getTime } from "@/apis/scheduleApi";
 import { IService } from "@/interfaces/IService";
 
 interface IAppointmentState {
-    loading?: boolean;
-    status?: 'pending' | 'completed' | 'rejected';
+    loading: boolean;
+    status: 'pending' | 'completed' | 'rejected';
     edit?: 'wait' | 'success' | 'fail';
     data: IAppointment[];
     times: ITime[];
-    loadingTimes?: boolean;
+    loadingTimes: boolean;
     date: IDate[];
-    loadingDate?: boolean;
+    loadingDate: boolean;
     loadingTime?: boolean;
-    statusTime?: 'pending' | 'completed' | 'rejected';
+    statusTime: 'pending' | 'completed' | 'rejected';
     time: ITime[];
     modal?: boolean;
     services: IService[];
@@ -146,7 +146,6 @@ const appointmentSlice = createSlice({
             .addCase(getDate.rejected, (state, action: any) => {
                 state.date = [];
                 state.loadingDate = false;
-                TOAST_ERROR(action.error?.message)
             })
             .addCase(getTime.pending, (state) => {
                 state.loadingTime = true;
@@ -158,7 +157,6 @@ const appointmentSlice = createSlice({
             .addCase(getTime.rejected, (state, action: any) => {
                 state.time = [];
                 state.loadingTime = false;
-                TOAST_ERROR(action.error?.message)
             })
     }
 });

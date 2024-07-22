@@ -4,8 +4,8 @@ import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IInvoiceState {
-    loading?: boolean;
-    status?: 'pending' | 'completed' | 'rejected';
+    loading: boolean;
+    status: 'pending' | 'completed' | 'rejected';
     edit?: 'wait' | 'success' | 'fail';
     data: IInvoice[];
 };

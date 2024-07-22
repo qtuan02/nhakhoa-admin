@@ -98,7 +98,7 @@ export default function TableComponent() {
     return (
         <CTable
             columns={columns}
-            dataSource={history.data?.map((item, index) => ({...item, index: index + 1, key: item.id, customer_name: item.customer?.name, doctor_name: item.doctor?.name }))}
+            dataSource={history?.data?.map((item: IHistory, index: number) => ({...item, index: index + 1, key: item.id, customer_name: item.customer?.name, doctor_name: item.doctor?.name })) || []}
             pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15'] }}
         />
     );

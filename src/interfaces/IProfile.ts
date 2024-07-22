@@ -6,5 +6,6 @@ export interface IProfile {
     phone_number?: string,
     birthday?: string,
     gender?: number,
+    address?: string,
     role?: string,
 }

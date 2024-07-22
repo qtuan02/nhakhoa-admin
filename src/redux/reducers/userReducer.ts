@@ -4,14 +4,14 @@ import { IUser } from "@/interfaces/IUser";
 import { createUser, editUser, getDoctors, getUsers } from "@/apis";
 
 interface IUserState {
-    loading?: boolean;
-    status?: 'pending' | 'completed' | 'rejected';
+    loading: boolean;
+    status: 'pending' | 'completed' | 'rejected';
     edit?: 'wait' | 'success' | 'fail';
     data: IUser[];
-    modal?: boolean;
+    modal: boolean;
     user_id?: string;
-    loadingDoctors?: boolean;
-    statusDoctors?: 'pending' | 'completed' | 'rejected';
+    loadingDoctors: boolean;
+    statusDoctors: 'pending' | 'completed' | 'rejected';
     doctors: IUser[];
 };
 

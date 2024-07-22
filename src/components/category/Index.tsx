@@ -5,17 +5,17 @@ import CTitle from "@/custom_antd/CTitle";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
-import { getCategories } from "@/apis";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import CButton from "@/custom_antd/CButton";
+import { getCategorys } from "@/apis";
 
 export default function CategoryComponent() {
     const category = useAppSelector((state) => state.category);
     const dispatch = useAppDispatch();
     useEffect(() => {
         if(category.status === "completed" || category.status === "rejected") {
-            dispatch(getCategories());
+            dispatch(getCategorys());
         }
     }, [dispatch, category.status]);
 

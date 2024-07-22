@@ -149,7 +149,7 @@ export default function TableComponent() {
             />
             <CTable
                 columns={newColumns}
-                dataSource={customer.data?.map((item, index) => ({ ...item, index: index + 1, key: item.id }))}
+                dataSource={customer?.data?.map((item: ICustomer, index: number) => ({ ...item, index: index + 1, key: item.id })) || []}
                 pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15'] }}
                 expandable={{ expandedRowRender }}
             />

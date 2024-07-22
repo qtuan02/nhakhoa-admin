@@ -18,6 +18,7 @@ import { STATUS_APPOINTMENT } from "@/commons/Option";
 import { formatDate } from "@/utils/FunctionHelpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faSave } from "@fortawesome/free-solid-svg-icons";
+import { IService } from "@/interfaces/IService";
 
 interface FormComponentProps {
     onSubmit: (values: IAppointment) => void;
@@ -42,7 +43,6 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
     const user = useAppSelector((state) => state.user);
     const appointment = useAppSelector((state) => state.appointment);
 
-
     useEffect(() => {
         if(user.status === 'completed' || user.status === 'rejected') {
             dispatch(getUsers());
@@ -63,7 +63,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
             form.setFieldsValue({
                 ...data,
                 doctor_id: data?.doctor?.id || '',
-                date: data.doctor ? dayjs(data?.date).format('DD/MM/YYYY') || '' : dayjs(data?.date) || '',
+                date: data.doctor ? dayjs(data?.date).format('YYYY-MM-DD') || '' : dayjs(data?.date) || '',
             });
         }
 
@@ -185,7 +185,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                         <List
                             itemLayout="horizontal"
                             dataSource={appointment.services}
-                            renderItem={(item, index) => (
+                            renderItem={(item: IService, index: number) => (
                                 <List.Item>
                                     <List.Item.Meta
                                         avatar={<Avatar shape="square" size="large" src={item?.image} />}

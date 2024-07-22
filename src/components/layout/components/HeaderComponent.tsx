@@ -33,7 +33,7 @@ export default function HeaderComponent() {
         },
         {
             key: 'profile',
-            label: <Link href='#' >Thông tin</Link>,
+            label: <Link href='/thong-tin' >Thông tin</Link>,
             icon: <FontAwesomeIcon icon={faAddressCard} />
         },
         {

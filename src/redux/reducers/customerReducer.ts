@@ -4,11 +4,11 @@ import { ICustomer } from "@/interfaces/ICustomer";
 import { createCustomer, editCustomer, getCustomers } from "@/apis";
 
 interface ICustomerState {
-    loading?: boolean;
-    status?: 'pending' | 'completed' | 'rejected';
+    loading: boolean;
+    status: 'pending' | 'completed' | 'rejected';
     edit?: 'wait' | 'success' | 'fail';
     data: ICustomer[];
-    drawer?: boolean;
+    drawer: boolean;
     history_id?: string;
 };
 

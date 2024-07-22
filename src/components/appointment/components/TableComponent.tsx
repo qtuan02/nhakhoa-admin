@@ -103,7 +103,7 @@ export default function TableComponent() {
     return (
         <CTable
             columns={columns}
-            dataSource={appoinment.data?.map((item, index) => ({...item, index: index + 1, key: item.id }))}
+            dataSource={appoinment?.data?.map((item: IAppointment, index: number) => ({...item, index: index + 1, key: item.id })) || []}
             pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15'] }}
         />
     );

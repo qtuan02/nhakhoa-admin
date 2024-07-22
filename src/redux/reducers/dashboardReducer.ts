@@ -4,14 +4,14 @@ import { IDashboard, IDashboardAppoinment, IDashboardInvoice } from "@/interface
 import { getOverview, getOverviewAppointment, getOverviewInvoice } from "@/apis/dashboardApi";
 
 interface IDashboardState {
-    loading?: boolean;
-    status?: 'pending' | 'completed';
+    loading: boolean;
+    status: 'pending' | 'completed';
     data: IDashboard[];
-    loadingInvoice?: boolean;
-    statusInvoice?: 'pending' | 'completed';
+    loadingInvoice: boolean;
+    statusInvoice: 'pending' | 'completed';
     dataInvoice: IDashboardInvoice[];
-    loadingAppointment?: boolean;
-    statusAppointment?: 'pending' | 'completed';
+    loadingAppointment: boolean;
+    statusAppointment: 'pending' | 'completed';
     dataAppointment: IDashboardAppoinment[];
 };
 

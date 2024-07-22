@@ -23,7 +23,7 @@ export default function EditAppointmentComponent() {
 
     const handleSubmit = (values: IAppointment) => {
         values.date = parseDayjsToString(values.date);
-        values.services = appointment.services;     
+        values.services = appointment.services;
         dispatch(editAppointment({ id: id as string, data: values }));
     }
 

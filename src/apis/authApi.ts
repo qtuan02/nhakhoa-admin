@@ -25,16 +25,14 @@ export const login = async (data: ILogin) => {
 };
 
 export const refreshToken = async () => {
-    console.log("in");
     try {
-        console.log("in1");
         const res = await axios.post(URL_AUTH+'/refresh', null, {
             withCredentials: true
         });
         return res.data.data;
     }catch(error: any) {
-        TOAST_ERROR(error?.response?.data?.message);
         if(error.response.status === 401){
+            TOAST_ERROR(error?.response?.data?.message);
             store.dispatch(logout());
         }
     }
@@ -43,10 +41,10 @@ export const refreshToken = async () => {
 export const profile = createAsyncThunk<IResponse>(
     'auth/profile',
     async () => {
-        try{
+        try {
             const res = await axiosClient.get(URL + '/profile');
             return res.data;
-        }catch(error: any) {
+        } catch(error: any) {
             throw error?.response?.data;
         }
     }

@@ -4,8 +4,8 @@ import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { ISchedule, IScheduleDoctor } from "@/interfaces/ISchedule";
 
 interface IScheduleState {
-    loading?: boolean;
-    status?: 'pending' | 'completed' | 'rejected';
+    loading: boolean;
+    status: 'pending' | 'completed' | 'rejected';
     edit?: 'wait' | 'success' | 'fail';
     data: ISchedule[];
 };

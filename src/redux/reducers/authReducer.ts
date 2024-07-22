@@ -7,8 +7,8 @@ import { IProfile } from "@/interfaces/IProfile";
 
 interface IAuthState {
     profile: IProfile | null;
-    loading?: boolean;
-    modal?: boolean;
+    loading: boolean;
+    modal: boolean;
 }
 
 const initialState: IAuthState = {
