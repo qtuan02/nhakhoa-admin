@@ -6,7 +6,7 @@ import { IChangepassword } from "@/interfaces/IChangepassword";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toggleModal } from "@/redux/reducers/authReducer";
 import { TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
-import { faPenToSquare, faSave } from "@fortawesome/free-solid-svg-icons";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, Input, Modal } from "antd";
 import { useState } from "react";

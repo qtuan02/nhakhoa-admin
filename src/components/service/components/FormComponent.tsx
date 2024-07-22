@@ -1,4 +1,3 @@
-import { getCategories } from "@/apis";
 import { STATUS } from "@/utils/Option";
 import CButton from "@/custom_antd/CButton";
 import CCol from "@/custom_antd/CCol";
@@ -16,6 +15,7 @@ import { faPenToSquare, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form } from "antd";
 import { useEffect } from "react";
+import { getCategorys } from "@/apis";
 
 
 interface FormComponentProps {
@@ -43,7 +43,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
 
   useEffect(() => {
     if (category.status === "completed" || category.status === "rejected") {
-      dispatch(getCategories());
+      dispatch(getCategorys());
     }
     
     if (data) {

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
+import { TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { ILogin } from "@/interfaces/ILogin";
 import { IResponse } from "@/interfaces/IResponse";
 import { profile } from "@/apis";

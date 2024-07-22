@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { Button, Result } from 'antd';
+import { Result } from 'antd';
 import CButton from '@/custom_antd/CButton';
 
 export default function NotFoundComponent() {

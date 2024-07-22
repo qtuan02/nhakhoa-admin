@@ -8,7 +8,7 @@ import { toggleSider } from '@/redux/reducers/siderReducer';
 import { RootState } from '@/redux/store';
 import { faAddressCard, faBars, faBell, faLock, faSignOut, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Avatar, Badge, Divider, Flex, Layout, MenuProps } from 'antd';
+import { Avatar, Badge, Flex, Layout, MenuProps } from 'antd';
 import Link from 'next/link';
 import React from 'react';
 import ModalComponent from './ModalComponent';

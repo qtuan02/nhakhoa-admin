@@ -7,7 +7,7 @@ interface ICategoryState {
   loading: boolean;
   status: "pending" | "completed" | "rejected";
   edit?: "wait" | "success" | "fail";
-  data?: ICategory[];
+  data: ICategory[];
 }
 
 const initialState: ICategoryState = {

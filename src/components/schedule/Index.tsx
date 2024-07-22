@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DatePicker, Tabs, TabsProps } from "antd";
 import dayjs from 'dayjs';
 import { Dayjs } from 'dayjs';
-import { ReactNode, useEffect } from "react";
+import { useEffect } from "react";
 import CardComponent from "./components/CardComponent";
 
 export default function ScheduleComponent() {

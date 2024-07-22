@@ -10,7 +10,6 @@ import ChartComponent from "./components/ChartComponent";
 import PieComponent from "./components/PieComponent";
 import { appConfig } from "@/config/AppConfig";
 import { getOverview, getOverviewAppointment, getOverviewInvoice } from "@/apis/dashboardApi";
-import ProfileComponent from "../profile/Index";
 import CTitle from "@/custom_antd/CTitle";
 import CDescriptionItem from "@/custom_antd/CDescriptionItem";
 import { formatDate } from "@/utils/FunctionHelpers";

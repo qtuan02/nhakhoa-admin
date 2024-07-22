@@ -1,4 +1,4 @@
-import { changePassword, editUser } from "@/apis";
+import { changePassword } from "@/apis";
 import CButton from "@/custom_antd/CButton";
 import CRow from "@/custom_antd/CRow";
 import CSkeleton from "@/custom_antd/CSkeleton";

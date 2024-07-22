@@ -10,7 +10,6 @@ import { Checkbox, Form, Input } from "antd";
 import { useEffect, useState } from "react";
 import { login } from "@/apis";
 import { logining, setRemember } from "@/redux/reducers/authReducer";
-import { handleBeforeInput } from "@/utils/FunctionHelpers";
 
 const initialLogin: ILogin = {
     account: '',

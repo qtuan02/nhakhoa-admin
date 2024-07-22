@@ -1,7 +1,6 @@
 "use client";
 import { appConfig } from "@/config/AppConfig";
 import CCol from "@/custom_antd/CCol";
-import CDescriptionItem from "@/custom_antd/CDescriptionItem";
 import CTitle from "@/custom_antd/CTitle";
 import { useAppSelector } from "@/redux/hooks";
 import { formatDate } from "@/utils/FunctionHelpers";
