@@ -1,4 +1,3 @@
-"use client";
 import { ILogin } from "@/interfaces/ILogin";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import CButton from "@/custom_antd/CButton";

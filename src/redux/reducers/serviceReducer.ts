@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { createService, deleteService, editService, getServices } from "@/apis";
 
-
 interface IServiceState {
     loading: boolean;
     status: 'pending' | 'completed' | 'rejected';
@@ -19,7 +18,7 @@ const initialState: IServiceState = {
 };
 
 const serviceSlice = createSlice({
-    name:'service',
+    name: 'service',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
