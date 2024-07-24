@@ -19,13 +19,9 @@ export default function LayoutComponent({ children }: { children: React.ReactNod
     }
   }, [auth.loading, dispatch])
 
-  if (!auth) {
-    return <LoadingComponent />;
-  }
-
   return (
     <div className="flex h-screen w-screen bg-[#f5f5f5]">
-      {!auth.loading ? <LoadingComponent />
+      {!auth || !auth.loading ? <LoadingComponent />
         : <>
           <SiderComponent isSider={sider.isSiderOpen} />
           <div className="w-full">
