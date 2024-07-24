@@ -14,12 +14,14 @@ export default function LayoutComponent({ children }: { children: React.ReactNod
   const sider = useAppSelector(getSiderState);
 
   useEffect(() => {
-    dispatch(profile());
-  }, [dispatch])
+    if(!auth || !auth.profile) {
+      dispatch(profile());
+    }
+  }, [auth, dispatch])
 
   return (
     <div className="flex h-screen w-screen bg-[#f5f5f5]">
-      {!auth || auth && !auth.profile ? <LoadingComponent />
+      {auth.loading ? <LoadingComponent />
         : <>
           <SiderComponent isSider={sider.isSiderOpen} />
           <div className="w-full">
