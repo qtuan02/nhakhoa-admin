@@ -57,11 +57,9 @@ const authSlice = createSlice({
                 state.loading = true;
             })
             .addCase(profile.fulfilled, (state, action) => {
-                state.loading = false;
                 state.profile = action.payload.data;
             })
             .addCase(profile.rejected, (state, action: any) => {
-                state.loading = false;
                 state.profile = null;
                 TOAST_ERROR(action.error?.message);
             })
