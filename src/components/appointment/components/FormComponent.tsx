@@ -1,5 +1,3 @@
-import { getDate, getDoctors, getTimes, getUsers } from "@/apis";
-import { getTime } from "@/apis/scheduleApi";
 import CButton from "@/custom_antd/CButton";
 import CCol from "@/custom_antd/CCol";
 import CDatePicker from "@/custom_antd/CDatePicker";
@@ -9,7 +7,7 @@ import { CSelect } from "@/custom_antd/CSelect";
 import { IAppointment, IDate, ITime } from "@/interfaces/IAppointment";
 import { IUser } from "@/interfaces/IUser";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { removeService, setDate, setServices, setTime, toggleModal } from "@/redux/reducers/appointmentReducer";
+import { getAppointmentState, removeService, setDate, setServices, setTime, toggleModal } from "@/redux/reducers/appointmentReducer";
 import { Avatar, Form, Input, List, Select } from "antd";
 import { useEffect } from "react";
 import ModalComponent from "./ModalComponent";
@@ -19,6 +17,10 @@ import { formatDate } from "@/utils/FunctionHelpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faSave } from "@fortawesome/free-solid-svg-icons";
 import { IService } from "@/interfaces/IService";
+import { getUserState } from "@/redux/reducers/userReducer";
+import { getDoctors, getUsers } from "@/redux/slices/userSlice";
+import { getTimes } from "@/redux/slices/appointmentSlice";
+import { getDate, getTime } from "@/redux/slices/scheduleSlice";
 
 interface FormComponentProps {
     onSubmit: (values: IAppointment) => void;
@@ -40,8 +42,8 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
     const [form] = Form.useForm();
 
     const dispatch = useAppDispatch();
-    const user = useAppSelector((state) => state.user);
-    const appointment = useAppSelector((state) => state.appointment);
+    const user = useAppSelector(getUserState);
+    const appointment = useAppSelector(getAppointmentState);
 
     useEffect(() => {
         if(user.status === 'completed' || user.status === 'rejected') {

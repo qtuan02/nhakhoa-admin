@@ -9,15 +9,17 @@ import CCol from "@/custom_antd/CCol";
 import ChartComponent from "./components/ChartComponent";
 import PieComponent from "./components/PieComponent";
 import { appConfig } from "@/config/AppConfig";
-import { getOverview, getOverviewAppointment, getOverviewInvoice } from "@/apis/dashboardApi";
 import CTitle from "@/custom_antd/CTitle";
 import CDescriptionItem from "@/custom_antd/CDescriptionItem";
 import { formatDate } from "@/utils/FunctionHelpers";
+import { getAuthState } from "@/redux/reducers/authReducer";
+import { getOverviewState } from "@/redux/reducers/overviewReducer";
+import { getOverview, getOverviewAppointment, getOverviewInvoice } from "@/redux/slices/overviewSlice";
 
 export default function DashboardComponent() {
     const dispatch = useAppDispatch();
-    const auth = useAppSelector((state) => state.auth);
-    const dashboard = useAppSelector((state) => state.dashboard);
+    const auth = useAppSelector(getAuthState);
+    const dashboard = useAppSelector(getOverviewState);
 
     const [checked, setChecked] = useState<boolean>(false);
 

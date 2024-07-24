@@ -10,11 +10,12 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { IUser } from "@/interfaces/IUser";
 import { editorToHtml, parseDayjsToString } from "@/utils/FunctionHelpers";
 import { RawDraftContentState } from "draft-js";
-import { createUser } from "@/apis";
+import { createUser } from "@/redux/slices/userSlice";
+import { getUserState } from "@/redux/reducers/userReducer";
 
 export default function CreateUserComponent() {
     const dispatch = useAppDispatch();
-    const user = useAppSelector((state) => state.user);
+    const user = useAppSelector(getUserState);
 
     const handleSubmit = (values: IUser) => {
         values.description = editorToHtml(values.description as RawDraftContentState);

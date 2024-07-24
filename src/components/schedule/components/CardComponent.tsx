@@ -9,7 +9,7 @@ import { faClockRotateLeft, faPenToSquare, faTrashCan } from '@fortawesome/free-
 import CButton from '@/custom_antd/CButton';
 import CSpace from '@/custom_antd/CSpace';
 import { useAppDispatch } from '@/redux/hooks';
-import { deleteSchedule } from '@/apis';
+import { deleteSchedule } from '@/redux/slices/scheduleSlice';
 import CPopConfirm from '@/custom_antd/CPopConfirm';
 
 interface CardComponentProps {

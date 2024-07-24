@@ -4,11 +4,12 @@ import SiderComponent from "./components/SiderComponent";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
 import LoadingComponent from "./Loading";
-import { profile } from "@/apis";
+import { getAuthState } from "@/redux/reducers/authReducer";
+import { profile } from "@/redux/slices/authSlice";
 
 export default function LayoutComponent({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();
-  const auth = useAppSelector((state) => state.auth);
+  const auth = useAppSelector(getAuthState);
 
   useEffect(() => {
     dispatch(profile());

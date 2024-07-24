@@ -1,10 +1,10 @@
-import { changePasswordWithToken } from "@/apis";
+import { changePasswordWithToken } from "@/redux/slices/authSlice";
 import CButton from "@/custom_antd/CButton";
 import CRow from "@/custom_antd/CRow";
 import CTitle from "@/custom_antd/CTitle";
 import { IChangepassword } from "@/interfaces/IChangepassword";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { toggleModal } from "@/redux/reducers/authReducer";
+import { getAuthState, toggleModal } from "@/redux/reducers/authReducer";
 import { TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -23,7 +23,7 @@ export default function ModalComponent() {
     const [loading, setLoading] = useState<boolean>(false);
 
     const dispatch = useAppDispatch();
-    const auth = useAppSelector((state) => state.auth);
+    const auth = useAppSelector(getAuthState);
 
     const handleSubmit = async (values: IChangepassword) => {
         setLoading(true);

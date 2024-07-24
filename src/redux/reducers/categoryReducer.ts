@@ -1,13 +1,14 @@
 import { ICategory } from "@/interfaces/ICategory";
 import { createSlice } from "@reduxjs/toolkit";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
-import { createCategory, deleteCategory, editCategory, getCategorys } from "@/apis";
+import { RootState } from "../store";
+import { createCategory, deleteCategory, editCategory, getCategories } from "../slices/categorySlice";
 
 interface ICategoryState {
   loading: boolean;
   status: "pending" | "completed" | "rejected";
-  edit?: "wait" | "success" | "fail";
-  data: ICategory[];
+  edit: "wait" | "success" | "fail";
+  data?: ICategory[];
 }
 
 const initialState: ICategoryState = {
@@ -23,15 +24,15 @@ const categorySlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-        .addCase(getCategorys.pending, (state) => {
+        .addCase(getCategories.pending, (state) => {
             state.status = 'pending';
             state.loading = true;
         })
-        .addCase(getCategorys.fulfilled, (state, action) => {
+        .addCase(getCategories.fulfilled, (state, action) => {
             state.loading = false;
             state.data = action.payload.data;
         })
-        .addCase(getCategorys.rejected, (state, action: any) => {
+        .addCase(getCategories.rejected, (state, action: any) => {
             state.data = [];
             state.loading = false;
             TOAST_ERROR(action.error?.message)
@@ -50,8 +51,8 @@ const categorySlice = createSlice({
             TOAST_ERROR(action.error?.message);
         })
         .addCase(deleteCategory.fulfilled, (state, action: any) => {
-            state.data = state.data.filter(
-            (item) => item.id !== action.payload.data
+            state.data = state.data?.filter(
+                (item) => item.id !== action.payload.data
             );
             TOAST_SUCCESS(action.payload.message);
         })
@@ -75,4 +76,5 @@ const categorySlice = createSlice({
   },
 });
 
+export const getCategoryState = (state: RootState) => state.category;
 export default categorySlice.reducer;

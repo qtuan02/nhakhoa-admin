@@ -7,15 +7,15 @@ import CButton from "@/custom_antd/CButton";
 import FormComponent from "../components/FormComponent";
 import { IAppointment } from "@/interfaces/IAppointment";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { createAppointment } from "@/apis";
+import { createAppointment } from "@/redux/slices/appointmentSlice";
 import CSkeleton from "@/custom_antd/CSkeleton";
-import { clearService } from "@/redux/reducers/appointmentReducer";
+import { clearService, getAppointmentState } from "@/redux/reducers/appointmentReducer";
 import { useEffect } from "react";
 import { parseDayjsToString } from "@/utils/FunctionHelpers";
 
 export default function CreateAppointmentComponent() {
     const dispatch = useAppDispatch();
-    const appointment = useAppSelector((state) => state.appointment);
+    const appointment = useAppSelector(getAppointmentState);
 
     const handleSubmit = (values: IAppointment) => {
         values.date = parseDayjsToString(values.date);

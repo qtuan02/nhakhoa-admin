@@ -12,12 +12,13 @@ import { IService } from "@/interfaces/IService";
 import { editorToHtml } from "@/utils/FunctionHelpers";
 import { RawDraftContentState } from "draft-js";
 import { useEffect, useState } from "react";
-import { editService, getService } from "@/apis/serviceApi";
+import { editService, getService } from "@/redux/slices/serviceSlice";
+import { getServiceState } from "@/redux/reducers/serviceReducer";
 
 export default function EditServiceComponent() {
     const { id } = useParams();
     const dispatch = useAppDispatch();
-    const service = useAppSelector((state) => state.service);
+    const service = useAppSelector(getServiceState);
 
     const [data, setData] = useState<IService | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(false);

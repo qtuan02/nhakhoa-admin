@@ -15,7 +15,8 @@ import { faPenToSquare, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form } from "antd";
 import { useEffect } from "react";
-import { getCategorys } from "@/apis";
+import { getCategoryState } from "@/redux/reducers/categoryReducer";
+import { getCategories } from "@/redux/slices/categorySlice";
 
 
 interface FormComponentProps {
@@ -37,15 +38,15 @@ const initialService: IService = {
 
 export default function FormComponent({ onSubmit, data }: FormComponentProps) {
   const [form] = Form.useForm();
-  
+
   const dispatch = useAppDispatch();
-  const category = useAppSelector((state) => state.category);
+  const category = useAppSelector(getCategoryState);
 
   useEffect(() => {
     if (category.status === "completed" || category.status === "rejected") {
-      dispatch(getCategorys());
+      dispatch(getCategories());
     }
-    
+
     if (data) {
       form.setFieldsValue({
         ...data,
@@ -79,7 +80,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
       <CRow gutter={[16, 16]}>
         <CCol span={6}>
           <Form.Item label="Danh mục" className="!mb-4" name="category_id" rules={[{ required: true, message: "Hãy chọn danh mục..." }]}>
-            <CSelect className="!h-[40px]" options={category.data?.map((c: ICategory) => ({ value: c.id, label: c.name }) || [])} />
+            <CSelect className="!h-[40px]" options={category?.data?.map((c: ICategory) => ({ value: c.id, label: c.name }) || [])} />
           </Form.Item>
         </CCol>
         <CCol span={6}>

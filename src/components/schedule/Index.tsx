@@ -1,5 +1,5 @@
 "use client"
-import { getSchedules } from "@/apis";
+import { getSchedules } from "@/redux/slices/scheduleSlice";
 import CButton from "@/custom_antd/CButton";
 import CCol from "@/custom_antd/CCol";
 import CRow from "@/custom_antd/CRow";
@@ -15,10 +15,12 @@ import dayjs from 'dayjs';
 import { Dayjs } from 'dayjs';
 import { useEffect } from "react";
 import CardComponent from "./components/CardComponent";
+import { getScheduleState } from "@/redux/reducers/scheduleReducer";
 
 export default function ScheduleComponent() {
     const dispatch = useAppDispatch();
-    const schedule = useAppSelector((state) => state.schedule);
+    const schedule = useAppSelector(getScheduleState);
+
     useEffect(() => {
         if(schedule.status === "completed" || schedule.status === "rejected") {
             dispatch(getSchedules(""));

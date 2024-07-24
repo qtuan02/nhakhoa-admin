@@ -10,9 +10,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import CTable from "@/custom_antd/CTable";
 import { formatDate } from "@/utils/FunctionHelpers";
+import { getHistoryState } from "@/redux/reducers/historyReducer";
 
 export default function TableComponent() {
-    const history = useAppSelector((state) => state.history);
+    const history = useAppSelector(getHistoryState);
+
     const columns: TableColumnsType<IHistory> = [
         {
             title: "#",

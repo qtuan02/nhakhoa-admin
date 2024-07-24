@@ -3,8 +3,8 @@ import CCol from '@/custom_antd/CCol';
 import CDropDown from '@/custom_antd/CDropdown';
 import CRow from '@/custom_antd/CRow';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { logout, toggleModal } from '@/redux/reducers/authReducer';
-import { toggleSider } from '@/redux/reducers/siderReducer';
+import { getAuthState, logout, toggleModal } from '@/redux/reducers/authReducer';
+import { getSiderState, toggleSider } from '@/redux/reducers/siderReducer';
 import { RootState } from '@/redux/store';
 import { faAddressCard, faBars, faBell, faLock, faSignOut, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,8 +16,8 @@ const { Header } = Layout;
 
 export default function HeaderComponent() {
     const dispatch = useAppDispatch();
-    const auth = useAppSelector((state) => state.auth);
-    const isSiderOpen = useAppSelector((state: RootState) => state.sider.isSiderOpen);
+    const auth = useAppSelector(getAuthState);
+    const sider = useAppSelector(getSiderState);
 
     const items: MenuProps['items'] = [
         {
@@ -53,7 +53,7 @@ export default function HeaderComponent() {
                     <CRow gutter={[16, 16]}>
                         <CCol>
                             <CButton className="!h-10 !w-10 !border-none !bg-[#f0f0f0]" onClick={() => dispatch(toggleSider())}>
-                                {isSiderOpen ? <FontAwesomeIcon icon={faBars} /> : <FontAwesomeIcon icon={faXmark} />}
+                                {sider.isSiderOpen ? <FontAwesomeIcon icon={faBars} /> : <FontAwesomeIcon icon={faXmark} />}
                             </CButton>
                         </CCol>
                     </CRow>

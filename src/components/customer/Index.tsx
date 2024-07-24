@@ -2,17 +2,19 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import TableComponent from "./components/TableComponent";
 import { useEffect } from "react";
-import { getCustomers } from "@/apis";
 import CRow from "@/custom_antd/CRow";
 import CTitle from "@/custom_antd/CTitle";
 import CButton from "@/custom_antd/CButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import CSkeleton from "@/custom_antd/CSkeleton";
+import { getCustomerState } from "@/redux/reducers/customerReducer";
+import { getCustomers } from "@/redux/slices/customerSlice";
 
 export default function CustomerComponent() {
-    const customer = useAppSelector((state) => state.customer);
     const dispatch = useAppDispatch();
+    const customer = useAppSelector(getCustomerState);
+
     useEffect(() => {
         if(customer.status === "completed" || customer.status === "rejected") {
             dispatch(getCustomers());

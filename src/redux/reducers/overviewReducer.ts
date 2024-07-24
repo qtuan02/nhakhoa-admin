@@ -1,21 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { IDashboard, IDashboardAppoinment, IDashboardInvoice } from "@/interfaces/IDashboard";
-import { getOverview, getOverviewAppointment, getOverviewInvoice } from "@/apis/dashboardApi";
+import { RootState } from "../store";
+import { getOverview, getOverviewAppointment, getOverviewInvoice } from "../slices/overviewSlice";
 
-interface IDashboardState {
+interface IOverviewState {
     loading: boolean;
     status: 'pending' | 'completed';
-    data: IDashboard[];
+    data?: IDashboard[];
     loadingInvoice: boolean;
     statusInvoice: 'pending' | 'completed';
-    dataInvoice: IDashboardInvoice[];
+    dataInvoice?: IDashboardInvoice[];
     loadingAppointment: boolean;
     statusAppointment: 'pending' | 'completed';
-    dataAppointment: IDashboardAppoinment[];
+    dataAppointment?: IDashboardAppoinment[];
 };
 
-const initialState: IDashboardState = {
+const initialState: IOverviewState = {
     loading: false,
     status: 'completed',
     data: [],
@@ -27,8 +28,8 @@ const initialState: IDashboardState = {
     dataAppointment: [],
 };
 
-const dashboardSlice = createSlice({
-    name: 'dashboard',
+const overviewSlice = createSlice({
+    name: 'overview',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -75,4 +76,5 @@ const dashboardSlice = createSlice({
     }
 });
 
-export default dashboardSlice.reducer;
+export const getOverviewState = (state: RootState) => state.overview;
+export default overviewSlice.reducer;

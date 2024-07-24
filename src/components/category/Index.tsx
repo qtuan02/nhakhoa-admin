@@ -8,14 +8,16 @@ import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import CButton from "@/custom_antd/CButton";
-import { getCategorys } from "@/apis";
+import { getCategories } from "@/redux/slices/categorySlice";
+import { getCategoryState } from "@/redux/reducers/categoryReducer";
 
 export default function CategoryComponent() {
-    const category = useAppSelector((state) => state.category);
     const dispatch = useAppDispatch();
+    const category = useAppSelector(getCategoryState);
+
     useEffect(() => {
         if(category.status === "completed" || category.status === "rejected") {
-            dispatch(getCategorys());
+            dispatch(getCategories());
         }
     }, [dispatch, category.status]);
 

@@ -10,9 +10,11 @@ import { CheckCircleOutlined, ExclamationCircleOutlined } from "@ant-design/icon
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
 import { IInvoice } from "@/interfaces/IInvoice";
 import { customNumberPrice } from "@/utils/FunctionHelpers";
+import { getInvoiceState } from "@/redux/reducers/invoiceReducer";
 
 export default function TableComponent() {
-    const invoice = useAppSelector((state) => state.invoice);
+    const invoice = useAppSelector(getInvoiceState);
+
     const columns: TableColumnsType<IInvoice> = [
         {
             title: "#",

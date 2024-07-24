@@ -1,18 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TOAST_ERROR, TOAST_SUCCESS, TOAST_WARNING } from "@/utils/FunctionUiHelpers";
 import { IHistory } from "@/interfaces/IHistory";
-import { createHistory, editHistory, getHistories } from "@/apis";
 import { IService } from "@/interfaces/IService";
+import { RootState } from "../store";
+import { createHistory, editHistory, getHistories } from "../slices/historySlice";
 
 interface IHistoryState {
     loading: boolean;
     status: 'pending' | 'completed' | 'rejected';
-    edit?: 'wait' | 'success' | 'fail';
-    data: IHistory[];
+    edit: 'wait' | 'success' | 'fail';
+    data?: IHistory[];
     drawer: boolean;
     history_id?: string;
     modal: boolean;
-    services: IService[];
+    services?: IService[];
 };
 
 const initialState: IHistoryState = {
@@ -41,23 +42,23 @@ const historySlice = createSlice({
         },
         addService: (state, action: PayloadAction<IService>) => {
             const service = action.payload;
-            if(state.services.find(s => s.id === service.id)) {
+            if(state.services?.find(s => s.id === service.id)) {
                 TOAST_WARNING("Dịch vụ đã được thêm!");
             }else{
-                state.services.push(service);
+                state.services?.push(service);
             }
         },
         removeService: (state, action: PayloadAction<number>) => {
             const service_id = action.payload;
-            const index = state.services.findIndex(s => s.id === service_id);
-            if (index !== -1) {
-                state.services.splice(index, 1);
+            const index = state.services?.findIndex(s => s.id === service_id);
+            if (index) {
+                state.services?.splice(index, 1);
             }
         },
         editService: (state, action: PayloadAction<IService>) => {
             const service = action.payload;
-            const index = state.services.findIndex(s => s.id === service.id);
-            if (index !== -1) {
+            const index = state.services?.findIndex(s => s.id === service.id);
+            if (index && state.services) {
                 state.services[index].price = service.price;
                 state.services[index].quantity = service.quantity;
             } else {
@@ -115,5 +116,6 @@ const historySlice = createSlice({
     }
 });
 
+export const getHistoryState = (state: RootState) => state.history;
 export const { toggleDrawer, setHistoryId, toggleModal, addService, removeService, editService, clearService, setServices } = historySlice.actions;
 export default historySlice.reducer;

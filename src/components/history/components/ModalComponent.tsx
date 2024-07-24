@@ -1,4 +1,4 @@
-import { getServices } from "@/apis/serviceApi";
+import { getServices } from "@/redux/slices/serviceSlice";
 import CButton from "@/custom_antd/CButton";
 import CModal from "@/custom_antd/CModal";
 import CSkeleton from "@/custom_antd/CSkeleton";
@@ -9,12 +9,13 @@ import { useEffect } from "react";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
 import CTable from "@/custom_antd/CTable";
 import CTitle from "@/custom_antd/CTitle";
-import { addService, toggleModal } from "@/redux/reducers/historyReducer";
+import { addService, getHistoryState, toggleModal } from "@/redux/reducers/historyReducer";
+import { getServiceState } from "@/redux/reducers/serviceReducer";
 
 export default function ModalComponent() {
     const dispatch = useAppDispatch();
-    const service = useAppSelector((state) => state.service);
-    const isOpenModal = useAppSelector((state) => state.history.modal);
+    const service = useAppSelector(getServiceState);
+    const history = useAppSelector(getHistoryState);
 
     useEffect(() => {
         if(service.status === "completed" || service.status === "rejected"){
@@ -62,7 +63,7 @@ export default function ModalComponent() {
     ] as TableColumnsType<IService>;
 
     return (
-        <CModal open={isOpenModal} onCancel={() => dispatch(toggleModal())} footer={null} width={800}>
+        <CModal open={history.modal} onCancel={() => dispatch(toggleModal())} footer={null} width={800}>
             <Divider><CTitle level={4}>Chọn dịch vụ</CTitle></Divider>
             <CSkeleton loading={service.loading}>
                 <CTable

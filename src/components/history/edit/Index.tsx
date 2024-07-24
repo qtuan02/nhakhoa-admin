@@ -9,16 +9,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IHistory } from "@/interfaces/IHistory";
-import { editHistory, getHistory } from "@/apis";
+import { editHistory, getHistory } from "@/redux/slices/historySlice";
 import ProfileComponent from "../components/ProfileComponent";
 import { Tabs, TabsProps } from "antd";
 import FormEditComponent from "../components/FormEditComponent";
-import { clearService } from "@/redux/reducers/historyReducer";
+import { clearService, getHistoryState } from "@/redux/reducers/historyReducer";
 
 export default function EditHistoryComponent() {
     const { id } = useParams();
     const dispatch = useAppDispatch();
-    const history = useAppSelector((state) => state.history);
+    const history = useAppSelector(getHistoryState);
 
     const [data, setData] = useState<IHistory | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(false);

@@ -1,5 +1,5 @@
 "use client";
-import { getUsers } from "@/apis";
+import { getUsers } from "@/redux/slices/userSlice";
 import CButton from "@/custom_antd/CButton";
 import CRow from "@/custom_antd/CRow";
 import CSkeleton from "@/custom_antd/CSkeleton";
@@ -9,10 +9,12 @@ import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import TableComponent from "./components/TableComponent";
+import { getUserState } from "@/redux/reducers/userReducer";
 
 export default function UserComponent() {
-    const user = useAppSelector((state) => state.user);
     const dispatch = useAppDispatch();
+    const user = useAppSelector(getUserState);
+
     useEffect(() => {
         if(user.status === "completed" || user.status === "rejected") {
             dispatch(getUsers());

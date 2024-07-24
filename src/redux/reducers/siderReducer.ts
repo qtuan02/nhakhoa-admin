@@ -1,22 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
 interface ISiderState {
-  isSiderOpen: boolean;
+    isSiderOpen: boolean;
 }
 
 const initialState: ISiderState = {
-  isSiderOpen: true,
+    isSiderOpen: true,
 };
 
 const siderSlice = createSlice({
-  name: 'sider',
-  initialState,
-  reducers: {
-    toggleSider: (state) => {
-      state.isSiderOpen = !state.isSiderOpen;
+    name: 'sider',
+    initialState,
+    reducers: {
+        toggleSider: (state) => {
+          state.isSiderOpen = !state.isSiderOpen;
+        },
     },
-  },
 });
 
+export const getSiderState = (state: RootState) => state.sider;
 export const { toggleSider } = siderSlice.actions;
 export default siderSlice.reducer;

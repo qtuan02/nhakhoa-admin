@@ -1,4 +1,4 @@
-import { getHistory } from "@/apis";
+import { getHistory } from "@/redux/slices/historySlice";
 import CCol from "@/custom_antd/CCol";
 import CDescriptionItem from "@/custom_antd/CDescriptionItem";
 import CRow from "@/custom_antd/CRow";
@@ -6,19 +6,21 @@ import CSkeleton from "@/custom_antd/CSkeleton";
 import CTable from "@/custom_antd/CTable";
 import { IHistory, IHistoryDetail } from "@/interfaces/IHistory";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { toggleDrawer } from "@/redux/reducers/customerReducer";
+import { getCustomerState, toggleDrawer } from "@/redux/reducers/customerReducer";
 import { Divider, Drawer, TableColumnsType } from "antd";
 import { useEffect, useState } from "react";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
 import { formatDate } from "@/utils/FunctionHelpers";
+import { getHistoryState } from "@/redux/reducers/historyReducer";
 
 export default function DrawerComponent() {
     const dispatch = useAppDispatch();
-    const history_id = useAppSelector((state) => state.customer.history_id);
-    const isDrawerOpen = useAppSelector((state) => state.customer.drawer);
+    const history = useAppSelector(getHistoryState);
+    const customer = useAppSelector(getCustomerState);
 
     const [loading, setLoading] = useState<boolean>(false);
     const [data, setData] = useState<IHistory | null>();
+    
 
     const getDataHistory = async (id: string) => {
         setLoading(true);
@@ -28,8 +30,8 @@ export default function DrawerComponent() {
     }
 
     useEffect(() => {
-        getDataHistory(history_id as string);
-    }, [history_id]);
+        getDataHistory(customer.history_id as string);
+    }, [customer.history_id]);
 
     const columns: TableColumnsType<IHistoryDetail> = [
         {
@@ -65,7 +67,7 @@ export default function DrawerComponent() {
         }
     ] as TableColumnsType<IHistoryDetail>;
 
-    return <Drawer placement="right" width={680} open={isDrawerOpen} onClose={() => dispatch(toggleDrawer())} footer={null} title={"CHI TIẾT KHÁM - MÃ "+history_id}>
+    return <Drawer placement="right" width={680} open={customer.drawer} onClose={() => dispatch(toggleDrawer())} footer={null} title={"CHI TIẾT KHÁM - MÃ "+history.history_id}>
         <CSkeleton loading={loading}>
             <Divider>Thông tin</Divider>
             <CRow>

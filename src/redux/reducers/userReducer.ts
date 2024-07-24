@@ -1,18 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { IUser } from "@/interfaces/IUser";
-import { createUser, editUser, getDoctors, getUsers } from "@/apis";
+import { RootState } from "../store";
+import { createUser, editUser, getDoctors, getUsers } from "../slices/userSlice";
 
 interface IUserState {
     loading: boolean;
     status: 'pending' | 'completed' | 'rejected';
-    edit?: 'wait' | 'success' | 'fail';
-    data: IUser[];
+    edit: 'wait' | 'success' | 'fail';
+    data?: IUser[];
     modal: boolean;
     user_id?: string;
     loadingDoctors: boolean;
     statusDoctors: 'pending' | 'completed' | 'rejected';
-    doctors: IUser[];
+    doctors?: IUser[];
 };
 
 const initialState: IUserState = {
@@ -97,5 +98,6 @@ const userSlice = createSlice({
     }
 });
 
+export const getUserState = (state: RootState) => state.user;
 export const { toggleModal, setUserId } = userSlice.actions;
 export default userSlice.reducer;

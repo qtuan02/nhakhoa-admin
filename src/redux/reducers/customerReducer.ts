@@ -1,13 +1,14 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { ICustomer } from "@/interfaces/ICustomer";
-import { createCustomer, editCustomer, getCustomers } from "@/apis";
+import { RootState } from "../store";
+import { createCustomer, editCustomer, getCustomers } from "../slices/customerSlice";
 
 interface ICustomerState {
     loading: boolean;
     status: 'pending' | 'completed' | 'rejected';
-    edit?: 'wait' | 'success' | 'fail';
-    data: ICustomer[];
+    edit: 'wait' | 'success' | 'fail';
+    data?: ICustomer[];
     drawer: boolean;
     history_id?: string;
 };
@@ -40,7 +41,6 @@ const customerSlice = createSlice({
             })
             .addCase(getCustomers.fulfilled, (state, action) => {
                 state.loading = false;
-                state.status = 'completed';
                 state.data = action.payload.data;
             })
             .addCase(getCustomers.rejected, (state, action: any) => {
@@ -78,5 +78,6 @@ const customerSlice = createSlice({
     }
 });
 
+export const getCustomerState = (state: RootState) => state.customer;
 export const { toggleDrawer, setHistoryId } = customerSlice.actions;
 export default customerSlice.reducer;

@@ -1,5 +1,5 @@
 "use client";
-import { editInvoice, getInvoice } from "@/apis";
+import { editInvoice, getInvoice } from "@/redux/slices/invoiceSlice";
 import CButton from "@/custom_antd/CButton";
 import CRow from "@/custom_antd/CRow";
 import CSkeleton from "@/custom_antd/CSkeleton";
@@ -14,11 +14,12 @@ import { IInvoice } from "@/interfaces/IInvoice";
 import FormEditComponent from "../components/FormEditComponent";
 import { TOAST_WARNING } from "@/utils/FunctionUiHelpers";
 import CCol from "@/custom_antd/CCol";
+import { getInvoiceState } from "@/redux/reducers/invoiceReducer";
 
 export default function EditInvoiceComponent() {
     const { id } = useParams();
     const dispatch = useAppDispatch();
-    const invoice = useAppSelector((state) => state.invoice);
+    const invoice = useAppSelector(getInvoiceState);
 
     const [data, setData] = useState<IInvoice | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(false);

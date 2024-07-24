@@ -9,14 +9,15 @@ import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
 import { ICustomer } from "@/interfaces/ICustomer";
 import { useState } from "react";
 import CTitle from "@/custom_antd/CTitle";
-import { setHistoryId, toggleDrawer } from "@/redux/reducers/customerReducer";
+import { getCustomerState, setHistoryId, toggleDrawer } from "@/redux/reducers/customerReducer";
 import { IHistory } from "@/interfaces/IHistory";
 import DrawerComponent from "./DrawerComponent";
 import { formatDate } from "@/utils/FunctionHelpers";
 
 export default function TableComponent() {
     const dispatch = useAppDispatch();
-    const customer = useAppSelector((state) => state.customer);
+    const customer = useAppSelector(getCustomerState);
+    
     const columns: TableColumnsType<ICustomer> = [
         {
             title: "Mã",

@@ -3,7 +3,7 @@ import CButton from "@/custom_antd/CButton";
 import CRow from "@/custom_antd/CRow";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import CTitle from "@/custom_antd/CTitle";
-import { editCategory, getCategory } from "@/apis";
+import { editCategory, getCategory } from "@/redux/slices/categorySlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { faRotateBack } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,11 +11,12 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import FormComponent from "../components/FormComponent";
 import { ICategory } from "@/interfaces/ICategory";
+import { getCategoryState } from "@/redux/reducers/categoryReducer";
 
 export default function EditCategoryComponent() {
     const { id } = useParams();
     const dispatch = useAppDispatch();
-    const category = useAppSelector((state) => state.category);
+    const category = useAppSelector(getCategoryState);
 
     const [data, setData] = useState<ICategory | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(false);

@@ -8,13 +8,14 @@ import CButton from "@/custom_antd/CButton";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import { IService } from "@/interfaces/IService";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { createService } from "@/apis/serviceApi";
+import { createService } from "@/redux/slices/serviceSlice";
 import { editorToHtml } from "@/utils/FunctionHelpers";
 import { RawDraftContentState } from "draft-js";
+import { getServiceState } from "@/redux/reducers/serviceReducer";
 
 export default function CreateServiceComponent() {
     const dispatch = useAppDispatch();
-    const service = useAppSelector((state) => state.service);
+    const service = useAppSelector(getServiceState);
 
     const handleSubmit = (values: IService) => {
         values.description = editorToHtml(values.description as RawDraftContentState);

@@ -4,7 +4,7 @@ import CRow from "@/custom_antd/CRow";
 import { CSelect } from "@/custom_antd/CSelect";
 import { IHistory } from "@/interfaces/IHistory";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { editService, removeService, toggleModal } from "@/redux/reducers/historyReducer";
+import { editService, getHistoryState, removeService, toggleModal } from "@/redux/reducers/historyReducer";
 import { Form, Image, Input, TableProps } from "antd";
 import { useEffect, useState } from "react";
 import ModalComponent from "./ModalComponent";
@@ -77,7 +77,7 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
     const [formService] = Form.useForm();
 
     const dispatch = useAppDispatch();
-    const history = useAppSelector((state) => state.history);
+    const history = useAppSelector(getHistoryState);
 
     useEffect(() => {
         if (data) {

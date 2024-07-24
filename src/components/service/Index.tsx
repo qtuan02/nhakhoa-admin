@@ -6,13 +6,14 @@ import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import CButton from "@/custom_antd/CButton";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import TableComponent from "./components/TableComponent";
-import { getServices } from "@/apis/serviceApi";
+import { getServices } from "@/redux/slices/serviceSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
+import { getServiceState } from "@/redux/reducers/serviceReducer";
 
 export default function ServiceComponent() {
-    const service = useAppSelector((state) => state.service);
     const dispatch = useAppDispatch();
+    const service = useAppSelector(getServiceState);
     
     useEffect(() => {
         if(service.status === "completed" || service.status === "rejected") {

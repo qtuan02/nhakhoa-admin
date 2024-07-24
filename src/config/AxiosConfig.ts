@@ -3,7 +3,7 @@ import { appConfig } from "./AppConfig";
 import { logout } from "@/redux/reducers/authReducer";
 import store from "@/redux/store";
 import { jwtDecode, JwtPayload } from "jwt-decode";
-import { refreshToken } from "@/apis";
+import { refreshToken } from "@/redux/slices/authSlice";
 
 const axiosClient = axios.create({
   baseURL: appConfig.API_LOCAL,

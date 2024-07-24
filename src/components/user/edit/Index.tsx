@@ -12,12 +12,13 @@ import { useEffect, useState } from "react";
 import { IUser } from "@/interfaces/IUser";
 import { editorToHtml, parseDayjsToString } from "@/utils/FunctionHelpers";
 import { RawDraftContentState } from "draft-js";
-import { editUser, getUser } from "@/apis";
+import { editUser, getUser } from "@/redux/slices/userSlice";
+import { getUserState } from "@/redux/reducers/userReducer";
 
 export default function EditUserComponent() {
     const { id } = useParams();
     const dispatch = useAppDispatch();
-    const user = useAppSelector((state) => state.user);
+    const user = useAppSelector(getUserState);
 
     const [data, setData] = useState<IUser | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(false);

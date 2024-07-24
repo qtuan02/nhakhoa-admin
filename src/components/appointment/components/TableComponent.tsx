@@ -6,16 +6,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TableColumnsType } from "antd";
 import CPopConfirm from "@/custom_antd/CPopConfirm";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { deleteAppointment } from "@/apis";
+import { deleteAppointment } from "@/redux/slices/appointmentSlice";
 import CTag from "@/custom_antd/CTag";
 import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
 import { IAppointment } from "@/interfaces/IAppointment";
 import { formatDate } from "@/utils/FunctionHelpers";
+import { getAppointmentState } from "@/redux/reducers/appointmentReducer";
 
 export default function TableComponent() {
-    const appoinment = useAppSelector((state) => state.appointment);
     const dispatch = useAppDispatch();
+    const appoinment = useAppSelector(getAppointmentState);
+
     const columns: TableColumnsType<IAppointment> = [
         {
             title: "#",

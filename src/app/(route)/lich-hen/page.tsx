@@ -1,6 +1,6 @@
 import AppointmentComponent from "@/components/appointment/Index";
 
-export default function AppoinmentPage(){
+export default function AppointmentPage(){
     return (
         <AppointmentComponent />
     );

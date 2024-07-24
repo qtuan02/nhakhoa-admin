@@ -1,5 +1,5 @@
 "use client";
-import { getInvoices } from "@/apis";
+import { getInvoices } from "@/redux/slices/invoiceSlice";
 import CRow from "@/custom_antd/CRow";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import CTitle from "@/custom_antd/CTitle";
@@ -9,10 +9,12 @@ import TableComponent from "./components/TableComponent";
 import CButton from "@/custom_antd/CButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
+import { getInvoiceState } from "@/redux/reducers/invoiceReducer";
 
 export default function InvoiceComponent() {
-    const invoice = useAppSelector((state) => state.invoice);
     const dispatch = useAppDispatch();
+    const invoice = useAppSelector(getInvoiceState);
+
     useEffect(() => {
         if(invoice.status === "completed" || invoice.status === "rejected") {
             dispatch(getInvoices());

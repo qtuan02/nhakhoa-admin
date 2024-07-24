@@ -1,13 +1,8 @@
-import { Input, InputProps } from "antd";
-import { ReactNode } from "react";
+import { Input, InputProps } from 'antd';
+import React from 'react';
 
-interface CInputProps extends InputProps {
-    children?: ReactNode;
-}
-
-const CInput: React.FC<CInputProps> = (props) => {
-    const { children, ...rest } = props;
-    return <Input {...rest}>{children}</Input>;
+const CInput: React.FC<InputProps> = (props) => {
+    return <Input {...props} />;
 };
 
 export default CInput;

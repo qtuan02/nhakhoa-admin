@@ -1,13 +1,14 @@
 import { IService } from "@/interfaces/IService";
 import { createSlice } from "@reduxjs/toolkit";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
-import { createService, deleteService, editService, getServices } from "@/apis";
+import { RootState } from "../store";
+import { createService, deleteService, editService, getServices } from "../slices/serviceSlice";
 
 interface IServiceState {
     loading: boolean;
     status: 'pending' | 'completed' | 'rejected';
-    edit?: 'wait' | 'success' | 'fail';
-    data: IService[];
+    edit: 'wait' | 'success' | 'fail';
+    data?: IService[];
 };
 
 const initialState: IServiceState = {
@@ -50,7 +51,7 @@ const serviceSlice = createSlice({
                 TOAST_ERROR(action.error?.message)
             })
             .addCase(deleteService.fulfilled, (state, action: any) => {
-                state.data = state.data.filter((item) => item.id !== action.payload.data);
+                state.data = state.data?.filter((item) => item.id !== action.payload.data);
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(deleteService.rejected, (state, action: any) => {
@@ -73,4 +74,5 @@ const serviceSlice = createSlice({
     }
 });
 
+export const getServiceState = (state: RootState) => state.service;
 export default serviceSlice.reducer;

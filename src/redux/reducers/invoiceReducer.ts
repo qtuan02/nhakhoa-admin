@@ -1,13 +1,14 @@
-import { editInvoice, getInvoices } from "@/apis";
 import { IInvoice } from "@/interfaces/IInvoice";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
+import { editInvoice, getInvoices } from "../slices/invoiceSlice";
 
 interface IInvoiceState {
     loading: boolean;
     status: 'pending' | 'completed' | 'rejected';
-    edit?: 'wait' | 'success' | 'fail';
-    data: IInvoice[];
+    edit: 'wait' | 'success' | 'fail';
+    data?: IInvoice[];
 };
 
 const initialState: IInvoiceState = {
@@ -52,4 +53,5 @@ const invoiceSlice = createSlice({
     }
 });
 
+export const getInvoiceState = (state: RootState) => state.invoice;
 export default invoiceSlice.reducer;

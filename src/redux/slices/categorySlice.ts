@@ -16,7 +16,7 @@ export const getCategory = async (id: string) => {
     }
 };
 
-export const getCategorys = createAsyncThunk<IResponse>(
+export const getCategories = createAsyncThunk<IResponse>(
     'category/get',
     async () => {
         try{

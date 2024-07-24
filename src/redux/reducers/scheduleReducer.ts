@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createSchedule, deleteSchedule, getSchedules } from "@/apis";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { ISchedule, IScheduleDoctor } from "@/interfaces/ISchedule";
+import { RootState } from "../store";
+import { createSchedule, deleteSchedule, getSchedules } from "../slices/scheduleSlice";
 
 interface IScheduleState {
     loading: boolean;
     status: 'pending' | 'completed' | 'rejected';
-    edit?: 'wait' | 'success' | 'fail';
-    data: ISchedule[];
+    edit: 'wait' | 'success' | 'fail';
+    data?: ISchedule[];
 };
 
 const initialState: IScheduleState = {
@@ -51,7 +52,7 @@ const scheduleSlice = createSlice({
             })
             .addCase(deleteSchedule.fulfilled, (state, action: any) => {
                 const { date, doctor_id } = action.payload.data;
-                state.data = state.data.map((s: ISchedule) => ({
+                state.data = state.data?.map((s: ISchedule) => ({
                     ...s,
                     doctor: s?.doctor?.filter((d: IScheduleDoctor) => d.id !== doctor_id)
                 }));
@@ -64,4 +65,5 @@ const scheduleSlice = createSlice({
     }
 });
 
+export const getScheduleState = (state: RootState) => state.schedule;
 export default scheduleSlice.reducer;

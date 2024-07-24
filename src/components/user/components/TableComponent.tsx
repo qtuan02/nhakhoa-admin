@@ -10,12 +10,13 @@ import CTag from "@/custom_antd/CTag";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
 import { IUser } from "@/interfaces/IUser";
-import { setUserId, toggleModal } from "@/redux/reducers/userReducer";
+import { getUserState, setUserId, toggleModal } from "@/redux/reducers/userReducer";
 import ModalComponent from "./ModalComponent";
 
 export default function TableComponent() {
-    const user = useAppSelector((state) => state.user);
     const dispatch = useAppDispatch();
+    const user = useAppSelector(getUserState);
+
     const columns: TableColumnsType<IUser> = [
         {
             title: "#",

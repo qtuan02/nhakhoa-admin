@@ -11,11 +11,13 @@ import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Image, TableColumnsType } from "antd";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
-import { deleteService } from "@/apis/serviceApi";
+import { deleteService } from "@/redux/slices/serviceSlice";
+import { getServiceState } from "@/redux/reducers/serviceReducer";
 
 export default function TableComponent() {
-    const service = useAppSelector((state) => state.service);
     const dispatch = useAppDispatch();
+    const service = useAppSelector(getServiceState);
+
     const columns: TableColumnsType<IService> = [
         {
             title: "#",

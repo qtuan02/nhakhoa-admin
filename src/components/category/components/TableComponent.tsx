@@ -7,14 +7,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Image, TableColumnsType } from "antd";
 import CPopConfirm from "@/custom_antd/CPopConfirm";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { deleteCategory } from "@/apis";
+import { deleteCategory } from "@/redux/slices/categorySlice";
 import CTag from "@/custom_antd/CTag";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
+import { getCategoryState } from "@/redux/reducers/categoryReducer";
 
 export default function TableComponent() {
-    const category = useAppSelector((state) => state.category);
     const dispatch = useAppDispatch();
+    const category = useAppSelector(getCategoryState);
+
     const columns: TableColumnsType<ICategory> = [
         {
             title: "#",

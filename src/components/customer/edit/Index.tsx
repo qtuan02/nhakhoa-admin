@@ -9,14 +9,15 @@ import { ICustomer } from "@/interfaces/ICustomer";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import { useParams } from "next/navigation";
-import { editCustomer, getCustomer } from "@/apis";
+import { editCustomer, getCustomer } from "@/redux/slices/customerSlice";
 import { useEffect, useState } from "react";
 import { parseDayjsToString } from "@/utils/FunctionHelpers";
+import { getCustomerState } from "@/redux/reducers/customerReducer";
 
 export default function EditCustomerComponent() {
     const { id } = useParams();
     const dispatch = useAppDispatch();
-    const customer = useAppSelector((state) => state.customer);
+    const customer = useAppSelector(getCustomerState);
 
     const [data, setData] = useState<ICustomer | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(false);

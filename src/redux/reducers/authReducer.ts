@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { ILogin } from "@/interfaces/ILogin";
-import { IResponse } from "@/interfaces/IResponse";
-import { login, profile } from "@/apis";
 import { IProfile } from "@/interfaces/IProfile";
+import { RootState } from "../store";
+import { login, profile } from "../slices/authSlice";
 
 interface IAuthState {
     loging: boolean;
-    profile: IProfile | null;
+    profile?: IProfile | null;
     loading: boolean;
     modal: boolean;
 }
@@ -70,5 +70,6 @@ const authSlice = createSlice({
         }
 });
 
+export const getAuthState = (state: RootState) => state.auth;
 export const { logout, setRemember, toggleModal } = authSlice.actions;
 export default authSlice.reducer;

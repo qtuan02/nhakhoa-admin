@@ -1,24 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { createAppointment, deleteAppointment, editAppointment, getAppointments, getDate, getTimes } from "@/apis";
 import { TOAST_ERROR, TOAST_SUCCESS, TOAST_WARNING } from "@/utils/FunctionUiHelpers";
 import { IAppointment, IDate, ITime } from "@/interfaces/IAppointment";
-import { getTime } from "@/apis/scheduleApi";
 import { IService } from "@/interfaces/IService";
+import { RootState } from "../store";
+import { createAppointment, deleteAppointment, editAppointment, getAppointments, getTimes } from "../slices/appointmentSlice";
+import { getDate, getTime } from "../slices/scheduleSlice";
 
 interface IAppointmentState {
     loading: boolean;
     status: 'pending' | 'completed' | 'rejected';
-    edit?: 'wait' | 'success' | 'fail';
-    data: IAppointment[];
-    times: ITime[];
+    edit: 'wait' | 'success' | 'fail';
+    data?: IAppointment[];
+    times?: ITime[];
     loadingTimes: boolean;
-    date: IDate[];
+    date?: IDate[];
     loadingDate: boolean;
     loadingTime?: boolean;
     statusTime: 'pending' | 'completed' | 'rejected';
-    time: ITime[];
-    modal?: boolean;
-    services: IService[];
+    time?: ITime[];
+    modal: boolean;
+    services?: IService[];
 };
 
 const initialState: IAppointmentState = {
@@ -52,17 +53,17 @@ const appointmentSlice = createSlice({
         },
         addService: (state, action: PayloadAction<IService>) => {
             const service = action.payload;
-            if(state.services.find(s => s.id === service.id)) {
+            if(state.services?.find(s => s.id === service.id)) {
                 TOAST_WARNING("Dịch vụ đã được thêm!");
             }else{
-                state.services.push(service);
+                state.services?.push(service);
             }
         },
         removeService: (state, action: PayloadAction<number>) => {
             const service_id = action.payload;
-            const index = state.services.findIndex(s => s.id === service_id);
-            if (index !== -1) {
-                state.services.splice(index, 1);
+            const index = state.services?.findIndex(s => s.id === service_id);
+            if (index) {
+                state.services?.splice(index, 1);
             }
         },
         clearService: (state) => {
@@ -102,7 +103,7 @@ const appointmentSlice = createSlice({
                 TOAST_ERROR(action.error?.message)
             })
             .addCase(deleteAppointment.fulfilled, (state, action: any) => {
-                state.data = state.data.filter((item) => item.id !== action.payload.data);
+                state.data = state.data?.filter((item) => item.id !== action.payload.data);
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(deleteAppointment.rejected, (state, action: any) => {
@@ -161,5 +162,6 @@ const appointmentSlice = createSlice({
     }
 });
 
+export const getAppointmentState = (state: RootState) => state.appointment;
 export const { setDate, setTime, toggleModal, addService, removeService, clearService, setServices } = appointmentSlice.actions;
 export default appointmentSlice.reducer;

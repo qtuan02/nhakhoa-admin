@@ -8,12 +8,13 @@ import FormComponent from "../components/FormComponent";
 import { ICustomer } from "@/interfaces/ICustomer";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import CSkeleton from "@/custom_antd/CSkeleton";
-import { createCustomer } from "@/apis";
+import { createCustomer } from "@/redux/slices/customerSlice";
 import { parseDayjsToString } from "@/utils/FunctionHelpers";
+import { getCustomerState } from "@/redux/reducers/customerReducer";
 
 export default function CreateCustomerComponent() {
     const dispatch = useAppDispatch();
-    const customer = useAppSelector((state) => state.customer);
+    const customer = useAppSelector(getCustomerState);
 
     const handleSubmit = (values: ICustomer) => {
         values.birthday = parseDayjsToString(values.birthday);

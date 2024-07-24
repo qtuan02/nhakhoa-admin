@@ -1,15 +1,18 @@
-import { getCustomers, getDoctors } from "@/apis";
+import { getCustomers } from "@/redux/slices/customerSlice";
 import CButton from "@/custom_antd/CButton";
 import CCol from "@/custom_antd/CCol";
 import CRow from "@/custom_antd/CRow";
 import { CSelect } from "@/custom_antd/CSelect";
 import { IHistory } from "@/interfaces/IHistory";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { getCustomerState } from "@/redux/reducers/customerReducer";
+import { getUserState } from "@/redux/reducers/userReducer";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form, Input } from "antd";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
+import { getDoctors } from "@/redux/slices/userSlice";
 
 interface FormComponentProps {
     onSubmit: (values: IHistory) => void;
@@ -26,8 +29,8 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
     const [form] = Form.useForm();
 
     const dispatch = useAppDispatch();
-    const user = useAppSelector((state) => state.user);
-    const customer = useAppSelector((state) => state.customer);
+    const user = useAppSelector(getUserState);
+    const customer = useAppSelector(getCustomerState);
 
     useEffect(() => {
         if(customer.status === 'completed' || customer.status === 'rejected') {

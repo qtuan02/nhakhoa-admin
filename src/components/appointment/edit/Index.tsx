@@ -9,14 +9,15 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useParams } from "next/navigation";
 import FormComponent from "../components/FormComponent";
 import { useEffect, useState } from "react";
-import { editAppointment, getAppointment } from "@/apis";
+import { editAppointment, getAppointment } from "@/redux/slices/appointmentSlice";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import { parseDayjsToString } from "@/utils/FunctionHelpers";
+import { getAppointmentState } from "@/redux/reducers/appointmentReducer";
 
 export default function EditAppointmentComponent() {
     const { id } = useParams();
     const dispatch = useAppDispatch();
-    const appointment = useAppSelector((state) => state.appointment);
+    const appointment = useAppSelector(getAppointmentState);
 
     const [data, setData] = useState<IAppointment | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(false);

@@ -1,5 +1,4 @@
 import { IScheduleAction, IScheduleCreate } from "@/interfaces/ISchedule";
-import { getDoctors, getTimes } from "@/apis";
 import CButton from "@/custom_antd/CButton";
 import CCol from "@/custom_antd/CCol";
 import CRow from "@/custom_antd/CRow";
@@ -13,6 +12,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, DatePicker, Form } from "antd";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { getDoctors } from "@/redux/slices/userSlice";
+import { getTimes } from "@/redux/slices/appointmentSlice";
 
 interface FormComponentProps {
     onSubmit: (values: IScheduleAction) => void;
