@@ -44,7 +44,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                 <Checkbox>Nhớ mật khẩu</Checkbox>
             </Form.Item>
             <Form.Item>
-                <CButton loading={auth?.loging || false} type="primary" htmlType="submit" icon={<FontAwesomeIcon icon={faHospital} />} size="large">Đăng nhập</CButton>
+                <CButton loading={auth.loging} type="primary" htmlType="submit" icon={<FontAwesomeIcon icon={faHospital} />} size="large">Đăng nhập</CButton>
             </Form.Item>
         </Form>
     );
