@@ -38,11 +38,11 @@ export default function ScheduleComponent() {
         return current.day() !== 1;
     };
 
-    const items: TabsProps['items'] = schedule.data.map((s: ISchedule) => ({
+    const items: TabsProps['items'] = schedule?.data?.map((s: ISchedule) => ({
         key: s.key as string,
         label: <p className="px-4">Thứ {s.key} - {formatDate(s.date)}</p>,
         children: <CardComponent data={s.doctor} date={s.date} />
-    }));
+    }) || []);
 
     const handleChange = (date: Dayjs) => {
         dispatch(getSchedules(parseDayjsToString(date)));
