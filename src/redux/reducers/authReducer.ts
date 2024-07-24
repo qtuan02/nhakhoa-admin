@@ -6,16 +6,14 @@ import { RootState } from "../store";
 import { login, profile } from "../slices/authSlice";
 
 interface IAuthState {
-    loging: boolean;
-    profile?: IProfile | null;
-    loading: boolean;
+    logging: boolean;
+    profile: IProfile | null;
     modal: boolean;
 }
 
 const initialState: IAuthState = {
-    loging: false,
+    logging: false,
     profile: null,
-    loading: false,
     modal: false,
 };
 
@@ -43,24 +41,17 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(login.pending, (state) => {
-                state.loging = true;
-            })
             .addCase(login.fulfilled, (state, action) => {
                 localStorage.setItem('access_token', action.payload.data.access_token);
-                state.loging = false;
+                state.logging = false;
                 window.location.assign('/');
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(login.rejected, (state, action: any) => {
-                state.loging = false;
+                state.logging = false;
                 TOAST_ERROR(action.error?.message);
             })
-            .addCase(profile.pending, (state) => {
-                state.loading = true;
-            })
             .addCase(profile.fulfilled, (state, action) => {
-                state.loading = false;
                 state.profile = action.payload.data;
             })
             .addCase(profile.rejected, (state, action: any) => {

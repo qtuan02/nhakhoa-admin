@@ -24,7 +24,7 @@ export default function DashboardComponent() {
     const [checked, setChecked] = useState<boolean>(false);
 
     useEffect(() => {
-        if (auth.profile?.role === appConfig.R_1) {
+        if (auth?.profile?.role === appConfig.R_1) {
             if (dashboard.status === 'completed') {
                 dispatch(getOverview());
             }
