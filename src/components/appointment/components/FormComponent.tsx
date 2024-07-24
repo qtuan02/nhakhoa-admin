@@ -139,9 +139,9 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                                 <Form.Item label="Chọn ngày:" className="!mb-4" name="date" rules={[{ required: true, message: "Chưa chọn ngày..." }]}>
                                     <CSelect loading={appointment.loadingDate} className="!h-10 ts-16" onChange={handleDateChange}>
                                         <Select.Option value="">--Chọn ngày</Select.Option>
-                                        {appointment.date?.map((d: IDate) => (
+                                        {appointment?.date?.map((d: IDate) => (
                                             <Select.Option key={d.date} value={d.date}>{formatDate(d.date)}</Select.Option>
-                                        ))}
+                                        )) || []}
                                     </CSelect>
                                 </Form.Item>
                             </CCol>
@@ -149,9 +149,9 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                                 <Form.Item label="Chọn giờ:" className="!mb-4" name="time" rules={[{ required: true, message: "Chưa chọn giờ..." }]}>
                                     <CSelect loading={appointment.loadingTime} className="!h-10 ts-16">
                                         <Select.Option value="">--Chọn giờ</Select.Option>
-                                        {appointment.time?.map((t: ITime) => (
+                                        {appointment?.time?.map((t: ITime) => (
                                             <Select.Option key={t.time} value={t.time}>{t.time}</Select.Option>
-                                        ))}
+                                        )) || []}
                                     </CSelect>
                                 </Form.Item>
                             </CCol>
@@ -167,9 +167,9 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                                 <Form.Item label="Chọn giờ:" className="!mb-4" name="time" rules={[{ required: true, message: "Chưa chọn giờ..." }]}>
                                     <CSelect loading={appointment.loadingTimes} className="!h-10 ts-16">
                                         <Select.Option value="">--Chọn giờ</Select.Option>
-                                        {appointment.times?.map((t: ITime) => (
+                                        {appointment?.times?.map((t: ITime) => (
                                             <Select.Option key={t.time} value={t.time}>{t.time}</Select.Option>
-                                        ))}
+                                        )) || []}
                                     </CSelect>
                                 </Form.Item>
                             </CCol>

@@ -183,7 +183,7 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
                 <Form.Item label="Dịch vụ:" name="services">
                     <div>
                         <CButton type="primary" className="rounded-lg" onClick={() => dispatch(toggleModal())}>Chọn dịch vụ</CButton>
-                        {history.services.length === 0 ?
+                        {history && history.services?.length === 0 ?
                             <p className="mt-2 ml-1 text-[14px] text-red-500">Chưa chọn dịch vụ nào...</p>
                             :
                             <Form form={formService} component={false}>
@@ -196,7 +196,7 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
                                     className="table-modal !mt-2"
                                     rowClassName="editable-row"
                                     columns={editColumns}
-                                    dataSource={history.services.map((item, index) => ({ ...item, index: index + 1, key: item.id, quantity: item.quantity ? item.quantity : 1, price: item.price ? item.price : item.min_price }))}
+                                    dataSource={history?.services?.map((item, index) => ({ ...item, index: index + 1, key: item.id, quantity: item.quantity ? item.quantity : 1, price: item.price ? item.price : item.min_price })) || []}
                                     pagination={false}
                                 />
                             </Form>

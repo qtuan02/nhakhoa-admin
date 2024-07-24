@@ -5,7 +5,7 @@ import { Card, Flex } from 'antd'
 import CRow from '@/custom_antd/CRow';
 import CCol from '@/custom_antd/CCol';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClockRotateLeft, faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { faClockRotateLeft, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import CButton from '@/custom_antd/CButton';
 import CSpace from '@/custom_antd/CSpace';
 import { useAppDispatch } from '@/redux/hooks';

@@ -97,7 +97,7 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
                             onChange={() => setDisabled(false)}
                             className="!h-[40px]"
                             placeholder="Chọn nha sĩ..."
-                            options={user.doctors.map(u => ({ value: u.id, label: u.id + ' - ' + u.name + ' - ' + u.phone_number }))}
+                            options={user?.doctors?.map(u => ({ value: u.id, label: u.id + ' - ' + u.name + ' - ' + u.phone_number })) || []}
                             filterOption={(input, option) =>
                                 (option?.label as string ?? '').toLowerCase().includes(input.toLowerCase())
                             }

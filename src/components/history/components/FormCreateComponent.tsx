@@ -55,7 +55,7 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
                             className="!h-[40px]"
                             showSearch
                             placeholder="Chọn khách hàng..."
-                            options={customer.data.map(c => ({ value: c.id, label: c.id+' - '+c.name+' - '+c.phone_number }))}
+                            options={customer?.data?.map(c => ({ value: c.id, label: c.id+' - '+c.name+' - '+c.phone_number })) || []}
                             filterOption={(input, option) =>
                                 (option?.label as string ?? '').toLowerCase().includes(input.toLowerCase())
                             }
@@ -68,7 +68,7 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
                             className="!h-[40px]"
                             showSearch
                             placeholder="Chọn nha sĩ..."
-                            options={user.doctors.map(u => ({ value: u.id, label: u.id+' - '+u.name+' - '+u.phone_number }))}
+                            options={user?.doctors?.map(u => ({ value: u.id, label: u.id+' - '+u.name+' - '+u.phone_number })) || []}
                             filterOption={(input, option) =>
                                 (option?.label as string ?? '').toLowerCase().includes(input.toLowerCase())
                             }
