@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import siderReducer from './reducers/siderReducer';
 import categoryReducer from './reducers/categoryReducer';
 import serviceReducer from './reducers/serviceReducer';
@@ -11,7 +11,7 @@ import scheduleReducer from './reducers/scheduleReducer';
 import authReducer from './reducers/authReducer';
 import overviewReducer from './reducers/overviewReducer';
 
-const reducers = {
+const reducers = combineReducers({
     appointment: appointmentReducer,
     auth: authReducer,
     category: categoryReducer,
@@ -23,7 +23,7 @@ const reducers = {
     service: serviceReducer,
     sider: siderReducer,
     user: userReducer,
-};
+});
 
 const store = configureStore({
     reducer: reducers,

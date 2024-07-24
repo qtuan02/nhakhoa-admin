@@ -6,15 +6,17 @@ import { RootState } from "../store";
 import { login, profile } from "../slices/authSlice";
 
 interface IAuthState {
-    logging?: boolean;
+    logging: boolean;
     profile: IProfile | null;
     modal: boolean;
+    loading: boolean;
 }
 
 const initialState: IAuthState = {
     logging: false,
     profile: null,
     modal: false,
+    loading: false,
 };
 
 const authSlice = createSlice({
@@ -58,14 +60,14 @@ const authSlice = createSlice({
                 TOAST_ERROR(action.error?.message);
             })
             .addCase(profile.pending, (state) => {
-                state.logging = true;
+                state.loading = true;
             })
             .addCase(profile.fulfilled, (state, action) => {
-                state.logging = false;
+                state.loading = false;
                 state.profile = action.payload.data;
             })
             .addCase(profile.rejected, (state, action: any) => {
-                state.logging = false;
+                state.loading = false;
                 state.profile = null;
                 TOAST_ERROR(action.error?.message);
             })
