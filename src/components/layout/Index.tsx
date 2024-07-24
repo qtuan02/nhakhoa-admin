@@ -14,10 +14,10 @@ export default function LayoutComponent({ children }: { children: React.ReactNod
   const sider = useAppSelector(getSiderState);
 
   useEffect(() => {
-    if(!auth.loading) {
+    if(!auth || !auth.loading) {
       dispatch(profile());
     }
-  }, [auth.loading, dispatch])
+  }, [auth, auth.loading, dispatch])
 
   return (
     <div className="flex h-screen w-screen bg-[#f5f5f5]">
