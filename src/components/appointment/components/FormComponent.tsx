@@ -126,9 +126,9 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                     <Form.Item label="Chọn nha sĩ:" className="!mb-4" name="doctor_id">
                         <CSelect loading={user.loading} className="!h-10 ts-16" onChange={handleDoctorChange}>
                             <Select.Option value="">--Không chọn nha sĩ</Select.Option>
-                            {user.doctors.map((d: IUser) => (
+                            {user?.doctors?.map((d: IUser) => (
                                 <Select.Option key={d.id} value={d.id}>{d.name}</Select.Option>
-                            ))}
+                            )) || []}
                         </CSelect>
                     </Form.Item>
                 </CCol>
