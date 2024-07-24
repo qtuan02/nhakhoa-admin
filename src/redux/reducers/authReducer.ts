@@ -9,14 +9,12 @@ interface IAuthState {
     logging?: boolean;
     profile: IProfile | null;
     modal: boolean;
-    loading?: boolean;
 }
 
 const initialState: IAuthState = {
     logging: false,
     profile: null,
     modal: false,
-    loading: false,
 };
 
 const authSlice = createSlice({
@@ -39,6 +37,9 @@ const authSlice = createSlice({
         },
         toggleModal: (state) => {
             state.modal =!state.modal;
+        },
+        isLogging: (state) => {
+            state.logging = true;
         }
     },
     extraReducers: (builder) => {
@@ -57,14 +58,14 @@ const authSlice = createSlice({
                 TOAST_ERROR(action.error?.message);
             })
             .addCase(profile.pending, (state) => {
-                state.loading = true;
+                state.logging = true;
             })
             .addCase(profile.fulfilled, (state, action) => {
-                state.loading = false;
+                state.logging = false;
                 state.profile = action.payload.data;
             })
             .addCase(profile.rejected, (state, action: any) => {
-                state.loading = false;
+                state.logging = false;
                 state.profile = null;
                 TOAST_ERROR(action.error?.message);
             })

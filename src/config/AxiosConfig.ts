@@ -1,9 +1,9 @@
 import axios from "axios";
 import { appConfig } from "./AppConfig";
 import { logout } from "@/redux/reducers/authReducer";
-import store from "@/redux/store";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 import { refreshToken } from "@/redux/slices/authSlice";
+import store from "@/redux/store";
 
 const axiosClient = axios.create({
   baseURL: appConfig.API_LOCAL,
@@ -22,11 +22,9 @@ axiosClient.interceptors.request.use(
 			const currentTime = new Date().getTime() / 1000;
 			if (decodedToken.exp < currentTime) {
 				const response = await refreshToken();
-				localStorage.setItem("access_token", response.access_token);
-				config.headers.Authorization = `Bearer ${response.access_token}`;
-			} else {
-				config.headers.Authorization = `Bearer ${accessToken}`;
+				accessToken = response.access_token;
 			}
+			config.headers.Authorization = `Bearer ${accessToken}`;
 		} else{
 			store.dispatch(logout());
 		}
