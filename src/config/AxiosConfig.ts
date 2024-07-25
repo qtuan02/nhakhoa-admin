@@ -1,9 +1,9 @@
 import axios from "axios";
 import { appConfig } from "./AppConfig";
 import { jwtDecode, JwtPayload } from "jwt-decode";
-import store from "@/redux/store";
 import { refreshToken } from "@/redux/slices/authenticateSlice";
 import { logout } from "@/redux/reducers/authenticateReducer";
+import { makeStore } from "@/redux/store";
 
 const axiosClient = axios.create({
 	baseURL: appConfig.API_LOCAL,
@@ -25,8 +25,8 @@ axiosClient.interceptors.request.use(
 				accessToken = response.access_token;
 			}
 			config.headers.Authorization = `Bearer ${accessToken}`;
-		} else{
-			store.dispatch(logout());
+		}else{
+			makeStore().dispatch(logout());
 		}
 		return config;
 	},
@@ -41,8 +41,8 @@ axiosClient.interceptors.response.use(
 	},
 	(error) => {
 		if (error.response && error.response.status === 401) {
-			store.dispatch(logout());
-		}
+            makeStore().dispatch(logout());
+        }
 		return Promise.reject(error);
 	}
 );

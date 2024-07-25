@@ -25,10 +25,12 @@ const reducers = combineReducers({
     user: userReducer,
 });
 
-const store = configureStore({
-    reducer: reducers,
-});
+export const makeStore = () => {
+    return configureStore({
+        reducer: reducers
+    });
+};
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export default store;
+export type AppStore = ReturnType<typeof makeStore>;
+export type RootState = ReturnType<AppStore['getState']>;
+export type AppDispatch = AppStore['dispatch']
