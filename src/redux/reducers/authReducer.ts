@@ -61,6 +61,7 @@ const authSlice = createSlice({
             })
             .addCase(profile.pending, (state) => {
                 state.loading = true;
+                state.currentUser = null;
             })
             .addCase(profile.fulfilled, (state, action) => {
                 state.loading = false;
