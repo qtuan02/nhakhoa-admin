@@ -4,11 +4,11 @@ import axiosClient from "@/config/AxiosConfig";
 import { IChangepassword } from "@/interfaces/IChangepassword";
 import { ILogin } from "@/interfaces/ILogin";
 import { IResponse } from "@/interfaces/IResponse";
-import store from "@/redux/store";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { logout } from "../reducers/authenticateReducer";
+import { makeStore } from "../store";
 
 const URL = "/v1/auth";
 const URL_AUTH = appConfig.API_LOCAL+"/v1/auth";
@@ -37,7 +37,7 @@ export const refreshToken = async () => {
     }catch(error: any) {
         if(error.response.status === 401){
             TOAST_ERROR(error?.response?.data?.message);
-            store.dispatch(logout());
+            makeStore().dispatch(logout());
         }
     }
 };

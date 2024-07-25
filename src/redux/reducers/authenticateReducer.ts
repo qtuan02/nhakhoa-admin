@@ -1,6 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
-import { ILogin } from "@/interfaces/ILogin";
 import { IProfile } from "@/interfaces/IProfile";
 import { RootState } from "../store";
 import { login, profile } from "../slices/authenticateSlice";
