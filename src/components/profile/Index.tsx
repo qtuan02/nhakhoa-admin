@@ -3,12 +3,12 @@ import { appConfig } from "@/config/AppConfig";
 import CCol from "@/custom_antd/CCol";
 import CTitle from "@/custom_antd/CTitle";
 import { useAppSelector } from "@/redux/hooks";
-import { getAuthState } from "@/redux/reducers/authReducer";
+import { getAuthenticateState } from "@/redux/reducers/authenticateReducer";
 import { formatDate } from "@/utils/FunctionHelpers";
 import { Avatar, Flex } from "antd";
 
 export default function ProfileComponent() {
-    const { currentUser } = useAppSelector(getAuthState);
+    const { currentUser } = useAppSelector(getAuthenticateState);
     
     return (
         <div className="mx-10">
