@@ -11,24 +11,23 @@ import PieComponent from "./components/PieComponent";
 import { getOverviewState } from "@/redux/reducers/overviewReducer";
 import { getOverview, getOverviewAppointment, getOverviewInvoice } from "@/redux/slices/overviewSlice";
 
-export default function DashboardComponent() {
+export default function OverviewComponent() {
     const dispatch = useAppDispatch();
-    const overview = useAppSelector(getOverviewState);
+    const { loading, loadingInvoice, loadingAppointment, status, statusInvoice, statusAppointment,
+        data, dataInvoice, dataAppointment } = useAppSelector(getOverviewState);
 
     useEffect(() => {
-        if (!overview.loading) {
+        if(status === "completed" || status === "rejected"){
             dispatch(getOverview());
         }
-
-        if (!overview.loadingInvoice) {
+        if(statusInvoice === "completed" || statusInvoice === "rejected"){
             dispatch(getOverviewInvoice());
         }
-
-        if (!overview.loadingAppointment) {
+        if(statusAppointment === "completed" || statusAppointment === "rejected"){
             dispatch(getOverviewAppointment());
         }
 
-    }, [dispatch, overview.loading, overview.loadingAppointment, overview.loadingInvoice])
+    }, [dispatch, status, statusAppointment, statusInvoice])
 
     return (
         // <div className="m-5">
@@ -59,18 +58,18 @@ export default function DashboardComponent() {
         // </div>
 
         <Flex vertical gap={16}>
-            <CSkeleton loading={overview.loading}>
-                <StatisticComponent data={overview.data} />
+            <CSkeleton loading={loading}>
+                <StatisticComponent data={data} />
             </CSkeleton>
             <CRow gutter={[16, 0]}>
                 <CCol span={16}>
-                    <CSkeleton loading={overview.loadingInvoice}>
-                        <ChartComponent data={overview.dataInvoice} />
+                    <CSkeleton loading={loadingInvoice}>
+                        <ChartComponent data={dataInvoice} />
                     </CSkeleton>
                 </CCol>
                 <CCol span={8}>
-                    <CSkeleton loading={overview.loadingAppointment}>
-                        <PieComponent data={overview.dataAppointment} />
+                    <CSkeleton loading={loadingAppointment}>
+                        <PieComponent data={dataAppointment} />
                     </CSkeleton>
                 </CCol>
             </CRow>

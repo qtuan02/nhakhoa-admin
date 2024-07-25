@@ -9,15 +9,22 @@ import { faAddressCard, faBars, faBell, faLock, faSignOut, faXmark } from "@fort
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Avatar, Badge, Flex, Layout, MenuProps } from "antd";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import ModalComponent from "./ModalComponent";
+import { profile } from "@/redux/slices/authenticateSlice";
 const { Header } = Layout;
 
 
 export default function HeaderComponent() {
     const dispatch = useAppDispatch();
-    const { currentUser } = useAppSelector(getAuthenticateState);
+    const { currentUser, isLoggedIn } = useAppSelector(getAuthenticateState);
     const { isSiderOpen } = useAppSelector(getSiderState);
+
+    useEffect(() => {
+        if(!isLoggedIn){
+            dispatch(profile());
+        }
+    }, [dispatch, isLoggedIn])
 
     const items: MenuProps['items'] = [
         {

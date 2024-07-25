@@ -1,7 +1,7 @@
-import DashboardComponent from "@/components/dashboard/Index";
+import OverviewComponent from "@/components/overview/Index";
 
-export default function DashboardPage() {
+export default function OverviewPage() {
 	return (
-        <DashboardComponent />
+        <OverviewComponent />
     );
 }

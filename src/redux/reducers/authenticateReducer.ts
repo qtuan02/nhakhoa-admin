@@ -72,15 +72,12 @@ const authenticateSlice = createSlice({
                 state.currentUser = action.payload.data;
             })
             .addCase(profile.rejected, (state, action: any) => {
+                state.isLoggedIn = true;
                 TOAST_ERROR(action.error?.message);
             })
         }
 });
 
-// export const getAuthenticateState = (state: RootState) => state.authenticate;
-export const getAuthenticateState = (state: RootState) => {
-    console.log('authenticate state:', state.authenticate);
-    return state.authenticate;
-};
+export const getAuthenticateState = (state: RootState) => state.authenticate;
 export const { logout, toggleModal } = authenticateSlice.actions;
 export default authenticateSlice.reducer;
