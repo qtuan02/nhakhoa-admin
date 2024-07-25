@@ -7,14 +7,14 @@ import { login, profile } from "../slices/authSlice";
 
 interface IAuthState {
     logging: boolean;
-    profile: IProfile | null;
+    currentUser: IProfile | null;
     modal: boolean;
     loading: boolean;
 }
 
 const initialState: IAuthState = {
     logging: false,
-    profile: null,
+    currentUser: null,
     modal: false,
     loading: false,
 };
@@ -64,11 +64,11 @@ const authSlice = createSlice({
             })
             .addCase(profile.fulfilled, (state, action) => {
                 state.loading = false;
-                state.profile = action.payload.data;
+                state.currentUser = action.payload.data;
             })
             .addCase(profile.rejected, (state, action: any) => {
                 state.loading = false;
-                state.profile = null;
+                state.currentUser = null;
                 TOAST_ERROR(action.error?.message);
             })
         }

@@ -10,8 +10,8 @@ import { getSiderState } from "@/redux/reducers/siderReducer";
 
 export default function LayoutComponent({ children }: { children: React.ReactNode }) {
     const dispatch = useAppDispatch();
-    const auth = useAppSelector(getAuthState);
-    const sider = useAppSelector(getSiderState);
+    const { currentUser, loading } = useAppSelector(getAuthState);
+    const { isSiderOpen } = useAppSelector(getSiderState);
 
     useEffect(() => {
         dispatch(profile());
@@ -19,11 +19,11 @@ export default function LayoutComponent({ children }: { children: React.ReactNod
 
     return (
         <div className="flex h-screen w-screen bg-[#f5f5f5]">
-            {auth.loading ? <LoadingComponent />
+            {loading ? <LoadingComponent />
                 : <>
-                    <SiderComponent isSider={sider.isSiderOpen} />
+                    <SiderComponent isSider={isSiderOpen} />
                     <div className="w-full">
-                        <HeaderComponent isSider={sider.isSiderOpen} data={auth.profile} />
+                        <HeaderComponent isSider={isSiderOpen} data={currentUser} />
                         <div>
                             <div className="bg-[#fff] mx-4 my-2 rounded-xl px-6 py-4 h-[calc(100vh-96px)] overflow-auto !items-start">{children}</div>
                         </div>
