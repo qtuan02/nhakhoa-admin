@@ -28,7 +28,7 @@ export default function DashboardComponent() {
             dispatch(getOverviewAppointment());
         }
 
-    }, [])
+    }, [dispatch, overview.loading, overview.loadingAppointment, overview.loadingInvoice])
 
     return (
         // <div className="m-5">
