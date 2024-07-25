@@ -23,7 +23,7 @@ const initialState: IOverviewState = {
 };
 
 const overviewSlice = createSlice({
-    name: 'overview',
+    name: "overview",
     initialState,
     reducers: {},
     extraReducers: (builder) => {

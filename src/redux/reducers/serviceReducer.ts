@@ -6,26 +6,26 @@ import { createService, deleteService, editService, getServices } from "../slice
 
 interface IServiceState {
     loading: boolean;
-    status: 'pending' | 'completed' | 'rejected';
-    edit: 'wait' | 'success' | 'fail';
+    status: "pending" | "completed" | "rejected";
+    edit: "wait" | "success" | "fail";
     data?: IService[];
 };
 
 const initialState: IServiceState = {
     loading: false,
-    status: 'completed',
-    edit: 'success',
+    status: "completed",
+    edit: "success",
     data: []
 };
 
 const serviceSlice = createSlice({
-    name: 'service',
+    name: "service",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(getServices.pending, (state) => {
-                state.status = 'pending';
+                state.status = "pending";
                 state.loading = true;
             })
             .addCase(getServices.fulfilled, (state, action) => {
@@ -41,12 +41,12 @@ const serviceSlice = createSlice({
                 state.loading = true;
             })
             .addCase(createService.fulfilled, (state, action) => {
-                state.status = 'completed';
+                state.status = "completed";
                 state.loading = false;
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(createService.rejected, (state, action: any) => {
-                state.status = 'rejected';
+                state.status = "rejected";
                 state.loading = false;
                 TOAST_ERROR(action.error?.message)
             })
@@ -55,20 +55,20 @@ const serviceSlice = createSlice({
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(deleteService.rejected, (state, action: any) => {
-                state.status = 'rejected';
+                state.status = "rejected";
                 TOAST_ERROR(action.error?.message);
             })
             .addCase(editService.pending, (state) => {
-                state.edit = 'wait';
+                state.edit = "wait";
             })
             .addCase(editService.fulfilled, (state, action) => {
-                state.status = 'completed';
-                state.edit = 'success';
+                state.status = "completed";
+                state.edit = "success";
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(editService.rejected, (state, action: any) => {
-                state.status = 'rejected';
-                state.edit = 'fail';
+                state.status = "rejected";
+                state.edit = "fail";
                 TOAST_ERROR(action.error?.message)
             })
     }

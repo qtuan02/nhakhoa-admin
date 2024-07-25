@@ -6,30 +6,30 @@ import { createUser, editUser, getDoctors, getUsers } from "../slices/userSlice"
 
 interface IUserState {
     loading: boolean;
-    status: 'pending' | 'completed' | 'rejected';
-    edit: 'wait' | 'success' | 'fail';
+    status: "pending" | "completed" | "rejected";
+    edit: "wait" | "success" | "fail";
     data?: IUser[];
     modal: boolean;
     user_id?: string;
     loadingDoctors: boolean;
-    statusDoctors: 'pending' | 'completed' | 'rejected';
+    statusDoctors: "pending" | "completed" | "rejected";
     doctors?: IUser[];
 };
 
 const initialState: IUserState = {
     loading: false,
-    status: 'completed',
-    edit: 'success',
+    status: "completed",
+    edit: "success",
     data: [],
     modal: false,
-    user_id: '',
+    user_id: "",
     loadingDoctors: false,
-    statusDoctors: 'completed',
+    statusDoctors: "completed",
     doctors: [],
 };
 
 const userSlice = createSlice({
-    name: 'user',
+    name: "user",
     initialState,
     reducers: {
         toggleModal: (state) => {
@@ -42,7 +42,7 @@ const userSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getUsers.pending, (state) => {
-                state.status = 'pending';
+                state.status = "pending";
                 state.loading = true;
             })
             .addCase(getUsers.fulfilled, (state, action) => {
@@ -58,32 +58,32 @@ const userSlice = createSlice({
                 state.loading = true;
             })
             .addCase(createUser.fulfilled, (state, action) => {
-                state.status = 'completed';
-                state.statusDoctors = 'completed';
+                state.status = "completed";
+                state.statusDoctors = "completed";
                 state.loading = false;
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(createUser.rejected, (state, action: any) => {
-                state.status = 'rejected';
+                state.status = "rejected";
                 state.loading = false;
                 TOAST_ERROR(action.error?.message)
             })
             .addCase(editUser.pending, (state) => {
-                state.edit = 'wait';
+                state.edit = "wait";
             })
             .addCase(editUser.fulfilled, (state, action) => {
-                state.status = 'completed';
-                state.statusDoctors = 'completed';
-                state.edit = 'success';
+                state.status = "completed";
+                state.statusDoctors = "completed";
+                state.edit = "success";
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(editUser.rejected, (state, action: any) => {
-                state.status = 'rejected';
-                state.edit = 'fail';
+                state.status = "rejected";
+                state.edit = "fail";
                 TOAST_ERROR(action.error?.message)
             })
             .addCase(getDoctors.pending, (state) => {
-                state.statusDoctors = 'pending';
+                state.statusDoctors = "pending";
                 state.loadingDoctors = true;
             })
             .addCase(getDoctors.fulfilled, (state, action) => {

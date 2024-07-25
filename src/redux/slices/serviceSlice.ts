@@ -4,11 +4,11 @@ import { IResponse } from "@/interfaces/IResponse";
 import { IService } from "@/interfaces/IService";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const URL = '/v1/service';
+const URL = "/v1/service";
 
 export const getService = async (id: string) => {
     try {
-        const res = await axiosClient.get(URL+ '/' +id);
+        const res = await axiosClient.get(URL+ "/" +id);
         return res.data.data;   
     }catch(error: any) {
         TOAST_ERROR(error?.response?.data?.message);
@@ -17,7 +17,7 @@ export const getService = async (id: string) => {
 };
 
 export const getServices = createAsyncThunk<IResponse>(
-    'service/get',
+    "service/get",
     async () => {
         try{
             const res = await axiosClient.get(URL);
@@ -29,7 +29,7 @@ export const getServices = createAsyncThunk<IResponse>(
 );
 
 export const createService = createAsyncThunk<IResponse, IService>(
-    'service/create',
+    "service/create",
     async (data) => {
         try{
             const res = await axiosClient.post(URL, data);
@@ -41,10 +41,10 @@ export const createService = createAsyncThunk<IResponse, IService>(
 );
 
 export const deleteService = createAsyncThunk<IResponse, number>(
-    'service/delete',
+    "service/delete",
     async (id) => {
         try{
-            const res = await axiosClient.delete(URL+ '/' +id);
+            const res = await axiosClient.delete(URL+ "/" +id);
             return {...res.data, data: id};
         }catch(error: any) {
             throw error?.response?.data;
@@ -53,10 +53,10 @@ export const deleteService = createAsyncThunk<IResponse, number>(
 );
 
 export const editService = createAsyncThunk<IResponse, { id: string, data: IService }>(
-    'service/edit',
+    "service/edit",
     async({ id, data }) => {
         try{
-            const res = await axiosClient.put(URL+ '/' +id, data);
+            const res = await axiosClient.put(URL+ "/" +id, data);
             return res.data;
         }catch(error: any) {
             throw error?.response?.data;

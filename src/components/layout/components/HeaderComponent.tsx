@@ -2,34 +2,30 @@ import CButton from "@/custom_antd/CButton";
 import CCol from "@/custom_antd/CCol";
 import CDropDown from "@/custom_antd/CDropdown";
 import CRow from "@/custom_antd/CRow";
-import { IProfile } from "@/interfaces/IProfile";
-import { useAppDispatch } from "@/redux/hooks";
-import { logout, toggleModal } from "@/redux/reducers/authenticateReducer";
-import { toggleSider } from "@/redux/reducers/siderReducer";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { getAuthenticateState, logout, toggleModal } from "@/redux/reducers/authenticateReducer";
+import { getSiderState, toggleSider } from "@/redux/reducers/siderReducer";
 import { faAddressCard, faBars, faBell, faLock, faSignOut, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Avatar, Badge, Flex, Layout, MenuProps } from "antd";
 import Link from "next/link";
 import React from "react";
 import ModalComponent from "./ModalComponent";
-
 const { Header } = Layout;
 
-interface IHeaderProps {
-    isSider: boolean;
-    data?: IProfile | null;
-}
 
-export default function HeaderComponent({ isSider, data }: IHeaderProps) {
+export default function HeaderComponent() {
     const dispatch = useAppDispatch();
+    const { currentUser } = useAppSelector(getAuthenticateState);
+    const { isSiderOpen } = useAppSelector(getSiderState);
 
     const items: MenuProps['items'] = [
         {
             key: 'info',
             type: 'group',
             label: <span>
-                <p className='text-[#000]'>{data?.name || ''}</p>
-                <p className='ts-12'>{data?.email || ''}</p>
+                <p className='text-[#000]'>{currentUser?.name || ''}</p>
+                <p className='ts-12'>{currentUser?.email || ''}</p>
             </span>
         },
         {
@@ -57,7 +53,7 @@ export default function HeaderComponent({ isSider, data }: IHeaderProps) {
                     <CRow gutter={[16, 16]}>
                         <CCol>
                             <CButton className="!h-10 !w-10 !border-none !bg-[#f0f0f0]" onClick={() => dispatch(toggleSider())}>
-                                {isSider ? <FontAwesomeIcon icon={faBars} /> : <FontAwesomeIcon icon={faXmark} />}
+                                {isSiderOpen ? <FontAwesomeIcon icon={faBars} /> : <FontAwesomeIcon icon={faXmark} />}
                             </CButton>
                         </CCol>
                     </CRow>
@@ -80,7 +76,7 @@ export default function HeaderComponent({ isSider, data }: IHeaderProps) {
                                         </Flex>
                                     </div>
                                 )}>
-                                <Avatar className='hover:bg-[#d9d9d9] hover:opacity-90 cursor-pointer shadow-sm' style={{ border: '1px solid #d9d9d9'}} size="large" src={data?.avatar || ''} alt="Ảnh đại diện..." />
+                                <Avatar className='hover:bg-[#d9d9d9] hover:opacity-90 cursor-pointer shadow-sm' style={{ border: '1px solid #d9d9d9'}} size="large" src={currentUser?.avatar || ''} alt="Ảnh đại diện..." />
                             </CDropDown>
                             <ModalComponent />
                         </CCol>

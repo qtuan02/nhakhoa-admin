@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../store';
+import { createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 interface ISiderState {
     isSiderOpen: boolean;
@@ -10,7 +10,7 @@ const initialState: ISiderState = {
 };
 
 const siderSlice = createSlice({
-    name: 'sider',
+    name: "sider",
     initialState,
     reducers: {
         toggleSider: (state) => {

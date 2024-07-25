@@ -6,8 +6,8 @@ import { createCustomer, editCustomer, getCustomers } from "../slices/customerSl
 
 interface ICustomerState {
     loading: boolean;
-    status: 'pending' | 'completed' | 'rejected';
-    edit: 'wait' | 'success' | 'fail';
+    status: "pending" | "completed" | "rejected";
+    edit: "wait" | "success" | "fail";
     data?: ICustomer[];
     drawer: boolean;
     history_id?: string;
@@ -15,15 +15,15 @@ interface ICustomerState {
 
 const initialState: ICustomerState = {
     loading: false,
-    status: 'completed',
-    edit: 'success',
+    status: "completed",
+    edit: "success",
     data: [],
     drawer: false,
-    history_id: '',
+    history_id: "",
 };
 
 const customerSlice = createSlice({
-    name: 'customer',
+    name: "customer",
     initialState,
     reducers: {
         toggleDrawer: (state) => {
@@ -36,7 +36,7 @@ const customerSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getCustomers.pending, (state) => {
-                state.status = 'pending';
+                state.status = "pending";
                 state.loading = true;
             })
             .addCase(getCustomers.fulfilled, (state, action) => {
@@ -46,33 +46,33 @@ const customerSlice = createSlice({
             .addCase(getCustomers.rejected, (state, action: any) => {
                 state.data = [];
                 state.loading = false;
-                state.status = 'rejected';
+                state.status = "rejected";
                 TOAST_ERROR(action.error?.message);
             })
             .addCase(createCustomer.pending, (state) => {
                 state.loading = true;
             })
             .addCase(createCustomer.fulfilled, (state, action) => {
-                state.status = 'completed';
+                state.status = "completed";
                 state.loading = false;
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(createCustomer.rejected, (state, action: any) => {
-                state.status = 'rejected';
+                state.status = "rejected";
                 state.loading = false;
                 TOAST_ERROR(action.error?.message);
             })
             .addCase(editCustomer.pending, (state) => {
-                state.edit = 'wait';
+                state.edit = "wait";
             })
             .addCase(editCustomer.fulfilled, (state, action) => {
-                state.status = 'completed';
-                state.edit = 'success';
+                state.status = "completed";
+                state.edit = "success";
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(editCustomer.rejected, (state, action: any) => {
-                state.status = 'rejected';
-                state.edit = 'fail';
+                state.status = "rejected";
+                state.edit = "fail";
                 TOAST_ERROR(action.error?.message);
             });
     }

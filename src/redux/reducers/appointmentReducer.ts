@@ -8,15 +8,15 @@ import { getDate, getTime } from "../slices/scheduleSlice";
 
 interface IAppointmentState {
     loading: boolean;
-    status: 'pending' | 'completed' | 'rejected';
-    edit: 'wait' | 'success' | 'fail';
+    status: "pending" | "completed" | "rejected";
+    edit: "wait" | "success" | "fail";
     data?: IAppointment[];
     times?: ITime[];
     loadingTimes: boolean;
     date?: IDate[];
     loadingDate: boolean;
     loadingTime?: boolean;
-    statusTime: 'pending' | 'completed' | 'rejected';
+    statusTime: "pending" | "completed" | "rejected";
     time?: ITime[];
     modal: boolean;
     services?: IService[];
@@ -24,11 +24,11 @@ interface IAppointmentState {
 
 const initialState: IAppointmentState = {
     loading: false,
-    status: 'completed',
-    edit: 'success',
+    status: "completed",
+    edit: "success",
     data: [],
     loadingTimes: false,
-    statusTime: 'completed',
+    statusTime: "completed",
     times: [],
     date: [],
     loadingDate: false,
@@ -39,7 +39,7 @@ const initialState: IAppointmentState = {
 };
 
 const appointmentSlice = createSlice({
-    name: 'appointment',
+    name: "appointment",
     initialState,
     reducers: {
         setDate: (state) => {
@@ -76,7 +76,7 @@ const appointmentSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getAppointments.pending, (state) => {
-                state.status = 'pending';
+                state.status = "pending";
                 state.loading = true;
             })
             .addCase(getAppointments.fulfilled, (state, action) => {
@@ -93,12 +93,12 @@ const appointmentSlice = createSlice({
             })
             .addCase(createAppointment.fulfilled, (state, action) => {
                 state.services = [];
-                state.status = 'completed';
+                state.status = "completed";
                 state.loading = false;
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(createAppointment.rejected, (state, action: any) => {
-                state.status = 'rejected';
+                state.status = "rejected";
                 state.loading = false;
                 TOAST_ERROR(action.error?.message)
             })
@@ -107,25 +107,25 @@ const appointmentSlice = createSlice({
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(deleteAppointment.rejected, (state, action: any) => {
-                state.status = 'rejected';
+                state.status = "rejected";
                 TOAST_ERROR(action.error?.message);
             })
             .addCase(editAppointment.pending, (state) => {
-                state.edit = 'wait';
+                state.edit = "wait";
             })
             .addCase(editAppointment.fulfilled, (state, action) => {
                 state.services = [];
-                state.status = 'completed';
-                state.edit = 'success';
+                state.status = "completed";
+                state.edit = "success";
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(editAppointment.rejected, (state, action: any) => {
-                state.status = 'rejected';
-                state.edit = 'fail';
+                state.status = "rejected";
+                state.edit = "fail";
                 TOAST_ERROR(action.error?.message)
             })
             .addCase(getTimes.pending, (state) => {
-                state.statusTime = 'pending';
+                state.statusTime = "pending";
                 state.loadingTimes = true;
             })
             .addCase(getTimes.fulfilled, (state, action) => {

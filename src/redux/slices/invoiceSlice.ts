@@ -8,7 +8,7 @@ const URL = "/v1/invoice";
 
 export const getInvoice = async (id: string) => {
     try {
-        const res = await axiosClient.get(URL+ '/' +id);
+        const res = await axiosClient.get(URL+ "/" +id);
         return res.data.data;
     }catch(error: any) {
         TOAST_ERROR(error?.response?.data?.message);
@@ -17,7 +17,7 @@ export const getInvoice = async (id: string) => {
 };
 
 export const getInvoices = createAsyncThunk<IResponse>(
-    'invoice/get',
+    "invoice/get",
     async () => {
         try{
             const res = await axiosClient.get(URL);
@@ -29,10 +29,10 @@ export const getInvoices = createAsyncThunk<IResponse>(
 );
 
 export const editInvoice = createAsyncThunk<IResponse, { id: string, data: IInvoice }>(
-    'invoice/edit',
+    "invoice/edit",
     async({ id, data }) => {
         try{
-            const res = await axiosClient.put(URL+ '/' +id, data);
+            const res = await axiosClient.put(URL+ "/" +id, data);
             return res.data;
         }catch(error: any) {
             throw error?.response?.data;

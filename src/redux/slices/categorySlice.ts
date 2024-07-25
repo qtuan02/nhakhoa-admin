@@ -4,11 +4,11 @@ import { ICategory } from "@/interfaces/ICategory";
 import { IResponse } from "@/interfaces/IResponse";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const URL = '/v1/category';
+const URL = "/v1/category";
 
 export const getCategory = async (id: string) => {
     try {
-        const res = await axiosClient.get(URL+ '/' +id);
+        const res = await axiosClient.get(URL+ "/" +id);
         return res.data.data;
     }catch(error: any) {
         TOAST_ERROR(error?.response?.data?.message);
@@ -17,7 +17,7 @@ export const getCategory = async (id: string) => {
 };
 
 export const getCategories = createAsyncThunk<IResponse>(
-    'category/get',
+    "category/get",
     async () => {
         try{
             const res = await axiosClient.get(URL);
@@ -29,7 +29,7 @@ export const getCategories = createAsyncThunk<IResponse>(
 );
 
 export const createCategory = createAsyncThunk<IResponse, ICategory>(
-    'category/create',
+    "category/create",
     async (data) => {
         try{
             const res = await axiosClient.post(URL, data);
@@ -41,10 +41,10 @@ export const createCategory = createAsyncThunk<IResponse, ICategory>(
 );
 
 export const deleteCategory = createAsyncThunk<IResponse, number>(
-    'category/delete',
+    "category/delete",
     async (id) => {
         try{
-            const res = await axiosClient.delete(URL+ '/' +id);
+            const res = await axiosClient.delete(URL+ "/" +id);
             return {...res.data, data: id};
         }catch(error: any) {
             throw error?.response?.data;
@@ -53,10 +53,10 @@ export const deleteCategory = createAsyncThunk<IResponse, number>(
 );
 
 export const editCategory = createAsyncThunk<IResponse, { id: string, data: ICategory }>(
-    'category/edit',
+    "category/edit",
     async({ id, data }) => {
         try{
-            const res = await axiosClient.put(URL+ '/' +id, data);
+            const res = await axiosClient.put(URL+ "/" +id, data);
             return res.data;
         }catch(error: any) {
             throw error?.response?.data;

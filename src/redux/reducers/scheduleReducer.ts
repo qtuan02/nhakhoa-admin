@@ -6,26 +6,26 @@ import { createSchedule, deleteSchedule, getSchedules } from "../slices/schedule
 
 interface IScheduleState {
     loading: boolean;
-    status: 'pending' | 'completed' | 'rejected';
-    edit: 'wait' | 'success' | 'fail';
+    status: "pending" | "completed" | "rejected";
+    edit: "wait" | "success" | "fail";
     data?: ISchedule[];
 };
 
 const initialState: IScheduleState = {
     loading: false,
-    status: 'completed',
-    edit: 'success',
+    status: "completed",
+    edit: "success",
     data: []
 };
 
 const scheduleSlice = createSlice({
-    name: 'schedule',
+    name: "schedule",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(getSchedules.pending, (state) => {
-                state.status = 'pending';
+                state.status = "pending";
                 state.loading = true;
             })
             .addCase(getSchedules.fulfilled, (state, action) => {
@@ -41,12 +41,12 @@ const scheduleSlice = createSlice({
                 state.loading = true;
             })
             .addCase(createSchedule.fulfilled, (state, action) => {
-                state.status = 'completed';
+                state.status = "completed";
                 state.loading = false;
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(createSchedule.rejected, (state, action: any) => {
-                state.status = 'rejected';
+                state.status = "rejected";
                 state.loading = false;
                 TOAST_ERROR(action.error?.message)
             })
@@ -59,7 +59,7 @@ const scheduleSlice = createSlice({
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(deleteSchedule.rejected, (state, action: any) => {
-                state.status = 'rejected';
+                state.status = "rejected";
                 TOAST_ERROR(action.error?.message);
             })
     }

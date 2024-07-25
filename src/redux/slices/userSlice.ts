@@ -4,13 +4,13 @@ import { IUser } from "@/interfaces/IUser";
 import { IResponse } from "@/interfaces/IResponse";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const URL = '/v1/user';
+const URL = "/v1/user";
 
 export const getDoctors = createAsyncThunk<IResponse>(
-    'user/getDoctors',
+    "user/getDoctors",
     async () => {
         try{
-            const res = await axiosClient.get(URL + '?role_id=1&status=1');
+            const res = await axiosClient.get(URL + "?role_id=1&status=1");
             return res.data;
         }catch(error: any) {
             throw error?.response?.data;
@@ -20,7 +20,7 @@ export const getDoctors = createAsyncThunk<IResponse>(
 
 export const getUser = async (id: string) => {
     try {
-        const res = await axiosClient.get(URL+ '/' +id);
+        const res = await axiosClient.get(URL+ "/" +id);
         return res.data.data;
     }catch(error: any) {
         TOAST_ERROR(error?.response?.data?.message);
@@ -30,7 +30,7 @@ export const getUser = async (id: string) => {
 
 export const changePassword = async (id: string, password: string) => {
     try {
-        const res = await axiosClient.put(URL+ '/' +id, { password: password });
+        const res = await axiosClient.put(URL+ "/" +id, { password: password });
         return res.data;
     }catch(error: any) {
         TOAST_ERROR(error?.response?.data?.message);
@@ -39,7 +39,7 @@ export const changePassword = async (id: string, password: string) => {
 }
 
 export const getUsers = createAsyncThunk<IResponse>(
-    'user/get',
+    "user/get",
     async () => {
         try{
             const res = await axiosClient.get(URL);
@@ -51,7 +51,7 @@ export const getUsers = createAsyncThunk<IResponse>(
 );
 
 export const createUser = createAsyncThunk<IResponse, IUser>(
-    'user/create',
+    "user/create",
     async (data) => {
         try{
             const res = await axiosClient.post(URL, data);
@@ -63,10 +63,10 @@ export const createUser = createAsyncThunk<IResponse, IUser>(
 );
 
 export const editUser = createAsyncThunk<IResponse, { id: string, data: IUser }>(
-    'user/edit',
+    "user/edit",
     async({ id, data }) => {
         try{
-            const res = await axiosClient.put(URL+ '/' +id, data);
+            const res = await axiosClient.put(URL+ "/" +id, data);
             return res.data;
         }catch(error: any) {
             throw error?.response?.data;

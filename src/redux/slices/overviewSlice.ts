@@ -2,13 +2,13 @@ import axiosClient from "@/config/AxiosConfig";
 import { IResponse } from "@/interfaces/IResponse";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const URL_1 = '/v1/overview';
-const URL_2 = '/v1/overview/invoice';
-const URL_3 = '/v1/overview/appointment';
+const URL_1 = "/v1/overview";
+const URL_2 = "/v1/overview/invoice";
+const URL_3 = "/v1/overview/appointment";
 
 
 export const getOverview = createAsyncThunk<IResponse>(
-    'overview/get',
+    "overview/get",
     async () => {
         try{
             const res = await axiosClient.get(URL_1);
@@ -20,7 +20,7 @@ export const getOverview = createAsyncThunk<IResponse>(
 );
 
 export const getOverviewInvoice = createAsyncThunk<IResponse>(
-    'overview/getInvoice',
+    "overview/getInvoice",
     async () => {
         try{
             const res = await axiosClient.get(URL_2);
@@ -32,7 +32,7 @@ export const getOverviewInvoice = createAsyncThunk<IResponse>(
 );
 
 export const getOverviewAppointment = createAsyncThunk<IResponse>(
-    'overview/getAppointment',
+    "overview/getAppointment",
     async () => {
         try{
             const res = await axiosClient.get(URL_3);

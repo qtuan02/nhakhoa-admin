@@ -5,18 +5,30 @@ import { IProfile } from "@/interfaces/IProfile";
 import { RootState } from "../store";
 import { login, profile } from "../slices/authenticateSlice";
 
+const initialUser: IProfile = {
+    id: "",
+    name: "",
+    avatar: "",
+    phone_number: "",
+    email: "",
+    birthday: "",
+    gender: 1,
+    address: "",
+    role: "",
+}
+
 interface IAuthenticateState {
     logging: boolean;
-    currentUser: IProfile | null;
+    currentUser: IProfile;
     modal: boolean;
-    loading: boolean;
+    isLoggedIn: boolean;
 }
 
 const initialState: IAuthenticateState = {
     logging: false,
-    currentUser: null,
+    currentUser: initialUser,
     modal: false,
-    loading: false,
+    isLoggedIn: false,
 };
 
 const authenticateSlice = createSlice({
@@ -52,6 +64,7 @@ const authenticateSlice = createSlice({
             .addCase(login.fulfilled, (state, action) => {
                 localStorage.setItem('access_token', action.payload.data.access_token);
                 state.logging = false;
+                state.isLoggedIn = true;
                 window.location.assign('/');
                 TOAST_SUCCESS(action.payload.message);
             })
@@ -59,17 +72,11 @@ const authenticateSlice = createSlice({
                 state.logging = false;
                 TOAST_ERROR(action.error?.message);
             })
-            .addCase(profile.pending, (state) => {
-                state.loading = true;
-                state.currentUser = null;
-            })
             .addCase(profile.fulfilled, (state, action) => {
-                state.loading = false;
+                state.isLoggedIn = true;
                 state.currentUser = action.payload.data;
             })
             .addCase(profile.rejected, (state, action: any) => {
-                state.loading = false;
-                state.currentUser = null;
                 TOAST_ERROR(action.error?.message);
             })
         }

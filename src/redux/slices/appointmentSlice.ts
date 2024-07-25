@@ -5,10 +5,10 @@ import { IResponse } from "@/interfaces/IResponse";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const URL_TIME = "/v1/time";
-const URL_APPOINTMENT = '/v1/appointment';
+const URL_APPOINTMENT = "/v1/appointment";
 
 export const getTimes = createAsyncThunk<IResponse>(
-    'appointment/getTimes',
+    "appointment/getTimes",
     async () => {
         try{
             const res = await axiosClient.get(URL_TIME);
@@ -21,7 +21,7 @@ export const getTimes = createAsyncThunk<IResponse>(
 
 export const getAppointment = async (id: string) => {
     try {
-        const res = await axiosClient.get(URL_APPOINTMENT+ '/' +id);
+        const res = await axiosClient.get(URL_APPOINTMENT+ "/" +id);
         return res.data.data;
     }catch(error: any) {
         TOAST_ERROR(error?.response?.data?.message);
@@ -30,7 +30,7 @@ export const getAppointment = async (id: string) => {
 };
 
 export const getAppointments = createAsyncThunk<IResponse>(
-    'appointment/get',
+    "appointment/get",
     async () => {
         try{
             const res = await axiosClient.get(URL_APPOINTMENT);
@@ -42,7 +42,7 @@ export const getAppointments = createAsyncThunk<IResponse>(
 );
 
 export const createAppointment = createAsyncThunk<IResponse, IAppointment>(
-    'appointment/create',
+    "appointment/create",
     async (data) => {
         try{
             const res = await axiosClient.post(URL_APPOINTMENT, data);
@@ -54,10 +54,10 @@ export const createAppointment = createAsyncThunk<IResponse, IAppointment>(
 );
 
 export const deleteAppointment = createAsyncThunk<IResponse, number>(
-    'appointment/delete',
+    "appointment/delete",
     async (id) => {
         try{
-            const res = await axiosClient.delete(URL_APPOINTMENT+ '/' +id);
+            const res = await axiosClient.delete(URL_APPOINTMENT+ "/" +id);
             return {...res.data, data: id};
         }catch(error: any) {
             throw error?.response?.data;
@@ -66,10 +66,10 @@ export const deleteAppointment = createAsyncThunk<IResponse, number>(
 );
 
 export const editAppointment = createAsyncThunk<IResponse, { id: string, data: IAppointment }>(
-    'appointment/edit',
+    "appointment/edit",
     async({ id, data }) => {
         try{
-            const res = await axiosClient.put(URL_APPOINTMENT+ '/' +id, data);
+            const res = await axiosClient.put(URL_APPOINTMENT+ "/" +id, data);
             return res.data;
         }catch(error: any) {
             throw error?.response?.data;

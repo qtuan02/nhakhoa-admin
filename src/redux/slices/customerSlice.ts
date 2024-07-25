@@ -4,11 +4,11 @@ import { ICustomer } from "@/interfaces/ICustomer";
 import { IResponse } from "@/interfaces/IResponse";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const URL = '/v1/customer';
+const URL = "/v1/customer";
 
 export const getCustomer = async (id: string) => {
     try {
-        const res = await axiosClient.get(URL+ '/' +id);
+        const res = await axiosClient.get(URL+ "/" +id);
         return res.data.data;
     } catch(error: any) {
         TOAST_ERROR(error?.response?.data?.message);
@@ -17,7 +17,7 @@ export const getCustomer = async (id: string) => {
 };
 
 export const getCustomers = createAsyncThunk<IResponse>(
-    'customer/get',
+    "customer/get",
     async () => {
         try {
             const res = await axiosClient.get(URL);
@@ -29,7 +29,7 @@ export const getCustomers = createAsyncThunk<IResponse>(
 );
 
 export const createCustomer = createAsyncThunk<IResponse, ICustomer>(
-    'customer/create',
+    "customer/create",
     async (data) => {
         try {
             const res = await axiosClient.post(URL, data);
@@ -41,10 +41,10 @@ export const createCustomer = createAsyncThunk<IResponse, ICustomer>(
 );
 
 export const editCustomer = createAsyncThunk<IResponse, { id: string, data: ICustomer }>(
-    'customer/edit',
+    "customer/edit",
     async ({ id, data }) => {
         try {
-            const res = await axiosClient.put(URL + '/' + id, data);
+            const res = await axiosClient.put(URL + "/" + id, data);
             return res.data;
         } catch (error: any) {
             throw error?.response?.data;

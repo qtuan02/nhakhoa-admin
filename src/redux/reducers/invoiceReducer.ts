@@ -6,26 +6,26 @@ import { editInvoice, getInvoices } from "../slices/invoiceSlice";
 
 interface IInvoiceState {
     loading: boolean;
-    status: 'pending' | 'completed' | 'rejected';
-    edit: 'wait' | 'success' | 'fail';
+    status: "pending" | "completed" | "rejected";
+    edit: "wait" | "success" | "fail";
     data?: IInvoice[];
 };
 
 const initialState: IInvoiceState = {
     loading: false,
-    status: 'completed',
-    edit: 'success',
+    status: "completed",
+    edit: "success",
     data: [],
 };
 
 const invoiceSlice = createSlice({
-    name: 'invoice',
+    name: "invoice",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(getInvoices.pending, (state) => {
-                state.status = 'pending';
+                state.status = "pending";
                 state.loading = true;
             })
             .addCase(getInvoices.fulfilled, (state, action) => {
@@ -38,16 +38,16 @@ const invoiceSlice = createSlice({
                 TOAST_ERROR(action.error?.message)
             })
             .addCase(editInvoice.pending, (state) => {
-                state.edit = 'wait';
+                state.edit = "wait";
             })
             .addCase(editInvoice.fulfilled, (state, action) => {
-                state.status = 'completed';
-                state.edit = 'success';
+                state.status = "completed";
+                state.edit = "success";
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(editInvoice.rejected, (state, action: any) => {
-                state.status = 'rejected';
-                state.edit = 'fail';
+                state.status = "rejected";
+                state.edit = "fail";
                 TOAST_ERROR(action.error?.message)
             })
     }

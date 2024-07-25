@@ -7,8 +7,8 @@ import { createHistory, editHistory, getHistories } from "../slices/historySlice
 
 interface IHistoryState {
     loading: boolean;
-    status: 'pending' | 'completed' | 'rejected';
-    edit: 'wait' | 'success' | 'fail';
+    status: "pending" | "completed" | "rejected";
+    edit: "wait" | "success" | "fail";
     data?: IHistory[];
     drawer: boolean;
     history_id?: string;
@@ -18,17 +18,17 @@ interface IHistoryState {
 
 const initialState: IHistoryState = {
     loading: false,
-    status: 'completed',
-    edit: 'success',
+    status: "completed",
+    edit: "success",
     data: [],
     drawer: false,
-    history_id: '',
+    history_id: "",
     modal: false,
     services: [],
 };
 
 const historySlice = createSlice({
-    name: 'history',
+    name: "history",
     initialState,
     reducers: {
         toggleDrawer: (state) => {
@@ -75,7 +75,7 @@ const historySlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getHistories.pending, (state) => {
-                state.status = 'pending';
+                state.status = "pending";
                 state.loading = true;
             })
             .addCase(getHistories.fulfilled, (state, action) => {
@@ -91,26 +91,26 @@ const historySlice = createSlice({
                 state.loading = true;
             })
             .addCase(createHistory.fulfilled, (state, action) => {
-                state.status = 'completed';
+                state.status = "completed";
                 state.loading = false;
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(createHistory.rejected, (state, action: any) => {
-                state.status = 'rejected';
+                state.status = "rejected";
                 state.loading = false;
                 TOAST_ERROR(action.error?.message)
             })
             .addCase(editHistory.pending, (state) => {
-                state.edit = 'wait';
+                state.edit = "wait";
             })
             .addCase(editHistory.fulfilled, (state, action) => {
-                state.status = 'completed';
-                state.edit = 'success';
+                state.status = "completed";
+                state.edit = "success";
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(editHistory.rejected, (state, action: any) => {
-                state.status = 'rejected';
-                state.edit = 'fail';
+                state.status = "rejected";
+                state.edit = "fail";
                 TOAST_ERROR(action.error?.message)
             })
     }
