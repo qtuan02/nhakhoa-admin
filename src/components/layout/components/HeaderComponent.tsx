@@ -1,17 +1,18 @@
-import CButton from '@/custom_antd/CButton';
-import CCol from '@/custom_antd/CCol';
-import CDropDown from '@/custom_antd/CDropdown';
-import CRow from '@/custom_antd/CRow';
-import { useAppDispatch } from '@/redux/hooks';
-import { logout, toggleModal } from '@/redux/reducers/authenticateReducer';
-import { toggleSider } from '@/redux/reducers/siderReducer';
-import { faAddressCard, faBars, faBell, faLock, faSignOut, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Avatar, Badge, Flex, Layout, MenuProps } from 'antd';
-import Link from 'next/link';
-import React from 'react';
-import ModalComponent from './ModalComponent';
-import { IProfile } from '@/interfaces/IProfile';
+import CButton from "@/custom_antd/CButton";
+import CCol from "@/custom_antd/CCol";
+import CDropDown from "@/custom_antd/CDropdown";
+import CRow from "@/custom_antd/CRow";
+import { IProfile } from "@/interfaces/IProfile";
+import { useAppDispatch } from "@/redux/hooks";
+import { logout, toggleModal } from "@/redux/reducers/authenticateReducer";
+import { toggleSider } from "@/redux/reducers/siderReducer";
+import { faAddressCard, faBars, faBell, faLock, faSignOut, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Avatar, Badge, Flex, Layout, MenuProps } from "antd";
+import Link from "next/link";
+import React from "react";
+import ModalComponent from "./ModalComponent";
+
 const { Header } = Layout;
 
 interface IHeaderProps {
