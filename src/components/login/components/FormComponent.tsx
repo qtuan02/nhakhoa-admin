@@ -4,11 +4,8 @@ import CInput from "@/custom_antd/CInput";
 import CTitle from "@/custom_antd/CTitle";
 import { faHospital } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Checkbox, Divider, Form, Input } from "antd";
+import { Checkbox, Form, Input } from "antd";
 import { useEffect } from "react";
-import { useAppSelector } from "@/redux/hooks";
-import { getAuthState } from "@/redux/reducers/authReducer";
-
 
 interface FormComponentProps {
     onSubmit: (values: ILogin) => void;
@@ -23,10 +20,6 @@ const initialLogin: ILogin = {
 
 export default function FormComponent({ onSubmit, data }: FormComponentProps) {
     const [form] = Form.useForm();
-    const { logging } = useAppSelector(getAuthState);
-
-    console.log(logging);
-    
 
     useEffect(() => {
         if (data) {
@@ -47,7 +40,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                 <Checkbox>Nhớ mật khẩu</Checkbox>
             </Form.Item>
             <Form.Item>
-                <CButton loading={logging} type="primary" htmlType="submit" icon={<FontAwesomeIcon icon={faHospital} />} size="large">Đăng nhập</CButton>
+                <CButton type="primary" htmlType="submit" icon={<FontAwesomeIcon icon={faHospital} />} size="large">Đăng nhập</CButton>
             </Form.Item>
         </Form>
     );

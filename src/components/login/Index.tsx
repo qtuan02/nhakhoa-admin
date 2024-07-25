@@ -1,10 +1,11 @@
 "use client";
 import { ILogin } from "@/interfaces/ILogin";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect, useState } from "react";
-import { setRemember } from "@/redux/reducers/authReducer";
-import { login } from "@/redux/slices/authSlice";
 import FormComponent from "./components/FormComponent";
+import LoadingComponent from "../layout/Loading";
+import { login } from "@/redux/slices/authenticateSlice";
+import { setRemember } from "@/redux/reducers/authenticateReducer";
 
 
 

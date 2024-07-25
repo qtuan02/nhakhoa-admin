@@ -3,23 +3,23 @@ import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { ILogin } from "@/interfaces/ILogin";
 import { IProfile } from "@/interfaces/IProfile";
 import { RootState } from "../store";
-import { login, profile } from "../slices/authSlice";
+import { login, profile } from "../slices/authenticateSlice";
 
-interface IAuthState {
+interface IAuthenticateState {
     logging: boolean;
     currentUser: IProfile | null;
     modal: boolean;
     loading: boolean;
 }
 
-const initialState: IAuthState = {
+const initialState: IAuthenticateState = {
     logging: false,
     currentUser: null,
     modal: false,
     loading: false,
 };
 
-const authSlice = createSlice({
+const authenticateSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
@@ -75,6 +75,6 @@ const authSlice = createSlice({
         }
 });
 
-export const getAuthState = (state: RootState) => state.auth;
-export const { logout, setRemember, toggleModal } = authSlice.actions;
-export default authSlice.reducer;
+export const getAuthenticateState = (state: RootState) => state.authenticate;
+export const { logout, setRemember, toggleModal } = authenticateSlice.actions;
+export default authenticateSlice.reducer;

@@ -4,11 +4,11 @@ import axiosClient from "@/config/AxiosConfig";
 import { IChangepassword } from "@/interfaces/IChangepassword";
 import { ILogin } from "@/interfaces/ILogin";
 import { IResponse } from "@/interfaces/IResponse";
-import { logout } from "@/redux/reducers/authReducer";
 import store from "@/redux/store";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { logout } from "../reducers/authenticateReducer";
 
 const URL = '/v1/auth';
 const URL_AUTH = appConfig.API_LOCAL+'/v1/auth';

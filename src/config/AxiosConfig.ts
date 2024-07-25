@@ -1,22 +1,21 @@
 import axios from "axios";
 import { appConfig } from "./AppConfig";
-import { logout } from "@/redux/reducers/authReducer";
 import { jwtDecode, JwtPayload } from "jwt-decode";
-import { refreshToken } from "@/redux/slices/authSlice";
 import store from "@/redux/store";
+import { refreshToken } from "@/redux/slices/authenticateSlice";
+import { logout } from "@/redux/reducers/authenticateReducer";
 
 const axiosClient = axios.create({
-  baseURL: appConfig.API_LOCAL,
-  headers: {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-  },
-  withCredentials: true,
+	baseURL: appConfig.API_LOCAL,
+	headers: {
+		"Content-Type": "application/json",
+		"Access-Control-Allow-Origin": "*",
+	},
+	withCredentials: true,
 });
 
 axiosClient.interceptors.request.use(
 	async (config) => {
-		const { currentUser} = store.getState().auth;
 		let accessToken = localStorage.getItem("access_token");
 		if (accessToken ) {
 			const decodedToken: any = jwtDecode<JwtPayload>(accessToken);

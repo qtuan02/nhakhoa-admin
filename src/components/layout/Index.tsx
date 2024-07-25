@@ -4,21 +4,18 @@ import SiderComponent from "./components/SiderComponent";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
 import LoadingComponent from "./Loading";
-import { getAuthState } from "@/redux/reducers/authReducer";
-import { profile } from "@/redux/slices/authSlice";
 import { getSiderState } from "@/redux/reducers/siderReducer";
+import { getAuthenticateState } from "@/redux/reducers/authenticateReducer";
+import { profile } from "@/redux/slices/authenticateSlice";
 
 export default function LayoutComponent({ children }: { children: React.ReactNode }) {
     const dispatch = useAppDispatch();
-    const { currentUser, loading } = useAppSelector(getAuthState);
+    const { currentUser, loading } = useAppSelector(getAuthenticateState);
     const { isSiderOpen } = useAppSelector(getSiderState);
 
     useEffect(() => {
         dispatch(profile());
     }, [dispatch])
-
-    console.log(currentUser);
-    console.log(loading);
 
     return (
         <div className="flex h-screen w-screen bg-[#f5f5f5]">
