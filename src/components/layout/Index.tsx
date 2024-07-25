@@ -17,9 +17,12 @@ export default function LayoutComponent({ children }: { children: React.ReactNod
         dispatch(profile());
     }, [dispatch])
 
+    console.log(currentUser);
+    console.log(loading);
+
     return (
         <div className="flex h-screen w-screen bg-[#f5f5f5]">
-            {loading ? <LoadingComponent />
+            {loading && !currentUser ? <LoadingComponent />
                 : <>
                     <SiderComponent isSider={isSiderOpen} />
                     <div className="w-full">
