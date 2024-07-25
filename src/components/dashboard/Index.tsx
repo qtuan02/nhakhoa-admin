@@ -13,22 +13,22 @@ import { getOverview, getOverviewAppointment, getOverviewInvoice } from "@/redux
 
 export default function DashboardComponent() {
     const dispatch = useAppDispatch();
-    const dashboard = useAppSelector(getOverviewState);
+    const overview = useAppSelector(getOverviewState);
 
     useEffect(() => {
-        if (dashboard.status === 'completed') {
+        if (!overview.loading) {
             dispatch(getOverview());
         }
 
-        if (dashboard.statusInvoice === 'completed') {
+        if (!overview.loadingInvoice) {
             dispatch(getOverviewInvoice());
         }
 
-        if (dashboard.statusAppointment === 'completed') {
+        if (!overview.loadingAppointment) {
             dispatch(getOverviewAppointment());
         }
 
-    }, [dashboard.status, dashboard.statusAppointment, dashboard.statusInvoice, dispatch])
+    }, [])
 
     return (
         // <div className="m-5">
@@ -59,18 +59,18 @@ export default function DashboardComponent() {
         // </div>
 
         <Flex vertical gap={16}>
-            <CSkeleton loading={dashboard.loading}>
-                <StatisticComponent data={dashboard.data} />
+            <CSkeleton loading={overview.loading}>
+                <StatisticComponent data={overview.data} />
             </CSkeleton>
             <CRow gutter={[16, 0]}>
                 <CCol span={16}>
-                    <CSkeleton loading={dashboard.loadingInvoice}>
-                        <ChartComponent data={dashboard.dataInvoice} />
+                    <CSkeleton loading={overview.loadingInvoice}>
+                        <ChartComponent data={overview.dataInvoice} />
                     </CSkeleton>
                 </CCol>
                 <CCol span={8}>
-                    <CSkeleton loading={dashboard.loadingAppointment}>
-                        <PieComponent data={dashboard.dataAppointment} />
+                    <CSkeleton loading={overview.loadingAppointment}>
+                        <PieComponent data={overview.dataAppointment} />
                     </CSkeleton>
                 </CCol>
             </CRow>

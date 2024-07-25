@@ -1,15 +1,15 @@
-export interface IDashboard {
+export interface IOverview {
     title?: string,
     total?: string,
     message?: string
 }
 
-export interface IDashboardInvoice {
+export interface IOverviewInvoice {
     total?: string,
     message?: number
 }
 
-export interface IDashboardAppoinment {
+export interface IOverviewAppoinment {
     total?: number,
     message?: string
 }

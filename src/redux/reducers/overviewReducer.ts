@@ -1,30 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
-import { IDashboard, IDashboardAppoinment, IDashboardInvoice } from "@/interfaces/IDashboard";
 import { RootState } from "../store";
 import { getOverview, getOverviewAppointment, getOverviewInvoice } from "../slices/overviewSlice";
+import { IOverview, IOverviewAppoinment, IOverviewInvoice } from "@/interfaces/IOverview";
 
 interface IOverviewState {
     loading: boolean;
-    status: 'pending' | 'completed';
-    data?: IDashboard[];
+    data?: IOverview[];
     loadingInvoice: boolean;
-    statusInvoice: 'pending' | 'completed';
-    dataInvoice?: IDashboardInvoice[];
+    dataInvoice?: IOverviewInvoice[];
     loadingAppointment: boolean;
-    statusAppointment: 'pending' | 'completed';
-    dataAppointment?: IDashboardAppoinment[];
+    dataAppointment?: IOverviewAppoinment[];
 };
 
 const initialState: IOverviewState = {
     loading: false,
-    status: 'completed',
     data: [],
     loadingInvoice: false,
-    statusInvoice: 'completed',
     dataInvoice: [],
     loadingAppointment: false,
-    statusAppointment: 'completed',
     dataAppointment: [],
 };
 
@@ -35,7 +29,6 @@ const overviewSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getOverview.pending, (state) => {
-                state.status = 'pending';
                 state.loading = true;
             })
             .addCase(getOverview.fulfilled, (state, action) => {
@@ -48,7 +41,6 @@ const overviewSlice = createSlice({
                 TOAST_ERROR(action.error?.message)
             })
             .addCase(getOverviewInvoice.pending, (state) => {
-                state.statusInvoice = 'pending';
                 state.loadingInvoice = true;
             })
             .addCase(getOverviewInvoice.fulfilled, (state, action) => {
@@ -61,7 +53,6 @@ const overviewSlice = createSlice({
                 TOAST_ERROR(action.error?.message)
             })
             .addCase(getOverviewAppointment.pending, (state) => {
-                state.statusAppointment = 'pending';
                 state.loadingAppointment = true;
             })
             .addCase(getOverviewAppointment.fulfilled, (state, action) => {

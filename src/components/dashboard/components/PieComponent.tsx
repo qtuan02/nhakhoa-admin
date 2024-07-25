@@ -1,10 +1,10 @@
 import CTitle from "@/custom_antd/CTitle";
-import { IDashboardAppoinment } from "@/interfaces/IDashboard";
+import { IOverviewAppoinment } from "@/interfaces/IOverview";
 import { ApexOptions } from "apexcharts";
 import ReactApexChart from "react-apexcharts";
 
 interface PieComponentProps {
-    data?: IDashboardAppoinment[];
+    data?: IOverviewAppoinment[];
 }
 
 export default function PieComponent({ data }: PieComponentProps) {

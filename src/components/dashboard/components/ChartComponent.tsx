@@ -1,11 +1,11 @@
 import CTitle from "@/custom_antd/CTitle";
-import { IDashboardInvoice } from "@/interfaces/IDashboard";
+import { IOverviewInvoice } from "@/interfaces/IOverview";
 import { customNumberPrice } from "@/utils/FunctionHelpers";
 import { ApexOptions } from "apexcharts";
 import ReactApexChart from "react-apexcharts";
 
 interface ChartComponentProps {
-    data?: IDashboardInvoice[];
+    data?: IOverviewInvoice[];
 }
 
 export default function ChartComponent({ data }: ChartComponentProps) {

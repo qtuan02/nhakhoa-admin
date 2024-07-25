@@ -2,11 +2,11 @@ import CCard from "@/custom_antd/CCard";
 import CCol from "@/custom_antd/CCol";
 import CRow from "@/custom_antd/CRow";
 import CTitle from "@/custom_antd/CTitle";
-import { IDashboard } from "@/interfaces/IDashboard";
+import { IOverview } from "@/interfaces/IOverview";
 import { parseHTML } from "@/utils/FunctionHelpers";
 
 interface StatisticComponentProps {
-    data?: IDashboard[];
+    data?: IOverview[];
 }
 
 export default function StatisticComponent({ data }: StatisticComponentProps){
