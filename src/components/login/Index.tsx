@@ -1,7 +1,7 @@
 "use client";
 import { ILogin } from "@/interfaces/ILogin";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { getAuthenticateState, setRemember } from "@/redux/reducers/authenticateReducer";
+import { getAuthenticateState } from "@/redux/reducers/authenticateReducer";
 import { login } from "@/redux/slices/authenticateSlice";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -26,7 +26,6 @@ export default function LoginComponent() {
     const navigator = useRouter();
 
     const handleSubmit = (values: ILogin) => {
-        dispatch(setRemember(values));
         dispatch(login(values));
     }
 

@@ -35,16 +35,6 @@ const authenticateSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        setRemember: (state, action: PayloadAction<ILogin>) => {
-            if(action.payload.remember){
-                const user = {
-                    account: action.payload.account,
-                    password: action.payload.password,
-                    remember: action.payload.remember
-                };
-                localStorage.setItem('r_u', JSON.stringify(user));
-            }
-        },
         logout: (state) => {
             localStorage.removeItem('access_token');
 			window.location.assign('/dang-nhap');
@@ -52,14 +42,19 @@ const authenticateSlice = createSlice({
         toggleModal: (state) => {
             state.modal =!state.modal;
         },
-        isLogging: (state) => {
-            state.logging = true;
-        }
     },
     extraReducers: (builder) => {
         builder
-            .addCase(login.pending, (state) => {
+            .addCase(login.pending, (state, action) => {
                 state.logging = true;
+                if(action.meta.arg.remember){
+                    const user = {
+                        account: action.meta.arg.account,
+                        password: action.meta.arg.password,
+                        remember: action.meta.arg.remember
+                    };
+                    localStorage.setItem('r_u', JSON.stringify(user));
+                }
             })
             .addCase(login.fulfilled, (state, action) => {
                 localStorage.setItem('access_token', action.payload.data.access_token);
@@ -82,6 +77,10 @@ const authenticateSlice = createSlice({
         }
 });
 
-export const getAuthenticateState = (state: RootState) => state.authenticate;
-export const { logout, setRemember, toggleModal } = authenticateSlice.actions;
+// export const getAuthenticateState = (state: RootState) => state.authenticate;
+export const getAuthenticateState = (state: RootState) => {
+    console.log('authenticate state:', state.authenticate);
+    return state.authenticate;
+};
+export const { logout, toggleModal } = authenticateSlice.actions;
 export default authenticateSlice.reducer;
