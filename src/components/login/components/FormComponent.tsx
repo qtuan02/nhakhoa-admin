@@ -25,6 +25,9 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
     const [form] = Form.useForm();
     const { logging } = useAppSelector(getAuthState);
 
+    console.log(logging);
+    
+
     useEffect(() => {
         if (data) {
             form.setFieldsValue(data);

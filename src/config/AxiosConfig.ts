@@ -16,6 +16,7 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use(
 	async (config) => {
+		const { currentUser} = store.getState().auth;
 		let accessToken = localStorage.getItem("access_token");
 		if (accessToken ) {
 			const decodedToken: any = jwtDecode<JwtPayload>(accessToken);
