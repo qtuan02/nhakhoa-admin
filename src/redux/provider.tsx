@@ -13,7 +13,7 @@ export function ReduxProvider({ children }: { children: React.ReactNode }) {
 	}
 
 	useEffect(() => {
-		if (storeRef.current != null) {
+		if (storeRef.current) {
 		  const unsubscribe = setupListeners(storeRef.current.dispatch);
 		  return unsubscribe;
 		}
