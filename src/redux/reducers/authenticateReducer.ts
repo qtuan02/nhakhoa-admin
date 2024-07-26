@@ -17,7 +17,7 @@ const initialState: IAuthenticateState = {
 };
 
 const authenticateSlice = createSlice({
-    name: "authenticate",
+    name: "auth",
     initialState,
     reducers: {
         setCurrentUser: (state, action) => {
