@@ -3,7 +3,7 @@ import { appConfig } from "./AppConfig";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 import { refreshToken } from "@/redux/slices/authenticateSlice";
 import { logout } from "@/redux/reducers/authenticateReducer";
-import { makeStore } from "@/redux/store";
+import store from "@/redux/store";
 
 const axiosClient = axios.create({
 	baseURL: appConfig.API_LOCAL,
@@ -26,7 +26,7 @@ axiosClient.interceptors.request.use(
 			}
 			config.headers.Authorization = `Bearer ${accessToken}`;
 		}else{
-			makeStore().dispatch(logout());
+			store.dispatch(logout());
 		}
 		return config;
 	},
@@ -41,7 +41,7 @@ axiosClient.interceptors.response.use(
 	},
 	(error) => {
 		if (error.response && error.response.status === 401) {
-            makeStore().dispatch(logout());
+            store.dispatch(logout());
         }
 		return Promise.reject(error);
 	}
