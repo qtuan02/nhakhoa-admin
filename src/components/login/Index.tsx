@@ -10,8 +10,6 @@ import CTitle from "@/custom_antd/CTitle";
 import { faHospital } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Checkbox, Form, Input, Spin } from "antd";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
 
 const initialLogin: ILogin = {
     account: "",
@@ -21,8 +19,7 @@ const initialLogin: ILogin = {
 
 export default function LoginComponent() {
     const dispatch = useAppDispatch();
-    // const { logging, isLoggedIn } = useAppSelector(getAuthenticateState);
-    const { logging, isLoggedIn } = useSelector((state: RootState) => state.authenticate);
+    const { logging, isLoggedIn } = useAppSelector(getAuthenticateState);
 
     const [form] = Form.useForm();
 
