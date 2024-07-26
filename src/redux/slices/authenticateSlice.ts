@@ -30,6 +30,8 @@ export const login = createAsyncThunk<IResponse, ILogin>(
 
 export const refreshToken = async () => {
 	try {
+        console.log("refresh");
+        
 		const { currentUser } = store.getState().authenticate;
 
 		const res = await axios.post(URL_AUTH+"/refresh", {}, {
