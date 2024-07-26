@@ -1,9 +1,8 @@
 import axios from "axios";
 import { appConfig } from "./AppConfig";
 import { jwtDecode, JwtPayload } from "jwt-decode";
-import { refreshToken } from "@/redux/slices/authenticateSlice";
-import { logout } from "@/redux/reducers/authenticateReducer";
-import store from "@/redux/store";
+import { logoutToken, refreshToken } from "@/redux/slices/authenticateSlice";
+import { store } from "@/redux/store";
 
 const axiosClient = axios.create({
 	baseURL: appConfig.API_LOCAL,
@@ -16,17 +15,18 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use(
 	async (config) => {
-		let accessToken = localStorage.getItem("access_token");
-		if (accessToken ) {
-			const decodedToken: any = jwtDecode<JwtPayload>(accessToken);
+		const { currentUser } = store.getState().authenticate;
+		if (currentUser && currentUser.access_token) {
+			const decodedToken: any = jwtDecode<JwtPayload>(currentUser.access_token);
 			const currentTime = new Date().getTime() / 1000;
 			if (decodedToken.exp < currentTime) {
-				const response = await refreshToken();
-				accessToken = response.access_token;
+				const refresh_token = await refreshToken();
+				config.headers.Authorization = `Bearer ${refresh_token}`;
+			}else{
+				config.headers.Authorization = `Bearer ${currentUser.access_token}`;
 			}
-			config.headers.Authorization = `Bearer ${accessToken}`;
 		}else{
-			store.dispatch(logout());
+			store.dispatch(logoutToken());
 		}
 		return config;
 	},
@@ -40,9 +40,6 @@ axiosClient.interceptors.response.use(
 		return response;
 	},
 	(error) => {
-		if (error.response && error.response.status === 401) {
-            store.dispatch(logout());
-        }
 		return Promise.reject(error);
 	}
 );

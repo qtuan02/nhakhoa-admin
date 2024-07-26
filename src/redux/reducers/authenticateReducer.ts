@@ -2,45 +2,27 @@ import { createSlice } from "@reduxjs/toolkit";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { IProfile } from "@/interfaces/IProfile";
 import { RootState } from "../store";
-import { login, profile } from "../slices/authenticateSlice";
-
-const initialUser: IProfile = {
-    id: "",
-    name: "",
-    avatar: "",
-    phone_number: "",
-    email: "",
-    birthday: "",
-    gender: 1,
-    address: "",
-    role: "",
-}
+import { login, logoutToken } from "../slices/authenticateSlice";
 
 interface IAuthenticateState {
     logging: boolean;
-    currentUser: IProfile;
-    modal: boolean;
+    currentUser: IProfile | null;
     isLoggedIn: boolean;
 }
 
 const initialState: IAuthenticateState = {
     logging: false,
-    currentUser: initialUser,
-    modal: false,
+    currentUser: null,
     isLoggedIn: false,
 };
 
 const authenticateSlice = createSlice({
-    name: "auth",
+    name: "authenticate",
     initialState,
     reducers: {
-        logout: (state) => {
-            localStorage.removeItem('access_token');
-			window.location.assign('/dang-nhap');
-        },
-        toggleModal: (state) => {
-            state.modal =!state.modal;
-        },
+        setCurrentUser: (state, action) => {
+            state.currentUser = action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -56,27 +38,26 @@ const authenticateSlice = createSlice({
                 }
             })
             .addCase(login.fulfilled, (state, action) => {
-                localStorage.setItem('access_token', action.payload.data.access_token);
-                state.logging = false;
-                state.isLoggedIn = true;
-                window.location.assign('/');
                 TOAST_SUCCESS(action.payload.message);
+                state.currentUser = action.payload.data;
+                state.isLoggedIn = true;
+                state.logging = false;
             })
             .addCase(login.rejected, (state, action: any) => {
                 state.logging = false;
+                state.currentUser = null;
                 TOAST_ERROR(action.error?.message);
             })
-            .addCase(profile.fulfilled, (state, action) => {
-                state.isLoggedIn = true;
-                state.currentUser = action.payload.data;
+            .addCase(logoutToken.fulfilled, (state, action) => {
+                state.currentUser = null;
+                state.isLoggedIn = false;
             })
-            .addCase(profile.rejected, (state, action: any) => {
-                state.isLoggedIn = true;
+            .addCase(logoutToken.rejected, (state, action: any) => {
                 TOAST_ERROR(action.error?.message);
             })
         }
 });
 
 export const getAuthenticateState = (state: RootState) => state.authenticate;
-export const { logout, toggleModal } = authenticateSlice.actions;
+export const { setCurrentUser } = authenticateSlice.actions;
 export default authenticateSlice.reducer;

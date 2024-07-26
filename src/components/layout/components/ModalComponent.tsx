@@ -3,7 +3,7 @@ import CRow from "@/custom_antd/CRow";
 import CTitle from "@/custom_antd/CTitle";
 import { IChangepassword } from "@/interfaces/IChangepassword";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { getAuthenticateState, toggleModal } from "@/redux/reducers/authenticateReducer";
+import { getModalState, toggleModalHeader } from "@/redux/reducers/modalReducer";
 import { changePasswordWithToken } from "@/redux/slices/authenticateSlice";
 import { TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
@@ -23,7 +23,7 @@ export default function ModalComponent() {
     const [loading, setLoading] = useState<boolean>(false);
 
     const dispatch = useAppDispatch();
-    const { modal } = useAppSelector(getAuthenticateState);
+    const { modalHeader } = useAppSelector(getModalState);
 
     const handleSubmit = async (values: IChangepassword) => {
         setLoading(true);
@@ -37,11 +37,11 @@ export default function ModalComponent() {
 
     const handleCancel = () => {
         form.resetFields();
-        dispatch(toggleModal());
+        dispatch(toggleModalHeader());
     }
 
     return (
-        <Modal open={modal} onCancel={handleCancel} footer={null}>
+        <Modal open={modalHeader} onCancel={handleCancel} footer={null}>
             <CTitle level={3} className="text-center">Đổi mật khẩu</CTitle>
             <Form layout="vertical" className="px-2 py-4" onFinish={handleSubmit} initialValues={initialChangepasswordForm} form={form}>
                 <Form.Item label="Mật khẩu cũ" className="!mb-4" name="password" rules={[{ required: true, message: "Hãy nhập mật khẩu cũ..." }]}>

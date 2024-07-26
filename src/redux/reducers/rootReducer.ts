@@ -10,6 +10,7 @@ import scheduleReducer from "./scheduleReducer";
 import serviceReducer from "./serviceReducer";
 import siderReducer from "./siderReducer";
 import userReducer from "./userReducer";
+import modalReducer from "./modalReducer";
 
 
 const rootReducer = combineReducers({
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
     service: serviceReducer,
     sider: siderReducer,
     user: userReducer,
+    modal: modalReducer
 });
 
 export default rootReducer;

@@ -7,11 +7,11 @@ import { getSiderState } from "@/redux/reducers/siderReducer";
 
 export default function SiderComponent() {
     const pathname = usePathname();
-    const { isSiderOpen } = useAppSelector(getSiderState);
+    const { sider } = useAppSelector(getSiderState);
 
     return (
         <CSider style={{ overflowY: 'auto', height: '100vh', left: 0, top: 0, bottom: 0, background: 'white' }} width="256px"
-            collapsible collapsed={isSiderOpen} trigger={null}>
+            collapsible collapsed={sider} trigger={null}>
             <CMenu
                 className="!h-full pt-5"
                 mode="inline"

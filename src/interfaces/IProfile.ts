@@ -8,4 +8,5 @@ export interface IProfile {
     gender?: number,
     address?: string,
     role?: string,
+    access_token?: string,
 }

@@ -3,28 +3,23 @@ import CCol from "@/custom_antd/CCol";
 import CDropDown from "@/custom_antd/CDropdown";
 import CRow from "@/custom_antd/CRow";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { getAuthenticateState, logout, toggleModal } from "@/redux/reducers/authenticateReducer";
+import { getAuthenticateState } from "@/redux/reducers/authenticateReducer";
 import { getSiderState, toggleSider } from "@/redux/reducers/siderReducer";
 import { faAddressCard, faBars, faBell, faLock, faSignOut, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Avatar, Badge, Flex, Layout, MenuProps } from "antd";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 import ModalComponent from "./ModalComponent";
-import { profile } from "@/redux/slices/authenticateSlice";
+import { toggleModalHeader } from "@/redux/reducers/modalReducer";
+import { logoutToken } from "@/redux/slices/authenticateSlice";
 const { Header } = Layout;
 
 
 export default function HeaderComponent() {
     const dispatch = useAppDispatch();
+    const { sider } = useAppSelector(getSiderState);
     const { currentUser, isLoggedIn } = useAppSelector(getAuthenticateState);
-    const { isSiderOpen } = useAppSelector(getSiderState);
-
-    useEffect(() => {
-        if(!isLoggedIn){
-            dispatch(profile());
-        }
-    }, [dispatch, isLoggedIn])
 
     const items: MenuProps['items'] = [
         {
@@ -45,7 +40,7 @@ export default function HeaderComponent() {
         },
         {
             key: 'change-password',
-            label: <Link href='#' onClick={() => dispatch(toggleModal())}>Đổi mật khẩu</Link>,
+            label: <Link href='#' onClick={() => dispatch(toggleModalHeader())}>Đổi mật khẩu</Link>,
             icon: <FontAwesomeIcon icon={faLock} />
         },
         {
@@ -60,7 +55,7 @@ export default function HeaderComponent() {
                     <CRow gutter={[16, 16]}>
                         <CCol>
                             <CButton className="!h-10 !w-10 !border-none !bg-[#f0f0f0]" onClick={() => dispatch(toggleSider())}>
-                                {isSiderOpen ? <FontAwesomeIcon icon={faBars} /> : <FontAwesomeIcon icon={faXmark} />}
+                                {sider ? <FontAwesomeIcon icon={faBars} /> : <FontAwesomeIcon icon={faXmark} />}
                             </CButton>
                         </CCol>
                     </CRow>
@@ -79,7 +74,7 @@ export default function HeaderComponent() {
                                         {React.cloneElement(menu as React.ReactElement, { style: { boxShadow: 'none' } })}
                                         <Flex justify='center'>
                                             <CButton icon={<FontAwesomeIcon icon={faSignOut} />} type='default' danger
-                                                onClick={() => dispatch(logout())}>Đăng xuất</CButton>
+                                                onClick={() => dispatch(logoutToken())}>Đăng xuất</CButton>
                                         </Flex>
                                     </div>
                                 )}>

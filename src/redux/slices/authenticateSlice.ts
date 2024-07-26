@@ -7,8 +7,9 @@ import { IResponse } from "@/interfaces/IResponse";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { logout } from "../reducers/authenticateReducer";
-import store from "../store";
+import { store } from "../store";
+import { IProfile } from "@/interfaces/IProfile";
+import { setCurrentUser } from "../reducers/authenticateReducer";
 
 const URL = "/v1/auth";
 const URL_AUTH = appConfig.API_LOCAL+"/v1/auth";
@@ -27,26 +28,33 @@ export const login = createAsyncThunk<IResponse, ILogin>(
     }
 );
 
-
 export const refreshToken = async () => {
-    try {
-        const res = await axios.post(URL_AUTH+"/refresh", null, {
+	try {
+		const { currentUser } = store.getState().authenticate;
+
+		const res = await axios.post(URL_AUTH+"/refresh", {}, {
             withCredentials: true
         });
-        return res.data.data;
-    }catch(error: any) {
-        if(error.response.status === 401){
-            TOAST_ERROR(error?.response?.data?.message);
-            store.dispatch(logout());
-        }
-    }
-};
+        
+		const newUser: IProfile = {
+			...currentUser,
+			access_token: res.data.data.access_token,
+		};
 
-export const profile = createAsyncThunk<IResponse>(
-    "auth/profile",
+		store.dispatch(setCurrentUser(newUser));
+		return res.data.data.access_token;
+	} catch (error: any) {
+		TOAST_ERROR(error?.response?.data?.message);
+		if (error.response.status === 401) {
+			store.dispatch(logoutToken());
+		}
+	}
+};
+export const logoutToken = createAsyncThunk<IResponse>(
+    "auth/logout",
     async () => {
         try {
-            const res = await axiosClient.get(URL + "/profile");
+            const res = await axiosClient.post(URL+"/logout");
             return res.data;
         } catch(error: any) {
             throw error?.response?.data;
