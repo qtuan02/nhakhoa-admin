@@ -1,8 +1,24 @@
 import rootReducer from "./reducers/rootReducer";
-import storage from "redux-persist/lib/storage";
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
+import createWebStorage from "redux-persist/es/storage/createWebStorage";
+
+const createNoopStorage = () => {
+    return {
+        getItem(_key: any) {
+            return Promise.resolve(null);
+        },
+        setItem(_key: any, value: any) {
+            return Promise.resolve(value);
+        },
+        removeItem(_key: any) {
+            return Promise.resolve();
+        },
+    };
+};
+  
+const storage = typeof window !== 'undefined' ? createWebStorage('local') : createNoopStorage();
 
 const persistConfig = {
     key: "primary",
@@ -17,10 +33,8 @@ export const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-            },
-        }).concat([])
+            serializableCheck: false
+        })
 });
 
 setupListeners(store.dispatch);
