@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-const Layout = dynamic(() => import('@/components/layout/Index'), { ssr: true });
+const Layout = dynamic(() => import('@/components/layout/Index'), { ssr: false });
 
 export const metadata: Metadata = {
     title: "Quản trị - Nha khoa OK-Vip",

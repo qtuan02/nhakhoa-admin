@@ -11,15 +11,15 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <html lang="en">
-            <body className={inter.className}>
-                <StyledComponentsRegistry>
-                    <ReduxProvider>
+        <ReduxProvider>
+            <html lang="en">
+                <body className={inter.className}>
+                    <StyledComponentsRegistry>
                         <div>{children}</div>
                         <ToastContainer limit={3} autoClose={1200} position="bottom-right" draggable />
-                    </ReduxProvider>
-                </StyledComponentsRegistry>
-            </body>
-        </html>
+                    </StyledComponentsRegistry>
+                </body>
+            </html>
+        </ReduxProvider>
     );
 }

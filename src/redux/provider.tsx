@@ -15,7 +15,7 @@ export function ReduxProvider({ children }: { children: React.ReactNode }) {
 	useEffect(() => {
 		if (storeRef.current) {
 		  const unsubscribe = setupListeners(storeRef.current.dispatch);
-		  return unsubscribe;
+		  return () => unsubscribe();
 		}
 	  }, []);
 
