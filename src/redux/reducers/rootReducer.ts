@@ -12,7 +12,6 @@ import siderReducer from "./siderReducer";
 import userReducer from "./userReducer";
 import modalReducer from "./modalReducer";
 
-
 const rootReducer = combineReducers({
     appointment: appointmentReducer,
     authenticate: authenticateReducer,
