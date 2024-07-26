@@ -28,7 +28,7 @@ const authenticateSlice = createSlice({
         builder
             .addCase(login.pending, (state, action) => {
                 state.logging = true;
-                if(action.meta.arg.remember){
+                if(action?.meta?.arg?.remember){
                     const user = {
                         account: action.meta.arg.account,
                         password: action.meta.arg.password,
