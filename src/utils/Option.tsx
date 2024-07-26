@@ -115,13 +115,13 @@ const STATUS_HISTORY: any = [
 ];
 
 const COLUMN_CUSTOMER: any = [
-    { title: 'Mã khách hàng', dataIndex: 'address', key: 'id' },
-    { title: 'Tên khách hàng', dataIndex: 'address', key: 'name' },
-    { title: 'Số điện thoại', dataIndex: 'address', key: 'phone_number' },
-    { title: 'Ngày sinh', dataIndex: 'address', key: 'birthday' },
-    { title: 'Email', dataIndex: 'address', key: 'email' },
-    { title: 'Giới tính', dataIndex: 'address', key: 'gender' },
-    { title: 'Địa chỉ', dataIndex: 'address', key: 'address' },
+    { title: "Mã khách hàng", dataIndex: "address", key: "id" },
+    { title: "Tên khách hàng", dataIndex: "address", key: "name" },
+    { title: "Số điện thoại", dataIndex: "address", key: "phone_number" },
+    { title: "Ngày sinh", dataIndex: "address", key: "birthday" },
+    { title: "Email", dataIndex: "address", key: "email" },
+    { title: "Giới tính", dataIndex: "address", key: "gender" },
+    { title: "Địa chỉ", dataIndex: "address", key: "address" },
 ];
 
 const STATUS_INVOICE: any = [

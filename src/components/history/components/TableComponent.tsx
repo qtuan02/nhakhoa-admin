@@ -27,21 +27,21 @@ export default function TableComponent() {
             dataIndex: "customer_name",
             key: "customer_name",
             width: 230,
-            ...getColumnSearchProps('customer_name'),
+            ...getColumnSearchProps("customer_name"),
         },
         {
             title: "Tên nha sĩ",
             dataIndex: "doctor_name",
             key: "doctor_name",
             width: 230,
-            ...getColumnSearchProps('doctor_name'),
+            ...getColumnSearchProps("doctor_name"),
         },
         {
             title: "Ngày hẹn",
             dataIndex: "date",
             key: "date",
             width: 150,
-            ...getColumnSearchProps('date'),
+            ...getColumnSearchProps("date"),
             sorter: (a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime(),
             render: (date) => <p>{formatDate(date)}</p>
         },
@@ -50,7 +50,7 @@ export default function TableComponent() {
             dataIndex: "time",
             key: "time",
             width: 120,
-            ...getColumnSearchProps('time'),
+            ...getColumnSearchProps("time"),
         },
         {
             title: "Trạng thái",
@@ -58,9 +58,9 @@ export default function TableComponent() {
             key: "status",
             width: 100,
             filters: [
-                { text: 'Đang chờ', value: 0 },
-                { text: 'Hoàn thành', value: 1 },
-                { text: 'Xác nhận', value: 2 },
+                { text: "Đang chờ", value: 0 },
+                { text: "Hoàn thành", value: 1 },
+                { text: "Xác nhận", value: 2 },
             ],
             onFilter: (value, item) => item.status === value,
             render: (status) => {
@@ -91,7 +91,7 @@ export default function TableComponent() {
             width: 120,
             render: (item) => (
                 <CSpace>
-                    <CButton tooltip="Chi tiết" link={`/lich-kham/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
+                    <CButton tooltip="Chi tiết" link={`/lich-kham/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className="ts-16"></CButton>
                 </CSpace>
             )
         }
@@ -101,7 +101,7 @@ export default function TableComponent() {
         <CTable
             columns={columns}
             dataSource={history?.data?.map((item: IHistory, index: number) => ({...item, index: index + 1, key: item.id, customer_name: item.customer?.name, doctor_name: item.doctor?.name })) || []}
-            pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15'] }}
+            pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ["5", "10", "15"] }}
         />
     );
 }

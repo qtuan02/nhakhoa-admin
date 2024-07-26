@@ -38,7 +38,7 @@ export default function TableComponent() {
             dataIndex: "name",
             key: "name",
             width: 225,
-            ...getColumnSearchProps('name'),
+            ...getColumnSearchProps("name"),
             ellipsis: true
         },
         {
@@ -46,14 +46,14 @@ export default function TableComponent() {
             dataIndex: "phone_number",
             key: "phone_number",
             width: 150,
-            ...getColumnSearchProps('phone_number'),
+            ...getColumnSearchProps("phone_number"),
         },
         {
             title: "Email",
             dataIndex: "email",
             key: "email",
             width: 225,
-            ...getColumnSearchProps('email'),
+            ...getColumnSearchProps("email"),
         },
         {
             title: "Chức vụ",
@@ -61,9 +61,9 @@ export default function TableComponent() {
             key: "role",
             width: 150,
             filters: [
-                { text: 'Nha sĩ', value: 1 },
-                { text: 'Nhân viên y tế', value: 2 },
-                { text: 'Quản trị viên', value: 3 },
+                { text: "Nha sĩ", value: 1 },
+                { text: "Nhân viên y tế", value: 2 },
+                { text: "Quản trị viên", value: 3 },
             ],
             onFilter: (value, item) => item.role === value,
             render: (role) => {
@@ -94,8 +94,8 @@ export default function TableComponent() {
             key: "status",
             width: 120,
             filters: [
-                { text: 'Hoạt động', value: 1 },
-                { text: 'Vô hiệu hóa', value: 0 },
+                { text: "Hoạt động", value: 1 },
+                { text: "Vô hiệu hóa", value: 0 },
             ],
             onFilter: (value, item) => item.status === value,
             render: (status) => (<CTag icon={status === 1 ? <CheckCircleOutlined /> : <CloseCircleOutlined />} color={status === 1 ? "green" : "red"}>{status === 1 ? "Hoạt động" : "Vô hiệu hóa"}</CTag>)
@@ -106,14 +106,14 @@ export default function TableComponent() {
             width: 150,
             render: (item) => (
                 <CSpace>
-                    <CButton tooltip="Chỉnh sửa thông tin nhân viên y tế" link={`/nguoi-dung/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
-                    <CButton tooltip="Đổi mật khẩu" type="primary" danger icon={<FontAwesomeIcon icon={faKey} />} className='ts-16'
+                    <CButton tooltip="Chỉnh sửa thông tin nhân viên y tế" link={`/nguoi-dung/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className="ts-16"></CButton>
+                    <CButton tooltip="Đổi mật khẩu" type="primary" danger icon={<FontAwesomeIcon icon={faKey} />} className="ts-16"
                         onClick={() => {
                             dispatch(toggleModal());
                             dispatch(setUserId(String(item.id)));
                         }}
                     ></CButton>
-                    {item.role === 1 && item.status === 1 ? <CButton tooltip="Tạo lịch làm việc" link={`/lich-lam-viec/them/${item.id}`} type="default" icon={<FontAwesomeIcon icon={faCalendarPlus} />} className='ts-16'></CButton> : null}
+                    {item.role === 1 && item.status === 1 ? <CButton tooltip="Tạo lịch làm việc" link={`/lich-lam-viec/them/${item.id}`} type="default" icon={<FontAwesomeIcon icon={faCalendarPlus} />} className="ts-16"></CButton> : null}
                 </CSpace>
             )
         }
@@ -124,7 +124,7 @@ export default function TableComponent() {
             <CTable
                 columns={columns}
                 dataSource={user?.data?.map((item: IUser, index: number) => ({ ...item, index: index + 1, key: item.id, role: item.role?.id })) || []}
-                pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15'] }}
+                pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ["5", "10", "15"] }}
             />
             <ModalComponent />
         </>

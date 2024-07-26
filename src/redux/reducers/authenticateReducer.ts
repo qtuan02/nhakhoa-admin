@@ -34,7 +34,7 @@ const authenticateSlice = createSlice({
                         password: action.meta.arg.password,
                         remember: action.meta.arg.remember
                     };
-                    localStorage.setItem('r_u', JSON.stringify(user));
+                    localStorage.setItem("r_u", JSON.stringify(user));
                 }
             })
             .addCase(login.fulfilled, (state, action) => {

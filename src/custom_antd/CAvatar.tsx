@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import { Avatar, AvatarProps } from 'antd';
+import React, { ReactNode } from "react";
+import { Avatar, AvatarProps } from "antd";
 
 interface CAvatarProps extends AvatarProps {
 	children?: ReactNode;

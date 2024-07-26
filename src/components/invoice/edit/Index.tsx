@@ -36,7 +36,7 @@ export default function EditInvoiceComponent() {
     }
 
     useEffect(() => {
-        if(invoice.edit === 'success' || invoice.edit === 'fail'){
+        if(invoice.edit === "success" || invoice.edit === "fail"){
             if(id){
                 getDataInvoice(id as string);
             }else{
@@ -45,17 +45,17 @@ export default function EditInvoiceComponent() {
         }
     }, [id, invoice.edit]);
 
-    const items: TabsProps['items'] = [
+    const items: TabsProps["items"] = [
         {
-            key: 'detail',
-            label: 'Thông tin hóa đơn',
+            key: "detail",
+            label: "Thông tin hóa đơn",
             children: <CSkeleton loading={invoice.loading || loading}>
                 <DetailComponent data={data} />
             </CSkeleton>,
         },
         {
-            key: 'form',
-            label: 'Thanh toán hóa đơn',
+            key: "form",
+            label: "Thanh toán hóa đơn",
             children: <CSkeleton loading={invoice.loading || loading}>
                 <FormEditComponent data={data} onSubmit={handleSubmit} />
             </CSkeleton >,

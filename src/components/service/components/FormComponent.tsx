@@ -25,15 +25,15 @@ interface FormComponentProps {
 }
 
 const initialService: IService = {
-  image: '',
-  name: '',
+  image: "",
+  name: "",
   quantity_sold: 0,
   category_id: 1,
   min_price: 1000,
   max_price: 1000,
-  unit: '',
+  unit: "",
   status: 1,
-  description: '',
+  description: "",
 };
 
 export default function FormComponent({ onSubmit, data }: FormComponentProps) {

@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import { Space, SpaceProps } from 'antd';
+import React, { ReactNode } from "react";
+import { Space, SpaceProps } from "antd";
 
 interface CSpaceProps extends SpaceProps {
 	children?: ReactNode;

@@ -1,6 +1,6 @@
-import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import rootReducer from "./reducers/rootReducer";
 import storage from "redux-persist/lib/storage";
+import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 
 const persistConfig = {

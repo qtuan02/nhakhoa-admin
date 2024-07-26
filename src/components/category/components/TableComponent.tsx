@@ -38,7 +38,7 @@ export default function TableComponent() {
             dataIndex: "name",
             key: "name",
             width: 450,
-            ...getColumnSearchProps('name'),
+            ...getColumnSearchProps("name"),
         },
         {
             title: "Trạng thái",
@@ -46,8 +46,8 @@ export default function TableComponent() {
             key: "status",
             width: 300,
             filters: [
-                { text: 'Hoạt động', value: 1 },
-                { text: 'Vô hiệu hóa', value: 0 },
+                { text: "Hoạt động", value: 1 },
+                { text: "Vô hiệu hóa", value: 0 },
             ],
             onFilter: (value, item) => item.status === value,
             render: (status) => ( <CTag icon={ status === 1 ? <CheckCircleOutlined /> : <CloseCircleOutlined />} color={status === 1 ? "green" : "red"}>{status === 1 ? "Hoạt động" : "Vô hiệu hóa"}</CTag> )
@@ -58,9 +58,9 @@ export default function TableComponent() {
             width: 300,
             render: (item) => (
                 <CSpace>
-                    <CButton tooltip="Chỉnh sửa danh mục" link={`/danh-muc/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
+                    <CButton tooltip="Chỉnh sửa danh mục" link={`/danh-muc/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className="ts-16"></CButton>
                     <CPopConfirm title={"Thông báo!!!"} description={`Bạn muốn xóa danh mục "${item.name}"`} onConfirm={() => dispatch(deleteCategory(item.id))}>
-                        <CButton tooltip="Xóa danh mục" type="primary" danger icon={<FontAwesomeIcon icon={faTrashCan} />} className='ts-16'></CButton>
+                        <CButton tooltip="Xóa danh mục" type="primary" danger icon={<FontAwesomeIcon icon={faTrashCan} />} className="ts-16"></CButton>
                     </CPopConfirm>
                 </CSpace>
             )
@@ -70,7 +70,7 @@ export default function TableComponent() {
         <CTable
             columns={columns}
             dataSource={category?.data?.map((item: ICategory, index: number) => ({...item, index: index + 1, key: item.id })) || []}
-            pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15'] }}
+            pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ["5", "10", "15"] }}
         />
     );
 }

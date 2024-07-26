@@ -25,20 +25,20 @@ export default function ProfileComponent({ data }: ProfileComponentProps) {
             dataIndex: "index",
             key: "index",
         },
-        { title: 'Ngày', dataIndex: 'date', key: 'date', render: (date) => <p>{formatDate(date)}</p> },
-        { title: 'Thời gian', dataIndex: 'time', key: 'time' },
-        { title: 'Nha sĩ', dataIndex: 'doctor_name', key: 'doctor_name' },
-        { title: 'Tổng giá', dataIndex: 'total_price', key: 'total_price', render: (total_price: number) => (<span>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(total_price))}</span>) },
+        { title: "Ngày", dataIndex: "date", key: "date", render: (date) => <p>{formatDate(date)}</p> },
+        { title: "Thời gian", dataIndex: "time", key: "time" },
+        { title: "Nha sĩ", dataIndex: "doctor_name", key: "doctor_name" },
+        { title: "Tổng giá", dataIndex: "total_price", key: "total_price", render: (total_price: number) => (<span>{new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(Number(total_price))}</span>) },
         {
-            title: 'Chi tiết',
-            key: 'detail',
+            title: "Chi tiết",
+            key: "detail",
             render: (item: IHistory) => (
                 <CButton onClick={() => {
                     dispatch(toggleDrawer());
                     dispatch(setHistoryId(String(item.id)));
                 }}
                     tooltip="Chi tiết khám" type="dashed" size="small" shape="circle"
-                    icon={<FontAwesomeIcon icon={faInfo} />} className='ts-16'></CButton>
+                    icon={<FontAwesomeIcon icon={faInfo} />} className="ts-16"></CButton>
             ),
         },
     ] as TableColumnsType<IHistory>;

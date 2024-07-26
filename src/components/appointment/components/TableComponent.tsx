@@ -30,21 +30,21 @@ export default function TableComponent() {
             dataIndex: "name",
             key: "name",
             width: 230,
-            ...getColumnSearchProps('name'),
+            ...getColumnSearchProps("name"),
         },
         {
             title: "Số điện thoại",
             dataIndex: "phone",
             key: "phone",
             width: 150,
-            ...getColumnSearchProps('phone'),
+            ...getColumnSearchProps("phone"),
         },
         {
             title: "Ngày hẹn",
             dataIndex: "date",
             key: "date",
             width: 150,
-            ...getColumnSearchProps('date'),
+            ...getColumnSearchProps("date"),
             sorter: (a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime(),
             render: (date) => <p>{formatDate(date)}</p>
         },
@@ -53,7 +53,7 @@ export default function TableComponent() {
             dataIndex: "time",
             key: "time",
             width: 120,
-            ...getColumnSearchProps('time'),
+            ...getColumnSearchProps("time"),
         },
         {
             title: "Trạng thái",
@@ -61,9 +61,9 @@ export default function TableComponent() {
             key: "status",
             width: 120,
             filters: [
-                { text: 'Đang chờ', value: 0 },
-                { text: 'Xác nhận', value: 1 },
-                { text: 'Hủy', value: 2 },
+                { text: "Đang chờ", value: 0 },
+                { text: "Xác nhận", value: 1 },
+                { text: "Hủy", value: 2 },
             ],
             onFilter: (value, item) => item.status === value,
             render: (status) => {
@@ -94,9 +94,9 @@ export default function TableComponent() {
             width: 120,
             render: (item) => (
                 <CSpace>
-                    <CButton tooltip="Chỉnh sửa lịch hẹn" link={`/lich-hen/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
+                    <CButton tooltip="Chỉnh sửa lịch hẹn" link={`/lich-hen/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className="ts-16"></CButton>
                     <CPopConfirm title={"Thông báo!!!"} description={`Bạn muốn xóa lịch hẹn của "${item.name}"`} onConfirm={() => dispatch(deleteAppointment(item.id))}>
-                        <CButton tooltip="Xóa danh mục" type="primary" danger icon={<FontAwesomeIcon icon={faTrashCan} />} className='ts-16'></CButton>
+                        <CButton tooltip="Xóa danh mục" type="primary" danger icon={<FontAwesomeIcon icon={faTrashCan} />} className="ts-16"></CButton>
                     </CPopConfirm>
                 </CSpace>
             )
@@ -106,7 +106,7 @@ export default function TableComponent() {
         <CTable
             columns={columns}
             dataSource={appoinment?.data?.map((item: IAppointment, index: number) => ({...item, index: index + 1, key: item.id })) || []}
-            pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15'] }}
+            pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ["5", "10", "15"] }}
         />
     );
 }

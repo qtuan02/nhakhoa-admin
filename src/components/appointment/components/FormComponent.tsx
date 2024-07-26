@@ -11,7 +11,7 @@ import { getAppointmentState, removeService, setDate, setServices, setTime, togg
 import { Avatar, Form, Input, List, Select } from "antd";
 import { useEffect } from "react";
 import ModalComponent from "./ModalComponent";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 import { STATUS_APPOINTMENT } from "@/utils/Option";
 import { formatDate } from "@/utils/FunctionHelpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -28,13 +28,13 @@ interface FormComponentProps {
 }
 
 const initialAppointment: IAppointment = {
-    name: '',
-    phone: '',
-    doctor_id: '',
-    date: '',
-    time: '',
+    name: "",
+    phone: "",
+    doctor_id: "",
+    date: "",
+    time: "",
     services: [],
-    note: '',
+    note: "",
     status: 0,
 }
 
@@ -46,11 +46,11 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
     const appointment = useAppSelector(getAppointmentState);
 
     useEffect(() => {
-        if(user.status === 'completed' || user.status === 'rejected') {
+        if(user.status === "completed" || user.status === "rejected") {
             dispatch(getUsers());
         }
 
-        if (appointment.statusTime === 'completed' || appointment.statusTime === 'rejected') {
+        if (appointment.statusTime === "completed" || appointment.statusTime === "rejected") {
             dispatch(getTimes());
         }
 
@@ -64,12 +64,12 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
             }
             form.setFieldsValue({
                 ...data,
-                doctor_id: data?.doctor?.id || '',
-                date: data.doctor ? dayjs(data?.date).format('YYYY-MM-DD') || '' : dayjs(data?.date) || '',
+                doctor_id: data?.doctor?.id || "",
+                date: data.doctor ? dayjs(data?.date).format("YYYY-MM-DD") || "" : dayjs(data?.date) || "",
             });
         }
 
-        if(user.statusDoctors === 'completed' || user.statusDoctors === 'rejected') {
+        if(user.statusDoctors === "completed" || user.statusDoctors === "rejected") {
             dispatch(getDoctors());
         }
 
@@ -80,7 +80,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
     };
 
     const handleDoctorChange = (doctorId: string) => {
-        form.setFieldsValue({ date: '', time: '' });
+        form.setFieldsValue({ date: "", time: "" });
         if (doctorId) {
             dispatch(getDate(doctorId));
             dispatch(setTime());
@@ -90,7 +90,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
     };
 
     const handleDateChange = (date: string) => {
-        form.setFieldsValue({ time: '' });
+        form.setFieldsValue({ time: "" });
         if (date) {
             dispatch(getTime({ doctor_id: form.getFieldValue("doctor_id"), date: date }));
         } else {
@@ -192,7 +192,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                                     <List.Item.Meta
                                         avatar={<Avatar shape="square" size="large" src={item?.image} />}
                                         title={<CRow justify="space-between">{item?.name}<CButton type="primary" danger size="small" onClick={() => dispatch(removeService(item?.id || -1))}>Xóa</CButton></CRow>}
-                                        description={new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(item?.min_price)) + "/" + item?.unit}
+                                        description={new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(Number(item?.min_price)) + "/" + item?.unit}
                                     />
                                 </List.Item>
                             )}
@@ -207,7 +207,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                     maxLength={500}
                     placeholder="Thông tin thêm"
                     className="ts-16"
-                    style={{ height: 150, resize: 'none' }}
+                    style={{ height: 150, resize: "none" }}
                 />
             </Form.Item>
             <CRow className="gap-4 justify-end">

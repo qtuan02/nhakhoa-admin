@@ -12,8 +12,8 @@ import { Form, Input, Modal } from "antd";
 import { useState } from "react";
 
 const initialChangepasswordForm: IChangepassword = {
-    password: '',
-    new_password: ''
+    password: "",
+    new_password: ""
 }
 
 

@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
+import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 
 export const metadata: Metadata = {
-    title: 'Đăng nhập',
+    title: "Đăng nhập",
     icons: {
         icon: "/logo.png"
     }
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <div className='flex justify-center items-center h-screen'>
+        <div className="flex justify-center items-center h-screen">
             {children}
         </div>
     );

@@ -1,14 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('./antd.css');
+@import url("./antd.css");
 
 * {
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
 	list-style: none;
-	font-family: 'Arial', sans-serif !important;
+	font-family: "Arial", sans-serif !important;
 }
 
 html,
@@ -44,7 +44,7 @@ body {
 }
 
 .form-login {
-    background-image: url('/bg-login.png');
+    background-image: url("/bg-login.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center top;

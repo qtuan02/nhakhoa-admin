@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import { Badge, BadgeProps } from 'antd';
+import React, { ReactNode } from "react";
+import { Badge, BadgeProps } from "antd";
 
 interface CBadgeProps extends BadgeProps {
 	children?: ReactNode;

@@ -1,8 +1,8 @@
 import { GetProp, MenuProps } from "antd";
 import { Dispatch, Key, ReactNode, SetStateAction } from "react";
-import { TinyColor } from '@ctrl/tinycolor';
-import React from 'react';
-import { FilterConfirmProps } from 'antd/es/table/interface';
+import { TinyColor } from "@ctrl/tinycolor";
+import React from "react";
+import { FilterConfirmProps } from "antd/es/table/interface";
 import CInput from "@/custom_antd/CInput";
 import CSpace from "@/custom_antd/CSpace";
 import CButton from "@/custom_antd/CButton";
@@ -11,7 +11,7 @@ import { faMagnifyingGlass, faRotateRight } from "@fortawesome/free-solid-svg-ic
 import { toast } from "react-toastify";
 
 
-type MenuItem = GetProp<MenuProps, 'items'>[number];
+type MenuItem = GetProp<MenuProps, "items">[number];
 
 export const customItemMenu = (label?: ReactNode, key?: Key, icon?: ReactNode, children?: MenuItem[], type?: string): MenuItem => {
     return { label, key, icon, children, type } as MenuItem;
@@ -46,23 +46,23 @@ export const getColumnSearchProps = (dataIndex: string) => ({
                 value={selectedKeys[0]}
                 onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
                 onPressEnter={() => handleSearch(selectedKeys, confirm)}
-                style={{ marginBottom: 8, display: 'block' }}
+                style={{ marginBottom: 8, display: "block" }}
             />
             <CSpace>
                 <CButton
-                    type='primary'
+                    type="primary"
                     onClick={() => handleSearch(selectedKeys, confirm)}
                     icon={<FontAwesomeIcon icon={faMagnifyingGlass} />}
-                    size='small'
+                    size="small"
                     style={{ width: 90 }}
                 >
                     Tìm
                 </CButton>
                 <CButton
-                    type='primary'
+                    type="primary"
                     onClick={() => clearFilters && handleReset(clearFilters, confirm)}
                     icon={<FontAwesomeIcon icon={faRotateRight} />}
-                    size='small'
+                    size="small"
                     danger
                     style={{ width: 90 }}
                 >
@@ -73,7 +73,7 @@ export const getColumnSearchProps = (dataIndex: string) => ({
     ),
     filterIcon: () => <FontAwesomeIcon icon={faMagnifyingGlass} />,
     onFilter: (value: string, record: Record<string, any>) =>
-        (record[dataIndex] || '').toString().toLowerCase().includes(value.toLowerCase()),
+        (record[dataIndex] || "").toString().toLowerCase().includes(value.toLowerCase()),
     render: (text: string) => text,
 });
 

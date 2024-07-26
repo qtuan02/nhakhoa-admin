@@ -31,7 +31,7 @@ export default function TableComponent() {
             dataIndex: "name",
             key: "name",
             width: 180,
-            ...getColumnSearchProps('name'),
+            ...getColumnSearchProps("name"),
             ellipsis: true,
         },
         {
@@ -39,7 +39,7 @@ export default function TableComponent() {
             dataIndex: "phone_number",
             key: "phone_number",
             width: 140,
-            ...getColumnSearchProps('phone_number'),
+            ...getColumnSearchProps("phone_number"),
         },
         {
             title: "Ngày sinh",
@@ -53,7 +53,7 @@ export default function TableComponent() {
             dataIndex: "email",
             key: "email",
             width: 150,
-            ...getColumnSearchProps('email'),
+            ...getColumnSearchProps("email"),
             ellipsis: true,
         },
         {
@@ -62,8 +62,8 @@ export default function TableComponent() {
             key: "gender",
             width: 120,
             filters: [
-                { text: 'Nam', value: 1 },
-                { text: 'Nữ', value: 0 },
+                { text: "Nam", value: 1 },
+                { text: "Nữ", value: 0 },
             ],
             onFilter: (value, item) => item.gender === value,
             render: (gender) => (<span>{gender === 1 ? "Nam" : "Nữ"}</span>)
@@ -81,8 +81,8 @@ export default function TableComponent() {
             width: 100,
             render: (item) => (
                 <CSpace>
-                    <CButton link={`/khach-hang/sua/${item.id}`} tooltip="Chỉnh sửa thông tin khách hàng" type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
-                    <CButton link={`/lich-kham/them/${item.id}`} tooltip="Tạo lịch khám" type="primary" danger icon={<FontAwesomeIcon icon={faCirclePlus} />} className='ts-16'></CButton>
+                    <CButton link={`/khach-hang/sua/${item.id}`} tooltip="Chỉnh sửa thông tin khách hàng" type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className="ts-16"></CButton>
+                    <CButton link={`/lich-kham/them/${item.id}`} tooltip="Tạo lịch khám" type="primary" danger icon={<FontAwesomeIcon icon={faCirclePlus} />} className="ts-16"></CButton>
                 </CSpace>
             )
         }
@@ -97,20 +97,20 @@ export default function TableComponent() {
 
     const expandedRowRender = (record: ICustomer) => {
         const columns = [
-            { title: 'Ngày', dataIndex: 'date', key: 'date', render: (date: string) => <p>{formatDate(date)}</p> },
-            { title: 'Thời gian', dataIndex: 'time', key: 'time' },
-            { title: 'Nha sĩ', dataIndex: 'doctor_name', key: 'doctor_name' },
-            { title: 'Tổng giá', dataIndex: 'total_price', key: 'total_price', render: (total_price: number) => ( <span>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(total_price))}</span> ) },
+            { title: "Ngày", dataIndex: "date", key: "date", render: (date: string) => <p>{formatDate(date)}</p> },
+            { title: "Thời gian", dataIndex: "time", key: "time" },
+            { title: "Nha sĩ", dataIndex: "doctor_name", key: "doctor_name" },
+            { title: "Tổng giá", dataIndex: "total_price", key: "total_price", render: (total_price: number) => ( <span>{new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(Number(total_price))}</span> ) },
             {
-                title: 'Chi tiết',
-                key: 'detail',
+                title: "Chi tiết",
+                key: "detail",
                 render: (item: IHistory) => (
                     <CButton onClick={() => {
                         dispatch(toggleDrawer());
                         dispatch(setHistoryId(String(item.id)));
                     }}
                     tooltip="Chi tiết khám" type="dashed" size="small" shape="circle"
-                    icon={<FontAwesomeIcon icon={faInfo} />} className='ts-16'></CButton>
+                    icon={<FontAwesomeIcon icon={faInfo} />} className="ts-16"></CButton>
                 ),
             },
         ];
@@ -151,7 +151,7 @@ export default function TableComponent() {
             <CTable
                 columns={newColumns}
                 dataSource={customer?.data?.map((item: ICustomer, index: number) => ({ ...item, index: index + 1, key: item.id })) || []}
-                pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15'] }}
+                pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ["5", "10", "15"] }}
                 expandable={{ expandedRowRender }}
             />
         </>

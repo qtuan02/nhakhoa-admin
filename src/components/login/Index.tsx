@@ -12,8 +12,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Checkbox, Form, Input, Spin } from "antd";
 
 const initialLogin: ILogin = {
-    account: '',
-    password: '',
+    account: "",
+    password: "",
     remember: false,
 }
 
@@ -29,10 +29,10 @@ export default function LoginComponent() {
 
     useEffect(() => {
         if (isLoggedIn) {
-            window.location.assign('/');
+            window.location.assign("/");
         }
 
-        const user = JSON.parse(localStorage.getItem('r_u') || '{}');
+        const user = JSON.parse(localStorage.getItem("r_u") || "{}");
         if (user) {
             form.setFieldsValue(user);
         }
@@ -40,14 +40,14 @@ export default function LoginComponent() {
     }, [form, isLoggedIn]);
 
     return (
-        isLoggedIn ? <div className='w-screen h-screen flex items-center justify-center z-10'><Spin size='large'></Spin></div> :
+        isLoggedIn ? <div className="w-screen h-screen flex items-center justify-center z-10"><Spin size="large"></Spin></div> :
             <div className="bg-login flex items-center justify-center">
                 <Form layout="vertical" onFinish={handleSubmit} initialValues={initialLogin} form={form} className="form-login !pt-10 !px-20 w-[600px] h-[450px] rounded-2xl">
                     <CTitle>Đăng nhập</CTitle>
-                    <Form.Item label="Tài khoản" className="!mb-4" name="account" rules={[{ required: true, message: 'Hãy nhập tài khoản!' }]}>
+                    <Form.Item label="Tài khoản" className="!mb-4" name="account" rules={[{ required: true, message: "Hãy nhập tài khoản!" }]}>
                         <CInput size="large" placeholder="Email hoặc số điện thoại..." autoComplete="username" />
                     </Form.Item>
-                    <Form.Item label="Mật khẩu" className="!mb-2" name="password" rules={[{ required: true, message: 'Hãy nhập mật khẩu!' }]}>
+                    <Form.Item label="Mật khẩu" className="!mb-2" name="password" rules={[{ required: true, message: "Hãy nhập mật khẩu!" }]}>
                         <Input.Password size="large" placeholder="Mật khẩu..." autoComplete="current-password" />
                     </Form.Item>
                     <Form.Item name="remember" valuePropName="checked" className="!mb-4">

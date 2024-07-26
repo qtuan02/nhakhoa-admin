@@ -1,7 +1,6 @@
-import LayoutComponent from "@/components/layout/Index";
 import type { Metadata } from "next";
-// import dynamic from "next/dynamic";
-// const Layout = dynamic(() => import('@/components/layout/Index'), { ssr: false });
+import dynamic from "next/dynamic";
+const AppLayout = dynamic(() => import("@/components/layout/AppLayout"), { ssr: false });
 
 export const metadata: Metadata = {
     title: "Quản trị - Nha khoa OK-Vip",
@@ -12,6 +11,6 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <LayoutComponent>{children}</LayoutComponent>
+        <AppLayout>{children}</AppLayout>
     );
 }

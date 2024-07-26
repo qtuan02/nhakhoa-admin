@@ -33,7 +33,7 @@ export default function EditCategoryComponent() {
     }
 
     useEffect(() => {
-        if(category.edit === 'success' || category.edit === 'fail'){
+        if(category.edit === "success" || category.edit === "fail"){
             getDataCategory(id as string);
         }
     }, [id, category.edit]);
@@ -44,7 +44,7 @@ export default function EditCategoryComponent() {
                 <CTitle>Cập nhật danh mục</CTitle>
                 <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
             </CRow>
-            <CSkeleton loading={category.edit === 'wait' || loading}>
+            <CSkeleton loading={category.edit === "wait" || loading}>
                 <FormComponent onSubmit={handleSubmit} data={data} />
             </CSkeleton>
         </>

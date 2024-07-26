@@ -35,7 +35,7 @@ export default function EditCustomerComponent() {
     }
 
     useEffect(() => {
-        if(customer.edit === 'success' || customer.edit === 'fail'){
+        if(customer.edit === "success" || customer.edit === "fail"){
             getDataCustomer(id as string);
         }
     }, [id, customer.edit]);
@@ -46,7 +46,7 @@ export default function EditCustomerComponent() {
                 <CTitle>Chỉnh sửa khách hàng</CTitle>
                 <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
             </CRow>
-            <CSkeleton loading={customer.edit === 'wait' || loading}>
+            <CSkeleton loading={customer.edit === "wait" || loading}>
                 <FormComponent onSubmit={handleSubmit} data={data} />
             </CSkeleton>
         </>

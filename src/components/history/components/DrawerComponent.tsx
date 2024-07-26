@@ -40,7 +40,7 @@ export default function DrawerComponent() {
             title: "Tên dịch vụ",
             dataIndex: "name",
             key: "name",
-            ...getColumnSearchProps('name'),
+            ...getColumnSearchProps("name"),
         },
         {
             title: "Số lượng",
@@ -53,14 +53,14 @@ export default function DrawerComponent() {
             dataIndex: "price",
             key: "price",
             sorter: (a: any, b: any) => a.price - b.price,
-            render: (price: number) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)
+            render: (price: number) => new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(price)
         },
         {
             title: "Tổng",
             dataIndex: "total",
             key: "total",
             sorter: (a: any, b: any) => a.total - b.total,
-            render: (total: number) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(total)
+            render: (total: number) => new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(total)
         }
     ] as TableColumnsType<IHistoryDetail>;
 
@@ -83,7 +83,7 @@ export default function DrawerComponent() {
                     <CDescriptionItem title="Thời gian" content={data?.time} />
                 </CCol>
             </CRow>
-            <CDescriptionItem title="Tổng giá" content={new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(data?.total_price))} />
+            <CDescriptionItem title="Tổng giá" content={new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(Number(data?.total_price))} />
             <CDescriptionItem title="Ghi chú" content={data?.note} />
             <Divider>Dịch vụ</Divider>
             <CTable

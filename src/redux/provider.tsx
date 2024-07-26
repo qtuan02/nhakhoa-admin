@@ -1,12 +1,12 @@
-'use client';
-import { Provider } from 'react-redux';
-import { persistor, store } from './store';
-import { useEffect, useRef } from 'react';
+"use client";
+import { Provider } from "react-redux";
+import { persistor, store } from "./store";
+import { useEffect, useRef } from "react";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { PersistGate } from 'redux-persist/integration/react';
+import { PersistGate } from "redux-persist/integration/react";
 
 export function ReduxProvider({ children }: { children: React.ReactNode }) {
-	const storeRef = useRef<typeof store | null>(null);
+	const storeRef = useRef<typeof store>();
 
 	if (!storeRef.current) {
 		storeRef.current = store;
@@ -15,7 +15,7 @@ export function ReduxProvider({ children }: { children: React.ReactNode }) {
 	useEffect(() => {
 		if (storeRef.current) {
 		  const unsubscribe = setupListeners(storeRef.current.dispatch);
-		  return () => unsubscribe();
+		  return unsubscribe;
 		}
 	  }, []);
 

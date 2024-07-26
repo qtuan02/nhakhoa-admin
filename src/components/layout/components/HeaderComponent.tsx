@@ -21,36 +21,36 @@ export default function HeaderComponent() {
     const { sider } = useAppSelector(getSiderState);
     const { currentUser, isLoggedIn } = useAppSelector(getAuthenticateState);
 
-    const items: MenuProps['items'] = [
+    const items: MenuProps["items"] = [
         {
-            key: 'info',
-            type: 'group',
+            key: "info",
+            type: "group",
             label: <span>
-                <p className='text-[#000]'>{currentUser?.name || ''}</p>
-                <p className='ts-12'>{currentUser?.email || ''}</p>
+                <p className="text-[#000]">{currentUser?.name || ""}</p>
+                <p className="ts-12">{currentUser?.email || ""}</p>
             </span>
         },
         {
-            type: 'divider',
+            type: "divider",
         },
         {
-            key: 'profile',
-            label: <Link href='/thong-tin' >Thông tin</Link>,
+            key: "profile",
+            label: <Link href="/thong-tin" >Thông tin</Link>,
             icon: <FontAwesomeIcon icon={faAddressCard} />
         },
         {
-            key: 'change-password',
-            label: <Link href='#' onClick={() => dispatch(toggleModalHeader())}>Đổi mật khẩu</Link>,
+            key: "change-password",
+            label: <Link href="#" onClick={() => dispatch(toggleModalHeader())}>Đổi mật khẩu</Link>,
             icon: <FontAwesomeIcon icon={faLock} />
         },
         {
-            type: 'divider',
+            type: "divider",
         },
     ];
 
     return (
-        <Header className='!bg-[#fff] mx-4 my-2 rounded-xl !px-6'>
-            <CRow className='justify-between'>
+        <Header className="!bg-[#fff] mx-4 my-2 rounded-xl !px-6">
+            <CRow className="justify-between">
                 <CCol>
                     <CRow gutter={[16, 16]}>
                         <CCol>
@@ -63,22 +63,22 @@ export default function HeaderComponent() {
                 <CCol>
                     <Flex gap={16}>
                         <CCol>
-                            <Badge count="1" size='small' color='#f50'>
-                                <CButton size='large' type="default" shape='circle' icon={<FontAwesomeIcon icon={faBell} />}></CButton>
+                            <Badge count="1" size="small" color="#f50">
+                                <CButton size="large" type="default" shape="circle" icon={<FontAwesomeIcon icon={faBell} />}></CButton>
                             </Badge>
                         </CCol>
                         <CCol>
-                            <CDropDown menu={{ items }} trigger={['click']} placement="bottomRight"
+                            <CDropDown menu={{ items }} trigger={["click"]} placement="bottomRight"
                                 dropdownRender={(menu) => (
-                                    <div className='bg-[#ffffff] shadow-lg px-2 py-2 rounded-lg border'>
-                                        {React.cloneElement(menu as React.ReactElement, { style: { boxShadow: 'none' } })}
-                                        <Flex justify='center'>
-                                            <CButton icon={<FontAwesomeIcon icon={faSignOut} />} type='default' danger
+                                    <div className="bg-[#ffffff] shadow-lg px-2 py-2 rounded-lg border">
+                                        {React.cloneElement(menu as React.ReactElement, { style: { boxShadow: "none" } })}
+                                        <Flex justify="center">
+                                            <CButton icon={<FontAwesomeIcon icon={faSignOut} />} type="default" danger
                                                 onClick={() => dispatch(logoutToken())}>Đăng xuất</CButton>
                                         </Flex>
                                     </div>
                                 )}>
-                                <Avatar className='hover:bg-[#d9d9d9] hover:opacity-90 cursor-pointer shadow-sm' style={{ border: '1px solid #d9d9d9'}} size="large" src={currentUser?.avatar || ''} alt="Ảnh đại diện..." />
+                                <Avatar className="hover:bg-[#d9d9d9] hover:opacity-90 cursor-pointer shadow-sm" style={{ border: "1px solid #d9d9d9"}} size="large" src={currentUser?.avatar || ""} alt="Ảnh đại diện..." />
                             </CDropDown>
                             <ModalComponent />
                         </CCol>

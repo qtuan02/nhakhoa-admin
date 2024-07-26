@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import { Menu, MenuProps } from 'antd';
+import React, { ReactNode } from "react";
+import { Menu, MenuProps } from "antd";
 
 interface CMenuProps extends MenuProps {
 	children?: ReactNode;

@@ -11,7 +11,7 @@ import { htmlToEditor } from "@/utils/FunctionHelpers";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { DatePicker, Form, Input } from "antd";
 import { useEffect } from "react";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faSave } from "@fortawesome/free-solid-svg-icons";
 
@@ -22,16 +22,16 @@ interface FormComponentProps {
 }
 
 const initialUser: IUser = {
-    avatar: '',
-    name: '',
-    phone_number: '',
-    email: '',
+    avatar: "",
+    name: "",
+    phone_number: "",
+    email: "",
     gender: 0,
-    address: '',
+    address: "",
     role_id: 1,
     status: 1,
-    password: '',
-    description: ''
+    password: "",
+    description: ""
 }
 
 export default function FormComponent({ onSubmit, data }: FormComponentProps) {
@@ -41,10 +41,10 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
         if (data) {
             form.setFieldsValue({
                 ...data,
-                birthday: dayjs(data?.birthday) || '',
+                birthday: dayjs(data?.birthday) || "",
                 role_id: data.role?.id,
                 description: htmlToEditor(data?.description as string),
-                password: ''
+                password: ""
             });
         }
     }, [form, data]);
@@ -62,7 +62,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                 </CCol>
                 <CCol span={4}>
                     <Form.Item label="Ngày sinh" className="!mb-4" name="birthday" rules={[{ required: true, message: "Hãy chọn ngày sinh..." }]}>
-                        <DatePicker className="h-10 w-full" placeholder="DD/MM/YYYY" format='DD/MM/YYYY' allowClear={false} />
+                        <DatePicker className="h-10 w-full" placeholder="DD/MM/YYYY" format="DD/MM/YYYY" allowClear={false} />
                     </Form.Item>
                 </CCol>
                 <CCol span={4}>

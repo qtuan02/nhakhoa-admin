@@ -1,5 +1,5 @@
 import { SiderProps } from "antd";
-import { Layout } from 'antd';
+import { Layout } from "antd";
 const { Sider } = Layout;
 import React, { ReactNode } from "react";
 

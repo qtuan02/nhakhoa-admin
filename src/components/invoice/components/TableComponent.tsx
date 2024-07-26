@@ -25,13 +25,13 @@ export default function TableComponent() {
             title: "Mã khách hàng",
             dataIndex: "customer_id",
             key: "customer_id",
-            ...getColumnSearchProps('customer_id'),
+            ...getColumnSearchProps("customer_id"),
         },
         {
             title: "Tên khách hàng",
             dataIndex: "customer_name",
             key: "customer_name",
-            ...getColumnSearchProps('customer_name'),
+            ...getColumnSearchProps("customer_name"),
         },
         {
             title: "Tổng giá",
@@ -45,8 +45,8 @@ export default function TableComponent() {
             dataIndex: "method_payment",
             key: "method_payment",
             filters: [
-                { text: 'Tiền mặt', value: 0 },
-                { text: 'Chuyển khoản', value: 1 },
+                { text: "Tiền mặt", value: 0 },
+                { text: "Chuyển khoản", value: 1 },
             ],
             onFilter: (value, item) => item.method_payment === value,
             render: (method_payment) => method_payment === 0 ? <p>Tiền mặt</p> : <p>Chuyển khoản</p>
@@ -56,8 +56,8 @@ export default function TableComponent() {
             dataIndex: "status",
             key: "status",
             filters: [
-                { text: 'Đã thanh toán', value: 1 },
-                { text: 'Chưa thanh toán', value: 0 },
+                { text: "Đã thanh toán", value: 1 },
+                { text: "Chưa thanh toán", value: 0 },
             ],
             onFilter: (value, item) => item.status === value,
             render: (status) => ( <CTag icon={ status === 1 ? <CheckCircleOutlined /> : <ExclamationCircleOutlined />} color={status === 1 ? "green" : "error"}>{status === 1 ? "Đã thanh toán" : "Chưa thanh toán"}</CTag> )
@@ -67,7 +67,7 @@ export default function TableComponent() {
             key: "item",
             render: (item) => (
                 <CSpace>
-                    <CButton tooltip="Cập nhật hóa đơn" link={`/hoa-don/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className='ts-16'></CButton>
+                    <CButton tooltip="Cập nhật hóa đơn" link={`/hoa-don/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className="ts-16"></CButton>
                 </CSpace>
             )
         }
@@ -76,7 +76,7 @@ export default function TableComponent() {
         <CTable
             columns={columns}
             dataSource={invoice?.data?.map((item: IInvoice, index: number) => ({...item, index: index + 1, key: item.id, customer_name: item?.customer?.name, customer_id: item?.customer?.id })) || []}
-            pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ['5', '10', '15'] }}
+            pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ["5", "10", "15"] }}
         />
     );
 }

@@ -38,24 +38,24 @@ export default function EditHistoryComponent() {
 
     useEffect(() => {
         if (id) {
-            if (history.edit === 'success' || history.edit === 'fail') {
+            if (history.edit === "success" || history.edit === "fail") {
                 getDataHistory(id as string);
             }
         }
     }, [history.edit, id]);
 
-    const items: TabsProps['items'] = [
+    const items: TabsProps["items"] = [
         {
-            key: 'profile',
-            label: 'Thông tin lịch khám',
+            key: "profile",
+            label: "Thông tin lịch khám",
             children: <CSkeleton loading={loading}>
                 <ProfileComponent data={data} />
             </CSkeleton>,
         },
         {
-            key: 'form',
-            label: 'Tiến độ lịch khám',
-            children: <CSkeleton loading={history.edit === 'wait'}>
+            key: "form",
+            label: "Tiến độ lịch khám",
+            children: <CSkeleton loading={history.edit === "wait"}>
                 <FormEditComponent onSubmit={handleSubmit} data={data} />
             </CSkeleton >,
         }

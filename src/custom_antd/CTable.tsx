@@ -1,5 +1,5 @@
-import { Table, TableProps } from 'antd';
-import React from 'react';
+import { Table, TableProps } from "antd";
+import React from "react";
 
 interface CTableProps extends TableProps<any> {}
 

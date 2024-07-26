@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import { Modal, ModalProps } from 'antd';
+import React, { ReactNode } from "react";
+import { Modal, ModalProps } from "antd";
 
 interface CModalProps extends ModalProps {
 	children?: ReactNode;

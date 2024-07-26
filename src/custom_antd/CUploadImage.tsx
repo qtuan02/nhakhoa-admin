@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Image, Upload, UploadProps } from 'antd';
+import { Image, Upload, UploadProps } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { appConfig } from "@/config/AppConfig";
 import { toast } from "react-toastify";
@@ -14,19 +14,19 @@ interface CUploadImageProps extends UploadProps {
 const CUploadImage: React.FC<CUploadImageProps> = (props) => {
     const { setImageUrl, initialImageUrl } = props;
     const [loading, setLoading] = useState(false);
-    const [image, setImage] = useState<string>('');
+    const [image, setImage] = useState<string>("");
 
     const handleChange = async (info: UploadChangeParam<UploadFile<any>>) => {
-        setImage('');
-        if(info.file.status === 'uploading') {
+        setImage("");
+        if(info.file.status === "uploading") {
             setLoading(true);
-        }else if(info.file.status === 'done') {
+        }else if(info.file.status === "done") {
             setLoading(false);
             setImage(info.file.response.data.url);
             setImageUrl(info.file.response.data.url);
         }else {
             setLoading(false);
-            toast.error('Tải ảnh thất bại!');
+            toast.error("Tải ảnh thất bại!");
         }
     };
 
@@ -47,10 +47,10 @@ const CUploadImage: React.FC<CUploadImageProps> = (props) => {
                 name="image"
                 action={appConfig.API_UPLOAD}
             >
-                {image ? <Image src={image} alt="avatar" style={{ width: '100%' }} preview={false} /> : (
+                {image ? <Image src={image} alt="avatar" style={{ width: "100%" }} preview={false} /> : (
                     <button
-                        style={{ border: 0, background: 'none' }}
-                        type='button'
+                        style={{ border: 0, background: "none" }}
+                        type="button"
                     >
                         {loading ? <LoadingOutlined /> : <PlusOutlined />}
                         <div style={{ marginTop: 8 }}>Tải ảnh</div>

@@ -48,7 +48,7 @@ export default function EditUserComponent() {
                 <CTitle>Cập nhật người dùng</CTitle>
                 <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
             </CRow>
-            <CSkeleton loading={user.edit === 'wait' || loading}>
+            <CSkeleton loading={user.edit === "wait" || loading}>
                 <FormComponent onSubmit={handleSubmit} data={data} />
             </CSkeleton>
         </>

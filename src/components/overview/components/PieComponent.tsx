@@ -10,17 +10,17 @@ interface PieComponentProps {
 export default function PieComponent({ data }: PieComponentProps) {
     const options: ApexOptions  = {
         chart: {
-            width: '100%',
-            type: 'donut'
+            width: "100%",
+            type: "donut"
         },
         legend: {
-            position: 'bottom',
+            position: "bottom",
         },
         title: {
-            text: 'Thống kê lịch hẹn',
-            align: 'center',
+            text: "Thống kê lịch hẹn",
+            align: "center",
             style: {
-                fontSize: '20px',
+                fontSize: "20px",
                 fontWeight: 600,
             }
         },
@@ -42,7 +42,7 @@ export default function PieComponent({ data }: PieComponentProps) {
                 }
             }
         },
-        colors: ['#FF3366', '#00FF00'],
+        colors: ["#FF3366", "#00FF00"],
     };
 
     const series = data?.map(item => Number(item?.total)) || [];

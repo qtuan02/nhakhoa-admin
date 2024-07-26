@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import { Switch, SwitchProps } from 'antd';
+import React, { ReactNode } from "react";
+import { Switch, SwitchProps } from "antd";
 
 interface CSwitchProps extends SwitchProps {
 	children?: ReactNode;

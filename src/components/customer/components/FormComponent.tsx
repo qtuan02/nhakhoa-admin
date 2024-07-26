@@ -7,7 +7,7 @@ import { CSelect } from "@/custom_antd/CSelect";
 import { ICustomer } from "@/interfaces/ICustomer";
 import { DatePicker, Form, Input } from "antd";
 import { useEffect } from "react";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faSave } from "@fortawesome/free-solid-svg-icons";
 
@@ -17,12 +17,12 @@ interface FormComponentProps {
 }
 
 const initialCustomer: ICustomer = {
-    name: '',
-    phone_number: '',
-    birthday: '',
-    email: '',
+    name: "",
+    phone_number: "",
+    birthday: "",
+    email: "",
     gender: 0,
-    address: '',
+    address: "",
 }
 
 export default function FormComponent({ onSubmit, data }: FormComponentProps){
@@ -32,7 +32,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps){
         if(data) {
             form.setFieldsValue({
                 ...data,
-                birthday: dayjs(data?.birthday) || '',
+                birthday: dayjs(data?.birthday) || "",
             });
         }
     }, [form, data]);
@@ -59,7 +59,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps){
                 </CCol>
                 <CCol span={8}>
                     <Form.Item label="Ngày sinh" className="!mb-4" name="birthday" rules={[{ required: true, message: "Hãy chọn ngày sinh..." }]}>
-                        <DatePicker className="h-10 w-full" placeholder="DD/MM/YYYY" format='DD/MM/YYYY' allowClear={false} />
+                        <DatePicker className="h-10 w-full" placeholder="DD/MM/YYYY" format="DD/MM/YYYY" allowClear={false} />
                     </Form.Item>    
                 </CCol>
                 <CCol span={8}>
@@ -73,7 +73,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps){
                     showCount
                     maxLength={255}
                     placeholder="Địa chỉ"
-                    style={{ height: 100, resize: 'none' }}
+                    style={{ height: 100, resize: "none" }}
                 />
             </Form.Item>
             <CRow className="gap-4 justify-end">

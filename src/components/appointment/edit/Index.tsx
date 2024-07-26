@@ -36,7 +36,7 @@ export default function EditAppointmentComponent() {
     }
 
     useEffect(() => {
-        if(appointment.edit === 'success' || appointment.edit === 'fail'){
+        if(appointment.edit === "success" || appointment.edit === "fail"){
             getDataAppointment(id as string);
         }
     }, [appointment.edit, dispatch, id]);
@@ -47,7 +47,7 @@ export default function EditAppointmentComponent() {
                 <CTitle>Cập nhật lịch hẹn</CTitle>
                 <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
             </CRow>
-            <CSkeleton loading={appointment.edit === 'wait' || loading}>
+            <CSkeleton loading={appointment.edit === "wait" || loading}>
                 <FormComponent onSubmit={handleSubmit} data={data} />
             </CSkeleton>
         </>

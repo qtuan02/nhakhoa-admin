@@ -22,7 +22,7 @@ export default function DetailComponent({ data }: DetailComponentProps) {
             title: "Tên dịch vụ",
             dataIndex: "name",
             key: "name",
-            ...getColumnSearchProps('name'),
+            ...getColumnSearchProps("name"),
         },
         {
             title: "Số lượng",
@@ -35,14 +35,14 @@ export default function DetailComponent({ data }: DetailComponentProps) {
             dataIndex: "price",
             key: "price",
             sorter: (a: any, b: any) => a.price - b.price,
-            render: (price: number) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)
+            render: (price: number) => new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(price)
         },
         {
             title: "Tổng",
             dataIndex: "total",
             key: "total",
             sorter: (a: any, b: any) => a.total - b.total,
-            render: (total: number) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(total)
+            render: (total: number) => new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(total)
         }
     ] as TableColumnsType<IHistoryDetail>;
     return (
@@ -74,13 +74,13 @@ export default function DetailComponent({ data }: DetailComponentProps) {
             </CRow>
             <CRow>
                 <CCol span={12}>
-                    <CDescriptionItem title="Tổng giá" content={new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(data?.total_price))} />
+                    <CDescriptionItem title="Tổng giá" content={new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(Number(data?.total_price))} />
                 </CCol>
                 <CCol span={12}>
-                    <CDescriptionItem title="Phương thức thanh toán" content={data?.method_payment === 0 ? 'Tiền mặt' : 'Chuyển khoản'} />
+                    <CDescriptionItem title="Phương thức thanh toán" content={data?.method_payment === 0 ? "Tiền mặt" : "Chuyển khoản"} />
                 </CCol>
             </CRow>
-            <CDescriptionItem title="Trạng thái" content={data?.status === 0 ? 'Chưa thanh toán' : 'Đã thanh toán'} />
+            <CDescriptionItem title="Trạng thái" content={data?.status === 0 ? "Chưa thanh toán" : "Đã thanh toán"} />
             <CDescriptionItem title="Dịch vụ" />
             <CTable
                 

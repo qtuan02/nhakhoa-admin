@@ -15,7 +15,7 @@ export default function ProfileComponent() {
             <CTitle className="text-center mt-5">Thông tin cá nhân</CTitle>
             <Flex gap={100} justify="center" className="border py-16 shadow-lg rounded-3xl">
                 <CCol>
-                    <Avatar src={currentUser?.avatar} alt="Hình đại diện..." shape="circle" style={{ width: 300, height: 300, border: '1px solid #f3f3f3' }} />
+                    <Avatar src={currentUser?.avatar} alt="Hình đại diện..." shape="circle" style={{ width: 300, height: 300, border: "1px solid #f3f3f3" }} />
                 </CCol>
                 <CCol>
                     <CTitle level={2} className="mt-5 !text-[#313b79]">{currentUser?.role === appConfig.R_1 ? "Quản trị viên" : currentUser?.role === appConfig.R_2 ? "Nhân viên y tế" : "Nha sĩ"}</CTitle>

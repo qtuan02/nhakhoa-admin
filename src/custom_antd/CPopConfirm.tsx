@@ -1,5 +1,5 @@
-import { Popconfirm, PopconfirmProps } from 'antd';
-import React, { MouseEventHandler, ReactNode } from 'react';
+import { Popconfirm, PopconfirmProps } from "antd";
+import React, { MouseEventHandler, ReactNode } from "react";
 
 
 interface CPopConfirmProps extends PopconfirmProps {
@@ -13,9 +13,9 @@ const CPopConfirm: React.FC<CPopConfirmProps> = (props) => {
 	return (
 		<Popconfirm
 			onConfirm={onConfirm}
-			okText='Yes'
-			cancelText='No'
-			placement='top'
+			okText="Yes"
+			cancelText="No"
+			placement="top"
 			{...rest}
 		>
             {children}

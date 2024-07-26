@@ -21,7 +21,7 @@ interface FormComponentProps {
 const initialHistory: IHistory = {
     customer_id: undefined,
     doctor_id: undefined,
-    note: ''
+    note: ""
 }
 
 export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
@@ -33,11 +33,11 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
     const customer = useAppSelector(getCustomerState);
 
     useEffect(() => {
-        if(customer.status === 'completed' || customer.status === 'rejected') {
+        if(customer.status === "completed" || customer.status === "rejected") {
             dispatch(getCustomers());
         }
 
-        if(user.statusDoctors === 'completed' || user.statusDoctors === 'rejected') {
+        if(user.statusDoctors === "completed" || user.statusDoctors === "rejected") {
             dispatch(getDoctors());
         }
 
@@ -55,9 +55,9 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
                             className="!h-[40px]"
                             showSearch
                             placeholder="Chọn khách hàng..."
-                            options={customer?.data?.map(c => ({ value: c.id, label: c.id+' - '+c.name+' - '+c.phone_number })) || []}
+                            options={customer?.data?.map(c => ({ value: c.id, label: c.id+" - "+c.name+" - "+c.phone_number })) || []}
                             filterOption={(input, option) =>
-                                (option?.label as string ?? '').toLowerCase().includes(input.toLowerCase())
+                                (option?.label as string ?? "").toLowerCase().includes(input.toLowerCase())
                             }
                         />
                     </Form.Item>
@@ -68,9 +68,9 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
                             className="!h-[40px]"
                             showSearch
                             placeholder="Chọn nha sĩ..."
-                            options={user?.doctors?.map(u => ({ value: u.id, label: u.id+' - '+u.name+' - '+u.phone_number })) || []}
+                            options={user?.doctors?.map(u => ({ value: u.id, label: u.id+" - "+u.name+" - "+u.phone_number })) || []}
                             filterOption={(input, option) =>
-                                (option?.label as string ?? '').toLowerCase().includes(input.toLowerCase())
+                                (option?.label as string ?? "").toLowerCase().includes(input.toLowerCase())
                             }
                         />
                     </Form.Item>
@@ -83,7 +83,7 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
                     maxLength={1000}
                     placeholder="Nhập nội dung..."
                     className="ts-16"
-                    style={{ height: 200, resize: 'none' }}
+                    style={{ height: 200, resize: "none" }}
                 />
             </Form.Item>
             <br />

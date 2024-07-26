@@ -1,6 +1,6 @@
 import { Button, ButtonProps, Tooltip } from "antd";
 import React, { ReactNode } from "react";
-import { useRouter } from 'next-nprogress-bar';
+import { useRouter } from "next-nprogress-bar";
 
 interface CButtonProps extends ButtonProps {
     children?: ReactNode;

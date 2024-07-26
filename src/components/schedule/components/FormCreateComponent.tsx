@@ -44,7 +44,7 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
             if (!selectedDates.includes(formattedDate)) {
                 setSelectedDates([...selectedDates, formattedDate]);
                 form.setFieldsValue({
-                    schedule: [...form.getFieldValue('schedule'), { date: formattedDate, time: [] }]
+                    schedule: [...form.getFieldValue("schedule"), { date: formattedDate, time: [] }]
                 });
             }
             setDisabled(false);
@@ -56,13 +56,13 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
     const handleDeleteDate = (date: string) => {
         setSelectedDates(selectedDates.filter(d => d !== date));
         form.setFieldsValue({
-            schedule: form.getFieldValue('schedule').filter((d: any) => d.date !== date)
+            schedule: form.getFieldValue("schedule").filter((d: any) => d.date !== date)
         });
         TOAST_SUCCESS(`Đã xóa ngày ${formatDate(date)}!`)
     }
 
     const handleSelectTime = (date: string, times: number[]) => {
-        const schedule = form.getFieldValue('schedule').map((item: IScheduleCreate) => {
+        const schedule = form.getFieldValue("schedule").map((item: IScheduleCreate) => {
             if (item.date === date) {
                 return { ...item, time: times };
             }
@@ -72,16 +72,16 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
     }
 
     useEffect(() => {
-        if (user.statusDoctors === 'completed' || user.statusDoctors === 'rejected') {
+        if (user.statusDoctors === "completed" || user.statusDoctors === "rejected") {
             dispatch(getDoctors());
         }
 
-        if (appointment.statusTime === 'completed' || appointment.statusTime === 'rejected') {
+        if (appointment.statusTime === "completed" || appointment.statusTime === "rejected") {
             dispatch(getTimes());
         }
 
         if (id) {
-            form.setFieldValue('doctor_id', id);
+            form.setFieldValue("doctor_id", id);
             setDisabled(false);
         }
     }, [user.statusDoctors, dispatch, id, form, appointment.statusTime]);
@@ -97,9 +97,9 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
                             onChange={() => setDisabled(false)}
                             className="!h-[40px]"
                             placeholder="Chọn nha sĩ..."
-                            options={user?.doctors?.map(u => ({ value: u.id, label: u.id + ' - ' + u.name + ' - ' + u.phone_number })) || []}
+                            options={user?.doctors?.map(u => ({ value: u.id, label: u.id + " - " + u.name + " - " + u.phone_number })) || []}
                             filterOption={(input, option) =>
-                                (option?.label as string ?? '').toLowerCase().includes(input.toLowerCase())
+                                (option?.label as string ?? "").toLowerCase().includes(input.toLowerCase())
                             }
                         />
                     </Form.Item>
@@ -110,7 +110,7 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
                             disabledDate={handleDisabledSunday}
                             disabled={disabled}
                             className="h-10 w-full"
-                            format='DD/MM/YYYY'
+                            format="DD/MM/YYYY"
                             placeholder="Chọn ngày..."
                             allowClear={false}
                             onChange={handleCreateDate}
@@ -124,14 +124,14 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
                         <>
                             {fields.map(({ key, name, ...restField }) => (
                                 <CCol key={key} span={8}>
-                                    <Form.Item {...restField} name={[name, 'date']}>
+                                    <Form.Item {...restField} name={[name, "date"]}>
                                         <Card className="shadow-md cursor-pointer hover:shadow-lg"
                                             title={`Ngày ${formatDate(selectedDates[key])}`}
                                             extra={<CButton type="primary" danger size="middle"
                                                 shape="circle" tooltip="Xóa" icon={<FontAwesomeIcon icon={faMinus} />}
                                                 onClick={() => handleDeleteDate(selectedDates[key])} />}>
                                             <CSelectTag data={appointment.times} size="middle"
-                                                onChange={(times) => handleSelectTime(form.getFieldValue('schedule')[key]?.date, times)} />
+                                                onChange={(times) => handleSelectTime(form.getFieldValue("schedule")[key]?.date, times)} />
                                         </Card>
                                     </Form.Item>
                                 </CCol>

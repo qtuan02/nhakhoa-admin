@@ -27,7 +27,7 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
     editing: boolean;
     dataIndex: string;
     title: any;
-    inputType: 'number' | 'text';
+    inputType: "number" | "text";
     record: IService;
     index: number;
 }
@@ -42,7 +42,7 @@ const EditableCell: React.FC<React.PropsWithChildren<EditableCellProps>> = ({
     children,
     ...restProps
 }) => {
-    const inputNode = inputType === 'number' ? <CInputNumber /> : <CInput />;
+    const inputNode = inputType === "number" ? <CInputNumber /> : <CInput />;
 
     return (
         <td {...restProps}>
@@ -67,7 +67,7 @@ const EditableCell: React.FC<React.PropsWithChildren<EditableCellProps>> = ({
 };
 
 const initialHistory: IHistory = {
-    note: '',
+    note: "",
     services: [],
     status: 0,
 }
@@ -157,7 +157,7 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
         }
     ];
 
-    const editColumns: TableProps['columns'] = columns.map((col) => {
+    const editColumns: TableProps["columns"] = columns.map((col) => {
         if (!col.editable) {
             return col;
         }
@@ -166,7 +166,7 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
             ...col,
             onCell: (record: IService) => ({
                 record,
-                inputType: col.dataIndex === 'price' || 'quantity' ? 'number' : 'text',
+                inputType: col.dataIndex === "price" || "quantity" ? "number" : "text",
                 dataIndex: col.dataIndex,
                 title: col.title,
                 editing: isEditing(record),
@@ -210,7 +210,7 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
                         maxLength={1000}
                         placeholder="Nhập nội dung..."
                         className="ts-16"
-                        style={{ height: 200, resize: 'none' }}
+                        style={{ height: 200, resize: "none" }}
                     />
                 </Form.Item>
                 <br />

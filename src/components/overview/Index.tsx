@@ -42,7 +42,7 @@ export default function OverviewComponent() {
         //                 <Image src={auth.profile?.avatar} alt="Hình đại diện..." height={300} width={300} />
         //             </CCol>
         //             <CCol>
-        //                 <CTitle level={5} className="">{auth.profile?.role === appConfig.R_2 ? 'Nhân viên y tế' : 'Nha sĩ'}: {auth.profile?.id}</CTitle>
+        //                 <CTitle level={5} className="">{auth.profile?.role === appConfig.R_2 ? "Nhân viên y tế" : "Nha sĩ"}: {auth.profile?.id}</CTitle>
         //                 <CTitle level={4} className="!mb-1 !text-[#313b79]">{auth.profile?.name}</CTitle>
         //                 <CDescriptionItem title="Ngày sinh" content={formatDate(auth.profile?.birthday)} />
         //                 <CDescriptionItem title="Email" content={auth.profile?.email} />

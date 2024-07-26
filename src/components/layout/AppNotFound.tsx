@@ -1,7 +1,7 @@
 "use client";
-import React from 'react';
-import { Result } from 'antd';
-import CButton from '@/custom_antd/CButton';
+import React from "react";
+import { Result } from "antd";
+import CButton from "@/custom_antd/CButton";
 
 export default function AppNotFound() {
     return (

@@ -17,10 +17,10 @@ interface FormComponentProps {
 }
 
 const initialCategory: ICategory = {
-    image: '',
-    name: '',
+    image: "",
+    name: "",
     status: 1,
-    description: ''
+    description: ""
 }
 
 export default function FormComponent({ onSubmit, data }: FormComponentProps){
@@ -54,7 +54,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps){
                     showCount
                     maxLength={1000}
                     placeholder="Thông tin mô tả"
-                    style={{ height: 120, resize: 'none' }}
+                    style={{ height: 120, resize: "none" }}
                 />
             </Form.Item>
             <CRow className="gap-4 justify-end">

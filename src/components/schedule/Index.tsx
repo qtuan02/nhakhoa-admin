@@ -11,8 +11,8 @@ import { formatDate, parseDayjsToString } from "@/utils/FunctionHelpers";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DatePicker, Tabs, TabsProps } from "antd";
-import dayjs from 'dayjs';
-import { Dayjs } from 'dayjs';
+import dayjs from "dayjs";
+import { Dayjs } from "dayjs";
 import { useEffect } from "react";
 import CardComponent from "./components/CardComponent";
 import { getScheduleState } from "@/redux/reducers/scheduleReducer";
@@ -38,7 +38,7 @@ export default function ScheduleComponent() {
         return current.day() !== 1;
     };
 
-    const items: TabsProps['items'] = schedule?.data?.map((s: ISchedule) => ({
+    const items: TabsProps["items"] = schedule?.data?.map((s: ISchedule) => ({
         key: s.key as string,
         label: <p className="px-4">Thứ {s.key} - {formatDate(s.date)}</p>,
         children: <CardComponent data={s.doctor} date={s.date} />
@@ -53,7 +53,7 @@ export default function ScheduleComponent() {
             <CRow className="justify-between">
                 <CCol>
                     <CTitle>Lịch làm việc</CTitle>
-                    <DatePicker className="h-10" onChange={handleChange} defaultValue={defaultMonday} format='DD/MM/YYYY' allowClear={false} disabledDate={disabledDate} />
+                    <DatePicker className="h-10" onChange={handleChange} defaultValue={defaultMonday} format="DD/MM/YYYY" allowClear={false} disabledDate={disabledDate} />
                 </CCol>
                 <CCol>
                     <CButton link="/lich-lam-viec/them" type="primary" icon={<FontAwesomeIcon icon={faCirclePlus} />}>Tạo lịch làm việc</CButton>

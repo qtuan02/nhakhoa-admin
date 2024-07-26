@@ -44,7 +44,7 @@ export default function ModalComponent() {
             dataIndex: "name",
             key: "name",
             width: 250,
-            ...getColumnSearchProps('name'),
+            ...getColumnSearchProps("name"),
         },
         {
             title: "Giá/Đơn vị",
@@ -52,7 +52,7 @@ export default function ModalComponent() {
             key: "min_price",
             width: 150,
             sorter: (a: any, b: any) => a.min_price - b.min_price,
-            render: (min_price, item) => <span>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(Number(min_price))+"/"+item.unit}</span>
+            render: (min_price, item) => <span>{new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(Number(min_price))+"/"+item.unit}</span>
         },
         {
             title: "Thao tác",

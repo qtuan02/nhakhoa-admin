@@ -48,7 +48,7 @@ export default function EditServiceComponent() {
                 <CTitle>Cập nhật dịch vụ</CTitle>
                 <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
             </CRow>
-            <CSkeleton loading={service.edit === 'wait' || loading}>
+            <CSkeleton loading={service.edit === "wait" || loading}>
                 <FormComponent onSubmit={handleSubmit} data={data} />
             </CSkeleton>
         </>

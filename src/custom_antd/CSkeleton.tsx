@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import { Skeleton, SkeletonProps } from 'antd';
+import React, { ReactNode } from "react";
+import { Skeleton, SkeletonProps } from "antd";
 
 interface CSkeletonProps extends SkeletonProps {
 	children?: ReactNode;

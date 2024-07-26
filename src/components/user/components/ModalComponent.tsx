@@ -11,7 +11,7 @@ import { Form, Input, Modal } from "antd";
 import { useState } from "react";
 
 const initialUser: IUser = {
-    password: ''
+    password: ""
 }
 
 export default function ModalComponent() {

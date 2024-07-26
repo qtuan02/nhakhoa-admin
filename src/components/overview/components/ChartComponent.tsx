@@ -10,9 +10,9 @@ interface ChartComponentProps {
 
 export default function ChartComponent({ data }: ChartComponentProps) {
     const options: ApexOptions = {
-        colors: ['#0099FF'],
+        colors: ["#0099FF"],
         chart: {
-            type: 'line',
+            type: "line",
             zoom: {
                 enabled: false
             }
@@ -21,15 +21,15 @@ export default function ChartComponent({ data }: ChartComponentProps) {
             enabled: false
         },
         stroke: {
-            curve: 'straight'
+            curve: "straight"
         },
         title: {
-            text: 'Doanh thu(VND)',
-            align: 'left'
+            text: "Doanh thu(VND)",
+            align: "left"
         },
         grid: {
             row: {
-                colors: ['#f3f3f3', 'transparent'],
+                colors: ["#f3f3f3", "transparent"],
                 opacity: 0.5
             },
         },
@@ -47,8 +47,8 @@ export default function ChartComponent({ data }: ChartComponentProps) {
 
     const series = [
         {
-            name: 'Doanh thu',
-            data: data?.map((item) => Number(item?.total || '0')) || []
+            name: "Doanh thu",
+            data: data?.map((item) => Number(item?.total || "0")) || []
         }
     ];
     
