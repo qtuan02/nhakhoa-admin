@@ -6,6 +6,10 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import { PersistGate } from "redux-persist/integration/react";
 
 export function ReduxProvider({ children }: { children: React.ReactNode }) {
+
+	console.log(store);
+	
+
 	const storeRef = useRef<typeof store>();
 
 	if (!storeRef.current) {
