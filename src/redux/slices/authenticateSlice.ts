@@ -15,7 +15,7 @@ const URL = "/v1/auth";
 const URL_AUTH = appConfig.API_LOCAL+"/v1/auth";
 
 export const login = createAsyncThunk<IResponse, ILogin>(
-    "auth/login",
+    "authenticate/login",
     async (data) => {
         try {
             const res = await axios.post(URL_AUTH+"/login", data, {
@@ -53,7 +53,7 @@ export const refreshToken = async () => {
 	}
 };
 export const logoutToken = createAsyncThunk<IResponse>(
-    "auth/logout",
+    "authenticate/logout",
     async () => {
         try {
             const res = await axiosClient.post(URL+"/logout");
