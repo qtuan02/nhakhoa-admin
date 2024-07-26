@@ -1,7 +1,7 @@
-import NotFoundComponent from "@/components/layout/NotFound";
+import AppNotFound from "@/components/layout/AppNotFound";
 
 export default function NotFoundPage() {
     return (
-        <NotFoundComponent />
+        <AppNotFound />
     );
 }

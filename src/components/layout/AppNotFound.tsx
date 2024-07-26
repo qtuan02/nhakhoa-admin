@@ -3,7 +3,7 @@ import React from 'react';
 import { Result } from 'antd';
 import CButton from '@/custom_antd/CButton';
 
-export default function NotFoundComponent() {
+export default function AppNotFound() {
     return (
         <Result
             status="404"
