@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, createDynamicMiddleware } from '@reduxjs/toolkit';
 import rootReducer from './reducers/rootReducer';
 import storage from 'redux-persist/lib/storage';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
@@ -11,6 +11,7 @@ const persistConfig = {
     whitelist: ['authenticate']
 };
 
+const dynamicMiddleware = createDynamicMiddleware();
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
@@ -19,7 +20,7 @@ export const store = configureStore({
         serializableCheck: {
             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         },
-    })
+    }).prepend(dynamicMiddleware.middleware)
 });
 
 export const persistor = persistStore(store);
