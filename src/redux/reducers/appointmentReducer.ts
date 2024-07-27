@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { TOAST_ERROR, TOAST_SUCCESS, TOAST_WARNING } from "@/utils/FunctionUiHelpers";
 import { IAppointment } from "@/interfaces/IAppointment";
 import { IService } from "@/interfaces/IService";
@@ -44,7 +44,7 @@ const appointmentSlice = createSlice({
         clearService: (state) => {
             state.services = [];
         },
-        setServices: (state, action: PayloadAction<IService[]>) => {
+        setServices: (state, action) => {
             state.services = action.payload;
         }
     },

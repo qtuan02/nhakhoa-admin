@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { TOAST_ERROR, TOAST_SUCCESS, TOAST_WARNING } from "@/utils/FunctionUiHelpers";
 import { IHistory } from "@/interfaces/IHistory";
 import { IService } from "@/interfaces/IService";
@@ -41,7 +41,7 @@ const historySlice = createSlice({
                 TOAST_SUCCESS("Xóa thành công!");
             }
         },
-        editService: (state, action: PayloadAction<IService>) => {
+        editService: (state, action) => {
             const service = action.payload;
             const index = state.services?.findIndex(s => s.id === service.id);
             if (index !== undefined && state.services) {
@@ -52,7 +52,7 @@ const historySlice = createSlice({
         clearService: (state) => {
             state.services = [];
         },
-        setServices: (state, action: PayloadAction<IService[]>) => {
+        setServices: (state, action) => {
             state.services = action.payload;
         }
     },
