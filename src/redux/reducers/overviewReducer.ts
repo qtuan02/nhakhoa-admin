@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { RootState } from "../store";
-import { getOverview, getOverviewAppointment, getOverviewInvoice } from "../slices/overviewSlice";
 import { IOverview, IOverviewAppoinment, IOverviewInvoice } from "@/interfaces/IOverview";
+import { overviewAppointmentThunk, overviewInvoiceThunk, overviewsThunk } from "../thunks/overviewThunk";
 
 interface IOverviewState {
     loading: boolean;
@@ -34,44 +34,44 @@ const overviewSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getOverview.pending, (state) => {
+            .addCase(overviewsThunk.pending, (state) => {
                 state.status = "pending";
                 state.loading = true;
             })
-            .addCase(getOverview.fulfilled, (state, action) => {
+            .addCase(overviewsThunk.fulfilled, (state, action) => {
                 state.loading = false;
                 state.data = action.payload.data;
             })
-            .addCase(getOverview.rejected, (state, action: any) => {
+            .addCase(overviewsThunk.rejected, (state, action) => {
                 state.data = [];
                 state.loading = false;
-                TOAST_ERROR(action.error?.message)
+                TOAST_ERROR(action?.payload)
             })
-            .addCase(getOverviewInvoice.pending, (state) => {
+            .addCase(overviewInvoiceThunk.pending, (state) => {
                 state.statusInvoice = "pending";
                 state.loadingInvoice = true;
             })
-            .addCase(getOverviewInvoice.fulfilled, (state, action) => {
+            .addCase(overviewInvoiceThunk.fulfilled, (state, action) => {
                 state.loadingInvoice = false;
                 state.dataInvoice = action.payload.data;
             })
-            .addCase(getOverviewInvoice.rejected, (state, action: any) => {
+            .addCase(overviewInvoiceThunk.rejected, (state, action) => {
                 state.dataInvoice = [];
                 state.loadingInvoice = false;
-                TOAST_ERROR(action.error?.message)
+                TOAST_ERROR(action?.payload)
             })
-            .addCase(getOverviewAppointment.pending, (state) => {
+            .addCase(overviewAppointmentThunk.pending, (state) => {
                 state.statusAppointment = "pending";
                 state.loadingAppointment = true;
             })
-            .addCase(getOverviewAppointment.fulfilled, (state, action) => {
+            .addCase(overviewAppointmentThunk.fulfilled, (state, action) => {
                 state.loadingAppointment = false;
                 state.dataAppointment = action.payload.data;
             })
-            .addCase(getOverviewAppointment.rejected, (state, action: any) => {
+            .addCase(overviewAppointmentThunk.rejected, (state, action) => {
                 state.dataAppointment = [];
                 state.loadingAppointment = false;
-                TOAST_ERROR(action.error?.message)
+                TOAST_ERROR(action?.payload)
             })
     }
 });

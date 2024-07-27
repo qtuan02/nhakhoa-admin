@@ -11,8 +11,8 @@ import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Image, TableColumnsType } from "antd";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
-import { deleteService } from "@/redux/slices/serviceSlice";
 import { getServiceState } from "@/redux/reducers/serviceReducer";
+import { serviceDeleteThunk } from "@/redux/thunks/serviceThunk";
 
 export default function TableComponent() {
     const dispatch = useAppDispatch();
@@ -74,7 +74,7 @@ export default function TableComponent() {
             render: (item) => (
                 <CSpace>
                     <CButton tooltip="Chỉnh sửa dịch vụ" link={`/dich-vu/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className="ts-16"></CButton>
-                    <CPopConfirm title={"Thông báo!!!"} description={`Bạn muốn xóa dịch vụ "${item.name}"`} onConfirm={() => dispatch(deleteService(item.id))}>
+                    <CPopConfirm title={"Thông báo!!!"} description={`Bạn muốn xóa dịch vụ "${item.name}"`} onConfirm={() => dispatch(serviceDeleteThunk(item.id))}>
                         <CButton tooltip="Xóa dịch vụ" type="primary" danger icon={<FontAwesomeIcon icon={faTrashCan} />} className="ts-16"></CButton>
                     </CPopConfirm>
                 </CSpace>

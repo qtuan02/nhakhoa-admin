@@ -1,5 +1,4 @@
 "use client";
-import { editInvoice, getInvoice } from "@/redux/slices/invoiceSlice";
 import CButton from "@/custom_antd/CButton";
 import CRow from "@/custom_antd/CRow";
 import CSkeleton from "@/custom_antd/CSkeleton";
@@ -15,6 +14,8 @@ import FormEditComponent from "../components/FormEditComponent";
 import { TOAST_WARNING } from "@/utils/FunctionUiHelpers";
 import CCol from "@/custom_antd/CCol";
 import { getInvoiceState } from "@/redux/reducers/invoiceReducer";
+import { invoiceEditThunk } from "@/redux/thunks/invoiceThunk";
+import { invoiceApi } from "@/api/invoiceApi";
 
 export default function EditInvoiceComponent() {
     const { id } = useParams();
@@ -25,12 +26,12 @@ export default function EditInvoiceComponent() {
     const [loading, setLoading] = useState<boolean>(false);
 
     const handleSubmit = (values: IInvoice) => {
-        dispatch(editInvoice({ id: id as string, data: values }));
+        dispatch(invoiceEditThunk({ id: id as string, body: values }));
     }
 
     const getDataInvoice = async (id: string) => {
         setLoading(true);
-        const value = await getInvoice(id);
+        const value = await invoiceApi.findOne(id);
         setLoading(false);
         setData(value);
     }

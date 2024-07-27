@@ -10,12 +10,20 @@ import CTag from "@/custom_antd/CTag";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
 import { IUser } from "@/interfaces/IUser";
-import { getUserState, setUserId, toggleModal } from "@/redux/reducers/userReducer";
+import { getUserState } from "@/redux/reducers/userReducer";
 import ModalComponent from "./ModalComponent";
+import { useState } from "react";
 
 export default function TableComponent() {
     const dispatch = useAppDispatch();
     const user = useAppSelector(getUserState);
+
+    const [ userId, setUserId ] = useState<string>("");
+    const [ modal, setModal ] = useState<boolean>(false);
+
+    const handleToggleModal = () => {
+        setModal(!modal);
+    }
 
     const columns: TableColumnsType<IUser> = [
         {
@@ -109,8 +117,8 @@ export default function TableComponent() {
                     <CButton tooltip="Chỉnh sửa thông tin nhân viên y tế" link={`/nguoi-dung/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className="ts-16"></CButton>
                     <CButton tooltip="Đổi mật khẩu" type="primary" danger icon={<FontAwesomeIcon icon={faKey} />} className="ts-16"
                         onClick={() => {
-                            dispatch(toggleModal());
-                            dispatch(setUserId(String(item.id)));
+                            setUserId(item.id);
+                            handleToggleModal()
                         }}
                     ></CButton>
                     {item.role === 1 && item.status === 1 ? <CButton tooltip="Tạo lịch làm việc" link={`/lich-lam-viec/them/${item.id}`} type="default" icon={<FontAwesomeIcon icon={faCalendarPlus} />} className="ts-16"></CButton> : null}
@@ -119,14 +127,13 @@ export default function TableComponent() {
         }
     ] as TableColumnsType<IUser>;
     return (
-
         <>
             <CTable
                 columns={columns}
                 dataSource={user?.data?.map((item: IUser, index: number) => ({ ...item, index: index + 1, key: item.id, role: item.role?.id })) || []}
                 pagination={{ defaultPageSize: 5, showSizeChanger: true, pageSizeOptions: ["5", "10", "15"] }}
             />
-            <ModalComponent />
+            <ModalComponent userId={userId} modal={modal} toggle={handleToggleModal} />
         </>
     );
 }

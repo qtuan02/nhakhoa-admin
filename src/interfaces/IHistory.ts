@@ -2,7 +2,7 @@ import { ICustomer } from "./ICustomer";
 import { IUser } from "./IUser";
 
 export interface IHistory {
-    id?: number,
+    id?: string,
     date?: string,
     time?: string,
     total_price?: number,
@@ -18,7 +18,7 @@ export interface IHistory {
 }
 
 export interface IHistoryDetail {
-    id?: number,
+    id?: string,
     name?: string,
     quantity?: number,
     price?: number,

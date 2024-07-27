@@ -2,7 +2,7 @@ import { IService } from "./IService";
 import { IUser } from "./IUser";
 
 export interface IAppointment {
-    id?: number,
+    id?: string,
     name?: string,
     phone?: string,
     date?: string,
@@ -19,6 +19,6 @@ export interface IDate {
 }
 
 export interface ITime {
-    id?: number,
+    id?: string,
     time?: string,
 }

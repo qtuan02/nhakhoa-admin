@@ -3,31 +3,38 @@ import CCol from "@/custom_antd/CCol";
 import CDropDown from "@/custom_antd/CDropdown";
 import CRow from "@/custom_antd/CRow";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { getAuthenticateState } from "@/redux/reducers/authenticateReducer";
-import { getSiderState, toggleSider } from "@/redux/reducers/siderReducer";
 import { faAddressCard, faBars, faBell, faLock, faSignOut, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Avatar, Badge, Flex, Layout, MenuProps } from "antd";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import ModalComponent from "./ModalComponent";
-import { toggleModalHeader } from "@/redux/reducers/modalReducer";
-import { logoutToken } from "@/redux/slices/authenticateSlice";
+import { getAuthenticateState } from "@/redux/reducers/authReducer";
+import { logoutThunk } from "@/redux/thunks/authThunk";
 const { Header } = Layout;
 
+interface IHeaderComponentProps {
+    sider: boolean,
+    toggle: () => void,
+}
 
-export default function HeaderComponent() {
+export default function HeaderComponent({ sider, toggle }: IHeaderComponentProps) {
     const dispatch = useAppDispatch();
-    const { sider } = useAppSelector(getSiderState);
-    const { currentUser, isLoggedIn } = useAppSelector(getAuthenticateState);
+    const auth = useAppSelector(getAuthenticateState);
+
+    const [ modal, setModal ] = useState<boolean>(false);
+
+    const handleToggleModal = () => {
+        setModal(!modal);
+    }
 
     const items: MenuProps["items"] = [
         {
             key: "info",
             type: "group",
             label: <span>
-                <p className="text-[#000]">{currentUser?.name || ""}</p>
-                <p className="ts-12">{currentUser?.email || ""}</p>
+                <p className="text-[#000]">{auth?.currentUser?.name || ""}</p>
+                <p className="ts-12">{auth?.currentUser?.email || ""}</p>
             </span>
         },
         {
@@ -40,7 +47,7 @@ export default function HeaderComponent() {
         },
         {
             key: "change-password",
-            label: <Link href="#" onClick={() => dispatch(toggleModalHeader())}>Đổi mật khẩu</Link>,
+            label: <Link href="#" onClick={() => handleToggleModal()}>Đổi mật khẩu</Link>,
             icon: <FontAwesomeIcon icon={faLock} />
         },
         {
@@ -54,7 +61,7 @@ export default function HeaderComponent() {
                 <CCol>
                     <CRow gutter={[16, 16]}>
                         <CCol>
-                            <CButton className="!h-10 !w-10 !border-none !bg-[#f0f0f0]" onClick={() => dispatch(toggleSider())}>
+                            <CButton className="!h-10 !w-10 !border-none !bg-[#f0f0f0]" onClick={() => toggle()}>
                                 {sider ? <FontAwesomeIcon icon={faBars} /> : <FontAwesomeIcon icon={faXmark} />}
                             </CButton>
                         </CCol>
@@ -74,13 +81,13 @@ export default function HeaderComponent() {
                                         {React.cloneElement(menu as React.ReactElement, { style: { boxShadow: "none" } })}
                                         <Flex justify="center">
                                             <CButton icon={<FontAwesomeIcon icon={faSignOut} />} type="default" danger
-                                                onClick={() => dispatch(logoutToken())}>Đăng xuất</CButton>
+                                                onClick={() => dispatch(logoutThunk())}>Đăng xuất</CButton>
                                         </Flex>
                                     </div>
                                 )}>
-                                <Avatar className="hover:bg-[#d9d9d9] hover:opacity-90 cursor-pointer shadow-sm" style={{ border: "1px solid #d9d9d9"}} size="large" src={currentUser?.avatar || ""} alt="Ảnh đại diện..." />
+                                <Avatar className="hover:bg-[#d9d9d9] hover:opacity-90 cursor-pointer shadow-sm" style={{ border: "1px solid #d9d9d9"}} size="large" src={auth?.currentUser?.avatar || ""} alt="Ảnh đại diện..." />
                             </CDropDown>
-                            <ModalComponent />
+                            <ModalComponent modal={modal} toggle={handleToggleModal} />
                         </CCol>
                     </Flex>
                 </CCol>

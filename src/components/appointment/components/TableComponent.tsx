@@ -6,13 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TableColumnsType } from "antd";
 import CPopConfirm from "@/custom_antd/CPopConfirm";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { deleteAppointment } from "@/redux/slices/appointmentSlice";
 import CTag from "@/custom_antd/CTag";
 import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
 import { IAppointment } from "@/interfaces/IAppointment";
 import { formatDate } from "@/utils/FunctionHelpers";
 import { getAppointmentState } from "@/redux/reducers/appointmentReducer";
+import { appointmentDeleteThunk } from "@/redux/thunks/appointmentThunk";
 
 export default function TableComponent() {
     const dispatch = useAppDispatch();
@@ -95,7 +95,7 @@ export default function TableComponent() {
             render: (item) => (
                 <CSpace>
                     <CButton tooltip="Chỉnh sửa lịch hẹn" link={`/lich-hen/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className="ts-16"></CButton>
-                    <CPopConfirm title={"Thông báo!!!"} description={`Bạn muốn xóa lịch hẹn của "${item.name}"`} onConfirm={() => dispatch(deleteAppointment(item.id))}>
+                    <CPopConfirm title={"Thông báo!!!"} description={`Bạn muốn xóa lịch hẹn của "${item.name}"`} onConfirm={() => dispatch(appointmentDeleteThunk(item.id))}>
                         <CButton tooltip="Xóa danh mục" type="primary" danger icon={<FontAwesomeIcon icon={faTrashCan} />} className="ts-16"></CButton>
                     </CPopConfirm>
                 </CSpace>

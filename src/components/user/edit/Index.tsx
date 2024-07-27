@@ -12,8 +12,9 @@ import { useEffect, useState } from "react";
 import { IUser } from "@/interfaces/IUser";
 import { editorToHtml, parseDayjsToString } from "@/utils/FunctionHelpers";
 import { RawDraftContentState } from "draft-js";
-import { editUser, getUser } from "@/redux/slices/userSlice";
 import { getUserState } from "@/redux/reducers/userReducer";
+import { userEditThunk } from "@/redux/thunks/userThunk";
+import { userApi } from "@/api/userApi";
 
 export default function EditUserComponent() {
     const { id } = useParams();
@@ -26,12 +27,12 @@ export default function EditUserComponent() {
     const handleSubmit = (values: IUser) => {
         values.description = editorToHtml(values.description as RawDraftContentState);
         values.birthday = parseDayjsToString(values.birthday);
-        dispatch(editUser({ id: id as string, data: values}));
+        dispatch(userEditThunk({ id: id as string, body: values}));
     }
 
     const getDataUser = async (id: string) => {
         setLoading(true);
-        const value = await getUser(id);
+        const value = await userApi.findOne(id);
         setLoading(false);
         setData(value);
     }

@@ -7,9 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
-import { getHistories } from "@/redux/slices/historySlice";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import { getHistoryState } from "@/redux/reducers/historyReducer";
+import { historiesThunk } from "@/redux/thunks/historyThunk";
 
 export default function HistoryComponent(){
     const dispatch = useAppDispatch();
@@ -17,7 +17,7 @@ export default function HistoryComponent(){
 
     useEffect(() => {
         if(history.status === "completed" || history.status === "rejected") {
-            dispatch(getHistories());
+            dispatch(historiesThunk());
         }
     }, [dispatch, history.status]);
 

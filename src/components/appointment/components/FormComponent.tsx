@@ -7,9 +7,8 @@ import { CSelect } from "@/custom_antd/CSelect";
 import { IAppointment, IDate, ITime } from "@/interfaces/IAppointment";
 import { IUser } from "@/interfaces/IUser";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { getAppointmentState, removeService, setDate, setServices, setTime, toggleModal } from "@/redux/reducers/appointmentReducer";
 import { Avatar, Form, Input, List, Select } from "antd";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ModalComponent from "./ModalComponent";
 import dayjs from "dayjs";
 import { STATUS_APPOINTMENT } from "@/utils/Option";
@@ -18,9 +17,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faSave } from "@fortawesome/free-solid-svg-icons";
 import { IService } from "@/interfaces/IService";
 import { getUserState } from "@/redux/reducers/userReducer";
-import { getDoctors, getUsers } from "@/redux/slices/userSlice";
-import { getTimes } from "@/redux/slices/appointmentSlice";
-import { getDate, getTime } from "@/redux/slices/scheduleSlice";
+import { getAppointmentState, removeService, setServices } from "@/redux/reducers/appointmentReducer";
+import { usersThunk } from "@/redux/thunks/userThunk";
+import { getTimeState } from "@/redux/reducers/timeReducer";
+import { timesThunk } from "@/redux/thunks/timeThunk";
+import { scheduleApi } from "@/api/scheduleApi";
+import { getDoctorState } from "@/redux/reducers/doctorReducer";
+import { doctorsThunk } from "@/redux/thunks/doctorThunk";
 
 interface FormComponentProps {
     onSubmit: (values: IAppointment) => void;
@@ -42,16 +45,40 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
     const [form] = Form.useForm();
 
     const dispatch = useAppDispatch();
+    const time = useAppSelector(getTimeState);
     const user = useAppSelector(getUserState);
+    const doctor = useAppSelector(getDoctorState);
     const appointment = useAppSelector(getAppointmentState);
+
+    const [ dataDate, setDataDate ] = useState<IDate[]>([]);
+    const [ loadingDate, setLoadingDate ] = useState<boolean>(false);
+
+    const [ dataTime, setDataTime ] = useState<ITime[]>([]);
+    const [ loadingTime, setLoadingTime ] = useState<boolean>(false);
+
+    const [ modal, setModal ] = useState<boolean>(false);
+
+    const getDataDateByDoctorId = async (doctor_id: string) => {
+        setLoadingDate(true);
+        const res = await scheduleApi.getDate(doctor_id);
+        setLoadingDate(false);
+        setDataDate(res);
+    }
+
+    const getDataTimeByDoctorIdAndDate = async (doctor_id: string, date: string) => {
+        setLoadingTime(true);
+        const res = await scheduleApi.getTime(doctor_id, date);
+        setLoadingTime(false);
+        setDataTime(res);
+    }
 
     useEffect(() => {
         if(user.status === "completed" || user.status === "rejected") {
-            dispatch(getUsers());
+            dispatch(usersThunk());
         }
 
-        if (appointment.statusTime === "completed" || appointment.statusTime === "rejected") {
-            dispatch(getTimes());
+        if (time.status === "completed" || time.status === "rejected") {
+            dispatch(timesThunk());
         }
 
         if (data) {
@@ -59,9 +86,10 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                 dispatch(setServices(data.services));
             }
             if(data.doctor && data.time) {
-                dispatch(getDate(data.doctor.id as string));
-                dispatch(getTime({ doctor_id: data.doctor.id as string, date: data.date as string }));
+                getDataDateByDoctorId(data?.doctor_id || '');
+                getDataTimeByDoctorIdAndDate(data?.doctor_id || '', data?.date || '');
             }
+
             form.setFieldsValue({
                 ...data,
                 doctor_id: data?.doctor?.id || "",
@@ -69,33 +97,28 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
             });
         }
 
-        if(user.statusDoctors === "completed" || user.statusDoctors === "rejected") {
-            dispatch(getDoctors());
+        if(doctor.status === "completed" || user.status === "rejected") {
+            dispatch(doctorsThunk());
         }
 
-    }, [appointment.statusTime, data, dispatch, form, user.status, user.statusDoctors]);
+    }, [data, dispatch, doctor.status, form, time.status, user.status]);
 
     const handleDisabledPast = (current: any) => {
         return current && (current.valueOf() < Date.now() || current.day() === 0);
     };
 
-    const handleDoctorChange = (doctorId: string) => {
+    const handleDoctorChange = (doctor_id: string) => {
         form.setFieldsValue({ date: "", time: "" });
-        if (doctorId) {
-            dispatch(getDate(doctorId));
-            dispatch(setTime());
-        } else {
-            dispatch(setDate());
-        }
+        getDataDateByDoctorId(doctor_id);
     };
 
     const handleDateChange = (date: string) => {
         form.setFieldsValue({ time: "" });
-        if (date) {
-            dispatch(getTime({ doctor_id: form.getFieldValue("doctor_id"), date: date }));
-        } else {
-            dispatch(setTime());
-        }
+        getDataTimeByDoctorIdAndDate(form.getFieldValue("doctor_id"), date);
+    }
+
+    const handleToggleModal = () => {
+        setModal(!modal);
     }
 
     return (
@@ -126,7 +149,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                     <Form.Item label="Chọn nha sĩ:" className="!mb-4" name="doctor_id">
                         <CSelect loading={user.loading} className="!h-10 ts-16" onChange={handleDoctorChange}>
                             <Select.Option value="">--Không chọn nha sĩ</Select.Option>
-                            {user?.doctors?.map((d: IUser) => (
+                            {doctor?.data?.map((d: IUser) => (
                                 <Select.Option key={d.id} value={d.id}>{d.name}</Select.Option>
                             )) || []}
                         </CSelect>
@@ -137,9 +160,9 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                         <CRow gutter={[16, 16]}>
                             <CCol span={12}>
                                 <Form.Item label="Chọn ngày:" className="!mb-4" name="date" rules={[{ required: true, message: "Chưa chọn ngày..." }]}>
-                                    <CSelect loading={appointment.loadingDate} className="!h-10 ts-16" onChange={handleDateChange}>
+                                    <CSelect loading={loadingDate} className="!h-10 ts-16" onChange={handleDateChange}>
                                         <Select.Option value="">--Chọn ngày</Select.Option>
-                                        {appointment?.date?.map((d: IDate) => (
+                                        {dataDate?.map((d: IDate) => (
                                             <Select.Option key={d.date} value={d.date}>{formatDate(d.date)}</Select.Option>
                                         )) || []}
                                     </CSelect>
@@ -147,9 +170,9 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                             </CCol>
                             <CCol span={12}>
                                 <Form.Item label="Chọn giờ:" className="!mb-4" name="time" rules={[{ required: true, message: "Chưa chọn giờ..." }]}>
-                                    <CSelect loading={appointment.loadingTime} className="!h-10 ts-16">
+                                    <CSelect loading={loadingTime} className="!h-10 ts-16">
                                         <Select.Option value="">--Chọn giờ</Select.Option>
-                                        {appointment?.time?.map((t: ITime) => (
+                                        {dataTime?.map((t: ITime) => (
                                             <Select.Option key={t.time} value={t.time}>{t.time}</Select.Option>
                                         )) || []}
                                     </CSelect>
@@ -165,9 +188,9 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                             </CCol>
                             <CCol span={12}>
                                 <Form.Item label="Chọn giờ:" className="!mb-4" name="time" rules={[{ required: true, message: "Chưa chọn giờ..." }]}>
-                                    <CSelect loading={appointment.loadingTimes} className="!h-10 ts-16">
+                                    <CSelect loading={time.loading} className="!h-10 ts-16">
                                         <Select.Option value="">--Chọn giờ</Select.Option>
-                                        {appointment?.times?.map((t: ITime) => (
+                                        {time?.data?.map((t: ITime) => (
                                             <Select.Option key={t.time} value={t.time}>{t.time}</Select.Option>
                                         )) || []}
                                     </CSelect>
@@ -180,7 +203,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
             </CRow>
             <Form.Item label="Chọn dịch vụ:" className="!mb-4" name="services">
                 <div>
-                    <CButton type="primary" className="rounded-lg" onClick={() => dispatch(toggleModal())}>Chọn dịch vụ</CButton>
+                    <CButton type="primary" className="rounded-lg" onClick={() => handleToggleModal() }>Chọn dịch vụ</CButton>
                     {appointment.services && appointment.services.length === 0 ?
                         null
                         :
@@ -198,7 +221,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                             )}
                         />
                     }
-                    <ModalComponent />
+                    <ModalComponent modal={modal} toggle={handleToggleModal} />
                 </div>
             </Form.Item>
             <Form.Item label="Ghi chú:" name="note">

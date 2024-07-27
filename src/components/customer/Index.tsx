@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import { getCustomerState } from "@/redux/reducers/customerReducer";
-import { getCustomers } from "@/redux/slices/customerSlice";
+import { customersThunk } from "@/redux/thunks/customerThunk";
 
 export default function CustomerComponent() {
     const dispatch = useAppDispatch();
@@ -17,7 +17,7 @@ export default function CustomerComponent() {
 
     useEffect(() => {
         if(customer.status === "completed" || customer.status === "rejected") {
-            dispatch(getCustomers());
+            dispatch(customersThunk());
         }
     }, [dispatch, customer.status]);
 

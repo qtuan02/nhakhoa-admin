@@ -2,7 +2,7 @@ import { IInvoice } from "@/interfaces/IInvoice";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { editInvoice, getInvoices } from "../slices/invoiceSlice";
+import { invoiceEditThunk, invoicesThunk } from "../thunks/invoiceThunk";
 
 interface IInvoiceState {
     loading: boolean;
@@ -24,31 +24,31 @@ const invoiceSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getInvoices.pending, (state) => {
+            .addCase(invoicesThunk.pending, (state) => {
                 state.status = "pending";
                 state.loading = true;
             })
-            .addCase(getInvoices.fulfilled, (state, action) => {
+            .addCase(invoicesThunk.fulfilled, (state, action) => {
                 state.loading = false;
                 state.data = action.payload.data;
             })
-            .addCase(getInvoices.rejected, (state, action: any) => {
+            .addCase(invoicesThunk.rejected, (state, action) => {
                 state.data = [];
                 state.loading = false;
-                TOAST_ERROR(action.error?.message)
+                TOAST_ERROR(action?.payload)
             })
-            .addCase(editInvoice.pending, (state) => {
+            .addCase(invoiceEditThunk.pending, (state) => {
                 state.edit = "wait";
             })
-            .addCase(editInvoice.fulfilled, (state, action) => {
+            .addCase(invoiceEditThunk.fulfilled, (state, action) => {
                 state.status = "completed";
                 state.edit = "success";
                 TOAST_SUCCESS(action.payload.message);
             })
-            .addCase(editInvoice.rejected, (state, action: any) => {
+            .addCase(invoiceEditThunk.rejected, (state, action) => {
                 state.status = "rejected";
                 state.edit = "fail";
-                TOAST_ERROR(action.error?.message)
+                TOAST_ERROR(action?.payload)
             })
     }
 });

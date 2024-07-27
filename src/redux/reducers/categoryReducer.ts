@@ -2,7 +2,7 @@ import { ICategory } from "@/interfaces/ICategory";
 import { createSlice } from "@reduxjs/toolkit";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { RootState } from "../store";
-import { createCategory, deleteCategory, editCategory, getCategories } from "../slices/categorySlice";
+import { categoriesThunk, categoryCreateThunk, categoryDeleteThunk, categoryEditThunk } from "../thunks/categoryThunk";
 
 interface ICategoryState {
     loading: boolean;
@@ -24,54 +24,52 @@ const categorySlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getCategories.pending, (state) => {
+            .addCase(categoriesThunk.pending, (state) => {
                 state.status = "pending";
                 state.loading = true;
             })
-            .addCase(getCategories.fulfilled, (state, action) => {
+            .addCase(categoriesThunk.fulfilled, (state, action) => {
                 state.loading = false;
                 state.data = action.payload.data;
             })
-            .addCase(getCategories.rejected, (state, action: any) => {
+            .addCase(categoriesThunk.rejected, (state, action) => {
                 state.data = [];
                 state.loading = false;
-                TOAST_ERROR(action.error?.message)
+                TOAST_ERROR(action?.payload)
             })
-            .addCase(createCategory.pending, (state) => {
+            .addCase(categoryCreateThunk.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(createCategory.fulfilled, (state, action) => {
+            .addCase(categoryCreateThunk.fulfilled, (state, action) => {
                 state.status = "completed";
                 state.loading = false;
                 TOAST_SUCCESS(action.payload.message);
             })
-            .addCase(createCategory.rejected, (state, action: any) => {
+            .addCase(categoryCreateThunk.rejected, (state, action) => {
                 state.status = "rejected";
                 state.loading = false;
-                TOAST_ERROR(action.error?.message);
+                TOAST_ERROR(action?.payload);
             })
-            .addCase(deleteCategory.fulfilled, (state, action: any) => {
-                state.data = state.data?.filter(
-                    (item) => item.id !== action.payload.data
-                );
+            .addCase(categoryDeleteThunk.fulfilled, (state, action) => {
+                state.data = state.data?.filter(item => item.id !== action.payload.data.id);
                 TOAST_SUCCESS(action.payload.message);
             })
-            .addCase(deleteCategory.rejected, (state, action: any) => {
+            .addCase(categoryDeleteThunk.rejected, (state, action) => {
                 state.status = "rejected";
-                TOAST_ERROR(action.error?.message);
+                TOAST_ERROR(action?.payload);
             })
-            .addCase(editCategory.pending, (state) => {
+            .addCase(categoryEditThunk.pending, (state) => {
                 state.edit = "wait";
             })
-            .addCase(editCategory.fulfilled, (state, action) => {
+            .addCase(categoryEditThunk.fulfilled, (state, action) => {
                 state.status = "completed";
                 state.edit = "success";
                 TOAST_SUCCESS(action.payload.message);
             })
-            .addCase(editCategory.rejected, (state, action: any) => {
+            .addCase(categoryEditThunk.rejected, (state, action) => {
                 state.status = "rejected";
                 state.edit = "fail";
-                TOAST_ERROR(action.error?.message);
+                TOAST_ERROR(action?.payload);
             });
     },
 });

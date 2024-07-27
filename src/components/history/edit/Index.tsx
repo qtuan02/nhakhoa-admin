@@ -9,11 +9,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IHistory } from "@/interfaces/IHistory";
-import { editHistory, getHistory } from "@/redux/slices/historySlice";
 import ProfileComponent from "../components/ProfileComponent";
 import { Tabs, TabsProps } from "antd";
 import FormEditComponent from "../components/FormEditComponent";
 import { clearService, getHistoryState } from "@/redux/reducers/historyReducer";
+import { historyEditThunk } from "@/redux/thunks/historyThunk";
+import { historyApi } from "@/api/historyApi";
 
 export default function EditHistoryComponent() {
     const { id } = useParams();
@@ -25,13 +26,13 @@ export default function EditHistoryComponent() {
 
     const handleSubmit = (values: IHistory) => {
         values.services = history.services;
-        dispatch(editHistory({ id: id as string, data: values }));
+        dispatch(historyEditThunk({ id: id as string, body: values }));
         dispatch(clearService());
     }
 
     const getDataHistory = async (id: string) => {
         setLoading(true);
-        const value = await getHistory(id);
+        const value = await historyApi.findOne(id);
         setLoading(false);
         setData(value);
     }

@@ -1,6 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import appointmentReducer from "./appointmentReducer";
-import authenticateReducer from "./authenticateReducer";
+import authenticateReducer from "./authReducer";
 import categoryReducer from "./categoryReducer";
 import customerReducer from "./customerReducer";
 import historyReducer from "./historyReducer";
@@ -8,9 +8,9 @@ import invoiceReducer from "./invoiceReducer";
 import overviewReducer from "./overviewReducer";
 import scheduleReducer from "./scheduleReducer";
 import serviceReducer from "./serviceReducer";
-import siderReducer from "./siderReducer";
 import userReducer from "./userReducer";
-import modalReducer from "./modalReducer";
+import timeReducer from "./timeReducer";
+import doctorReducer from "./doctorReducer";
 
 const rootReducer = combineReducers({
     appointment: appointmentReducer,
@@ -22,9 +22,9 @@ const rootReducer = combineReducers({
     overview: overviewReducer,
     schedule: scheduleReducer,
     service: serviceReducer,
-    sider: siderReducer,
     user: userReducer,
-    modal: modalReducer
+    time: timeReducer,
+    doctor: doctorReducer,
 });
 
 export default rootReducer;

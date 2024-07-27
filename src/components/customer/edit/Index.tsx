@@ -9,10 +9,11 @@ import { ICustomer } from "@/interfaces/ICustomer";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import { useParams } from "next/navigation";
-import { editCustomer, getCustomer } from "@/redux/slices/customerSlice";
 import { useEffect, useState } from "react";
 import { parseDayjsToString } from "@/utils/FunctionHelpers";
 import { getCustomerState } from "@/redux/reducers/customerReducer";
+import { customerApi } from "@/api/customerApi";
+import { customerEditThunk } from "@/redux/thunks/customerThunk";
 
 export default function EditCustomerComponent() {
     const { id } = useParams();
@@ -24,12 +25,12 @@ export default function EditCustomerComponent() {
 
     const handleSubmit = (values: ICustomer) => {
         values.birthday = parseDayjsToString(values.birthday);
-        dispatch(editCustomer({ id: id as string, data: values}));
+        dispatch(customerEditThunk({ id: id as string, body: values}));
     }
 
     const getDataCustomer = async (id: string) => {
         setLoading(true);
-        const value = await getCustomer(id);
+        const value = await customerApi.findOne(id);
         setLoading(false);
         setData(value);
     }

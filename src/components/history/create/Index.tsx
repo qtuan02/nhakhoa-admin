@@ -8,16 +8,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IHistory } from "@/interfaces/IHistory";
 import FormCreateComponent from "../components/FormCreateComponent";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { createHistory } from "@/redux/slices/historySlice";
 import { Space } from "antd";
 import { getHistoryState } from "@/redux/reducers/historyReducer";
+import { historyCreateThunk } from "@/redux/thunks/historyThunk";
 
 export default function CreateHistoryComponent() {
     const dispatch = useAppDispatch();
     const history = useAppSelector(getHistoryState);
 
     const handleSubmit = (values: IHistory) => {
-        dispatch(createHistory(values));
+        dispatch(historyCreateThunk(values));
     }
 
     return (

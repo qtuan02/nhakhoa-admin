@@ -7,11 +7,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Image, TableColumnsType } from "antd";
 import CPopConfirm from "@/custom_antd/CPopConfirm";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { deleteCategory } from "@/redux/slices/categorySlice";
 import CTag from "@/custom_antd/CTag";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
 import { getCategoryState } from "@/redux/reducers/categoryReducer";
+import { categoryDeleteThunk } from "@/redux/thunks/categoryThunk";
 
 export default function TableComponent() {
     const dispatch = useAppDispatch();
@@ -59,7 +59,7 @@ export default function TableComponent() {
             render: (item) => (
                 <CSpace>
                     <CButton tooltip="Chỉnh sửa danh mục" link={`/danh-muc/sua/${item.id}`} type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} className="ts-16"></CButton>
-                    <CPopConfirm title={"Thông báo!!!"} description={`Bạn muốn xóa danh mục "${item.name}"`} onConfirm={() => dispatch(deleteCategory(item.id))}>
+                    <CPopConfirm title={"Thông báo!!!"} description={`Bạn muốn xóa danh mục "${item.name}"`} onConfirm={() => dispatch(categoryDeleteThunk(item.id))}>
                         <CButton tooltip="Xóa danh mục" type="primary" danger icon={<FontAwesomeIcon icon={faTrashCan} />} className="ts-16"></CButton>
                     </CPopConfirm>
                 </CSpace>

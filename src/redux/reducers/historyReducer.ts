@@ -3,16 +3,13 @@ import { TOAST_ERROR, TOAST_SUCCESS, TOAST_WARNING } from "@/utils/FunctionUiHel
 import { IHistory } from "@/interfaces/IHistory";
 import { IService } from "@/interfaces/IService";
 import { RootState } from "../store";
-import { createHistory, editHistory, getHistories } from "../slices/historySlice";
+import { historiesThunk, historyCreateThunk, historyEditThunk } from "../thunks/historyThunk";
 
 interface IHistoryState {
     loading: boolean;
     status: "pending" | "completed" | "rejected";
     edit: "wait" | "success" | "fail";
     data?: IHistory[];
-    drawer: boolean;
-    history_id?: string;
-    modal: boolean;
     services?: IService[];
 };
 
@@ -21,9 +18,6 @@ const initialState: IHistoryState = {
     status: "completed",
     edit: "success",
     data: [],
-    drawer: false,
-    history_id: "",
-    modal: false,
     services: [],
 };
 
@@ -31,16 +25,7 @@ const historySlice = createSlice({
     name: "history",
     initialState,
     reducers: {
-        toggleDrawer: (state) => {
-            state.drawer = !state.drawer;
-        },
-        setHistoryId: (state, action: PayloadAction<string>) => {
-            state.history_id = action.payload;
-        },
-        toggleModal: (state) => {
-            state.modal = !state.modal;
-        },
-        addService: (state, action: PayloadAction<IService>) => {
+        addService: (state, action) => {
             const service = action.payload;
             if(state.services?.find(s => s.id === service.id)) {
                 TOAST_WARNING("Dịch vụ đã được thêm!");
@@ -48,7 +33,7 @@ const historySlice = createSlice({
                 state.services?.push(service);
             }
         },
-        removeService: (state, action: PayloadAction<number>) => {
+        removeService: (state, action) => {
             const service_id = action.payload;
             const index = state.services?.findIndex(s => s.id === service_id);
             if (index) {
@@ -74,48 +59,48 @@ const historySlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getHistories.pending, (state) => {
+            .addCase(historiesThunk.pending, (state) => {
                 state.status = "pending";
                 state.loading = true;
             })
-            .addCase(getHistories.fulfilled, (state, action) => {
+            .addCase(historiesThunk.fulfilled, (state, action) => {
                 state.loading = false;
                 state.data = action.payload.data;
             })
-            .addCase(getHistories.rejected, (state, action: any) => {
+            .addCase(historiesThunk.rejected, (state, action) => {
                 state.data = [];
                 state.loading = false;
-                TOAST_ERROR(action.error?.message)
+                TOAST_ERROR(action?.payload)
             })
-            .addCase(createHistory.pending, (state) => {
+            .addCase(historyCreateThunk.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(createHistory.fulfilled, (state, action) => {
+            .addCase(historyCreateThunk.fulfilled, (state, action) => {
                 state.status = "completed";
                 state.loading = false;
                 TOAST_SUCCESS(action.payload.message);
             })
-            .addCase(createHistory.rejected, (state, action: any) => {
+            .addCase(historyCreateThunk.rejected, (state, action) => {
                 state.status = "rejected";
                 state.loading = false;
-                TOAST_ERROR(action.error?.message)
+                TOAST_ERROR(action?.payload)
             })
-            .addCase(editHistory.pending, (state) => {
+            .addCase(historyEditThunk.pending, (state) => {
                 state.edit = "wait";
             })
-            .addCase(editHistory.fulfilled, (state, action) => {
+            .addCase(historyEditThunk.fulfilled, (state, action) => {
                 state.status = "completed";
                 state.edit = "success";
                 TOAST_SUCCESS(action.payload.message);
             })
-            .addCase(editHistory.rejected, (state, action: any) => {
+            .addCase(historyEditThunk.rejected, (state, action) => {
                 state.status = "rejected";
                 state.edit = "fail";
-                TOAST_ERROR(action.error?.message)
+                TOAST_ERROR(action?.payload)
             })
     }
 });
 
 export const getHistoryState = (state: RootState) => state.history;
-export const { toggleDrawer, setHistoryId, toggleModal, addService, removeService, editService, clearService, setServices } = historySlice.actions;
+export const { addService, removeService, editService, clearService, setServices } = historySlice.actions;
 export default historySlice.reducer;

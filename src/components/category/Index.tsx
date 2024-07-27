@@ -8,8 +8,8 @@ import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import CButton from "@/custom_antd/CButton";
-import { getCategories } from "@/redux/slices/categorySlice";
 import { getCategoryState } from "@/redux/reducers/categoryReducer";
+import { categoriesThunk } from "@/redux/thunks/categoryThunk";
 
 export default function CategoryComponent() {
     const dispatch = useAppDispatch();
@@ -17,7 +17,7 @@ export default function CategoryComponent() {
 
     useEffect(() => {
         if(category.status === "completed" || category.status === "rejected") {
-            dispatch(getCategories());
+            dispatch(categoriesThunk());
         }
     }, [dispatch, category.status]);
 

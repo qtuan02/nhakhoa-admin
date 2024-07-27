@@ -10,8 +10,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { IUser } from "@/interfaces/IUser";
 import { editorToHtml, parseDayjsToString } from "@/utils/FunctionHelpers";
 import { RawDraftContentState } from "draft-js";
-import { createUser } from "@/redux/slices/userSlice";
 import { getUserState } from "@/redux/reducers/userReducer";
+import { userCreateThunk } from "@/redux/thunks/userThunk";
 
 export default function CreateUserComponent() {
     const dispatch = useAppDispatch();
@@ -20,7 +20,7 @@ export default function CreateUserComponent() {
     const handleSubmit = (values: IUser) => {
         values.description = editorToHtml(values.description as RawDraftContentState);
         values.birthday = parseDayjsToString(values.birthday);
-        dispatch(createUser(values));
+        dispatch(userCreateThunk(values));
     }
 
     return (

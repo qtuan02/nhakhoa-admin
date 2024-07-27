@@ -9,10 +9,11 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useParams } from "next/navigation";
 import FormComponent from "../components/FormComponent";
 import { useEffect, useState } from "react";
-import { editAppointment, getAppointment } from "@/redux/slices/appointmentSlice";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import { parseDayjsToString } from "@/utils/FunctionHelpers";
 import { getAppointmentState } from "@/redux/reducers/appointmentReducer";
+import { appointmentApi } from "@/api/appointmentApi";
+import { appointmentEditThunk } from "@/redux/thunks/appointmentThunk";
 
 export default function EditAppointmentComponent() {
     const { id } = useParams();
@@ -25,12 +26,12 @@ export default function EditAppointmentComponent() {
     const handleSubmit = (values: IAppointment) => {
         values.date = parseDayjsToString(values.date);
         values.services = appointment.services;
-        dispatch(editAppointment({ id: id as string, data: values }));
+        dispatch(appointmentEditThunk({ id: id as string, body: values }));
     }
 
     const getDataAppointment = async (id: string) => {
         setLoading(true);
-        const value = await getAppointment(id);
+        const value = await appointmentApi.findOne(id);
         setLoading(false);
         setData(value);
     }

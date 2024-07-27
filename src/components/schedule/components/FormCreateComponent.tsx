@@ -12,8 +12,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, DatePicker, Form } from "antd";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getDoctors } from "@/redux/slices/userSlice";
-import { getTimes } from "@/redux/slices/appointmentSlice";
+import { getDoctorState } from "@/redux/reducers/doctorReducer";
+import { doctorsThunk } from "@/redux/thunks/doctorThunk";
+import { getTimeState } from "@/redux/reducers/timeReducer";
+import { timesThunk } from "@/redux/thunks/timeThunk";
 
 interface FormComponentProps {
     onSubmit: (values: IScheduleAction) => void;
@@ -31,8 +33,8 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
     const [selectedDates, setSelectedDates] = useState<string[]>([]);
 
     const dispatch = useAppDispatch();
-    const user = useAppSelector((state) => state.user);
-    const appointment = useAppSelector((state) => state.appointment);
+    const time = useAppSelector(getTimeState);
+    const doctor = useAppSelector(getDoctorState);
 
     const handleDisabledSunday = (current: any) => {
         return current && current.day() === 0;
@@ -72,19 +74,19 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
     }
 
     useEffect(() => {
-        if (user.statusDoctors === "completed" || user.statusDoctors === "rejected") {
-            dispatch(getDoctors());
+        if (doctor.status === "completed" || doctor.status === "rejected") {
+            dispatch(doctorsThunk());
         }
 
-        if (appointment.statusTime === "completed" || appointment.statusTime === "rejected") {
-            dispatch(getTimes());
+        if (time.status === "completed" || time.status === "rejected") {
+            dispatch(timesThunk());
         }
 
         if (id) {
             form.setFieldValue("doctor_id", id);
             setDisabled(false);
         }
-    }, [user.statusDoctors, dispatch, id, form, appointment.statusTime]);
+    }, [dispatch, doctor.status, form, id, time.status]);
 
     return (
         <Form layout="vertical" className="px-2 py-4" initialValues={initialSchedule} onFinish={onSubmit} form={form}>
@@ -92,12 +94,12 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
                 <CCol span={12}>
                     <Form.Item label="Chọn nha sĩ" className="!mb-4" name="doctor_id" rules={[{ required: true, message: "Hãy chọn nha sĩ..." }]}>
                         <CSelect
-                            loading={user.loadingDoctors}
+                            loading={doctor.loading}
                             disabled={!disabled}
                             onChange={() => setDisabled(false)}
                             className="!h-[40px]"
                             placeholder="Chọn nha sĩ..."
-                            options={user?.doctors?.map(u => ({ value: u.id, label: u.id + " - " + u.name + " - " + u.phone_number })) || []}
+                            options={doctor?.data?.map(u => ({ value: u.id, label: u.id + " - " + u.name + " - " + u.phone_number })) || []}
                             filterOption={(input, option) =>
                                 (option?.label as string ?? "").toLowerCase().includes(input.toLowerCase())
                             }
@@ -130,7 +132,7 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
                                             extra={<CButton type="primary" danger size="middle"
                                                 shape="circle" tooltip="Xóa" icon={<FontAwesomeIcon icon={faMinus} />}
                                                 onClick={() => handleDeleteDate(selectedDates[key])} />}>
-                                            <CSelectTag data={appointment.times} size="middle"
+                                            <CSelectTag data={time?.data} size="middle"
                                                 onChange={(times) => handleSelectTime(form.getFieldValue("schedule")[key]?.date, times)} />
                                         </Card>
                                     </Form.Item>

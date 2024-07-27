@@ -3,7 +3,7 @@ import { IHistory } from "./IHistory";
 import { IUser } from "./IUser";
 
 export interface IInvoice {
-    id?: number,
+    id?: string,
     history_id?: number,
     total_price?: number,
     method_payment?: number,

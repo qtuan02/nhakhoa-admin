@@ -1,8 +1,6 @@
 "use client";
 import { ILogin } from "@/interfaces/ILogin";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { getAuthenticateState } from "@/redux/reducers/authenticateReducer";
-import { login } from "@/redux/slices/authenticateSlice";
 import { useEffect } from "react";
 import CButton from "@/custom_antd/CButton";
 import CInput from "@/custom_antd/CInput";
@@ -10,6 +8,8 @@ import CTitle from "@/custom_antd/CTitle";
 import { faHospital } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Checkbox, Form, Input, Spin } from "antd";
+import { getAuthenticateState } from "@/redux/reducers/authReducer";
+import { loginThunk } from "@/redux/thunks/authThunk";
 
 const initialLogin: ILogin = {
     account: "",
@@ -19,16 +19,16 @@ const initialLogin: ILogin = {
 
 export default function LoginComponent() {
     const dispatch = useAppDispatch();
-    const { logging, isLoggedIn } = useAppSelector(getAuthenticateState);
+    const auth = useAppSelector(getAuthenticateState);
 
     const [form] = Form.useForm();
 
     const handleSubmit = (values: ILogin) => {
-        dispatch(login(values));
+        dispatch(loginThunk(values));
     }
 
     useEffect(() => {
-        if (isLoggedIn) {
+        if (auth.isLoggedIn) {
             window.location.assign("/");
         }
 
@@ -37,10 +37,10 @@ export default function LoginComponent() {
             form.setFieldsValue(user);
         }
 
-    }, [form, isLoggedIn]);
+    }, [form, auth.isLoggedIn]);
 
     return (
-        isLoggedIn ? <div className="w-screen h-screen flex items-center justify-center z-10"><Spin size="large"></Spin></div> :
+        auth.isLoggedIn ? <div className="w-screen h-screen flex items-center justify-center z-10"><Spin size="large"></Spin></div> :
             <div className="bg-login flex items-center justify-center">
                 <Form layout="vertical" onFinish={handleSubmit} initialValues={initialLogin} form={form} className="form-login !pt-10 !px-20 w-[600px] h-[450px] rounded-2xl">
                     <CTitle>Đăng nhập</CTitle>
@@ -54,7 +54,7 @@ export default function LoginComponent() {
                         <Checkbox>Nhớ mật khẩu</Checkbox>
                     </Form.Item>
                     <Form.Item>
-                        <CButton loading={logging} type="primary" htmlType="submit" icon={<FontAwesomeIcon icon={faHospital} />} size="large">Đăng nhập</CButton>
+                        <CButton loading={auth.logging} type="primary" htmlType="submit" icon={<FontAwesomeIcon icon={faHospital} />} size="large">Đăng nhập</CButton>
                     </Form.Item>
                 </Form>
             </div>

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { IProfile } from "@/interfaces/IProfile";
 import { RootState } from "../store";
-import { login, logoutToken } from "../slices/authenticateSlice";
+import { loginThunk, logoutThunk } from "../thunks/authThunk";
 
 interface IAuthenticateState {
     logging: boolean;
@@ -17,7 +17,7 @@ const initialState: IAuthenticateState = {
 };
 
 const authenticateSlice = createSlice({
-    name: "authenticate",
+    name: "auth",
     initialState,
     reducers: {
         setCurrentUser: (state, action) => {
@@ -26,7 +26,7 @@ const authenticateSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(login.pending, (state, action) => {
+            .addCase(loginThunk.pending, (state, action) => {
                 state.logging = true;
                 if(action?.meta?.arg?.remember){
                     const user = {
@@ -37,23 +37,23 @@ const authenticateSlice = createSlice({
                     localStorage.setItem("r_u", JSON.stringify(user));
                 }
             })
-            .addCase(login.fulfilled, (state, action) => {
+            .addCase(loginThunk.fulfilled, (state, action) => {
                 TOAST_SUCCESS(action.payload.message);
                 state.currentUser = action.payload.data;
                 state.isLoggedIn = true;
                 state.logging = false;
             })
-            .addCase(login.rejected, (state, action: any) => {
+            .addCase(loginThunk.rejected, (state, action) => {
                 state.logging = false;
                 state.currentUser = null;
-                TOAST_ERROR(action.error?.message);
+                TOAST_ERROR(action?.payload);
             })
-            .addCase(logoutToken.fulfilled, (state, action) => {
+            .addCase(logoutThunk.fulfilled, (state, action) => {
                 state.currentUser = null;
                 state.isLoggedIn = false;
             })
-            .addCase(logoutToken.rejected, (state, action: any) => {
-                TOAST_ERROR(action.error?.message);
+            .addCase(logoutThunk.rejected, (state, action) => {
+                TOAST_ERROR(action?.payload);
             })
         }
 });

@@ -17,6 +17,6 @@ export interface IUser {
 }
 
 export interface IRole {
-    id?: number,
+    id?: string,
     name?: string,
 }

@@ -3,7 +3,6 @@ import CButton from "@/custom_antd/CButton";
 import CRow from "@/custom_antd/CRow";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import CTitle from "@/custom_antd/CTitle";
-import { editCategory, getCategory } from "@/redux/slices/categorySlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { faRotateBack } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,6 +11,8 @@ import { useEffect, useState } from "react";
 import FormComponent from "../components/FormComponent";
 import { ICategory } from "@/interfaces/ICategory";
 import { getCategoryState } from "@/redux/reducers/categoryReducer";
+import { categoryEditThunk } from "@/redux/thunks/categoryThunk";
+import { categoryApi } from "@/api/categoryApi";
 
 export default function EditCategoryComponent() {
     const { id } = useParams();
@@ -22,12 +23,12 @@ export default function EditCategoryComponent() {
     const [loading, setLoading] = useState<boolean>(false);
 
     const handleSubmit = (values: ICategory) => {
-        dispatch(editCategory({ id: id as string, data: values}));
+        dispatch(categoryEditThunk({ id: id as string, body: values}));
     }
 
     const getDataCategory = async (id: string) => {
         setLoading(true);
-        const value = await getCategory(id);
+        const value = await categoryApi.findOne(id);
         setLoading(false);
         setData(value);
     }

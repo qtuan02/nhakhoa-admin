@@ -2,7 +2,7 @@ import { EditorState, RawDraftContentState } from "draft-js";
 import { ICategory } from "./ICategory";
 
 export interface IService {
-    id?: number,
+    id?: string,
     name: string,
     image: string,
     quantity_sold?: number,

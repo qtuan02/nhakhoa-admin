@@ -9,7 +9,7 @@ import CCol from "@/custom_antd/CCol";
 import ChartComponent from "./components/ChartComponent";
 import PieComponent from "./components/PieComponent";
 import { getOverviewState } from "@/redux/reducers/overviewReducer";
-import { getOverview, getOverviewAppointment, getOverviewInvoice } from "@/redux/slices/overviewSlice";
+import { overviewAppointmentThunk, overviewInvoiceThunk, overviewsThunk } from "@/redux/thunks/overviewThunk";
 
 export default function OverviewComponent() {
     const dispatch = useAppDispatch();
@@ -18,13 +18,13 @@ export default function OverviewComponent() {
 
     useEffect(() => {
         if(status === "completed" || status === "rejected"){
-            dispatch(getOverview());
+            dispatch(overviewsThunk());
         }
         if(statusInvoice === "completed" || statusInvoice === "rejected"){
-            dispatch(getOverviewInvoice());
+            dispatch(overviewInvoiceThunk());
         }
         if(statusAppointment === "completed" || statusAppointment === "rejected"){
-            dispatch(getOverviewAppointment());
+            dispatch(overviewAppointmentThunk());
         }
 
     }, [dispatch, status, statusAppointment, statusInvoice])

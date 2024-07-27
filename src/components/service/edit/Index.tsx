@@ -12,8 +12,9 @@ import { IService } from "@/interfaces/IService";
 import { editorToHtml } from "@/utils/FunctionHelpers";
 import { RawDraftContentState } from "draft-js";
 import { useEffect, useState } from "react";
-import { editService, getService } from "@/redux/slices/serviceSlice";
 import { getServiceState } from "@/redux/reducers/serviceReducer";
+import { serviceEditThunk } from "@/redux/thunks/serviceThunk";
+import { serviceApi } from "@/api/serviceApi";
 
 export default function EditServiceComponent() {
     const { id } = useParams();
@@ -25,12 +26,12 @@ export default function EditServiceComponent() {
 
     const handleSubmit = (values: IService) => {
         values.description = editorToHtml(values.description as RawDraftContentState);
-        dispatch(editService({ id: id as string, data: values }));
+        dispatch(serviceEditThunk({ id: id as string, body: values }));
     }
 
     const getDataService = async (id: string) => {
         setLoading(true);
-        const value = await getService(id);
+        const value = await serviceApi.findOne(id);
         setLoading(false);
         setData(value);
     }

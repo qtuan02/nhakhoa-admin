@@ -2,7 +2,7 @@ import { IService } from "@/interfaces/IService";
 import { createSlice } from "@reduxjs/toolkit";
 import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
 import { RootState } from "../store";
-import { createService, deleteService, editService, getServices } from "../slices/serviceSlice";
+import { serviceCreateThunk, serviceDeleteThunk, serviceEditThunk, servicesThunk } from "../thunks/serviceThunk";
 
 interface IServiceState {
     loading: boolean;
@@ -24,52 +24,52 @@ const serviceSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getServices.pending, (state) => {
+            .addCase(servicesThunk.pending, (state) => {
                 state.status = "pending";
                 state.loading = true;
             })
-            .addCase(getServices.fulfilled, (state, action) => {
+            .addCase(servicesThunk.fulfilled, (state, action) => {
                 state.loading = false;
                 state.data = action.payload.data;
             })
-            .addCase(getServices.rejected, (state, action: any) => {
+            .addCase(servicesThunk.rejected, (state, action) => {
                 state.data = [];
                 state.loading = false;
-                TOAST_ERROR(action.error?.message)
+                TOAST_ERROR(action?.payload)
             })
-            .addCase(createService.pending, (state) => {
+            .addCase(serviceCreateThunk.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(createService.fulfilled, (state, action) => {
+            .addCase(serviceCreateThunk.fulfilled, (state, action) => {
                 state.status = "completed";
                 state.loading = false;
                 TOAST_SUCCESS(action.payload.message);
             })
-            .addCase(createService.rejected, (state, action: any) => {
+            .addCase(serviceCreateThunk.rejected, (state, action) => {
                 state.status = "rejected";
                 state.loading = false;
-                TOAST_ERROR(action.error?.message)
+                TOAST_ERROR(action?.payload)
             })
-            .addCase(deleteService.fulfilled, (state, action: any) => {
-                state.data = state.data?.filter((item) => item.id !== action.payload.data);
+            .addCase(serviceDeleteThunk.fulfilled, (state, action) => {
+                state.data = state.data?.filter((item) => item.id !== action.payload.data.id);
                 TOAST_SUCCESS(action.payload.message);
             })
-            .addCase(deleteService.rejected, (state, action: any) => {
+            .addCase(serviceDeleteThunk.rejected, (state, action) => {
                 state.status = "rejected";
-                TOAST_ERROR(action.error?.message);
+                TOAST_ERROR(action?.payload);
             })
-            .addCase(editService.pending, (state) => {
+            .addCase(serviceEditThunk.pending, (state) => {
                 state.edit = "wait";
             })
-            .addCase(editService.fulfilled, (state, action) => {
+            .addCase(serviceEditThunk.fulfilled, (state, action) => {
                 state.status = "completed";
                 state.edit = "success";
                 TOAST_SUCCESS(action.payload.message);
             })
-            .addCase(editService.rejected, (state, action: any) => {
+            .addCase(serviceEditThunk.rejected, (state, action) => {
                 state.status = "rejected";
                 state.edit = "fail";
-                TOAST_ERROR(action.error?.message)
+                TOAST_ERROR(action?.payload)
             })
     }
 });

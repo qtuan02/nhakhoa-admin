@@ -8,15 +8,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FormCreateComponent from "../components/FormCreateComponent";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { IScheduleAction } from "@/interfaces/ISchedule";
-import { createSchedule } from "@/redux/slices/scheduleSlice";
 import { getScheduleState } from "@/redux/reducers/scheduleReducer";
+import { scheduleCreateThunk } from "@/redux/thunks/scheduleThunk";
 
 export default function CreateScheduleComponent() {
     const dispatch = useAppDispatch();
     const schedule = useAppSelector(getScheduleState);
 
     const handleSubmit = (values: IScheduleAction) => {
-        dispatch(createSchedule(values));
+        dispatch(scheduleCreateThunk(values));
     }
 
     return (

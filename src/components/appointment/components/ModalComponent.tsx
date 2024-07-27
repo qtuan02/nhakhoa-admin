@@ -8,18 +8,23 @@ import { useEffect } from "react";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
 import CTable from "@/custom_antd/CTable";
 import CTitle from "@/custom_antd/CTitle";
-import { addService, getAppointmentState, toggleModal } from "@/redux/reducers/appointmentReducer";
+import { addService, getAppointmentState } from "@/redux/reducers/appointmentReducer";
 import { getServiceState } from "@/redux/reducers/serviceReducer";
-import { getServices } from "@/redux/slices/serviceSlice";
+import { servicesThunk } from "@/redux/thunks/serviceThunk";
 
-export default function ModalComponent() {
+interface IModalComponentProps {
+    modal: boolean,
+    toggle: () => void
+}
+
+export default function ModalComponent({ modal, toggle }: IModalComponentProps) {
     const dispatch = useAppDispatch();
     const service = useAppSelector(getServiceState);
     const appointment = useAppSelector(getAppointmentState);
 
     useEffect(() => {
         if(service.status === "completed" || service.status === "rejected"){
-            dispatch(getServices());
+            dispatch(servicesThunk());
         }
     }, [dispatch, service.status]);
 
@@ -63,7 +68,7 @@ export default function ModalComponent() {
     ] as TableColumnsType<IService>;
 
     return (
-        <CModal open={appointment.modal} onCancel={() => dispatch(toggleModal())} footer={null} width={800}>
+        <CModal open={modal} onCancel={() => toggle()} footer={null} width={800}>
             <Divider><CTitle level={4}>Chọn dịch vụ</CTitle></Divider>
             <CSkeleton loading={service.loading}>
                 <CTable

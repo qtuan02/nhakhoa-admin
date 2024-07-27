@@ -7,16 +7,16 @@ import { faRotateBack } from "@fortawesome/free-solid-svg-icons";
 import CButton from "@/custom_antd/CButton";
 import { ICategory } from "@/interfaces/ICategory";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { createCategory } from "@/redux/slices/categorySlice";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import { getCategoryState } from "@/redux/reducers/categoryReducer";
+import { categoryCreateThunk } from "@/redux/thunks/categoryThunk";
 
 export default function CreateCategoryComponent() {
     const dispatch = useAppDispatch();
     const category = useAppSelector(getCategoryState);
 
     const handleSubmit = (values: ICategory) => {
-        dispatch(createCategory(values));
+        dispatch(categoryCreateThunk(values));
     }
     
     return (

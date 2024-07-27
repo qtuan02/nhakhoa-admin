@@ -9,8 +9,8 @@ import { faClockRotateLeft, faTrashCan } from "@fortawesome/free-solid-svg-icons
 import CButton from "@/custom_antd/CButton";
 import CSpace from "@/custom_antd/CSpace";
 import { useAppDispatch } from "@/redux/hooks";
-import { deleteSchedule } from "@/redux/slices/scheduleSlice";
 import CPopConfirm from "@/custom_antd/CPopConfirm";
+import { scheduleDeleteThunk } from "@/redux/thunks/scheduleThunk";
 
 interface CardComponentProps {
     data?: IScheduleDoctor[];
@@ -27,8 +27,7 @@ const CardComponent: React.FC<CardComponentProps> = ({ data, date }) => {
                     <CCol key={index} span={6}>
                         <Card className="shadow-lg hover:shadow-2xl cursor-pointer" title={d.id + " - " + d.name} style={{ border: "1px solid #f3f3f3", height: "200px" }}
                             extra={<CSpace>
-                                {/* <CButton tooltip="Chỉnh sửa" type="primary" size="small" icon={<FontAwesomeIcon icon={faPenToSquare} />} className="ts-16"></CButton> */}
-                                <CPopConfirm title={"Thông báo!!!"} description={`Bạn muốn xóa lịch làm việc của "${d.name}"`} onConfirm={() => dispatch(deleteSchedule({
+                                <CPopConfirm title={"Thông báo!!!"} description={`Bạn muốn xóa lịch làm việc của "${d.name}"`} onConfirm={() => dispatch(scheduleDeleteThunk({
                                     doctor_id: d.id as string,
                                     date: date as string
                                 }))}>

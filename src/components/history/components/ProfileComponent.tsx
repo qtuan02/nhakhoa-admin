@@ -4,20 +4,25 @@ import CRow from "@/custom_antd/CRow";
 import { IHistory } from "@/interfaces/IHistory";
 import { Divider, TableColumnsType } from "antd";
 import CButton from "@/custom_antd/CButton";
-import { useAppDispatch } from "@/redux/hooks";
-import { setHistoryId, toggleDrawer } from "@/redux/reducers/historyReducer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfo } from "@fortawesome/free-solid-svg-icons";
 import CTable from "@/custom_antd/CTable";
 import DrawerComponent from "./DrawerComponent";
 import { formatDate } from "@/utils/FunctionHelpers";
+import { useState } from "react";
 
 interface ProfileComponentProps {
     data?: IHistory;
 }
 
 export default function ProfileComponent({ data }: ProfileComponentProps) {
-    const dispatch = useAppDispatch();
+
+    const [ drawer, setDrawer ] = useState<boolean>(false);
+    const [ historyId, setHistoryId ] = useState<string>("");
+
+    const handleToggleDrawer = () => {
+        setDrawer(!drawer);
+    }
 
     const columns: TableColumnsType<IHistory> = [
         {
@@ -34,8 +39,8 @@ export default function ProfileComponent({ data }: ProfileComponentProps) {
             key: "detail",
             render: (item: IHistory) => (
                 <CButton onClick={() => {
-                    dispatch(toggleDrawer());
-                    dispatch(setHistoryId(String(item.id)));
+                    setHistoryId(item?.id || "");
+                    handleToggleDrawer();
                 }}
                     tooltip="Chi tiết khám" type="dashed" size="small" shape="circle"
                     icon={<FontAwesomeIcon icon={faInfo} />} className="ts-16"></CButton>
@@ -70,7 +75,7 @@ export default function ProfileComponent({ data }: ProfileComponentProps) {
                     /> :
                     <p>Không tìm thấy lịch sử khám...</p>
                 }
-                <DrawerComponent />
+                <DrawerComponent historyId={historyId} drawer={drawer} toggle={handleToggleDrawer} />
             </CCol>
         </CRow>
     );

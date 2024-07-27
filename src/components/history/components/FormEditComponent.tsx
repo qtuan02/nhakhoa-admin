@@ -4,7 +4,7 @@ import CRow from "@/custom_antd/CRow";
 import { CSelect } from "@/custom_antd/CSelect";
 import { IHistory } from "@/interfaces/IHistory";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { editService, getHistoryState, removeService, toggleModal } from "@/redux/reducers/historyReducer";
+import { editService, getHistoryState, removeService } from "@/redux/reducers/historyReducer";
 import { Form, Image, Input, TableProps } from "antd";
 import { useEffect, useState } from "react";
 import ModalComponent from "./ModalComponent";
@@ -79,24 +79,30 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
     const dispatch = useAppDispatch();
     const history = useAppSelector(getHistoryState);
 
+    const [ modal, setModal ] = useState<boolean>(false);
+
+    const handleToggleModal = () => {
+        setModal(!modal);
+    }
+
     useEffect(() => {
         if (data) {
             form.setFieldsValue(data);
         }
     }, [data, form]);
 
-    const [editing, setEditing] = useState<number>(-1);
+    const [editing, setEditing] = useState<string>('');
 
     const isEditing = (record: IService) => record.id === editing;
 
     const edit = (service: IService) => {
         formService.setFieldsValue({ ...service });
-        setEditing(service?.id || -1);
+        setEditing(service?.id || '');
     };
 
     const save = (id: number) => {
         dispatch(editService({ ...formService.getFieldsValue(), id: id }));
-        setEditing(-1);
+        setEditing('');
     };
 
     const columns = [
@@ -144,7 +150,7 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
             width: 100,
             render: (item: IService) => {
                 const editable = isEditing(item);
-                const disable = editing !== -1 ? true : false;
+                const disable = editing !== '' ? true : false;
                 return editable ?
                     <CSpace>
                         <CButton type="default" size="small" onClick={() => save(Number(item.id))}>Lưu</CButton>
@@ -182,7 +188,7 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
                 </Form.Item>
                 <Form.Item label="Dịch vụ:" name="services">
                     <div>
-                        <CButton type="primary" className="rounded-lg" onClick={() => dispatch(toggleModal())}>Chọn dịch vụ</CButton>
+                        <CButton type="primary" className="rounded-lg" onClick={() => handleToggleModal()}>Chọn dịch vụ</CButton>
                         {history && history.services?.length === 0 ?
                             <p className="mt-2 ml-1 text-[14px] text-red-500">Chưa chọn dịch vụ nào...</p>
                             :
@@ -201,7 +207,7 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
                                 />
                             </Form>
                         }
-                        <ModalComponent />
+                        <ModalComponent modal={modal} toggle={handleToggleModal} />
                     </div>
                 </Form.Item>
                 <Form.Item label="Ghi chú:" name="note">

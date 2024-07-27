@@ -1,34 +1,35 @@
-import { getHistory } from "@/redux/slices/historySlice";
 import CCol from "@/custom_antd/CCol";
 import CDescriptionItem from "@/custom_antd/CDescriptionItem";
 import CRow from "@/custom_antd/CRow";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import CTable from "@/custom_antd/CTable";
 import { IHistory, IHistoryDetail } from "@/interfaces/IHistory";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { getHistoryState, toggleDrawer } from "@/redux/reducers/historyReducer";
 import { Divider, Drawer, TableColumnsType } from "antd";
 import { useEffect, useState } from "react";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
 import { formatDate } from "@/utils/FunctionHelpers";
+import { historyApi } from "@/api/historyApi";
 
-export default function DrawerComponent() {
-    const dispatch = useAppDispatch();
-    const history = useAppSelector(getHistoryState);
+interface IDrawerComponentProps {
+    historyId: string,
+    drawer: boolean,
+    toggle: () => void
+}
 
+export default function DrawerComponent({ historyId, drawer, toggle }: IDrawerComponentProps) {
     const [loading, setLoading] = useState<boolean>(false);
     const [data, setData] = useState<IHistory | null>();
 
     const getDataHistory = async (id: string) => {
         setLoading(true);
-        const history = await getHistory(id);
+        const history = await historyApi.findOne(id);
         setLoading(false);
         return history ? setData(history) : setData(null);
     }
 
     useEffect(() => {
-        getDataHistory(history.history_id as string);
-    }, [history.history_id]);
+        getDataHistory(historyId);
+    }, [historyId]);
 
     const columns: TableColumnsType<IHistoryDetail> = [
         {
@@ -64,7 +65,7 @@ export default function DrawerComponent() {
         }
     ] as TableColumnsType<IHistoryDetail>;
 
-    return <Drawer placement="right" width={680} open={history.drawer} onClose={() => dispatch(toggleDrawer())} footer={null} title={"CHI TIẾT KHÁM - MÃ "+history.history_id}>
+    return <Drawer placement="right" width={680} open={drawer} onClose={() => toggle()} footer={null} title={"CHI TIẾT KHÁM - MÃ "+historyId}>
         <CSkeleton loading={loading}>
             <Divider>Thông tin</Divider>
             <CRow>

@@ -4,19 +4,25 @@ import CTable from "@/custom_antd/CTable";
 import { faCirclePlus, faInfo, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Checkbox, CheckboxOptionType, TableColumnsType } from "antd";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppSelector } from "@/redux/hooks";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
 import { ICustomer } from "@/interfaces/ICustomer";
 import { useState } from "react";
 import CTitle from "@/custom_antd/CTitle";
-import { getCustomerState, setHistoryId, toggleDrawer } from "@/redux/reducers/customerReducer";
+import { getCustomerState } from "@/redux/reducers/customerReducer";
 import { IHistory } from "@/interfaces/IHistory";
 import DrawerComponent from "./DrawerComponent";
 import { formatDate } from "@/utils/FunctionHelpers";
 
 export default function TableComponent() {
-    const dispatch = useAppDispatch();
     const customer = useAppSelector(getCustomerState);
+
+    const [ historyId, setHistoryId ] = useState<string>('');
+    const [ drawer, setDrawer ] = useState<boolean>(false);
+
+    const handleToggleDrawer = () => {
+        setDrawer(!drawer);
+    }
     
     const columns: TableColumnsType<ICustomer> = [
         {
@@ -106,8 +112,8 @@ export default function TableComponent() {
                 key: "detail",
                 render: (item: IHistory) => (
                     <CButton onClick={() => {
-                        dispatch(toggleDrawer());
-                        dispatch(setHistoryId(String(item.id)));
+                        setHistoryId(item?.id || '');
+                        handleToggleDrawer();
                     }}
                     tooltip="Chi tiết khám" type="dashed" size="small" shape="circle"
                     icon={<FontAwesomeIcon icon={faInfo} />} className="ts-16"></CButton>
@@ -128,7 +134,7 @@ export default function TableComponent() {
             <>
                 <CTitle level={5}>Lịch sử khám</CTitle>
                 <CTable columns={columns} dataSource={data} pagination={false} size="small" />
-                <DrawerComponent />
+                <DrawerComponent historyId={historyId} drawer={drawer} toggle={handleToggleDrawer} />
             </>
         ) : (
             <CTitle level={5}>Không có lịch sử khám</CTitle>
