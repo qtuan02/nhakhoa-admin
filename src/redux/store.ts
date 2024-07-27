@@ -1,9 +1,7 @@
-import storage from "redux-persist/lib/storage";
 import rootReducer from "./reducers/rootReducer";
-import { createWrapper } from 'next-redux-wrapper';
+import storage from "redux-persist/lib/storage";
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
-
 
 const persistConfig = {
     key: "primary",
@@ -14,21 +12,16 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const makeStore = () => {
-    return configureStore({
-        reducer: persistedReducer,
-        middleware: (getDefaultMiddleware) =>
-            getDefaultMiddleware({
-                serializableCheck: {
-                    ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-                },
-            })
-    });
-}
+export const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+			},
+        })
+});
 
-export const wrapper = createWrapper(makeStore, { debug: true });
-
-export const store = makeStore();
 export const persistor = persistStore(store);
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

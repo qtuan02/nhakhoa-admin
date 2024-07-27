@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+
 import dynamic from "next/dynamic";
 const AppLayout = dynamic(() => import("@/components/layout/AppLayout"), { ssr: false });
 
