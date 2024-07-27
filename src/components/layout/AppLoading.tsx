@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Spin } from "antd";
 
 export default function AppLoading() {

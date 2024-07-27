@@ -25,7 +25,7 @@ export default function InvoiceComponent() {
         <>
             <CRow className="justify-between">
                 <CTitle>Danh sách hóa đơn</CTitle>
-                <CButton onClick={() => dispatch(invoicesThunk())} type="primary" icon={<FontAwesomeIcon icon={faRotateRight} />}>Tải lại</CButton>
+                <CButton onClick={() => dispatch(invoicesThunk())} type="default" icon={<FontAwesomeIcon icon={faRotateRight} />}>Tải lại</CButton>
             </CRow>
             <CSkeleton loading={invoice.loading}>
                 <div className="w-full h-[calc(100%-65px)] overflow-auto">

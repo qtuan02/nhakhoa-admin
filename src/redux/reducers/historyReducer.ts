@@ -36,18 +36,17 @@ const historySlice = createSlice({
         removeService: (state, action) => {
             const service_id = action.payload;
             const index = state.services?.findIndex(s => s.id === service_id);
-            if (index) {
+            if (index !== undefined) {
                 state.services?.splice(index, 1);
+                TOAST_SUCCESS("Xóa thành công!");
             }
         },
         editService: (state, action: PayloadAction<IService>) => {
             const service = action.payload;
             const index = state.services?.findIndex(s => s.id === service.id);
-            if (index && state.services) {
+            if (index !== undefined && state.services) {
                 state.services[index].price = service.price;
                 state.services[index].quantity = service.quantity;
-            } else {
-                TOAST_WARNING("Dịch vụ không tồn tại!");
             }
         },
         clearService: (state) => {

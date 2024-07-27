@@ -52,6 +52,7 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
                 <CCol span={12}>
                     <Form.Item label="Khách hàng" className="!mb-4" name="customer_id" rules={[{ required: true, message: "Hãy chọn khách hàng..." }]}>
                         <CSelect
+                            loading={customer.loading}
                             className="!h-[40px]"
                             showSearch
                             placeholder="Chọn khách hàng..."
@@ -65,6 +66,7 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
                 <CCol span={12}>
                     <Form.Item label="Nha sĩ" className="!mb-4" name="doctor_id" rules={[{ required: true, message: "Hãy chọn nha sĩ..." }]}>
                         <CSelect
+                            loading={doctor.loading}
                             className="!h-[40px]"
                             showSearch
                             placeholder="Chọn nha sĩ..."

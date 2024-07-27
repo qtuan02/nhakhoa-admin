@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import DetailComponent from "../components/DetailComponent";
 import { IInvoice } from "@/interfaces/IInvoice";
 import FormEditComponent from "../components/FormEditComponent";
-import { TOAST_WARNING } from "@/utils/FunctionUiHelpers";
+import { TOAST_SUCCESS, TOAST_WARNING } from "@/utils/FunctionUiHelpers";
 import CCol from "@/custom_antd/CCol";
 import { getInvoiceState } from "@/redux/reducers/invoiceReducer";
 import { invoiceEditThunk } from "@/redux/thunks/invoiceThunk";
@@ -34,6 +34,10 @@ export default function EditInvoiceComponent() {
         const value = await invoiceApi.findOne(id);
         setLoading(false);
         setData(value);
+    }
+
+    const handlePrint = async (id: string) => {
+        const res = await invoiceApi.print(id);
     }
 
     useEffect(() => {
@@ -70,7 +74,7 @@ export default function EditInvoiceComponent() {
                     <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
                 </CCol>
                 <CCol>
-                    <CButton onClick={() => alert("In ra hóa đơn!")} type="default" icon={<FontAwesomeIcon icon={faPrint} />}>In hóa đơn</CButton>
+                    <CButton onClick={() => handlePrint(id as string)} type="default" icon={<FontAwesomeIcon icon={faPrint} />}>In hóa đơn</CButton>
                 </CCol>
             </CRow>
             <Tabs defaultActiveKey="detail" items={items} />

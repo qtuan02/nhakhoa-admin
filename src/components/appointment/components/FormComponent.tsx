@@ -61,7 +61,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
     const getDataDateByDoctorId = async (doctor_id: string) => {
         setLoadingDate(true);
         const res = await scheduleApi.getDate(doctor_id);
-        setLoadingDate(false);
+        setLoadingDate(false); 
         setDataDate(res);
     }
 
@@ -85,9 +85,10 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
             if(data.services){
                 dispatch(setServices(data.services));
             }
+
             if(data.doctor && data.time) {
-                getDataDateByDoctorId(data?.doctor_id || '');
-                getDataTimeByDoctorIdAndDate(data?.doctor_id || '', data?.date || '');
+                getDataDateByDoctorId(data.doctor.id || '');
+                getDataTimeByDoctorIdAndDate(data.doctor.id || '', data.date || '');
             }
 
             form.setFieldsValue({
@@ -197,7 +198,6 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                                 </Form.Item>
                             </CCol>
                         </CRow>
-
                     }
                 </CCol>
             </CRow>
@@ -214,7 +214,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                                 <List.Item>
                                     <List.Item.Meta
                                         avatar={<Avatar shape="square" size="large" src={item?.image} />}
-                                        title={<CRow justify="space-between">{item?.name}<CButton type="primary" danger size="small" onClick={() => dispatch(removeService(item?.id || -1))}>Xóa</CButton></CRow>}
+                                        title={<CRow justify="space-between">{item?.name}<CButton type="primary" danger size="small" onClick={() => dispatch(removeService(item?.id || ''))}>Xóa</CButton></CRow>}
                                         description={new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(Number(item?.min_price)) + "/" + item?.unit}
                                     />
                                 </List.Item>

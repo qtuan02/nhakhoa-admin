@@ -40,7 +40,7 @@ const CardComponent: React.FC<CardComponentProps> = ({ data, date }) => {
                                 {d.times?.map((t, index) => {
                                     return (
                                         <CCol key={index} span={12}>
-                                            <Flex align="center" className="ml-4" gap={8}><FontAwesomeIcon icon={faClockRotateLeft} className="text-green-500" />
+                                            <Flex align="center" gap={8}><FontAwesomeIcon icon={faClockRotateLeft} className="text-green-500" />
                                                 {t.time}
                                             </Flex>
                                         </CCol>

@@ -36,8 +36,9 @@ const appointmentSlice = createSlice({
         removeService: (state, action) => {
             const service_id = action.payload;
             const index = state.services?.findIndex(s => s.id === service_id);
-            if (index) {
+            if (index !== undefined) {
                 state.services?.splice(index, 1);
+                TOAST_SUCCESS("Xóa thành công!");
             }
         },
         clearService: (state) => {

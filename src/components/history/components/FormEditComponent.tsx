@@ -4,7 +4,7 @@ import CRow from "@/custom_antd/CRow";
 import { CSelect } from "@/custom_antd/CSelect";
 import { IHistory } from "@/interfaces/IHistory";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { editService, getHistoryState, removeService } from "@/redux/reducers/historyReducer";
+import { clearService, editService, getHistoryState, removeService } from "@/redux/reducers/historyReducer";
 import { Form, Image, Input, TableProps } from "antd";
 import { useEffect, useState } from "react";
 import ModalComponent from "./ModalComponent";
@@ -13,10 +13,12 @@ import { IService } from "@/interfaces/IService";
 import CSpace from "@/custom_antd/CSpace";
 import CInput from "@/custom_antd/CInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faCancel, faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import CTitle from "@/custom_antd/CTitle";
 import CInputNumber from "@/custom_antd/CInputNumber";
 import { customNumberPrice } from "@/utils/FunctionHelpers";
+import CPopConfirm from "@/custom_antd/CPopConfirm";
+import { historyEditThunk } from "@/redux/thunks/historyThunk";
 
 interface FormComponentProps {
     onSubmit: (values: IHistory) => void;
@@ -183,9 +185,6 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
     return (
         data && data.status === 0 ?
             <Form layout="vertical" onFinish={onSubmit} initialValues={initialHistory} form={form}>
-                <Form.Item label="Trạng thái:" name="status" rules={[{ required: true, message: "Hãy chọn trạng thái..." }]}>
-                    <CSelect className="!h-[40px]" options={STATUS_HISTORY} />
-                </Form.Item>
                 <Form.Item label="Dịch vụ:" name="services">
                     <div>
                         <CButton type="primary" className="rounded-lg" onClick={() => handleToggleModal()}>Chọn dịch vụ</CButton>
@@ -202,7 +201,7 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
                                     className="table-modal !mt-2"
                                     rowClassName="editable-row"
                                     columns={editColumns}
-                                    dataSource={history?.services?.map((item, index) => ({ ...item, index: index + 1, key: item.id, quantity: item.quantity ? item.quantity : 1, price: item.price ? item.price : item.min_price })) || []}
+                                    dataSource={history?.services?.map((item: IService, index: number) => ({ ...item, index: index + 1, key: item.id, quantity: item.quantity ? item.quantity : 1, price: item.price ? item.price : item.min_price })) || []}
                                     pagination={false}
                                 />
                             </Form>
@@ -221,6 +220,13 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
                 </Form.Item>
                 <br />
                 <CRow className="gap-4 justify-end">
+                    <CPopConfirm title={"Thông báo!!!"} description={`Bạn muốn hủy lịch khám của "${data.customer?.name}"!`}
+                        onConfirm={() => {
+                            dispatch(historyEditThunk({ id: data.id || "", body: { status: 2 } }));
+                            dispatch(clearService());
+                        }}>
+                        <CButton type="primary" danger icon={<FontAwesomeIcon icon={faCancel} />}>Hủy</CButton>
+                    </CPopConfirm>
                     <CButton type="primary" icon={<FontAwesomeIcon icon={faPenToSquare} />} htmlType="submit">Hoàn thành</CButton>
                 </CRow>
             </Form> :

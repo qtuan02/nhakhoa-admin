@@ -18,5 +18,13 @@ export const invoiceApi = {
         }catch(error: any) {
             TOAST_ERROR(error?.response?.data?.message)
         }
+    },
+    print: async (id: string) => {
+        try{
+            const res = await axiosClient.post(URL + "/print", { id: id });
+            return res.data;
+        }catch(error: any) {
+            TOAST_ERROR(error?.response?.data?.message)
+        }
     }
 }

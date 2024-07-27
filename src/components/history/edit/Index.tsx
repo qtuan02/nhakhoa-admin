@@ -26,6 +26,7 @@ export default function EditHistoryComponent() {
 
     const handleSubmit = (values: IHistory) => {
         values.services = history.services;
+        values.status = 1;
         dispatch(historyEditThunk({ id: id as string, body: values }));
         dispatch(clearService());
     }
