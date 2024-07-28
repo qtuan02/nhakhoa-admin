@@ -1,13 +1,13 @@
-"use client"
-import CSkeleton from "@/custom_antd/CSkeleton";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+"use client";
 import { Flex } from "antd";
 import { useEffect } from "react";
-import StatisticComponent from "./components/StatisticComponent";
-import CRow from "@/custom_antd/CRow";
 import CCol from "@/custom_antd/CCol";
-import ChartComponent from "./components/ChartComponent";
+import CRow from "@/custom_antd/CRow";
+import CSkeleton from "@/custom_antd/CSkeleton";
 import PieComponent from "./components/PieComponent";
+import ChartComponent from "./components/ChartComponent";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import StatisticComponent from "./components/StatisticComponent";
 import { getOverviewState } from "@/redux/reducers/overviewReducer";
 import { overviewAppointmentThunk, overviewInvoiceThunk, overviewsThunk } from "@/redux/thunks/overviewThunk";
 
@@ -26,7 +26,6 @@ export default function OverviewComponent() {
         if(statusAppointment === "completed" || statusAppointment === "rejected"){
             dispatch(overviewAppointmentThunk());
         }
-
     }, [dispatch, status, statusAppointment, statusInvoice])
 
     return (

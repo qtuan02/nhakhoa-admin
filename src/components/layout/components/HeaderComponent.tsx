@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import ModalComponent from "./ModalComponent";
 import { getAuthenticateState } from "@/redux/reducers/authReducer";
 import { logoutThunk } from "@/redux/thunks/authThunk";
+import usePusher from "@/hooks/usePusher";
 const { Header } = Layout;
 
 interface IHeaderComponentProps {
@@ -24,6 +25,8 @@ export default function HeaderComponent({ sider, toggle }: IHeaderComponentProps
     const auth = useAppSelector(getAuthenticateState);
 
     const [ modal, setModal ] = useState<boolean>(false);
+
+    const countNotice = usePusher();
 
     const handleToggleModal = () => {
         setModal(!modal);
@@ -71,7 +74,7 @@ export default function HeaderComponent({ sider, toggle }: IHeaderComponentProps
                 <CCol>
                     <Flex gap={16}>
                         <CCol>
-                            <Badge count="1" size="small" color="#f50">
+                            <Badge count={countNotice} size="small" color="#f50">
                                 <CButton size="large" type="default" shape="circle" icon={<FontAwesomeIcon icon={faBell} />}></CButton>
                             </Badge>
                         </CCol>

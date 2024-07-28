@@ -16,10 +16,10 @@ export default function CategoryComponent() {
     const category = useAppSelector(getCategoryState);
 
     useEffect(() => {
-        if(category.status === "completed" || category.status === "rejected") {
+        if(category?.status === "completed" || category?.status === "rejected") {
             dispatch(categoriesThunk());
         }
-    }, [dispatch, category.status]);
+    }, [dispatch, category?.status]);
 
     return (
         <>
@@ -27,7 +27,7 @@ export default function CategoryComponent() {
                 <CTitle>Danh mục</CTitle>
                 <CButton link="/danh-muc/them" type="primary" icon={<FontAwesomeIcon icon={faCirclePlus} />}>Thêm mới</CButton>
             </CRow>
-            <CSkeleton loading={category.loading}>
+            <CSkeleton loading={category?.loading}>
                 <div className="w-full h-[calc(100%-65px)] overflow-auto">
                     <TableComponent />
                 </div>
