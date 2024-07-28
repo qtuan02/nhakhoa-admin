@@ -1,3 +1,4 @@
+"use client";
 import CButton from "@/custom_antd/CButton";
 import CCol from "@/custom_antd/CCol";
 import CDropDown from "@/custom_antd/CDropdown";

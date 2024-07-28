@@ -1,3 +1,4 @@
+"use client";
 import { authApi } from "@/api/authenticateApi";
 import CButton from "@/custom_antd/CButton";
 import CRow from "@/custom_antd/CRow";

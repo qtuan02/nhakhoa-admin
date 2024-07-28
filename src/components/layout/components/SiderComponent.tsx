@@ -1,3 +1,4 @@
+"use client";
 import { SIDER_MENU } from "@/utils/Option";
 import CMenu from "@/custom_antd/CMenu";
 import CSider from "@/custom_antd/CSider";
