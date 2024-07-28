@@ -1,6 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import appointmentReducer from "./appointmentReducer";
-import authenticateReducer from "./authReducer";
 import categoryReducer from "./categoryReducer";
 import customerReducer from "./customerReducer";
 import historyReducer from "./historyReducer";
@@ -12,10 +11,11 @@ import userReducer from "./userReducer";
 import timeReducer from "./timeReducer";
 import doctorReducer from "./doctorReducer";
 import statisticReducer from "./statisticReducer";
+import authReducer from "./authReducer";
 
 const rootReducer = combineReducers({
     appointment: appointmentReducer,
-    authenticate: authenticateReducer,
+    auth: authReducer,
     category: categoryReducer,
     customer: customerReducer,
     history: historyReducer,

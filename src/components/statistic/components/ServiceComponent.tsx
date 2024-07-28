@@ -15,7 +15,6 @@ import { DatePicker, Flex, Form, Skeleton, TableColumnsType } from "antd";
 import { CheckCircleOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { IStatisticAction, IStatisticServiceDetail } from "@/interfaces/IStatistic";
 import { useState } from "react";
-import CSpace from "@/custom_antd/CSpace";
 import { exportApi } from "@/api/exportApi";
 
 export default function ServiceComponent() {

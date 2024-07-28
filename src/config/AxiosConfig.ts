@@ -20,7 +20,7 @@ const axiosClient = axios.create({
 
 axiosClient.interceptors.request.use(
 	async (config: AdaptAxiosRequestConfig) => {
-		const { currentUser } = store.getState().authenticate;
+		const { currentUser } = store.getState().auth;
 		if (currentUser && currentUser.access_token) {
 			const decodedToken: any = jwtDecode<JwtPayload>(currentUser.access_token);
 			const currentTime = new Date().getTime() / 1000;

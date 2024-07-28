@@ -1,6 +1,4 @@
 "use client";
-
-import CTitle from "@/custom_antd/CTitle";
 import { Tabs, TabsProps } from "antd";
 import InvoiceComponent from "./components/InvoiceComponent";
 import ServiceComponent from "./components/ServiceComponent";

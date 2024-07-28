@@ -43,9 +43,3 @@ body {
     height: 100%;
 }
 
-.form-login {
-    background-image: url("/bg-login.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center top;
-}

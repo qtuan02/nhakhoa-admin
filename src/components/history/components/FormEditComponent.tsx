@@ -1,7 +1,5 @@
-import { STATUS_HISTORY } from "@/utils/Option";
 import CButton from "@/custom_antd/CButton";
 import CRow from "@/custom_antd/CRow";
-import { CSelect } from "@/custom_antd/CSelect";
 import { IHistory } from "@/interfaces/IHistory";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { clearService, editService, getHistoryState, removeService } from "@/redux/reducers/historyReducer";

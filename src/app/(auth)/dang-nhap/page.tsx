@@ -2,11 +2,17 @@
 import LoginComponent from "@/components/login/Index";
 import { appConfig } from "@/config/AppConfig";
 import { useAppSelector } from "@/redux/hooks";
-import { getAuthenticateState } from "@/redux/reducers/authReducer";
+import { getAuthState } from "@/redux/reducers/authReducer";
 import { useEffect } from "react";
 
 export default function LoginPage() {
-    const auth = useAppSelector(getAuthenticateState);
+    const auth = useAppSelector(getAuthState);
+
+    // useEffect(() => {
+    //     if (auth?.isLoggedIn) {
+    //         window.location.assign("/");
+    //     }
+    // }, [auth?.isLoggedIn])
 
     useEffect(() => {
         if (auth.isLoggedIn) {

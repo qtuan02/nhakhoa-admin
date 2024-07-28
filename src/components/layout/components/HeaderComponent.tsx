@@ -10,9 +10,9 @@ import { Avatar, Badge, Flex, Layout, MenuProps } from "antd";
 import Link from "next/link";
 import React, { useState } from "react";
 import ModalComponent from "./ModalComponent";
-import { getAuthenticateState } from "@/redux/reducers/authReducer";
 import { logoutThunk } from "@/redux/thunks/authThunk";
 import usePusher from "@/hooks/usePusher";
+import { getAuthState } from "@/redux/reducers/authReducer";
 const { Header } = Layout;
 
 interface IHeaderComponentProps {
@@ -22,7 +22,7 @@ interface IHeaderComponentProps {
 
 export default function HeaderComponent({ sider, toggle }: IHeaderComponentProps) {
     const dispatch = useAppDispatch();
-    const auth = useAppSelector(getAuthenticateState);
+    const auth = useAppSelector(getAuthState);
 
     const [ modal, setModal ] = useState<boolean>(false);
 

@@ -4,19 +4,19 @@ import { IProfile } from "@/interfaces/IProfile";
 import { RootState } from "../store";
 import { loginThunk, logoutThunk } from "../thunks/authThunk";
 
-interface IAuthenticateState {
+interface IAuthState {
     logging: boolean;
     currentUser: IProfile | null;
     isLoggedIn: boolean;
 }
 
-const initialState: IAuthenticateState = {
+const initialState: IAuthState = {
     logging: false,
     currentUser: null,
     isLoggedIn: false,
 };
 
-const authenticateSlice = createSlice({
+const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
@@ -58,6 +58,6 @@ const authenticateSlice = createSlice({
         }
 });
 
-export const getAuthenticateState = (state: RootState) => state.authenticate;
-export const { setCurrentUser } = authenticateSlice.actions;
-export default authenticateSlice.reducer;
+export const getAuthState = (state: RootState) => state.auth;
+export const { setCurrentUser } = authSlice.actions;
+export default authSlice.reducer;

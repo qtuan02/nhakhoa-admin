@@ -1,3 +1,4 @@
+"use client";
 import { ILogin } from "@/interfaces/ILogin";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
@@ -7,8 +8,8 @@ import CTitle from "@/custom_antd/CTitle";
 import { faHospital } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Checkbox, Form, Input } from "antd";
-import { getAuthenticateState } from "@/redux/reducers/authReducer";
 import { loginThunk } from "@/redux/thunks/authThunk";
+import { getAuthState } from "@/redux/reducers/authReducer";
 
 const initialLogin: ILogin = {
     account: "",
@@ -18,7 +19,7 @@ const initialLogin: ILogin = {
 
 export default function LoginComponent() {
     const dispatch = useAppDispatch();
-    const auth = useAppSelector(getAuthenticateState);
+    const auth = useAppSelector(getAuthState);
 
     const [form] = Form.useForm();
 
@@ -35,7 +36,8 @@ export default function LoginComponent() {
 
     return (
         <div className="bg-login flex items-center justify-center">
-            <Form layout="vertical" onFinish={handleSubmit} initialValues={initialLogin} form={form} className="form-login !pt-10 !px-20 w-[600px] h-[450px] rounded-2xl">
+            <Form layout="vertical" onFinish={handleSubmit} initialValues={initialLogin} form={form} 
+            className="border-[2px] shadow-xl hover:shadow-2xl hover:cursor-pointer hover:bg-[rgba(240,255,255,.5)] bg-[rgba(240,255,255,1)] !pt-10 !px-20 w-[600px] h-[450px] rounded-2xl">
                 <CTitle>Đăng nhập</CTitle>
                 <Form.Item label="Tài khoản" className="!mb-4" name="account" rules={[{ required: true, message: "Hãy nhập tài khoản!" }]}>
                     <CInput size="large" placeholder="Email hoặc số điện thoại..." autoComplete="username" />

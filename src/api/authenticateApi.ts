@@ -17,7 +17,7 @@ export const authApi = {
 	},
 	refreshToken: async () => {
 		try{
-			const { currentUser } = store.getState().authenticate;
+			const { currentUser } = store.getState().auth;
 			const res = await axios.post(baseURL  + "/refresh", {}, { withCredentials: true });
 			store.dispatch(setCurrentUser({
 				...currentUser,

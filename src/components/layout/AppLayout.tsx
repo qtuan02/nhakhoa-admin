@@ -4,10 +4,10 @@ import HeaderComponent from "./components/HeaderComponent";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "@/redux/hooks";
 import AppLoading from "./AppLoading";
-import { getAuthenticateState } from "@/redux/reducers/authReducer";
+import { getAuthState } from "@/redux/reducers/authReducer";
 
 export default function LayoutComponent({ children }: { children: React.ReactNode }) {
-    const auth = useAppSelector(getAuthenticateState);
+    const auth = useAppSelector(getAuthState);
 
     const [ sider, setSider ] = useState<boolean>(true);
 
