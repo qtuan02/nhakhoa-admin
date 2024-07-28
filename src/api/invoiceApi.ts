@@ -1,6 +1,7 @@
 import axiosClient from "@/config/AxiosConfig";
 import { IInvoice } from "@/interfaces/IInvoice";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
+import { saveAs } from 'file-saver';
 
 const URL = "/v1/invoice";
 
@@ -22,9 +23,12 @@ export const invoiceApi = {
     },
     print: async (id: string) => {
         try{
-            const res = await axiosClient.get(URL + "/print/" + id);
-            return res.data;
-        }catch(error: any) {
+            const res = await axiosClient.post(URL + "/print/" + id, null, {
+                responseType: 'blob'
+            });
+            const pdfBlob = new Blob([res.data], { type: 'application/pdf' });
+            saveAs(pdfBlob, `hoa-don-${id}.pdf`);
+        } catch(error: any) {
             TOAST_ERROR(error?.response?.data?.message)
         }
     }

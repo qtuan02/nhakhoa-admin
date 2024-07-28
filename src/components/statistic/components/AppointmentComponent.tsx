@@ -8,17 +8,20 @@ import CButton from "@/custom_antd/CButton";
 import { IAppointment } from "@/interfaces/IAppointment";
 import { IStatisticAction } from "@/interfaces/IStatistic";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { faFileExcel, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getStatisticState } from "@/redux/reducers/statisticReducer";
 import { formatDate, parseDayjsToString } from "@/utils/FunctionHelpers";
 import { DatePicker, Flex, Form, Skeleton, TableColumnsType } from "antd";
 import { statisticAppointmentThunk } from "@/redux/thunks/statisticThunk";
 import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import { exportApi } from "@/api/exportApi";
 
 export default function AppointmentComponent() {
     const dispatch = useAppDispatch();
     const statistic = useAppSelector(getStatisticState);
+    const [date, setDate] = useState<IStatisticAction>({ begin: '', end: '' });
 
     const handleSubmit = (value: any) => {
         const [begin, end] = value.date;
@@ -26,8 +29,14 @@ export default function AppointmentComponent() {
             begin: parseDayjsToString(begin),
             end: parseDayjsToString(end)
         };
+        setDate(data);
         dispatch(statisticAppointmentThunk(data));
     }
+
+    const handleExport = () => {
+        exportApi.exportAppointment(date.begin, date.end);
+    }
+
 
     const columns: TableColumnsType<IAppointment> = [
         {
@@ -81,7 +90,7 @@ export default function AppointmentComponent() {
                         break;
                     case 2:
                         icon = <CloseCircleOutlined />
-                        color="error"
+                        color = "error"
                         text = "Hủy"
                         break;
                 }
@@ -93,11 +102,18 @@ export default function AppointmentComponent() {
     return (
         <>
             <Form onFinish={handleSubmit}>
-                <Flex gap={16} className="!h-10">
-                    <Form.Item name="date" rules={[{ required: true, message: "" }]}>
-                        <DatePicker.RangePicker size="middle" format="DD/MM/YYYY" />
-                    </Form.Item>
-                    <CButton type="primary" size="middle" icon={<FontAwesomeIcon icon={faPaperPlane} />} htmlType="submit">Thống kê</CButton>
+                <Flex className="!h-10" justify="space-between">
+                    <CCol>
+                        <Flex gap={16}>
+                            <Form.Item name="date" rules={[{ required: true, message: "" }]}>
+                                <DatePicker.RangePicker size="middle" format="DD/MM/YYYY" />
+                            </Form.Item>
+                            <CButton type="primary" size="middle" icon={<FontAwesomeIcon icon={faPaperPlane} />} htmlType="submit">Thống kê</CButton>
+                        </Flex>
+                    </CCol>
+                    <CCol>
+                        {date.begin && date.end ? <CButton type="default" size="middle" icon={<FontAwesomeIcon icon={faFileExcel} />} onClick={handleExport}>Export</CButton> : <></>}
+                    </CCol>
                 </Flex>
             </Form>
             <Skeleton loading={statistic.loadingAppointment}>

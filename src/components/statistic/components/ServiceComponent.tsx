@@ -7,7 +7,7 @@ import CTitle from "@/custom_antd/CTitle";
 import CButton from "@/custom_antd/CButton";
 import { customNumberPrice, parseDayjsToString } from "@/utils/FunctionHelpers";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { faFileExcel, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getStatisticState } from "@/redux/reducers/statisticReducer";
 import { statisticServiceThunk } from "@/redux/thunks/statisticThunk";
@@ -15,6 +15,8 @@ import { DatePicker, Flex, Form, Skeleton, TableColumnsType } from "antd";
 import { CheckCircleOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { IStatisticAction, IStatisticServiceDetail } from "@/interfaces/IStatistic";
 import { useState } from "react";
+import CSpace from "@/custom_antd/CSpace";
+import { exportApi } from "@/api/exportApi";
 
 export default function ServiceComponent() {
     const dispatch = useAppDispatch();
@@ -30,6 +32,10 @@ export default function ServiceComponent() {
         };
         setDate(data);
         dispatch(statisticServiceThunk(data));
+    }
+
+    const handleExport = () => {
+        exportApi.exportService(date.begin, date.end);
     }
 
     const columns: TableColumnsType<IStatisticServiceDetail> = [
@@ -80,11 +86,18 @@ export default function ServiceComponent() {
     return (
         <>
             <Form onFinish={handleSubmit}>
-                <Flex gap={16} className="!h-10">
-                    <Form.Item name="date" rules={[{ required: true, message: "" }]}>
-                        <DatePicker.RangePicker size="middle" format="DD/MM/YYYY" />
-                    </Form.Item>
-                    <CButton type="primary" size="middle" icon={<FontAwesomeIcon icon={faPaperPlane} />} htmlType="submit">Thống kê</CButton>
+                <Flex className="!h-10" justify="space-between">
+                    <CCol>
+                        <Flex gap={16}>
+                            <Form.Item name="date" rules={[{ required: true, message: "" }]}>
+                                <DatePicker.RangePicker size="middle" format="DD/MM/YYYY" />
+                            </Form.Item>
+                            <CButton type="primary" size="middle" icon={<FontAwesomeIcon icon={faPaperPlane} />} htmlType="submit">Thống kê</CButton>
+                        </Flex>
+                    </CCol>
+                    <CCol>
+                        { date.begin && date.end ? <CButton type="default" size="middle" icon={<FontAwesomeIcon icon={faFileExcel} />} onClick={handleExport}>Export</CButton> : <></> }
+                    </CCol>
                 </Flex>
             </Form>
             <Skeleton loading={statistic.loadingService}>

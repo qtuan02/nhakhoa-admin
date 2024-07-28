@@ -84,7 +84,6 @@ export default function DetailComponent({ data }: DetailComponentProps) {
             <CDescriptionItem title="Trạng thái" content={data?.status === 0 ? "Chưa thanh toán" : "Đã thanh toán"} />
             <CDescriptionItem title="Dịch vụ" />
             <CTable
-                
                 columns={columns}
                 dataSource={data?.history?.services?.map((item, index) => ({ ...item, index: index + 1, key: item.id, total: item.price && item.quantity ? item.quantity * item.price : undefined }))}
                 pagination={false}

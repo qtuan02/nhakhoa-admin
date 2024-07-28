@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import DetailComponent from "../components/DetailComponent";
 import { IInvoice } from "@/interfaces/IInvoice";
 import FormEditComponent from "../components/FormEditComponent";
-import { TOAST_SUCCESS, TOAST_WARNING } from "@/utils/FunctionUiHelpers";
+import { TOAST_WARNING } from "@/utils/FunctionUiHelpers";
 import CCol from "@/custom_antd/CCol";
 import { getInvoiceState } from "@/redux/reducers/invoiceReducer";
 import { invoiceEditThunk } from "@/redux/thunks/invoiceThunk";
@@ -25,6 +25,8 @@ export default function EditInvoiceComponent() {
     const [data, setData] = useState<IInvoice | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(false);
 
+    const [loadingExport, setLoadingExport] = useState<boolean>(false);
+
     const handleSubmit = (values: IInvoice) => {
         dispatch(invoiceEditThunk({ id: id as string, body: values }));
     }
@@ -36,8 +38,10 @@ export default function EditInvoiceComponent() {
         setData(value);
     }
 
-    const handlePrint = async (id: string) => {        
-        const res = await invoiceApi.print(id);
+    const handlePrint = async (id: string) => { 
+        setLoadingExport(true);       
+        const print = await invoiceApi.print(id);
+        setLoadingExport(false);       
     }
 
     useEffect(() => {
@@ -74,7 +78,7 @@ export default function EditInvoiceComponent() {
                     <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
                 </CCol>
                 <CCol>
-                    <CButton onClick={() => handlePrint(id as string)} type="default" icon={<FontAwesomeIcon icon={faPrint} />}>In hóa đơn</CButton>
+                    <CButton loading={loadingExport} onClick={() => handlePrint(id as string)} type="default" icon={<FontAwesomeIcon icon={faPrint} />}>In hóa đơn</CButton>
                 </CCol>
             </CRow>
             <Tabs defaultActiveKey="detail" items={items} />

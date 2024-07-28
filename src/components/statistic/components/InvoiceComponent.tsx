@@ -8,17 +8,21 @@ import CButton from "@/custom_antd/CButton";
 import { IInvoice } from "@/interfaces/IInvoice";
 import { IStatisticAction } from "@/interfaces/IStatistic";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { faFileExcel, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getStatisticState } from "@/redux/reducers/statisticReducer";
 import { statisticInvoiceThunk } from "@/redux/thunks/statisticThunk";
 import { DatePicker, Flex, Form, Skeleton, TableColumnsType } from "antd";
 import { customNumberPrice, parseDayjsToString } from "@/utils/FunctionHelpers";
 import { CheckCircleOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import { exportApi } from "@/api/exportApi";
 
 export default function InvoiceComponent() {
     const dispatch = useAppDispatch();
     const statistic = useAppSelector(getStatisticState);
+
+    const [ date, setDate ] = useState<IStatisticAction>({ begin: '', end: '' });
 
     const handleSubmit = (value: any) => {
         const [begin, end] = value.date;
@@ -26,7 +30,12 @@ export default function InvoiceComponent() {
             begin: parseDayjsToString(begin),
             end: parseDayjsToString(end)
         };
+        setDate(data);
         dispatch(statisticInvoiceThunk(data));
+    }
+
+    const handleExport = () => {
+        exportApi.exportInvoice(date.begin, date.end);
     }
 
     const columns: TableColumnsType<IInvoice> = [
@@ -68,11 +77,18 @@ export default function InvoiceComponent() {
     return (
         <>
             <Form onFinish={handleSubmit}>
-                <Flex gap={16} className="!h-10">
-                    <Form.Item name="date" rules={[{ required: true, message: "" }]}>
-                        <DatePicker.RangePicker size="middle" format="DD/MM/YYYY" />
-                    </Form.Item>
-                    <CButton type="primary" size="middle" icon={<FontAwesomeIcon icon={faPaperPlane} />} htmlType="submit">Thống kê</CButton>
+                <Flex className="!h-10" justify="space-between">
+                    <CCol>
+                        <Flex gap={16}>
+                            <Form.Item name="date" rules={[{ required: true, message: "" }]}>
+                                <DatePicker.RangePicker size="middle" format="DD/MM/YYYY" />
+                            </Form.Item>
+                            <CButton type="primary" size="middle" icon={<FontAwesomeIcon icon={faPaperPlane} />} htmlType="submit">Thống kê</CButton>
+                        </Flex>
+                    </CCol>
+                    <CCol>
+                        {date.begin && date.end ? <CButton type="default" size="middle" icon={<FontAwesomeIcon icon={faFileExcel} />} onClick={handleExport}>Export</CButton> : <></>}
+                    </CCol>
                 </Flex>
             </Form>
             <Skeleton loading={statistic.loadingInvoice}>
