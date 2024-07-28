@@ -1,18 +1,12 @@
-'use client';
+"use client";
 import { Provider } from "react-redux";
 import { persistor, store } from "./store";
 import { PersistGate } from "redux-persist/integration/react";
-import { useRef } from "react";
 
-export async function ReduxProvider({ children }: { children: React.ReactNode }) {
-	const storeRef = useRef<typeof store>();
-
-	if (!storeRef.current) {
-		storeRef.current = await store;
-	}
-
+export function ReduxProvider({ children }: { children: React.ReactNode }) {
+	console.log(store.getState());
 	return (
-		<Provider store={storeRef.current}>
+		<Provider store={store}>
 			<PersistGate loading={null} persistor={persistor}>
 				{children}
 			</PersistGate>
