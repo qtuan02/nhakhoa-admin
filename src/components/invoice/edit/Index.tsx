@@ -36,7 +36,7 @@ export default function EditInvoiceComponent() {
         setData(value);
     }
 
-    const handlePrint = async (id: string) => {
+    const handlePrint = async (id: string) => {        
         const res = await invoiceApi.print(id);
     }
 

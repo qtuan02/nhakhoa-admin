@@ -13,6 +13,7 @@ export const invoiceApi = {
     },
     findOne: async (id: string) => {
         try{
+            console.log(URL + "/" + id);
             const res = await axiosClient.get(URL + "/" + id);
             return res.data.data;
         }catch(error: any) {
@@ -21,7 +22,7 @@ export const invoiceApi = {
     },
     print: async (id: string) => {
         try{
-            const res = await axiosClient.post(URL + "/print", { id: id });
+            const res = await axiosClient.get(URL + "/print/" + id);
             return res.data;
         }catch(error: any) {
             TOAST_ERROR(error?.response?.data?.message)
