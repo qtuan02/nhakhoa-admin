@@ -1,5 +1,6 @@
 "use client";
 import LoginComponent from "@/components/login/Index";
+import { appConfig } from "@/config/AppConfig";
 import { useAppSelector } from "@/redux/hooks";
 import { getAuthenticateState } from "@/redux/reducers/authReducer";
 import { useEffect } from "react";
@@ -9,9 +10,15 @@ export default function LoginPage() {
 
     useEffect(() => {
         if (auth.isLoggedIn) {
-            window.location.assign("/");
+            if(auth.currentUser?.role === appConfig.R_1){
+                window.location.assign("/");
+            } else if (auth.currentUser?.role === appConfig.R_2){
+                window.location.assign("/khach-hang");
+            } else {
+                window.location.assign("/lich-kham");
+            }
         }
-    }, [auth.isLoggedIn]);
+    }, [auth.currentUser?.role, auth.isLoggedIn]);
 
     return (
         <LoginComponent />
