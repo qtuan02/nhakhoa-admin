@@ -9,7 +9,7 @@ import { getAuthenticateState } from "@/redux/reducers/authReducer";
 export default function LayoutComponent({ children }: { children: React.ReactNode }) {
     const auth = useAppSelector(getAuthenticateState);
 
-    const [ sider, setSider ] = useState<boolean>(false);
+    const [ sider, setSider ] = useState<boolean>(true);
 
     const handleToggleSider = () => {
         setSider(!sider);

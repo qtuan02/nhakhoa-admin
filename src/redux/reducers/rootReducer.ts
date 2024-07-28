@@ -11,6 +11,7 @@ import serviceReducer from "./serviceReducer";
 import userReducer from "./userReducer";
 import timeReducer from "./timeReducer";
 import doctorReducer from "./doctorReducer";
+import statisticReducer from "./statisticReducer";
 
 const rootReducer = combineReducers({
     appointment: appointmentReducer,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
     user: userReducer,
     time: timeReducer,
     doctor: doctorReducer,
+    statistic: statisticReducer,
 });
 
 export default rootReducer;
