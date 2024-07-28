@@ -14,5 +14,5 @@ export function ReduxProvider({ children }: { children: React.ReactNode }) {
 		);
 	}
 	
-	return { children };
+	return children;
 }
