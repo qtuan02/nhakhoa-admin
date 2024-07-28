@@ -45,6 +45,7 @@ export default function DetailComponent({ data }: DetailComponentProps) {
             render: (total: number) => new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(total)
         }
     ] as TableColumnsType<IHistoryDetail>;
+    
     return (
         <>
             <Divider>Hóa đơn - Mã {data?.id} </Divider>

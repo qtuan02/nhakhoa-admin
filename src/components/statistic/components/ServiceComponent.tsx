@@ -14,10 +14,13 @@ import { statisticServiceThunk } from "@/redux/thunks/statisticThunk";
 import { DatePicker, Flex, Form, Skeleton, TableColumnsType } from "antd";
 import { CheckCircleOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { IStatisticAction, IStatisticServiceDetail } from "@/interfaces/IStatistic";
+import { useState } from "react";
 
 export default function ServiceComponent() {
     const dispatch = useAppDispatch();
     const statistic = useAppSelector(getStatisticState);
+
+    const [ date, setDate ] = useState<IStatisticAction>({ begin: '', end: '' });
 
     const handleSubmit = (value: any) => {
         const [begin, end] = value.date;
@@ -25,6 +28,7 @@ export default function ServiceComponent() {
             begin: parseDayjsToString(begin),
             end: parseDayjsToString(end)
         };
+        setDate(data);
         dispatch(statisticServiceThunk(data));
     }
 

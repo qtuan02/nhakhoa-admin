@@ -14,5 +14,5 @@ export const statisticsApi = {
     },
     getHistory(begin: string, end: string) {
         return axiosClient.get(URL + "/history?begin-date=" + begin + "&end-date=" + end);
-    }
+    },
 }
