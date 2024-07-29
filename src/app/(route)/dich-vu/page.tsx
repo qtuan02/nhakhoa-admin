@@ -1,6 +1,6 @@
 import ServiceComponent from "@/components/service/Index";
 
-export default async function SerivcePage(){
+export default function SerivcePage(){
     return (
         <ServiceComponent />
     );

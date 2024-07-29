@@ -1,6 +1,6 @@
 import AppointmentComponent from "@/components/appointment/Index";
 
-export default async function AppointmentPage(){
+export default function AppointmentPage(){
     return (
         <AppointmentComponent />
     );

@@ -6,9 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 import AntdRegistry from "@/lib/AntdRegistry";
-
-import dynamic from "next/dynamic";
-const StoreProvider = dynamic(() => import("@/redux/provider"), { ssr: false });
+import StoreProvider from "@/redux/provider";
 
 const inter = Inter({ subsets: ["latin"] });
 

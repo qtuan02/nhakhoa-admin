@@ -1,6 +1,6 @@
 import OverviewComponent from "@/components/overview/Index";
 
-export default async function OverviewPage() {
+export default function OverviewPage() {
 	return (
         <OverviewComponent />
     );

@@ -1,6 +1,6 @@
 import CustomerComponent from "@/components/customer/Index";
 
-export default async function CustomerPage(){
+export default function CustomerPage(){
     return (
         <CustomerComponent />
     );

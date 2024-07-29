@@ -1,6 +1,6 @@
 import HistoryComponent from "@/components/history/Index";
 
-export default async function HistoryPage(){
+export default function HistoryPage(){
     return (
         <HistoryComponent />
     );
