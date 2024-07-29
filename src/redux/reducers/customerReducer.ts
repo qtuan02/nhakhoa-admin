@@ -35,7 +35,6 @@ const customerSlice = createSlice({
             .addCase(customersThunk.rejected, (state, action) => {
                 state.data = [];
                 state.loading = false;
-                state.status = "rejected";
                 TOAST_ERROR(action?.payload);
             })
             .addCase(customerCreateThunk.pending, (state) => {
