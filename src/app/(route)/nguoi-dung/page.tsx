@@ -1,6 +1,6 @@
 import UserComponent from "@/components/user/Index";
 
-export default function EmployeePage(){
+export default async function EmployeePage(){
     return (
         <UserComponent />
     );

@@ -1,6 +1,6 @@
 import CategoryComponent from "@/components/category/Index";
 
-export default function CategoryPage(){
+export default async function CategoryPage(){
     return (
         <CategoryComponent />
     );
