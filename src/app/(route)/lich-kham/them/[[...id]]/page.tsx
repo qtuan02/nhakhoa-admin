@@ -1,6 +1,6 @@
 import CreateHistoryComponent from "@/components/history/create/Index";
 
-export default async function CreateHistoryPage(){
+export default function CreateHistoryPage(){
     return (
         <CreateHistoryComponent />
     );

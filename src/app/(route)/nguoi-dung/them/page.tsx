@@ -1,6 +1,6 @@
 import CreateUserComponent from "@/components/user/create/Index";
 
-export default async function CreateUserPage(){
+export default function CreateUserPage(){
     return (
         <CreateUserComponent />
     );

@@ -1,6 +1,6 @@
 import EditHistoryComponent from "@/components/history/edit/Index";
 
-export default async function EditHistoryPage(){
+export default function EditHistoryPage(){
     return (
         <EditHistoryComponent />
     );

@@ -1,6 +1,6 @@
 import CreateCategoryComponent from "@/components/category/create/Index";
 
-export default async function CreateCategoryPage(){
+export default function CreateCategoryPage(){
     return (
         <CreateCategoryComponent />
     );
