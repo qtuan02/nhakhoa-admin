@@ -21,6 +21,7 @@ import { exportApi } from "@/api/exportApi";
 export default function AppointmentComponent() {
     const dispatch = useAppDispatch();
     const statistic = useAppSelector(getStatisticState);
+    const [loading, setLoading] = useState<boolean>(false);
     const [date, setDate] = useState<IStatisticAction>({ begin: '', end: '' });
 
     const handleSubmit = (value: any) => {
@@ -33,8 +34,10 @@ export default function AppointmentComponent() {
         dispatch(statisticAppointmentThunk(data));
     }
 
-    const handleExport = () => {
-        exportApi.exportAppointment(date.begin, date.end);
+    const handleExport = async () => {
+        setLoading(true);
+        const file = exportApi.exportAppointment(date.begin, date.end);
+        setLoading(false);
     }
 
 
@@ -112,7 +115,7 @@ export default function AppointmentComponent() {
                         </Flex>
                     </CCol>
                     <CCol>
-                        {date.begin && date.end ? <CButton type="default" size="middle" icon={<FontAwesomeIcon icon={faFileExcel} />} onClick={handleExport}>Export</CButton> : <></>}
+                        {date.begin && date.end ? <CButton loading={loading} type="default" size="middle" icon={<FontAwesomeIcon icon={faFileExcel} />} onClick={handleExport}>Export</CButton> : <></>}
                     </CCol>
                 </Flex>
             </Form>

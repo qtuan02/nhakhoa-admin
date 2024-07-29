@@ -21,7 +21,7 @@ import { exportApi } from "@/api/exportApi";
 export default function InvoiceComponent() {
     const dispatch = useAppDispatch();
     const statistic = useAppSelector(getStatisticState);
-
+    const [loading, setLoading] = useState<boolean>(false);
     const [ date, setDate ] = useState<IStatisticAction>({ begin: '', end: '' });
 
     const handleSubmit = (value: any) => {
@@ -34,8 +34,10 @@ export default function InvoiceComponent() {
         dispatch(statisticInvoiceThunk(data));
     }
 
-    const handleExport = () => {
-        exportApi.exportInvoice(date.begin, date.end);
+    const handleExport = async () => {
+        setLoading(true);
+        const file = await exportApi.exportInvoice(date.begin, date.end);
+        setLoading(false);
     }
 
     const columns: TableColumnsType<IInvoice> = [
@@ -87,7 +89,7 @@ export default function InvoiceComponent() {
                         </Flex>
                     </CCol>
                     <CCol>
-                        {date.begin && date.end ? <CButton type="default" size="middle" icon={<FontAwesomeIcon icon={faFileExcel} />} onClick={handleExport}>Export</CButton> : <></>}
+                        {date.begin && date.end ? <CButton loading={loading} type="default" size="middle" icon={<FontAwesomeIcon icon={faFileExcel} />} onClick={handleExport}>Export</CButton> : <></>}
                     </CCol>
                 </Flex>
             </Form>
