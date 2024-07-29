@@ -2,7 +2,7 @@ import { categoryApi } from "@/api/categoryApi";
 import { ICategory } from "@/interfaces/ICategory";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const categoriesThunk = createAsyncThunk(
+const categoriesThunk = createAsyncThunk(
     "category/getAll",
     async(_, { rejectWithValue }) => {
         try{
@@ -14,7 +14,7 @@ export const categoriesThunk = createAsyncThunk(
     }
 );
 
-export const categoryCreateThunk = createAsyncThunk(
+const categoryCreateThunk = createAsyncThunk(
     "category/create",
     async (body: ICategory, { rejectWithValue }) => {
         try{
@@ -26,7 +26,7 @@ export const categoryCreateThunk = createAsyncThunk(
     }
 );
 
-export const categoryDeleteThunk = createAsyncThunk(
+const categoryDeleteThunk = createAsyncThunk(
     "category/delete",
     async (id: string, { rejectWithValue }) => {
         try{
@@ -38,7 +38,7 @@ export const categoryDeleteThunk = createAsyncThunk(
     }
 );
 
-export const categoryEditThunk = createAsyncThunk(
+const categoryEditThunk = createAsyncThunk(
     "category/edit",
     async (data: { id: string, body: ICategory }, { rejectWithValue }) => {
         try{
@@ -49,3 +49,5 @@ export const categoryEditThunk = createAsyncThunk(
         }
     }
 );
+
+export { categoriesThunk, categoryCreateThunk, categoryDeleteThunk, categoryEditThunk };

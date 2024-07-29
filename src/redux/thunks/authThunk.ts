@@ -2,7 +2,7 @@ import { authApi } from "@/api/authenticateApi";
 import { ILogin } from "@/interfaces/ILogin";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const loginThunk = createAsyncThunk(
+const loginThunk = createAsyncThunk(
     "auth/login",
     async(body: ILogin, { rejectWithValue }) => {
         try{
@@ -14,7 +14,7 @@ export const loginThunk = createAsyncThunk(
     }
 );
 
-export const logoutThunk = createAsyncThunk(
+const logoutThunk = createAsyncThunk(
     "auth/logout",
     async(_, { rejectWithValue }) => {
         try{
@@ -25,3 +25,5 @@ export const logoutThunk = createAsyncThunk(
         }
     }
 );
+
+export { loginThunk, logoutThunk };

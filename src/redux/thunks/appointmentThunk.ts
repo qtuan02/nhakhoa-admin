@@ -2,7 +2,7 @@ import { appointmentApi } from "@/api/appointmentApi";
 import { IAppointment } from "@/interfaces/IAppointment";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const appointmentsThunk = createAsyncThunk(
+const appointmentsThunk = createAsyncThunk(
     "appointment/getAll",
     async(_, { rejectWithValue }) => {
         try{
@@ -14,7 +14,7 @@ export const appointmentsThunk = createAsyncThunk(
     }
 );
 
-export const appointmentCreateThunk = createAsyncThunk(
+const appointmentCreateThunk = createAsyncThunk(
     "appointment/create",
     async (body: IAppointment, { rejectWithValue }) => {
         try{
@@ -26,7 +26,7 @@ export const appointmentCreateThunk = createAsyncThunk(
     }
 );
 
-export const appointmentDeleteThunk = createAsyncThunk(
+const appointmentDeleteThunk = createAsyncThunk(
     "appointment/delete",
     async (id: string, { rejectWithValue }) => {
         try{
@@ -38,7 +38,7 @@ export const appointmentDeleteThunk = createAsyncThunk(
     }
 );
 
-export const appointmentEditThunk = createAsyncThunk(
+const appointmentEditThunk = createAsyncThunk(
     "appointment/edit",
     async (data: { id: string, body: IAppointment }, { rejectWithValue }) => {
         try{
@@ -49,3 +49,5 @@ export const appointmentEditThunk = createAsyncThunk(
         }
     }
 );
+
+export { appointmentsThunk, appointmentCreateThunk, appointmentDeleteThunk, appointmentEditThunk };

@@ -2,7 +2,7 @@ import { customerApi } from "@/api/customerApi";
 import { ICustomer } from "@/interfaces/ICustomer";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const customersThunk = createAsyncThunk(
+const customersThunk = createAsyncThunk(
     "customer/getAll",
     async(_, { rejectWithValue }) => {
         try{
@@ -14,7 +14,7 @@ export const customersThunk = createAsyncThunk(
     }
 );
 
-export const customerCreateThunk = createAsyncThunk(
+const customerCreateThunk = createAsyncThunk(
     "customer/create",
     async (body: ICustomer, { rejectWithValue }) => {
         try{
@@ -26,7 +26,7 @@ export const customerCreateThunk = createAsyncThunk(
     }
 );
 
-export const customerEditThunk = createAsyncThunk(
+const customerEditThunk = createAsyncThunk(
     "customer/edit",
     async (data: { id: string, body: ICustomer }, { rejectWithValue }) => {
         try{
@@ -37,3 +37,5 @@ export const customerEditThunk = createAsyncThunk(
         }
     }
 );
+
+export { customersThunk, customerCreateThunk, customerEditThunk };

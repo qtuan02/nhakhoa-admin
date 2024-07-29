@@ -1,7 +1,7 @@
 import { overviewApi } from "@/api/overviewApi";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const overviewsThunk = createAsyncThunk(
+const overviewsThunk = createAsyncThunk(
     "overview/getOverview",
     async(_, { rejectWithValue }) => {
         try{
@@ -13,7 +13,7 @@ export const overviewsThunk = createAsyncThunk(
     }
 );
 
-export const overviewInvoiceThunk = createAsyncThunk(
+const overviewInvoiceThunk = createAsyncThunk(
     "overview/getInvoice",
     async(_, { rejectWithValue }) => {
         try{
@@ -25,7 +25,7 @@ export const overviewInvoiceThunk = createAsyncThunk(
     }
 );
 
-export const overviewAppointmentThunk = createAsyncThunk(
+const overviewAppointmentThunk = createAsyncThunk(
     "overview/getAppointment",
     async(_, { rejectWithValue }) => {
         try{
@@ -36,3 +36,5 @@ export const overviewAppointmentThunk = createAsyncThunk(
         }
     }
 );
+
+export { overviewsThunk, overviewInvoiceThunk, overviewAppointmentThunk };

@@ -2,7 +2,7 @@ import { serviceApi } from "@/api/serviceApi";
 import { IService } from "@/interfaces/IService";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const servicesThunk = createAsyncThunk(
+const servicesThunk = createAsyncThunk(
     "service/getAll",
     async(_, { rejectWithValue }) => {
         try{
@@ -14,7 +14,7 @@ export const servicesThunk = createAsyncThunk(
     }
 );
 
-export const serviceCreateThunk = createAsyncThunk(
+const serviceCreateThunk = createAsyncThunk(
     "service/create",
     async (body: IService, { rejectWithValue }) => {
         try{
@@ -26,7 +26,7 @@ export const serviceCreateThunk = createAsyncThunk(
     }
 );
 
-export const serviceDeleteThunk = createAsyncThunk(
+const serviceDeleteThunk = createAsyncThunk(
     "service/delete",
     async (id: string, { rejectWithValue }) => {
         try{
@@ -38,7 +38,7 @@ export const serviceDeleteThunk = createAsyncThunk(
     }
 );
 
-export const serviceEditThunk = createAsyncThunk(
+const serviceEditThunk = createAsyncThunk(
     "service/edit",
     async (data: { id: string, body: IService }, { rejectWithValue }) => {
         try{
@@ -49,3 +49,5 @@ export const serviceEditThunk = createAsyncThunk(
         }
     }
 );
+
+export { servicesThunk, serviceCreateThunk, serviceDeleteThunk, serviceEditThunk };

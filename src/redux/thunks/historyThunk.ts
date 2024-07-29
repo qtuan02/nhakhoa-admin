@@ -2,7 +2,7 @@ import { historyApi } from "@/api/historyApi";
 import { IHistory } from "@/interfaces/IHistory";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const historiesThunk = createAsyncThunk(
+const historiesThunk = createAsyncThunk(
     "history/getAll",
     async(_, { rejectWithValue }) => {
         try{
@@ -14,7 +14,7 @@ export const historiesThunk = createAsyncThunk(
     }
 );
 
-export const historyCreateThunk = createAsyncThunk(
+const historyCreateThunk = createAsyncThunk(
     "history/create",
     async (body: IHistory, { rejectWithValue }) => {
         try{
@@ -26,7 +26,7 @@ export const historyCreateThunk = createAsyncThunk(
     }
 );
 
-export const historyEditThunk = createAsyncThunk(
+const historyEditThunk = createAsyncThunk(
     "history/edit",
     async (data: { id: string, body: IHistory }, { rejectWithValue }) => {
         try{
@@ -37,3 +37,5 @@ export const historyEditThunk = createAsyncThunk(
         }
     }
 );
+
+export { historiesThunk, historyCreateThunk, historyEditThunk };

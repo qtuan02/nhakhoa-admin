@@ -1,11 +1,14 @@
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
-import { ReduxProvider } from "@/redux/provider";
-import StyledComponentsRegistry from "@/lib/AntdRegistry";
 
 import "../styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+
+import AntdRegistry from "@/lib/AntdRegistry";
+
+import dynamic from "next/dynamic";
+const StoreProvider = dynamic(() => import("@/redux/provider"), { ssr: false });
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,12 +16,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     return (
         <html lang="en">
             <body className={inter.className}>
-                <ReduxProvider>
-                    <StyledComponentsRegistry>
+                <AntdRegistry>
+                    <StoreProvider>
                         <div>{children}</div>
                         <ToastContainer limit={3} autoClose={1200} position="bottom-right" draggable />
-                    </StyledComponentsRegistry>
-                </ReduxProvider>
+                    </StoreProvider>
+                </AntdRegistry>
             </body>
         </html>
     );

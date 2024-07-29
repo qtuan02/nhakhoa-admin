@@ -2,7 +2,7 @@ import { userApi } from "@/api/userApi";
 import { IUser } from "@/interfaces/IUser";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const usersThunk = createAsyncThunk(
+const usersThunk = createAsyncThunk(
     "user/getAll",
     async(_, { rejectWithValue }) => {
         try{
@@ -14,7 +14,7 @@ export const usersThunk = createAsyncThunk(
     }
 );
 
-export const userCreateThunk = createAsyncThunk(
+const userCreateThunk = createAsyncThunk(
     "user/create",
     async (body: IUser, { rejectWithValue }) => {
         try{
@@ -26,7 +26,7 @@ export const userCreateThunk = createAsyncThunk(
     }
 );
 
-export const userEditThunk = createAsyncThunk(
+const userEditThunk = createAsyncThunk(
     "user/edit",
     async (data: { id: string, body: IUser }, { rejectWithValue }) => {
         try{
@@ -37,3 +37,5 @@ export const userEditThunk = createAsyncThunk(
         }
     }
 );
+
+export { usersThunk, userCreateThunk, userEditThunk };

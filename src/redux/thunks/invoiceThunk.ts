@@ -2,7 +2,7 @@ import { invoiceApi } from "@/api/invoiceApi";
 import { IInvoice } from "@/interfaces/IInvoice";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const invoicesThunk = createAsyncThunk(
+const invoicesThunk = createAsyncThunk(
     "invoice/getAll",
     async(_, { rejectWithValue }) => {
         try{
@@ -14,7 +14,7 @@ export const invoicesThunk = createAsyncThunk(
     }
 );
 
-export const invoiceEditThunk = createAsyncThunk(
+const invoiceEditThunk = createAsyncThunk(
     "invoice/edit",
     async (data: { id: string, body: IInvoice }, { rejectWithValue }) => {
         try{
@@ -25,3 +25,5 @@ export const invoiceEditThunk = createAsyncThunk(
         }
     }
 );
+
+export { invoicesThunk, invoiceEditThunk };

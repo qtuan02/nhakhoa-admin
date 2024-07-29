@@ -1,7 +1,7 @@
 import { doctorApi } from "@/api/doctorApi";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const doctorsThunk = createAsyncThunk(
+const doctorsThunk = createAsyncThunk(
     "doctor/getAll",
     async(_, { rejectWithValue }) => {
         try{
@@ -12,3 +12,5 @@ export const doctorsThunk = createAsyncThunk(
         }
     }
 );
+
+export { doctorsThunk };

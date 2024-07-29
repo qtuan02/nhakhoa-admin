@@ -2,7 +2,7 @@
 import { IStatisticAction } from "@/interfaces/IStatistic";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const statisticInvoiceThunk = createAsyncThunk(
+const statisticInvoiceThunk = createAsyncThunk(
     "statistic/invoice",
     async(data: IStatisticAction, { rejectWithValue }) => {
         try{
@@ -14,7 +14,7 @@ export const statisticInvoiceThunk = createAsyncThunk(
     }
 );
 
-export const statisticServiceThunk = createAsyncThunk(
+const statisticServiceThunk = createAsyncThunk(
     "statistic/service",
     async(data: IStatisticAction, { rejectWithValue }) => {
         try{
@@ -26,7 +26,7 @@ export const statisticServiceThunk = createAsyncThunk(
     }
 );
 
-export const statisticAppointmentThunk = createAsyncThunk(
+const statisticAppointmentThunk = createAsyncThunk(
     "statistic/appointment",
     async(data: IStatisticAction, { rejectWithValue }) => {
         try{
@@ -38,7 +38,7 @@ export const statisticAppointmentThunk = createAsyncThunk(
     }
 );
 
-export const statisticHistoryThunk = createAsyncThunk(
+const statisticHistoryThunk = createAsyncThunk(
     "statistic/history",
     async(data: IStatisticAction, { rejectWithValue }) => {
         try{
@@ -49,3 +49,5 @@ export const statisticHistoryThunk = createAsyncThunk(
         }
     }
 );
+
+export { statisticInvoiceThunk, statisticServiceThunk, statisticAppointmentThunk, statisticHistoryThunk };

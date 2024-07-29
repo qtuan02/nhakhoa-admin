@@ -1,7 +1,7 @@
 import rootReducer from "./reducers/rootReducer";
 import storage from "redux-persist/lib/storage";
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
-import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
+import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 
 const persistConfig = {
     key: "primary",
@@ -22,7 +22,6 @@ export const store = configureStore({
         })
 });
 
-export const persistor = persistStore(store);
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ThunkReturnType = void> = ThunkAction<ThunkReturnType, RootState, unknown, Action>;

@@ -2,7 +2,7 @@ import { scheduleApi } from "@/api/scheduleApi";
 import { IScheduleAction } from "@/interfaces/ISchedule";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const schedulesThunk = createAsyncThunk(
+const schedulesThunk = createAsyncThunk(
     "schedule/getAll",
     async (date: string, { rejectWithValue }) => {
         try{
@@ -14,7 +14,7 @@ export const schedulesThunk = createAsyncThunk(
     }
 );
 
-export const scheduleCreateThunk = createAsyncThunk(
+const scheduleCreateThunk = createAsyncThunk(
     "schedule/create",
     async (body: IScheduleAction, { rejectWithValue }) => {
         try{
@@ -26,7 +26,7 @@ export const scheduleCreateThunk = createAsyncThunk(
     }
 );
 
-export const scheduleDeleteThunk = createAsyncThunk(
+const scheduleDeleteThunk = createAsyncThunk(
     "schedule/delete",
     async (data: { date: string, doctor_id: string }, { rejectWithValue }) => {
         try{
@@ -37,3 +37,5 @@ export const scheduleDeleteThunk = createAsyncThunk(
         }
     }
 );
+
+export { schedulesThunk, scheduleCreateThunk, scheduleDeleteThunk };

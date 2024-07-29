@@ -1,7 +1,7 @@
 ;import { timeApi } from "@/api/timeApi";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const timesThunk = createAsyncThunk(
+const timesThunk = createAsyncThunk(
     "time/getAll",
     async(_, { rejectWithValue }) => {
         try{
@@ -12,3 +12,5 @@ export const timesThunk = createAsyncThunk(
         }
     }
 );
+
+export { timesThunk };

@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Checkbox, Form, Input } from "antd";
 import { loginThunk } from "@/redux/thunks/authThunk";
 import { getAuthState } from "@/redux/reducers/authReducer";
+import { appConfig } from "@/config/AppConfig";
 
 const initialLogin: ILogin = {
     account: "",
@@ -28,6 +29,18 @@ export default function LoginComponent() {
     }
 
     useEffect(() => {
+        if (auth.isLoggedIn) {
+            if(auth.currentUser?.role === appConfig.R_1){
+                window.location.assign("/");
+            } else if (auth.currentUser?.role === appConfig.R_2){
+                window.location.assign("/khach-hang");
+            } else {
+                window.location.assign("/lich-kham");
+            }
+        }
+    }, [auth.currentUser?.role, auth.isLoggedIn]);
+
+    useEffect(() => {
         const user = JSON.parse(localStorage.getItem("r_u") || "{}");
         if (user) {
             form.setFieldsValue(user);
@@ -36,8 +49,8 @@ export default function LoginComponent() {
 
     return (
         <div className="bg-login flex items-center justify-center">
-            <Form layout="vertical" onFinish={handleSubmit} initialValues={initialLogin} form={form} 
-            className="border-[2px] shadow-xl hover:shadow-2xl hover:cursor-pointer hover:bg-[rgba(240,255,255,.5)] bg-[rgba(240,255,255,1)] !pt-10 !px-20 w-[600px] h-[450px] rounded-2xl">
+            <Form layout="vertical" onFinish={handleSubmit} initialValues={initialLogin} form={form}
+                className="border-[2px] shadow-xl hover:shadow-2xl hover:cursor-pointer hover:bg-[rgba(240,255,255,.5)] bg-[rgba(240,255,255,1)] !pt-10 !px-20 w-[600px] h-[450px] rounded-2xl">
                 <CTitle>Đăng nhập</CTitle>
                 <Form.Item label="Tài khoản" className="!mb-4" name="account" rules={[{ required: true, message: "Hãy nhập tài khoản!" }]}>
                     <CInput size="large" placeholder="Email hoặc số điện thoại..." autoComplete="username" />

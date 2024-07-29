@@ -53,6 +53,8 @@ const authSlice = createSlice({
                 state.isLoggedIn = false;
             })
             .addCase(logoutThunk.rejected, (state, action) => {
+                state.currentUser = null;
+                state.isLoggedIn = false;
                 TOAST_ERROR(action?.payload);
             })
         }
