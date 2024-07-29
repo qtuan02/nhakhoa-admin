@@ -1,6 +1,6 @@
 import EditCategoryComponent from "@/components/category/edit/Index";
 
-export default function EditCategoryPage(){
+export default async function EditCategoryPage(){
     return (
         <EditCategoryComponent />
     );

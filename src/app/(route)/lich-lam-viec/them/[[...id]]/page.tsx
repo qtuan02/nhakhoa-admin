@@ -1,6 +1,6 @@
 import CreateScheduleComponent from "@/components/schedule/create/Index";
 
-export default function CreateCalendarPage(){
+export default async function CreateCalendarPage(){
     return (
         <CreateScheduleComponent />
     );

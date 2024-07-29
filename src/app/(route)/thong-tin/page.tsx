@@ -1,5 +1,5 @@
 import ProfileComponent from "@/components/profile/Index";
 
-export default function ProfilePage() {
+export default async function ProfilePage() {
     return <ProfileComponent />
 }

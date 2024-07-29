@@ -1,6 +1,6 @@
 import StatisticComponent from "@/components/statistic/Index";
 
-export default function StatisticPage(){
+export default async function StatisticPage(){
     return (
         <StatisticComponent />
     );

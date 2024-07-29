@@ -1,6 +1,6 @@
 import CreateCustomerComponent from "@/components/customer/create/Index";
 
-export default function CreateCustomerPage(){
+export default async function CreateCustomerPage(){
     return (
         <CreateCustomerComponent />
     );

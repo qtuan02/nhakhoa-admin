@@ -1,6 +1,6 @@
 import EditAppointmentComponent from "@/components/appointment/edit/Index";
 
-export default function EditAppointmentPage(){
+export default async function EditAppointmentPage(){
     return (
         <EditAppointmentComponent />
     );
