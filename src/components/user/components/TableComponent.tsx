@@ -69,18 +69,18 @@ export default function TableComponent() {
             key: "role",
             width: 150,
             filters: [
-                { text: "Nha sĩ", value: 1 },
+                { text: "Quản trị viên", value: 1 },
                 { text: "Nhân viên y tế", value: 2 },
-                { text: "Quản trị viên", value: 3 },
+                { text: "Nha sĩ", value: 3 },
             ],
             onFilter: (value, item) => item.role === value,
             render: (role) => {
                 let icon, text, color;
                 switch (role) {
                     case 1:
-                        icon = <FontAwesomeIcon icon={faUserDoctor} />
-                        color = "processing"
-                        text = "Nha sĩ"
+                        icon = <FontAwesomeIcon icon={faUserShield} />
+                        color = "green"
+                        text = "Quản trị viên"
                         break;
                     case 2:
                         icon = <FontAwesomeIcon icon={faUserNurse} />
@@ -88,9 +88,9 @@ export default function TableComponent() {
                         text = "Nhân viên y tế"
                         break;
                     case 3:
-                        icon = <FontAwesomeIcon icon={faUserShield} />
-                        color = "green"
-                        text = "Quản trị viên"
+                        icon = <FontAwesomeIcon icon={faUserDoctor} />
+                        color = "processing"
+                        text = "Nha sĩ"
                         break;
                 }
                 return <CTag icon={icon} color={color}><span className="ml-2">{text}</span></CTag>;

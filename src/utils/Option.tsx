@@ -71,7 +71,7 @@ const GENDER: any = [
 
 const ROLE: any = [
     {
-        label: "Nha sĩ",
+        label: "Quản trị viên",
         value: 1,
     },
     {
@@ -79,7 +79,7 @@ const ROLE: any = [
         value: 2,
     },
     {
-        label: "Quản trị viên",
+        label: "Nha sĩ",
         value: 3,
     }
 ];
