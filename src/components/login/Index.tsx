@@ -13,9 +13,9 @@ import { getAuthState } from "@/redux/reducers/authReducer";
 import { appConfig } from "@/config/AppConfig";
 
 const initialLogin: ILogin = {
-    account: "",
-    password: "",
-    remember: false,
+    account: "admin@nhakhoa.com",
+    password: "123456",
+    remember: true,
 }
 
 export default function LoginComponent() {
@@ -56,7 +56,7 @@ export default function LoginComponent() {
                     <CInput size="large" placeholder="Email hoặc số điện thoại..." autoComplete="username" />
                 </Form.Item>
                 <Form.Item label="Mật khẩu" className="!mb-2" name="password" rules={[{ required: true, message: "Hãy nhập mật khẩu!" }]}>
-                    <Input.Password size="large" placeholder="Mật khẩu..." autoComplete="current-password" />
+                    <Input size="large" placeholder="Mật khẩu..." autoComplete="current-password" />
                 </Form.Item>
                 <Form.Item name="remember" valuePropName="checked" className="!mb-4">
                     <Checkbox>Nhớ mật khẩu</Checkbox>
