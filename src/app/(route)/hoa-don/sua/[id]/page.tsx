@@ -1,6 +1,6 @@
 import EditInvoiceComponent from "@/components/invoice/edit/Index";
 
-export default function EditInvoicePage(){
+export default async function EditInvoicePage(){
     return (
         <EditInvoiceComponent />
     );

@@ -1,6 +1,6 @@
 import EditServiceComponent from "@/components/service/edit/Index";
 
-export default function EditServicePage(){
+export default async function EditServicePage(){
     return (
         <EditServiceComponent />
     );

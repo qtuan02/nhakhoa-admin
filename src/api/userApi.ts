@@ -2,7 +2,7 @@ import axiosClient from "@/config/AxiosConfig";
 import { IUser } from "@/interfaces/IUser";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 
-const URL = "/v1/user";
+const URL = "/user";
 
 export const userApi = {
     get() {

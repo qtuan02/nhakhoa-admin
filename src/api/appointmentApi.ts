@@ -2,7 +2,7 @@ import axiosClient from "@/config/AxiosConfig";
 import { IAppointment } from "@/interfaces/IAppointment";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 
-const URL = "/v1/appointment";
+const URL = "/appointment";
 
 export const appointmentApi = {
     get() {

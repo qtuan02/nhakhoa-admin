@@ -2,7 +2,7 @@ import axiosClient from "@/config/AxiosConfig";
 import { IScheduleAction } from "@/interfaces/ISchedule";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 
-const URL = "/v1/schedule";
+const URL = "/schedule";
 
 export const scheduleApi = {
     get(date: string) {

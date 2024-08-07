@@ -2,7 +2,7 @@ import axiosClient from "@/config/AxiosConfig";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { saveAs } from 'file-saver';
 
-const URL = "/v1/export";
+const URL = "/export";
 
 export const exportApi = {
     exportService: async (begin: string, end: string) => {

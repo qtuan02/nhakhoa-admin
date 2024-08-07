@@ -4,9 +4,9 @@ import { ICategory } from "./ICategory";
 export interface IService {
     id?: string,
     name: string,
-    image: string,
+    image?: string,
     quantity_sold?: number,
-    status: number,
+    status?: number,
     min_price?: number,
     max_price?: number,
     unit?: string,

@@ -2,7 +2,7 @@ import axiosClient from "@/config/AxiosConfig";
 import { ICustomer } from "@/interfaces/ICustomer";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 
-const URL = "/v1/customer";
+const URL = "/customer";
 
 export const customerApi = {
     get() {

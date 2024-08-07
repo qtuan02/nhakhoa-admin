@@ -8,8 +8,8 @@ import { logoutThunk } from "@/redux/thunks/authThunk";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import axios from "axios";
 
-const baseURL = appConfig.API_LOCAL + "/v1/auth";
-const URL = "/v1/auth";
+const baseURL = appConfig.API_LOCAL + "/auth";
+const URL = "/auth";
 
 export const authApi = {
     login(body: ILogin) {

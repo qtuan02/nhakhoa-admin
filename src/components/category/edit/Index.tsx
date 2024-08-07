@@ -4,7 +4,7 @@ import CRow from "@/custom_antd/CRow";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import CTitle from "@/custom_antd/CTitle";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { faRotateBack } from "@fortawesome/free-solid-svg-icons";
+import { faLanguage, faRotateBack } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -13,6 +13,7 @@ import { ICategory } from "@/interfaces/ICategory";
 import { getCategoryState } from "@/redux/reducers/categoryReducer";
 import { categoryEditThunk } from "@/redux/thunks/categoryThunk";
 import { categoryApi } from "@/api/categoryApi";
+import CSpace from "@/custom_antd/CSpace";
 
 export default function EditCategoryComponent() {
     const { id } = useParams();
@@ -43,7 +44,10 @@ export default function EditCategoryComponent() {
         <>
             <CRow className="justify-between">
                 <CTitle>Cập nhật danh mục</CTitle>
-                <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
+                <CSpace>
+                    <CButton link={"/danh-muc/dich/" + id} type="default" icon={<FontAwesomeIcon icon={faLanguage} />}>Ngôn ngữ khác</CButton>
+                    <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
+                </CSpace>
             </CRow>
             <CSkeleton loading={category.edit === "wait" || loading}>
                 <FormComponent onSubmit={handleSubmit} data={data} />

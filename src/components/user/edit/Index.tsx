@@ -3,7 +3,7 @@ import CButton from "@/custom_antd/CButton";
 import CRow from "@/custom_antd/CRow";
 import CSkeleton from "@/custom_antd/CSkeleton";
 import CTitle from "@/custom_antd/CTitle";
-import { faRotateBack } from "@fortawesome/free-solid-svg-icons";
+import { faLanguage, faRotateBack } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "next/navigation";
 import FormComponent from "../components/FormComponent";
@@ -15,6 +15,7 @@ import { RawDraftContentState } from "draft-js";
 import { getUserState } from "@/redux/reducers/userReducer";
 import { userEditThunk } from "@/redux/thunks/userThunk";
 import { userApi } from "@/api/userApi";
+import CSpace from "@/custom_antd/CSpace";
 
 export default function EditUserComponent() {
     const { id } = useParams();
@@ -47,7 +48,10 @@ export default function EditUserComponent() {
         <>
             <CRow className="justify-between">
                 <CTitle>Cập nhật người dùng</CTitle>
-                <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
+                <CSpace>
+                    <CButton link={"/nguoi-dung/dich/" + id} type="default" icon={<FontAwesomeIcon icon={faLanguage} />}>Ngôn ngữ khác</CButton>
+                    <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
+                </CSpace>
             </CRow>
             <CSkeleton loading={user.edit === "wait" || loading}>
                 <FormComponent onSubmit={handleSubmit} data={data} />

@@ -1,6 +1,6 @@
 import axiosClient from "@/config/AxiosConfig";
 
-const URL = "/v1/doctor";
+const URL = "/doctor";
 
 export const doctorApi = {
     get() {

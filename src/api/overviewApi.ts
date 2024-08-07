@@ -1,6 +1,6 @@
 import axiosClient from "@/config/AxiosConfig";
 
-const URL = "/v1/overview";
+const URL = "/overview";
 
 export const overviewApi = {
     get() {

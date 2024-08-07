@@ -1,6 +1,6 @@
 import EditCustomerComponent from "@/components/customer/edit/Index";
 
-export default function EditCustomerPage(){
+export default async function EditCustomerPage(){
     return (
         <EditCustomerComponent />
     );

@@ -2,7 +2,7 @@ import axiosClient from "@/config/AxiosConfig";
 import { ICategory } from "@/interfaces/ICategory";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 
-const URL = "/v1/category";
+const URL = "/category";
 
 export const categoryApi = {
     get() {

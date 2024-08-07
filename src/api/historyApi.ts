@@ -2,7 +2,7 @@ import axiosClient from "@/config/AxiosConfig";
 import { IHistory } from "@/interfaces/IHistory";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 
-const URL = "/v1/history";
+const URL = "/history";
 
 export const historyApi = {
     get() {

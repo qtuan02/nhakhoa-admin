@@ -1,6 +1,6 @@
 import axiosClient from "@/config/AxiosConfig";
 
-const URL = "/v1/time";
+const URL = "/time";
 
 export const timeApi = {
     get() {

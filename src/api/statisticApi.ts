@@ -1,6 +1,6 @@
 import axiosClient from "@/config/AxiosConfig";
 
-const URL = "/v1/statistics";
+const URL = "/statistics";
 
 export const statisticsApi = {
     getInvoice(begin: string, end: string) {

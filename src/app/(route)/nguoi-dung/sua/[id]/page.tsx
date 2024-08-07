@@ -1,6 +1,6 @@
 import EditUserComponent from "@/components/user/edit/Index";
 
-export default function EditUserPage(){
+export default async function EditUserPage(){
     return (
         <EditUserComponent />
     );

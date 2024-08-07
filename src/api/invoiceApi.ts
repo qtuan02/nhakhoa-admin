@@ -3,7 +3,7 @@ import { IInvoice } from "@/interfaces/IInvoice";
 import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { saveAs } from 'file-saver';
 
-const URL = "/v1/invoice";
+const URL = "/invoice";
 
 export const invoiceApi = {
     get() {
