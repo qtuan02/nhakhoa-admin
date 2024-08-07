@@ -12,7 +12,7 @@ export const scheduleApi = {
         return axiosClient.post(URL, body);
     },
     delete(date: string, doctor_id: string) {
-        return axiosClient.delete(URL + "?date=" + date + "&doctor_id=" + doctor_id);
+        return axiosClient.delete(URL + "/" + date + "/" + doctor_id);
     },
     getDate: async (doctor_id: string) => {
         try{
