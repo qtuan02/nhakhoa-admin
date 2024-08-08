@@ -7,7 +7,7 @@ import { TableColumnsType } from "antd";
 import CPopConfirm from "@/custom_antd/CPopConfirm";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import CTag from "@/custom_antd/CTag";
-import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined, SyncOutlined } from "@ant-design/icons";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
 import { IAppointment } from "@/interfaces/IAppointment";
 import { formatDate } from "@/utils/FunctionHelpers";
@@ -63,7 +63,8 @@ export default function TableComponent() {
             filters: [
                 { text: "Đang chờ", value: 0 },
                 { text: "Xác nhận", value: 1 },
-                { text: "Hủy", value: 2 },
+                { text: "Hoàn thành", value: 2 },
+                { text: "Hủy", value: 3 },
             ],
             onFilter: (value, item) => item.status === value,
             render: (status) => {
@@ -75,11 +76,16 @@ export default function TableComponent() {
                         text = "Đang chờ"
                         break;
                     case 1:
-                        icon = <CheckCircleOutlined />
-                        color = "success"
+                        icon = <SyncOutlined spin />
+                        color = "processing"
                         text = "Xác nhận"
                         break;
                     case 2:
+                        icon = <CheckCircleOutlined />
+                        color="success"
+                        text = "Hoàn thành"
+                        break;
+                    case 3:
                         icon = <CloseCircleOutlined />
                         color="error"
                         text = "Hủy"

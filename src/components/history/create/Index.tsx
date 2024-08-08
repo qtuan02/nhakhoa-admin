@@ -16,6 +16,8 @@ export default function CreateHistoryComponent() {
     const dispatch = useAppDispatch();
     const history = useAppSelector(getHistoryState);
 
+    console.log(history.appointment);
+
     const handleSubmit = (values: IHistory) => {
         dispatch(historyCreateThunk(values));
     }

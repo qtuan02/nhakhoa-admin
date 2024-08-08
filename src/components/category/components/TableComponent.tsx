@@ -66,6 +66,7 @@ export default function TableComponent() {
             )
         }
     ] as TableColumnsType<ICategory>;
+    
     return (
         <CTable
             columns={columns}

@@ -60,7 +60,7 @@ export default function TableComponent() {
             filters: [
                 { text: "Đang chờ", value: 0 },
                 { text: "Hoàn thành", value: 1 },
-                { text: "Xác nhận", value: 2 },
+                { text: "Hủy", value: 2 },
             ],
             onFilter: (value, item) => item.status === value,
             render: (status) => {

@@ -234,7 +234,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                 />
             </Form.Item>
             <CRow className="gap-4 justify-end">
-                <CButton type="primary" icon={<FontAwesomeIcon icon={data ? faPenToSquare : faSave} />} htmlType="submit">{data ? "Cập nhật" : "Lưu"}</CButton>
+                <CButton disabled={data?.status === 2 || data?.status === 3 ? true : false} type="primary" icon={<FontAwesomeIcon icon={data ? faPenToSquare : faSave} />} htmlType="submit">{data ? "Cập nhật" : "Lưu"}</CButton>
             </CRow>
         </Form>
     );

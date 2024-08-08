@@ -4,6 +4,7 @@ import { IHistory } from "@/interfaces/IHistory";
 import { IService } from "@/interfaces/IService";
 import { RootState } from "../store";
 import { historiesThunk, historyCreateThunk, historyEditThunk } from "../thunks/historyThunk";
+import { IAppointment } from "@/interfaces/IAppointment";
 
 interface IHistoryState {
     loading: boolean;
@@ -11,6 +12,7 @@ interface IHistoryState {
     edit: "wait" | "success" | "fail";
     data?: IHistory[];
     services?: IService[];
+    appointment?: IAppointment | null;
 };
 
 const initialState: IHistoryState = {
@@ -19,6 +21,7 @@ const initialState: IHistoryState = {
     edit: "success",
     data: [],
     services: [],
+    appointment: null,
 };
 
 const historySlice = createSlice({
@@ -54,6 +57,9 @@ const historySlice = createSlice({
         },
         setServices: (state, action) => {
             state.services = action.payload;
+        },
+        setAppointment: (state, action) => {
+            state.appointment = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -101,5 +107,5 @@ const historySlice = createSlice({
 });
 
 export const getHistoryState = (state: RootState) => state.history;
-export const { addService, removeService, editService, clearService, setServices } = historySlice.actions;
+export const { addService, removeService, editService, clearService, setServices, setAppointment } = historySlice.actions;
 export default historySlice.reducer;

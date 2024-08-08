@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TOAST_ERROR, TOAST_SUCCESS } from "@/utils/FunctionUiHelpers";
+import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
 import { IUser } from "@/interfaces/IUser";
 import { RootState } from "../store";
 import { doctorsThunk } from "../thunks/doctorThunk";

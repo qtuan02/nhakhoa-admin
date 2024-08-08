@@ -15,7 +15,7 @@ interface ProfileComponentProps {
     data?: IHistory;
 }
 
-export default function ProfileComponent({ data }: ProfileComponentProps) {
+export default function ProfileEditComponent({ data }: ProfileComponentProps) {
 
     const [ drawer, setDrawer ] = useState<boolean>(false);
     const [ historyId, setHistoryId ] = useState<string>("");
@@ -52,7 +52,7 @@ export default function ProfileComponent({ data }: ProfileComponentProps) {
         <CRow gutter={[16, 16]}>
             <CCol span={12}>
                 <Divider>Thông tin khách hàng</Divider>
-                <CDescriptionItem title="Ngày" content={formatDate(data?.date)} />
+                <CDescriptionItem title="Ngày khám" content={formatDate(data?.date)} />
                 <CDescriptionItem title="Thời gian" content={data?.time} />
                 <CDescriptionItem title="Họ và tên" content={data?.customer?.name} />
                 <CDescriptionItem title="Giới tính" content={data?.customer?.gender === 1 ? "Nam" : "Nữ"} />

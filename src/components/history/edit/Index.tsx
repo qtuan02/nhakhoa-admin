@@ -9,12 +9,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IHistory } from "@/interfaces/IHistory";
-import ProfileComponent from "../components/ProfileComponent";
 import { Tabs, TabsProps } from "antd";
 import FormEditComponent from "../components/FormEditComponent";
 import { clearService, getHistoryState } from "@/redux/reducers/historyReducer";
 import { historyEditThunk } from "@/redux/thunks/historyThunk";
 import { historyApi } from "@/api/historyApi";
+import ProfileEditComponent from "../components/ProfileEditComponent";
 
 export default function EditHistoryComponent() {
     const { id } = useParams();
@@ -51,7 +51,7 @@ export default function EditHistoryComponent() {
             key: "profile",
             label: "Thông tin lịch khám",
             children: <CSkeleton loading={loading}>
-                <ProfileComponent data={data} />
+                <ProfileEditComponent data={data} />
             </CSkeleton>,
         },
         {

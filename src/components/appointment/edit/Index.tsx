@@ -6,7 +6,7 @@ import { faRotateBack } from "@fortawesome/free-solid-svg-icons";
 import CButton from "@/custom_antd/CButton";
 import { IAppointment } from "@/interfaces/IAppointment";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import FormComponent from "../components/FormComponent";
 import { useEffect, useState } from "react";
 import CSkeleton from "@/custom_antd/CSkeleton";
@@ -14,11 +14,14 @@ import { parseDayjsToString } from "@/utils/FunctionHelpers";
 import { getAppointmentState } from "@/redux/reducers/appointmentReducer";
 import { appointmentApi } from "@/api/appointmentApi";
 import { appointmentEditThunk } from "@/redux/thunks/appointmentThunk";
+import { getHistoryState, setAppointment, setServices } from "@/redux/reducers/historyReducer";
 
 export default function EditAppointmentComponent() {
     const { id } = useParams();
     const dispatch = useAppDispatch();
     const appointment = useAppSelector(getAppointmentState);
+
+    const router = useRouter();
 
     const [data, setData] = useState<IAppointment | undefined>(undefined);
     const [loading, setLoading] = useState<boolean>(false);
@@ -27,6 +30,11 @@ export default function EditAppointmentComponent() {
         values.date = parseDayjsToString(values.date);
         values.services = appointment.services;
         dispatch(appointmentEditThunk({ id: id as string, body: values }));
+        if(values.status === 2){
+            dispatch(setAppointment(values));
+            dispatch(setServices(values.services));
+            router.push("/lich-kham/them");
+        }
     }
 
     const getDataAppointment = async (id: string) => {

@@ -94,8 +94,12 @@ const STATUS_APPOINTMENT: any = [
         value: 1,
     },
     {
-        label: "Hủy",
+        label: "Hoàn thành",
         value: 2,
+    },
+    {
+        label: "Hủy",
+        value: 3,
     },
 ];
 
