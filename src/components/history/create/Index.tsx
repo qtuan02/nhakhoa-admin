@@ -11,14 +11,15 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { Space } from "antd";
 import { getHistoryState } from "@/redux/reducers/historyReducer";
 import { historyCreateThunk } from "@/redux/thunks/historyThunk";
+import { parseDayjsToString } from "@/utils/FunctionHelpers";
 
 export default function CreateHistoryComponent() {
     const dispatch = useAppDispatch();
     const history = useAppSelector(getHistoryState);
 
-    console.log(history.appointment);
-
     const handleSubmit = (values: IHistory) => {
+        values.date = parseDayjsToString(values.date);
+        values.services = history.services;
         dispatch(historyCreateThunk(values));
     }
 

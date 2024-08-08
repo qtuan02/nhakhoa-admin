@@ -2,7 +2,7 @@ import CButton from "@/custom_antd/CButton";
 import CRow from "@/custom_antd/CRow";
 import { IHistory } from "@/interfaces/IHistory";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { clearService, editService, getHistoryState, removeService } from "@/redux/reducers/historyReducer";
+import { clearService, editService, getHistoryState, removeService, setServices } from "@/redux/reducers/historyReducer";
 import { Form, Image, Input, TableProps } from "antd";
 import { useEffect, useState } from "react";
 import ModalComponent from "./ModalComponent";
@@ -88,8 +88,9 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
     useEffect(() => {
         if (data) {
             form.setFieldsValue(data);
+            dispatch(setServices(data.services))
         }
-    }, [data, form]);
+    }, [data, dispatch, form]);
 
     const [editing, setEditing] = useState<string>('');
 

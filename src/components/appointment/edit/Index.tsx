@@ -30,11 +30,11 @@ export default function EditAppointmentComponent() {
         values.date = parseDayjsToString(values.date);
         values.services = appointment.services;
         dispatch(appointmentEditThunk({ id: id as string, body: values }));
-        if(values.status === 2){
+        if(values.status === 2) {
             dispatch(setAppointment(values));
             dispatch(setServices(values.services));
             router.push("/lich-kham/them");
-        }
+        } 
     }
 
     const getDataAppointment = async (id: string) => {

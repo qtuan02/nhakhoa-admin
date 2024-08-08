@@ -41,7 +41,7 @@ export default function EditHistoryComponent() {
     useEffect(() => {
         if (id) {
             if (history.edit === "success" || history.edit === "fail") {
-                getDataHistory(id as string);
+                getDataHistory(id as string);                
             }
         }
     }, [history.edit, id]);

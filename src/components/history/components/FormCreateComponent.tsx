@@ -23,7 +23,7 @@ import CTitle from "@/custom_antd/CTitle";
 import CSpace from "@/custom_antd/CSpace";
 import { IUser } from "@/interfaces/IUser";
 import { doctorApi } from "@/api/doctorApi";
-import { customNumberPrice } from "@/utils/FunctionHelpers";
+import { customNumberPrice, parseDayjsToString } from "@/utils/FunctionHelpers";
 import { IService } from "@/interfaces/IService";
 import CTable from "@/custom_antd/CTable";
 import ModalComponent from "./ModalComponent";
@@ -74,8 +74,6 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
         }
 
         if (history.appointment) {
-            console.log(history.appointment);
-
             if (!history.appointment.doctor_id) {
                 getDataDoctor(history.appointment.date, history.appointment.time);
             }
@@ -184,7 +182,7 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
                 </CCol>
                 <CCol span={6}>
                     <Form.Item label="Thời gian" className="!mb-4" name="time" rules={[{ required: true, message: "Hãy chọn giờ.." }]}>
-                        <CSelect loading={time.loading} className="!h-10 ts-16">
+                        <CSelect loading={time.loading} className="!h-10 ts-16" onChange={() => getDataDoctor(parseDayjsToString(form.getFieldValue("date")), form.getFieldValue("time"))}>
                             <Select.Option value="">--Chọn giờ</Select.Option>
                             {time?.data?.map((t: ITime) => (
                                 <Select.Option key={t.time} value={t.time}>{t.time}</Select.Option>
@@ -193,7 +191,7 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
                     </Form.Item>
                 </CCol>
                 <CCol span={12}>
-                    {history.appointment?.doctor_id ?
+                    {!dataDoctor || dataDoctor.length === 0 ?
                         <Form.Item label="Nha sĩ" className="!mb-4" name="doctor_id" rules={[{ required: true, message: "Hãy chọn nha sĩ..." }]}>
                             <CSelect
                                 loading={doctor.loading}

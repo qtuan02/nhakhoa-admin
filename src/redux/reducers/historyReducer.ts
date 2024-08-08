@@ -83,6 +83,8 @@ const historySlice = createSlice({
             .addCase(historyCreateThunk.fulfilled, (state, action) => {
                 state.status = "completed";
                 state.loading = false;
+                state.services = [];
+                state.appointment = null;
                 TOAST_SUCCESS(action.payload.message);
             })
             .addCase(historyCreateThunk.rejected, (state, action) => {
