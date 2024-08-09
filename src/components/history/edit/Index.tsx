@@ -39,8 +39,11 @@ export default function EditHistoryComponent() {
     }
 
     useEffect(() => {
+        console.log("check"+id);
         if (id) {
+            console.log("ok"+id);
             if (history.edit === "success" || history.edit === "fail") {
+                console.log("fetch"+id);
                 getDataHistory(id as string);                
             }
         }
