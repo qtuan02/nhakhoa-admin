@@ -40,7 +40,6 @@ export default function EditHistoryComponent() {
 
     useEffect(() => {
         if (history.edit === "success" || history.edit === "fail") {
-            console.log("fetch check", id as string);
             getDataHistory(id as string);
         }
     }, [history.edit, id]);

@@ -17,8 +17,6 @@ export const historyApi = {
     findOne: async (id: string) => {
         try{
             const res = await axiosClient.get(URL + "/" + id);
-            console.log(URL+"/"+id);
-            console.log(res.data.data);
             return res.data.data;
         }catch(error: any) {
             TOAST_ERROR(error?.response?.data?.message)
