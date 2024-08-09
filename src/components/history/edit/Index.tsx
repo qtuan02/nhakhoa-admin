@@ -34,12 +34,13 @@ export default function EditHistoryComponent() {
     const getDataHistory = async (id: string) => {
         setLoading(true);
         const value = await historyApi.findOne(id);
-        setLoading(false);
+        setLoading(false)
         setData(value);
     }
 
     useEffect(() => {
         if (history.edit === "success" || history.edit === "fail") {
+            console.log("fetch check", id as string);
             getDataHistory(id as string);
         }
     }, [history.edit, id]);

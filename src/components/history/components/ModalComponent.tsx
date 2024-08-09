@@ -74,7 +74,7 @@ export default function ModalComponent({ modal, toggle }: IModalComponentProps) 
                 <CTable
                     className="table-modal"
                     columns={columns}
-                    dataSource={service?.data?.map((item, index) => ({ ...item, index: index + 1, key: item.id, price: item.min_price, quantity: 1 })) || []}
+                    dataSource={service?.data?.map((item: IService, index: number) => ({ ...item, index: index + 1, key: item.id, price: item.min_price, quantity: 1 })) || []}
                     pagination={{ defaultPageSize: 5, showSizeChanger: false }}
                 />
             </CSkeleton>
