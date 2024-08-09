@@ -88,7 +88,7 @@ export default function FormEditComponent({ onSubmit, data }: FormComponentProps
     useEffect(() => {
         if (data) {
             form.setFieldsValue(data);
-            dispatch(setServices(data.services))
+            dispatch(setServices(data.services));
         }
     }, [data, dispatch, form]);
 
