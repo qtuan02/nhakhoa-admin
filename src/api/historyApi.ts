@@ -18,7 +18,7 @@ export const historyApi = {
         try{
             const res = await axiosClient.get(URL + "/" + id);
             return res.data.data;
-        }catch(error: any) {
+        } catch(error: any) {
             TOAST_ERROR(error?.response?.data?.message)
         }
     }
