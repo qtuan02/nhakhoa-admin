@@ -29,7 +29,9 @@ export default function DrawerComponent({ historyId, drawer, toggle }: IDrawerCo
     }
 
     useEffect(() => {
-        getDataHistory(historyId);
+        if(historyId){
+            getDataHistory(historyId);
+        }
     }, [historyId]);
 
     const columns: TableColumnsType<IHistoryDetail> = [
