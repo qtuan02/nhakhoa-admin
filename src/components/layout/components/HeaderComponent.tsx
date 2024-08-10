@@ -13,6 +13,8 @@ import ModalComponent from "./ModalComponent";
 import { logoutThunk } from "@/redux/thunks/authThunk";
 import usePusher from "@/hooks/usePusher";
 import { getAuthState } from "@/redux/reducers/authReducer";
+import DrawerComponent from "./DrawerComponent";
+import { setNotification } from "@/redux/reducers/notificationReducer";
 const { Header } = Layout;
 
 interface IHeaderComponentProps {
@@ -25,11 +27,17 @@ export default function HeaderComponent({ sider, toggle }: IHeaderComponentProps
     const auth = useAppSelector(getAuthState);
 
     const [ modal, setModal ] = useState<boolean>(false);
+    const [ drawer, setDrawer ] = useState<boolean>(false);
 
     const countNotice = usePusher();
 
     const handleToggleModal = () => {
         setModal(!modal);
+    }
+
+    const handleToggleDrawer = () => {
+        setDrawer(!drawer);
+        dispatch(setNotification(0));
     }
 
     const items: MenuProps["items"] = [
@@ -75,8 +83,9 @@ export default function HeaderComponent({ sider, toggle }: IHeaderComponentProps
                     <Flex gap={16}>
                         <CCol>
                             <Badge count={countNotice} size="small" color="#f50">
-                                <CButton size="large" type="default" shape="circle" icon={<FontAwesomeIcon icon={faBell} />}></CButton>
+                                <CButton onClick={() => handleToggleDrawer()} size="large" type="default" shape="circle" icon={<FontAwesomeIcon icon={faBell} />}></CButton>
                             </Badge>
+                            <DrawerComponent drawer={drawer} toggle={handleToggleDrawer} />
                         </CCol>
                         <CCol>
                             <CDropDown menu={{ items }} trigger={["click"]} placement="bottomRight"

@@ -1,20 +1,23 @@
+"use client"
 import { pusher } from '@/config/PusherConfig';
-import { useEffect, useState } from 'react';
+import { INotification } from '@/interfaces/INotification';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { addNotification, countNotification, getNotification } from '@/redux/reducers/notificationReducer';
+import { useEffect } from 'react';
 
 const usePusher = () => {
-    const [count, setCount] = useState(0);
+    const dispatch = useAppDispatch();
+    const notification = useAppSelector(getNotification);
 
     useEffect(() => {
         const channel = pusher.subscribe("notifications");
-        channel.bind("notice", (data: any) => {
-            setCount(prevCount => (
-                prevCount + 1
-            ));
+        channel.bind("notice", (data: INotification) => {
+            dispatch(countNotification());
+            dispatch(addNotification(data));
         });
-        
-    }, []);
+    }, [dispatch]);
     
-    return count;
+    return notification.count;
 };
 
 export default usePusher;

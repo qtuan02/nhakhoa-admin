@@ -27,7 +27,7 @@ export default function LoginComponent() {
     const handleSubmit = (values: ILogin) => {
         dispatch(loginThunk(values));
     }
-
+    
     useEffect(() => {
         if (auth.isLoggedIn) {
             if(auth.currentUser?.role === appConfig.R_1){

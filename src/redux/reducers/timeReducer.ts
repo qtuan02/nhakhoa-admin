@@ -6,7 +6,7 @@ import { timesThunk } from "../thunks/timeThunk";
 
 interface ITimeState {
     loading: boolean;
-    status: "pending" | "completed" | "rejected";
+    status: "pending" | "completed";
     data?: ITime[];
 };
 

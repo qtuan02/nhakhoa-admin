@@ -2,12 +2,17 @@
 import SiderComponent from "./components/SiderComponent";
 import HeaderComponent from "./components/HeaderComponent";
 import { useEffect, useState } from "react";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import AppLoading from "./AppLoading";
 import { getAuthState } from "@/redux/reducers/authReducer";
+import { getNotification } from "@/redux/reducers/notificationReducer";
+import { notificationsThunk } from "@/redux/thunks/notificationThunk";
 
 export default function LayoutComponent({ children }: { children: React.ReactNode }) {
     const auth = useAppSelector(getAuthState);
+    const notification = useAppSelector(getNotification);
+
+    const dispatch = useAppDispatch();
 
     const [ sider, setSider ] = useState<boolean>(true);
 
@@ -19,7 +24,10 @@ export default function LayoutComponent({ children }: { children: React.ReactNod
         if (!auth.isLoggedIn) {
             window.location.assign("/dang-nhap");
         }
-    }, [auth.isLoggedIn]);
+        if(auth.isLoggedIn && notification.status === "completed"){
+            dispatch(notificationsThunk());
+        }
+    }, [auth.isLoggedIn, dispatch, notification.status]);
 
     return (
         <div className="flex h-screen w-screen bg-[#f5f5f5]">

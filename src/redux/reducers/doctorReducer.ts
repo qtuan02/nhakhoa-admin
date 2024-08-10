@@ -6,15 +6,13 @@ import { doctorsThunk } from "../thunks/doctorThunk";
 
 interface IDoctorState {
     loading: boolean;
-    status: "pending" | "completed" | "rejected";
-    edit: "wait" | "success" | "fail";
+    status: "pending" | "completed";
     data?: IUser[];
 };
 
 const initialState: IDoctorState = {
     loading: false,
     status: "completed",
-    edit: "success",
     data: [],
 };
 

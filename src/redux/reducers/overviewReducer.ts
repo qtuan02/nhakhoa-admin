@@ -6,13 +6,13 @@ import { overviewAppointmentThunk, overviewInvoiceThunk, overviewsThunk } from "
 
 interface IOverviewState {
     loading: boolean;
-    status: "pending" | "completed" | "rejected";
+    status: "pending" | "completed";
     data?: IOverview[];
     loadingInvoice: boolean;
-    statusInvoice: "pending" | "completed" | "rejected";
+    statusInvoice: "pending" | "completed";
     dataInvoice?: IOverviewInvoice[];
     loadingAppointment: boolean;
-    statusAppointment: "pending" | "completed" | "rejected";
+    statusAppointment: "pending" | "completed";
     dataAppointment?: IOverviewAppoinment[];
 };
 

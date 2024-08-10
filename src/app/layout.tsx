@@ -17,7 +17,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <AntdRegistry>
                     <StoreProvider>
                         <div>{children}</div>
-                        <ToastContainer limit={3} autoClose={1200} position="bottom-right" draggable />
+                        <ToastContainer limit={3} autoClose={1500} position="bottom-right" draggable />
                     </StoreProvider>
                 </AntdRegistry>
             </body>

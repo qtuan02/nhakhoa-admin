@@ -2,7 +2,7 @@
 import CRow from "@/custom_antd/CRow";
 import CTitle from "@/custom_antd/CTitle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRotateBack } from "@fortawesome/free-solid-svg-icons";
+import { faCalendar, faRotateBack } from "@fortawesome/free-solid-svg-icons";
 import CButton from "@/custom_antd/CButton";
 import { IAppointment } from "@/interfaces/IAppointment";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
@@ -15,6 +15,7 @@ import { getAppointmentState } from "@/redux/reducers/appointmentReducer";
 import { appointmentApi } from "@/api/appointmentApi";
 import { appointmentEditThunk } from "@/redux/thunks/appointmentThunk";
 import { getHistoryState, setAppointment, setServices } from "@/redux/reducers/historyReducer";
+import { Space } from "antd";
 
 export default function EditAppointmentComponent() {
     const { id } = useParams();
@@ -54,7 +55,10 @@ export default function EditAppointmentComponent() {
         <>
             <CRow className="justify-between">
                 <CTitle>Cập nhật lịch hẹn</CTitle>
-                <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
+                <Space>
+                    <CButton back={true} type="primary" danger icon={<FontAwesomeIcon icon={faRotateBack} />}>Trờ lại</CButton>
+                    <CButton link={"/lich-hen"} type="primary" icon={<FontAwesomeIcon icon={faCalendar} />}>Lịch hẹn</CButton>
+                </Space>
             </CRow>
             <CSkeleton loading={appointment.edit === "wait" || loading}>
                 <FormComponent onSubmit={handleSubmit} data={data} />
