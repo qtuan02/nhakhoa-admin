@@ -77,7 +77,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
             dispatch(usersThunk());
         }
 
-        if (time.status === "completed" || time.status === "rejected") {
+        if (time.status === "completed") {
             dispatch(timesThunk());
         }
 
@@ -164,7 +164,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                                     <CSelect loading={loadingDate} className="!h-10 ts-16" onChange={handleDateChange}>
                                         <Select.Option value="">--Chọn ngày</Select.Option>
                                         {dataDate?.map((d: IDate) => (
-                                            <Select.Option key={d.date} value={d.date}>{formatDate(d.date)}</Select.Option>
+                                            <Select.Option disabled={d.status === 0 ? true : false} key={d.date} value={d.date}>{formatDate(d.date)}</Select.Option>
                                         )) || []}
                                     </CSelect>
                                 </Form.Item>
@@ -174,7 +174,7 @@ export default function FormComponent({ onSubmit, data }: FormComponentProps) {
                                     <CSelect loading={loadingTime} className="!h-10 ts-16">
                                         <Select.Option value="">--Chọn giờ</Select.Option>
                                         {dataTime?.map((t: ITime) => (
-                                            <Select.Option key={t.time} value={t.time}>{t.time}</Select.Option>
+                                            <Select.Option disabled={t.status === 0 ? true : false} key={t.time} value={t.time}>{t.time}</Select.Option>
                                         )) || []}
                                     </CSelect>
                                 </Form.Item>

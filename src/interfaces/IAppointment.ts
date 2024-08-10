@@ -16,9 +16,11 @@ export interface IAppointment {
 
 export interface IDate {
     date?: string,
+    status?: number
 }
 
 export interface ITime {
     id?: string,
     time?: string,
+    status?: number
 }

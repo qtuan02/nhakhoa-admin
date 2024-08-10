@@ -69,7 +69,7 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
     }
 
     useEffect(() => {
-        if (time.status === "completed" || time.status === "rejected") {
+        if (time.status === "completed") {
             dispatch(timesThunk());
         }
 
@@ -90,7 +90,7 @@ export default function FormCreateComponent({ onSubmit }: FormComponentProps) {
             dispatch(customersThunk());
         }
 
-        if (doctor.status === "completed" || doctor.status === "rejected") {
+        if (doctor.status === "completed") {
             dispatch(doctorsThunk());
         }
 

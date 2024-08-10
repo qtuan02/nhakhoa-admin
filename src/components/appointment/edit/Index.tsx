@@ -14,7 +14,7 @@ import { parseDayjsToString } from "@/utils/FunctionHelpers";
 import { getAppointmentState } from "@/redux/reducers/appointmentReducer";
 import { appointmentApi } from "@/api/appointmentApi";
 import { appointmentEditThunk } from "@/redux/thunks/appointmentThunk";
-import { getHistoryState, setAppointment, setServices } from "@/redux/reducers/historyReducer";
+import { setAppointment, setServices } from "@/redux/reducers/historyReducer";
 import { Space } from "antd";
 
 export default function EditAppointmentComponent() {

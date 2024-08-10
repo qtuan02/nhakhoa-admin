@@ -1,5 +1,5 @@
 import axiosClient from "@/config/AxiosConfig";
-import { TOAST_ERROR } from "@/utils/FunctionUiHelpers";
+import { TOAST_WARNING } from "@/utils/FunctionUiHelpers";
 
 const URL = "/doctor";
 
@@ -12,7 +12,7 @@ export const doctorApi = {
             const res = await axiosClient.get(URL + "?date=" + date + "&time=" + time);
             return res.data.data;
         }catch(error: any) {
-            TOAST_ERROR(error?.response?.data?.message)
+            TOAST_WARNING(error?.response?.data?.message)
         }
     }
 }

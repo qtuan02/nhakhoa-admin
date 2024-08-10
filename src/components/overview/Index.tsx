@@ -17,13 +17,13 @@ export default function OverviewComponent() {
         data, dataInvoice, dataAppointment } = useAppSelector(getOverviewState);
 
     useEffect(() => {
-        if(status === "completed" || status === "rejected"){
+        if(status === "completed"){
             dispatch(overviewsThunk());
         }
-        if(statusInvoice === "completed" || statusInvoice === "rejected"){
+        if(statusInvoice === "completed"){
             dispatch(overviewInvoiceThunk());
         }
-        if(statusAppointment === "completed" || statusAppointment === "rejected"){
+        if(statusAppointment === "completed"){
             dispatch(overviewAppointmentThunk());
         }
     }, [dispatch, status, statusAppointment, statusInvoice])
