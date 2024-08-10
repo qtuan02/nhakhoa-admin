@@ -14,7 +14,7 @@ import { getStatisticState } from "@/redux/reducers/statisticReducer";
 import { formatDate, parseDayjsToString } from "@/utils/FunctionHelpers";
 import { DatePicker, Flex, Form, Skeleton, TableColumnsType } from "antd";
 import { statisticAppointmentThunk } from "@/redux/thunks/statisticThunk";
-import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined, SyncOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { exportApi } from "@/api/exportApi";
 
@@ -87,13 +87,18 @@ export default function AppointmentComponent() {
                         text = "Đang chờ"
                         break;
                     case 1:
-                        icon = <CheckCircleOutlined />
-                        color = "success"
+                        icon = <SyncOutlined spin />
+                        color = "processing"
                         text = "Xác nhận"
                         break;
                     case 2:
+                        icon = <CheckCircleOutlined />
+                        color="success"
+                        text = "Hoàn thành"
+                        break;
+                    case 3:
                         icon = <CloseCircleOutlined />
-                        color = "error"
+                        color="error"
                         text = "Hủy"
                         break;
                 }

@@ -77,12 +77,6 @@ export default function HistoryComponent() {
             dataIndex: "status",
             key: "status",
             width: 100,
-            filters: [
-                { text: "Đang chờ", value: 0 },
-                { text: "Hoàn thành", value: 1 },
-                { text: "Xác nhận", value: 2 },
-            ],
-            onFilter: (value, item) => item.status === value,
             render: (status) => {
                 let icon, color, text;
                 switch (status) {
