@@ -4,6 +4,7 @@ import CRow from "@/custom_antd/CRow";
 import CTable from "@/custom_antd/CTable";
 import { IHistoryDetail } from "@/interfaces/IHistory";
 import { IInvoice } from "@/interfaces/IInvoice";
+import { formatDate } from "@/utils/FunctionHelpers";
 import { getColumnSearchProps } from "@/utils/FunctionUiHelpers";
 import { Divider, TableColumnsType } from "antd";
 
@@ -62,7 +63,7 @@ export default function DetailComponent({ data }: DetailComponentProps) {
                     <CDescriptionItem title="Họ tên khách hàng" content={data?.customer?.name} />
                 </CCol>
                 <CCol span={12}>
-                    <CDescriptionItem title="Ngày khám" content={String(data?.history?.date)} />
+                    <CDescriptionItem title="Ngày khám" content={formatDate(data?.history?.date)} />
                 </CCol>
             </CRow>
             <CRow>

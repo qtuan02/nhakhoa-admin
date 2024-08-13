@@ -1,5 +1,4 @@
 "use client";
-import CButton from "@/custom_antd/CButton";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { getNotification } from "@/redux/reducers/notificationReducer";
 import { notificationEditThunk } from "@/redux/thunks/notificationThunk";
