@@ -50,7 +50,7 @@ export default function ProfileEditComponent({ data }: ProfileComponentProps) {
 
     return (
         <CRow gutter={[16, 16]}>
-            <CCol span={12}>
+            <CCol span={10}>
                 <Divider>Thông tin khách hàng</Divider>
                 <CDescriptionItem title="Ngày khám" content={formatDate(data?.date)} />
                 <CDescriptionItem title="Thời gian" content={data?.time} />
@@ -65,7 +65,7 @@ export default function ProfileEditComponent({ data }: ProfileComponentProps) {
                 <CDescriptionItem title="Ngày sinh" content={formatDate(data?.doctor?.birthday)} />
                 <CDescriptionItem title="Số điện thoại" content={data?.doctor?.phone_number} />
             </CCol>
-            <CCol span={12}>
+            <CCol span={14}>
                 <Divider>Lịch sử khám</Divider>
                 {data?.customer?.histories && data?.customer?.histories.length > 0 ?
                     <CTable 
