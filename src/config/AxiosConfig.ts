@@ -45,6 +45,9 @@ axiosClient.interceptors.response.use(
 		return response;
 	},
 	(error: AxiosError<AdaptAxiosRequestConfig>) => {
+		if(error.response?.status === 401) {
+			return store.dispatch(logoutThunk());
+		}
 		return Promise.reject(error);
 	}
 );
